@@ -101,7 +101,7 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <h1 id="signup-–-Re"><a href="#signup-–-Re" class="headerlink" title="signup – Re"></a>signup – Re</h1><p>当时我没可能看到这题，某位pwn大佬兼队友给我提了。Re题竟然是RSA！n,e,c,全部给出来了，脚本题，直接跑脚本。<br>flag为 suctf{Pwn_@_hundred_years}。</p>
-<h1 id="DSA-–-CRYPTO"><a href="#DSA-–-CRYPTO" class="headerlink" title="DSA – CRYPTO"></a>DSA – CRYPTO</h1><p>DSA题，共享k攻击。<br>首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模p体系下的。<br>还有变量m，k，r，s，以及hash加密函数H( )。其中:<br>r = (g ^ k mod p) mod<br>s = k^(-1) * (H(m) + xr) mod q<br>根据定义，(m, r, s)组成签名，签名是在模q体系下的。<br>然后理解一波共享k攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了k。</p>
+<h1 id="DSA-–-Crypto"><a href="#DSA-–-Crypto" class="headerlink" title="DSA – Crypto"></a>DSA – Crypto</h1><p>DSA题，共享k攻击。<br>首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模p体系下的。<br>还有变量m，k，r，s，以及hash加密函数H( )。其中:<br>r = (g ^ k mod p) mod<br>s = k^(-1) * (H(m) + xr) mod q<br>根据定义，(m, r, s)组成签名，签名是在模q体系下的。<br>然后理解一波共享k攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了k。</p>
 <pre><code>假设有公钥相同的两次加密结果，已知k相同，由于r = (g ^ k mod p) mod q，所以 r1 = r2。然后又有：
 s1 = k^(-1) * (H(m1) + xr) mod q
 s2 = k^(-1) * (H(m2) + xr) mod q
