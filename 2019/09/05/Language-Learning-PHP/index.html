@@ -107,7 +107,7 @@
     return $return_value;
 }
 
-foo(1..);</code></pre><h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。<br>Example:</p>
+foo(1..);</code></pre><h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。<br><strong>Example:</strong></p>
 <pre><code>Code: 
 function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
@@ -147,14 +147,14 @@ $i = &quot;jkd12&quot;;
 var_dump($s + $i);
 
 Run:
-int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强类型参数的定义：为参数列表中的参数指定类型。如果传入的数据类型不匹配，将会抛出 TypeError 异常。使用时需要在函数参数名前加上参数类型，并且同时需要限制类型转换，在程序开头声明： declare(strict_types=1)。这里要注意的是，strict_types 是在 PHP 7 版本下的。下面是各 PHP 版本的变量支持类型：</p>
+int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强类型参数的定义：为参数列表中的参数指定类型。如果传入的数据类型不匹配，将会抛出 <strong>TypeError</strong> 异常。使用时需要在函数参数名前加上参数类型，并且同时需要限制类型转换，在程序开头声明： declare(strict_types=1)。这里要注意的是，strict_types 是在 <strong>PHP 7</strong> 版本下的。下面是各 PHP 版本的变量支持类型：</p>
 <ul>
 <li><strong>class/interface name PHP 5.0</strong></li>
 <li><strong>array PHP 5.1</strong></li>
 <li><strong>callable PHP5.4</strong></li>
 <li><strong>bool，float， int ，string PHP 7.0</strong></li>
 </ul>
-<p>Example：</p>
+<p><strong>Example：</strong></p>
 <pre><code>Code:
 declare(strict_types=1);
 function sum_1($a, $b){ //正常传参
@@ -171,8 +171,7 @@ echo sum_2(1, 1.5);
 
 Run:
 2
-TypeError!</code></pre><p>##函数可变参数列表</p>
-
+TypeError!</code></pre><h2 id="函数可变参数列表"><a href="#函数可变参数列表" class="headerlink" title="函数可变参数列表"></a>函数可变参数列表</h2>
                             <hr>
                         </div>
                         <br>
