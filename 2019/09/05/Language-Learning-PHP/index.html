@@ -106,15 +106,72 @@
     return $return_value;
 }
 
-foo(1..)</code></pre><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。调用函数时，单括号中的 1 是实参。</p>
-<h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><pre><code>function foo($arg_1, $arg_2 = value, /*...*/, $arg_n){
+foo(1..);</code></pre><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。</p>
+<h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><pre><code>Code: 
+function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
+    echo $arg_2;
     echo &quot;Example function .\n&quot;;
     return $return_value;
 }
 
-foo(1..)</code></pre><p>function 定义函数时，若给参数赋值，则</p>
+foo(1, /*...*/, $arg_n); //lack $arg_2
 
+Run:
+value</code></pre><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像上面的代码一样。</p>
+<h2 id="函数强类型函数"><a href="#函数强类型函数" class="headerlink" title="函数强类型函数"></a>函数强类型函数</h2><p>一些简单类型的变量是可以互相转换的：</p>
+<pre><code>Example1:
+Code:
+$s = &quot;123jkl&quot;;
+$i = &quot;12&quot;;
+var_dump($s + $i);
+
+Run: 
+int(135) // 整型开头的字符串 + 数字 = 整型数字
+
+
+Example2:
+Code:
+$s = &quot;1.23jkl&quot;;
+$i = &quot;12&quot;;
+var_dump($s + $i);
+
+Run:
+float(13.23) // 浮点型开头的字符串 + 数字 = 浮点型数字
+
+
+Example3:
+Code:
+$s = &quot;jk123&quot;;
+$i = &quot;jkd12&quot;;
+var_dump($s + $i);
+
+Run:
+int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强类型参数的定义：为参数列表中的参数指定类型。如果传入的数据类型不匹配，将会抛出 TypeError 异常。使用时需要在函数参数名前加上参数类型，并且同时需要限制类型转换，在程序开头声明： declare(strict_types=1)。下面是各 PHP 版本的变量支持类型：</p>
+<ul>
+<li>class/interface name PHP 5.0</li>
+<li>array PHP 5.1</li>
+<li>callable PHP5.4</li>
+<li>bool，float， int ，string PHP 7.0</li>
+</ul>
+<p>Example：</p>
+<pre><code>Code:
+declare(strict_types=1);
+function sum_1($a, $b){ //正常传参
+    return $a + $b;
+}
+
+function sum_2(int $a, int $b){ // 使用强类型
+    return $a + $b;
+}
+
+echo sum_1(1, 1.5);
+echo &quot;\n&quot;;
+echo sum_2(1, 1.5);
+
+Run:
+2
+TypeError!</code></pre>
                             <hr>
                         </div>
                         <br>

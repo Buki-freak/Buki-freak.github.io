@@ -111,15 +111,16 @@
     return $return_value;
 }
 
-foo(1..)function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。调用函数时，单括号中的 1 是实参。
-函数的默认值function foo($arg_1, $arg_2 = value, /*...*/, $arg_n){
+foo(1..);function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。
+函数的默认值Code: 
+function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
+    echo $arg_2;
     echo &quot;Example function .\n&quot;;
     return $return_value;
 }
 
-foo(1..)function 定义函数时，若给参数赋值，则
-</div>
+foo(1, /*...*/, $arg_n); //lack</div>
                     
                 </div>
             </a>
