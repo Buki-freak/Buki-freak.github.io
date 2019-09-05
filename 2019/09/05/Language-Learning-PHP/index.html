@@ -100,14 +100,15 @@
                 <div class="py-5 z-depth-3 board">
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
-                            <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数形参与实参"><a href="#函数形参与实参" class="headerlink" title="函数形参与实参"></a>函数形参与实参</h2><pre><code>function foo($arg_1, $arg_2, /*...*/, $arg_n){
+                            <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数形参与实参"><a href="#函数形参与实参" class="headerlink" title="函数形参与实参"></a>函数形参与实参</h2><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。如下：</p>
+<pre><code>function foo($arg_1, $arg_2, /*...*/, $arg_n){
     $sum = $arg_1 + ... + $arg_n;
     echo &quot;Example function .\n&quot;;
     return $return_value;
 }
 
-foo(1..);</code></pre><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。</p>
-<h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><pre><code>Code: 
+foo(1..);</code></pre><h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。<br>Example:</p>
+<pre><code>Code: 
 function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
     echo $arg_2;
@@ -118,8 +119,7 @@ function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
 foo(1, /*...*/, $arg_n); //lack $arg_2
 
 Run:
-value</code></pre><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像上面的代码一样。</p>
-<h2 id="函数强类型函数"><a href="#函数强类型函数" class="headerlink" title="函数强类型函数"></a>函数强类型函数</h2><p>一些简单类型的变量是可以互相转换的：</p>
+value</code></pre><h2 id="函数强类型函数"><a href="#函数强类型函数" class="headerlink" title="函数强类型函数"></a>函数强类型函数</h2><p>一些简单类型的变量是可以互相转换的：</p>
 <pre><code>Example1:
 Code:
 $s = &quot;123jkl&quot;;
@@ -127,7 +127,7 @@ $i = &quot;12&quot;;
 var_dump($s + $i);
 
 Run: 
-int(135) // 整型开头的字符串 + 数字 = 整型数字
+int(135) // 整型开头的字符串 + 整型数字 = 整型数字
 
 
 Example2:
@@ -147,7 +147,7 @@ $i = &quot;jkd12&quot;;
 var_dump($s + $i);
 
 Run:
-int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强类型参数的定义：为参数列表中的参数指定类型。如果传入的数据类型不匹配，将会抛出 TypeError 异常。使用时需要在函数参数名前加上参数类型，并且同时需要限制类型转换，在程序开头声明： declare(strict_types=1)。下面是各 PHP 版本的变量支持类型：</p>
+int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强类型参数的定义：为参数列表中的参数指定类型。如果传入的数据类型不匹配，将会抛出 TypeError 异常。使用时需要在函数参数名前加上参数类型，并且同时需要限制类型转换，在程序开头声明： declare(strict_types=1)。这里要注意的是，strict_types 是在 PHP 7 版本下的。下面是各 PHP 版本的变量支持类型：</p>
 <ul>
 <li><strong>class/interface name PHP 5.0</strong></li>
 <li><strong>array PHP 5.1</strong></li>
@@ -171,7 +171,8 @@ echo sum_2(1, 1.5);
 
 Run:
 2
-TypeError!</code></pre>
+TypeError!</code></pre><p>##函数可变参数列表</p>
+
                             <hr>
                         </div>
                         <br>

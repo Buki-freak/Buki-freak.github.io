@@ -105,22 +105,19 @@
                 <p class="h4 index-header">Language_Learning_PHP</p>
                 <div class="index-excerpt">
                     
-                        <div class="index-text mb-1">函数函数形参与实参function foo($arg_1, $arg_2, /*...*/, $arg_n){
+                        <div class="index-text mb-1">函数函数形参与实参function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。如下：
+function foo($arg_1, $arg_2, /*...*/, $arg_n){
     $sum = $arg_1 + ... + $arg_n;
     echo &quot;Example function .\n&quot;;
     return $return_value;
 }
 
-foo(1..);function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。
-函数的默认值Code: 
+foo(1..);函数的默认值function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。Example:
+Code: 
 function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
     echo $arg_2;
-    echo &quot;Example function .\n&quot;;
-    return $return_value;
-}
-
-foo(1, /*...*/, $arg_n); //lack</div>
+    ec</div>
                     
                 </div>
             </a>
