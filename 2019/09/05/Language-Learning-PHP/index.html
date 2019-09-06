@@ -153,7 +153,7 @@ int(0) // 字符开头的串 + 字符开头的串 = 整型 0</code></pre><p>强�
 <li><strong>class/interface name PHP 5.0</strong></li>
 <li><strong>array PHP 5.1</strong></li>
 <li><strong>callable PHP5.4</strong></li>
-<li><strong>bool，float， int ，string PHP 7.0</strong></li>
+<li><strong>bool/float/int/string PHP 7.0</strong></li>
 </ul>
 <p><strong>Example：</strong></p>
 <pre><code>Code:
@@ -174,9 +174,9 @@ Run:
 2
 TypeError!</code></pre><h2 id="函数可变参数列表"><a href="#函数可变参数列表" class="headerlink" title="函数可变参数列表"></a>函数可变参数列表</h2><p>可变参数列表与三个函数有关：</p>
 <ul>
-<li><strong>func_get_args( )</strong>: 说明：func_get_args ( void ) : array。在自定义函数内部使用，该函数返回一个包含函数参数列表的数组。</li>
-<li><strong>func_get_arg( )</strong>: 说明：func_get_arg ( int $arg_num ) : mixed。在自定义函数内部使用，该函数返回参数列表的某一项，其中 $arg_num 代表参数的列表中的第几项。</li>
-<li><strong>func_num_args( )</strong> 说明：func_num_args( void ) : int。在自定义函数内部，该函数返回自定义函数中参数的数量。</li>
+<li><strong>func_get_args( )</strong>: 结构说明：func_get_args ( void ) : array。在自定义函数内部使用，该函数返回一个包含函数参数列表的数组。</li>
+<li><strong>func_get_arg( )</strong>: 结构说明：func_get_arg ( int $arg_num ) : mixed。在自定义函数内部使用，该函数返回参数列表的某一项，其中 $arg_num 代表参数的列表中的第几项。</li>
+<li><strong>func_num_args( )</strong>: 结构说明：func_num_args( void ) : int。在自定义函数内部，该函数返回自定义函数中参数的数量。</li>
 <li><em>注意：以上三个函数通常出现于 PHP 5.5及以前*</em></li>
 </ul>
 <p><strong>Example</strong></p>
@@ -238,13 +238,67 @@ echo $b1, &#39;&lt;br&gt;&#39;;
 Run:
 5
 3</code></pre><p>引用亦可以作为函数返回值的一种方式。引用传递的类型有：数值，对象，字符串，数组。</p>
-<h2 id="函数变量作用域"><a href="#函数变量作用域" class="headerlink" title="函数变量作用域"></a>函数变量作用域</h2><h1 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h1><p>几种情况：</p>
+<h2 id="函数变量作用域"><a href="#函数变量作用域" class="headerlink" title="函数变量作用域"></a>函数变量作用域</h2><h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><p>几种情况：</p>
 <ul>
 <li>当前页面中声明的普通变量，不能在函数或者类中使用。</li>
 <li>当前页面中声明的普通变量，不能被传递到其他页面。</li>
 <li>在函数中声明的普通变量，仅在函数内部有效。</li>
 <li>在类中声明的属性，在类的内部有效。</li>
 </ul>
+<p>###全局变量<br>对于 PHP 而言，可以认为在页面中生成的变量对于该页面而言都是全局变量，在整个页面都是有效的，但是不能被函数或者类中的方法访问。若想要页面的变量被函数或者类中的方法访问，则需要使用超全局变量(gloabal或者GLOBALS[])。</p>
+<p><strong>Example:</strong></p>
+<pre><code>Example1: //使用global对需要使用的函数外变量进行声明
+Code:
+$a = 1;
+function test_global(){
+    global $a;
+    echo $a;
+}
+
+test_global();
+
+Run:
+1
+
+Example2: //使用超全局变量GLOBAL数组
+Code:
+$a = 1;
+function test_global(){
+    echo $GLOBALS[&#39;a&#39;];
+}
+
+test_global();
+
+Run:
+1</code></pre><p>使用global声明变量和超全局变量GLOBALS数组的不同之处在于，global声明后的变量是依据指定的函数外的变量新创建的一个相同的变量，在函数内对这个变量操作不影响对应函数外变量的值。而GLOBALS数组中对应的变量就等同函数外的变量，对GLOBAL数组中的变量操作会影响函数外对应变量的值。<br>PHP 自带的超全局变量如下：</p>
+<ul>
+<li><strong>$_GET</strong></li>
+<li><strong>_POST</strong></li>
+<li><strong>_COOKIE</strong></li>
+<li><strong>_SERVER</strong></li>
+<li><strong>_FILES</strong></li>
+<li><strong>_ENV</strong></li>
+<li><strong>_REQUEST</strong></li>
+<li><strong>_SESSION</strong></li>
+</ul>
+<p>###静态变量（static）<br>函数内 static 声明的变量只在第一次有效。如下：</p>
+<p>Example:</p>
+<pre><code>Code:
+function test_static(){
+    static $a = 0;
+    echo $a++, &quot;&lt;br&gt;&quot;;
+}
+
+test_static();
+test_static();
+test_static();
+test_static();
+
+Run:
+0
+1
+2
+3</code></pre><p><strong>注意 static 变量的赋值一定不能是函数表达式！</strong></p>
 
                             <hr>
                         </div>
