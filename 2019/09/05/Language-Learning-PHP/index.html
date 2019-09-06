@@ -100,14 +100,15 @@
                 <div class="py-5 z-depth-3 board">
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
-                            <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数形参与实参"><a href="#函数形参与实参" class="headerlink" title="函数形参与实参"></a>函数形参与实参</h2><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo() 函数时，单括号中的 1 是实参。如下：</p>
+                            <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数形参与实参"><a href="#函数形参与实参" class="headerlink" title="函数形参与实参"></a>函数形参与实参</h2><p>function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo( ) 函数时，单括号中的 1 是实参。如下：</p>
 <pre><code>function foo($arg_1, $arg_2, /*...*/, $arg_n){
     $sum = $arg_1 + ... + $arg_n;
     echo &quot;Example function .\n&quot;;
     return $return_value;
 }
 
-foo(1..);</code></pre><h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。<br><strong>Example:</strong></p>
+foo(1..);</code></pre><h2 id="函数的默认值"><a href="#函数的默认值" class="headerlink" title="函数的默认值"></a>函数的默认值</h2><p>function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。</p>
+<p><strong>Example:</strong></p>
 <pre><code>Code: 
 function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
     $sum = $arg_1 + ... + $arg_n;
@@ -171,7 +172,80 @@ echo sum_2(1, 1.5);
 
 Run:
 2
-TypeError!</code></pre><h2 id="函数可变参数列表"><a href="#函数可变参数列表" class="headerlink" title="函数可变参数列表"></a>函数可变参数列表</h2>
+TypeError!</code></pre><h2 id="函数可变参数列表"><a href="#函数可变参数列表" class="headerlink" title="函数可变参数列表"></a>函数可变参数列表</h2><p>可变参数列表与三个函数有关：</p>
+<ul>
+<li><strong>func_get_args( )</strong>: 说明：func_get_args ( void ) : array。在自定义函数内部使用，该函数返回一个包含函数参数列表的数组。</li>
+<li><strong>func_get_arg( )</strong>: 说明：func_get_arg ( int $arg_num ) : mixed。在自定义函数内部使用，该函数返回参数列表的某一项，其中 $arg_num 代表参数的列表中的第几项。</li>
+<li><strong>func_num_args( )</strong> 说明：func_num_args( void ) : int。在自定义函数内部，该函数返回自定义函数中参数的数量。</li>
+<li><em>注意：以上三个函数通常出现于 PHP 5.5及以前*</em></li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>Code:
+function get_num(){
+    $args_num = func_num_args();
+    $sum = 0;
+
+    if(!$args_num){
+        return $sum;
+    }
+    else{
+        for($i=0;$i&lt;$args_num;$i++){
+            $sum += func_get_arg($i);
+        }
+        return $sum;
+    }
+}
+
+echo get_num(), &quot;&lt;br&gt;&quot;;
+echo get_num(1,2,3), &quot;\n&quot;;
+
+Run:
+0
+6</code></pre><p>在 <strong>PHP 5.6之后</strong> ，我们使用另外一种方法：</p>
+<pre><code>Code:
+function get_num2(...$nums){ //$nums作为参数列表数组
+    $sum = 0;
+    if(!$nums){
+        return $nums;
+    }
+    else{
+        foreach($nums as $num){
+            $sum += $num;
+        }
+        return $sum;
+    }
+}
+
+echo get_num2(), &quot;&lt;br&gt;&quot;;
+echo get_num2(1, 2, 3), &quot;&lt;br&gt;&quot;;
+
+Run:
+Array //若不传参则返回一个数组
+6</code></pre><h2 id="函数值传递与引用传递"><a href="#函数值传递与引用传递" class="headerlink" title="函数值传递与引用传递"></a>函数值传递与引用传递</h2><p>函数正常传参不影响实参的值。使用引用则会影响实参的值，如下:</p>
+<pre><code>Code:
+function swap(&amp;$a, &amp;$b){
+    $tmp = $a;
+    $a = $b;
+    $b = $tmp;
+}
+
+$a1 = 3;
+$b1 = 5;
+swap($a1, $b1);
+echo $a1, &#39;&lt;br&gt;&#39;;
+echo $b1, &#39;&lt;br&gt;&#39;;
+
+Run:
+5
+3</code></pre><p>引用亦可以作为函数返回值的一种方式。引用传递的类型有：数值，对象，字符串，数组。</p>
+<h2 id="函数变量作用域"><a href="#函数变量作用域" class="headerlink" title="函数变量作用域"></a>函数变量作用域</h2><h1 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h1><p>几种情况：</p>
+<ul>
+<li>当前页面中声明的普通变量，不能在函数或者类中使用。</li>
+<li>当前页面中声明的普通变量，不能被传递到其他页面。</li>
+<li>在函数中声明的普通变量，仅在函数内部有效。</li>
+<li>在类中声明的属性，在类的内部有效。</li>
+</ul>
+
                             <hr>
                         </div>
                         <br>
