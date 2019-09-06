@@ -245,7 +245,7 @@ Run:
 <li>在函数中声明的普通变量，仅在函数内部有效。</li>
 <li>在类中声明的属性，在类的内部有效。</li>
 </ul>
-<p>###全局变量<br>对于 PHP 而言，可以认为在页面中生成的变量对于该页面而言都是全局变量，在整个页面都是有效的，但是不能被函数或者类中的方法访问。若想要页面的变量被函数或者类中的方法访问，则需要使用超全局变量(gloabal或者GLOBALS[])。</p>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>对于 PHP 而言，可以认为在页面中生成的变量对于该页面而言都是全局变量，在整个页面都是有效的，但是不能被函数或者类中的方法访问。若想要页面的变量被函数或者类中的方法访问，则需要使用超全局变量(gloabal或者GLOBALS[])。</p>
 <p><strong>Example:</strong></p>
 <pre><code>Example1: //使用global对需要使用的函数外变量进行声明
 Code:
@@ -281,7 +281,7 @@ Run:
 <li><strong>_REQUEST</strong></li>
 <li><strong>_SESSION</strong></li>
 </ul>
-<p>###静态变量（static）<br>函数内 static 声明的变量只在第一次有效。如下：</p>
+<h3 id="静态变量（static）"><a href="#静态变量（static）" class="headerlink" title="静态变量（static）"></a>静态变量（static）</h3><p>函数内 static 声明的变量只在第一次有效。如下：</p>
 <p>Example:</p>
 <pre><code>Code:
 function test_static(){
