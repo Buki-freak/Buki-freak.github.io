@@ -272,16 +272,24 @@ test_global();
 Run:
 1</code></pre><p>使用 global 声明变量和超全局变量 GLOBALS 数组的不同之处在于，global 声明后的变量是依据指定的函数外的变量新创建的一个相同的变量，在函数内对这个变量操作不影响对应函数外变量的值。而 GLOBALS 数组中对应的变量就等同函数外的变量，对 GLOBAL 数组中的变量操作会影响函数外对应变量的值。<br>PHP 自带的超全局变量如下：</p>
 <ul>
-<li><strong>$_GET</strong></li>
-<li><strong>_POST</strong></li>
-<li><strong>_COOKIE</strong></li>
-<li><strong>_SERVER</strong></li>
-<li><strong>_FILES</strong></li>
-<li><strong>_ENV</strong></li>
-<li><strong>_REQUEST</strong></li>
-<li><strong>_SESSION</strong></li>
+<li><p><strong>$_GET</strong><br>$_GET 同样被广泛应用于收集表单数据，在HTML form标签的指定该属性：”method=”get”。$_GET 也可以收集 URL 中的发送的数据。</p>
+</li>
+<li><p><strong>_POST</strong><br>$_POST 被广泛应用于收集表单数据，在HTML form标签的指定该属性：”method=”post”。</p>
+</li>
+<li><p><strong>_COOKIE</strong></p>
+</li>
+<li><p><strong>_SERVER</strong><br>$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组。这个数组中的项目由 Web 服务器创建。</p>
+</li>
+<li><p><strong>_FILES</strong></p>
+</li>
+<li><p><strong>_ENV</strong></p>
+</li>
+<li><p><strong>_REQUEST</strong><br>$_REQUEST 用于收集HTML表单提交的数据。</p>
+</li>
+<li><p><strong>_SESSION</strong></p>
+</li>
 </ul>
-<h3 id="静态变量（static）"><a href="#静态变量（static）" class="headerlink" title="静态变量（static）"></a>静态变量（static）</h3><p>函数内 static 声明的变量只在第一次有效。如下：</p>
+<h3 id="静态变量（static）"><a href="#静态变量（static）" class="headerlink" title="静态变量（static）"></a>静态变量（static）</h3><p>函数内 static 声明的变量只在第一次赋值有效。之后每次调用该函数时，该变量将会保留着函数前一次被调用时的值。如下：</p>
 <p>Example:</p>
 <pre><code>Code:
 function test_static(){
