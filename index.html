@@ -143,12 +143,12 @@ function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">signup – Re当时我没可能看到这题，某位 pwn 大佬兼队友给我提了。Re 题竟然是 RSA！n,e,c,全部给出来了，脚本题，直接跑脚本。flag为 suctf{Pwn_@_hundred_years}。
-DSA – CryptoDSA 题，共享 k 攻击。首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模 p 体系下的。还有变量 m，k，r，s，以及hash加密函数H( )。其中:r = (g ^ k mod p) mods = k^(-1) * (H(m) + xr) mod q根据定义，(m, r, s)组成签名，签名是在模 q 体系下的。然后理解一波共享 k 攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了 k。
+DSA – CryptoDSA 题，共享 k 攻击。首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模 p 体系下的。还有变量 m，k，r，s，以及hash加密函数H( )。其中:r = (g ^ k mod p) mod qs = k^(-1) * (H(m) + xr) mod q根据定义，(m, r, s)组成签名，签名是在模 q 体系下的。然后理解一波共享 k 攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了 k。
 假设有公钥相同的两次加密结果，已知k相同，由于r = (g ^ k mod p) mod q，所以 r1 = r2。然后又有：
 s1 = k^(-1) * (H(m1) + xr) mod q
 s2 = k^(-1) * (H(m2) + xr) mod q
 变换可以得到：
-s1 * k ≡ H(</div>
+s1 * k ≡ </div>
                     
                 </div>
             </a>
