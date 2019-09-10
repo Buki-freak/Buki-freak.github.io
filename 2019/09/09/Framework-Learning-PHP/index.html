@@ -121,7 +121,17 @@
 <li>无 View 模式的 API 接口开发</li>
 <li>Model 再分层和 Controller 再分层</li>
 </ul>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3>
+<h3 id="目录结构和规范"><a href="#目录结构和规范" class="headerlink" title="目录结构和规范"></a>目录结构和规范</h3><h4 id="application-（应用目录）"><a href="#application-（应用目录）" class="headerlink" title="application （应用目录）"></a>application （应用目录）</h4><p>后续开发中编写的文件目录。其中包含：</p>
+<ul>
+<li><strong>Index 模块（Index 文件夹）</strong>，里面包含模型层（model 文件夹），视图层（view 文件夹），控制器层（controller 文件夹），三者组成 MVC。</li>
+<li><strong>command.php</strong> 控制台的配置文件。当我们用命令行执行 ThinkPHP 的时候，后台会读取 command.php 的配置。</li>
+<li><strong>common.php</strong> 项目的公共文件。记录通用函数。例如，若想要编写一个函数在所有模块中都能调用，我们就可以将函数写在 common.php 中，相当于模块的全局函数。</li>
+<li><strong>config.php</strong> 应用（application）的配置文件。应用（application）中的所有模块都会读取这个文件。</li>
+<li><strong>database.php</strong> 数据库配置文件。</li>
+<li><strong>route.php</strong> 路由文件。若需要对 URL 进行美化，可以通过修改 route.php，增加一些路由配置。</li>
+<li><strong>tag.php</strong> 应用行为扩展文件。</li>
+</ul>
+<h4 id="extend（？）"><a href="#extend（？）" class="headerlink" title="extend（？）"></a>extend（？）</h4>
                             <hr>
                         </div>
                         <br>
