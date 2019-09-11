@@ -121,7 +121,7 @@
 <li>无 View 模式的 API 接口开发</li>
 <li>Model 再分层和 Controller 再分层</li>
 </ul>
-<h3 id="目录结构和规范"><a href="#目录结构和规范" class="headerlink" title="目录结构和规范"></a>目录结构和规范</h3><h4 id="application-（应用目录）"><a href="#application-（应用目录）" class="headerlink" title="application （应用目录）"></a>application （应用目录）</h4><p>后续开发中编写的文件目录。其中包含：</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><h4 id="application-（应用目录）"><a href="#application-（应用目录）" class="headerlink" title="application （应用目录）"></a>application （应用目录）</h4><p>后续开发中编写的文件目录。其中包含：</p>
 <ul>
 <li><strong>index 模块（index 文件夹）</strong>，里面包含模型层（model 文件夹），视图层（view 文件夹），控制器层（controller 文件夹），三者组成 MVC。</li>
 <li><strong>command.php</strong>， 控制台的配置文件。当我们用命令行执行 ThinkPHP 的时候，后台会读取 command.php 的配置。</li>
@@ -141,7 +141,22 @@
 <li><strong>static 目录</strong>，主要存放网站的静态文件，例如 CSS，JS 以及一些静态的图片。</li>
 </ul>
 <h4 id="runtime（缓存目录）"><a href="#runtime（缓存目录）" class="headerlink" title="runtime（缓存目录）"></a>runtime（缓存目录）</h4><p>网站运行的缓存文件目录，包括日志以及编译文件等等。</p>
-<h4 id="thinkphp-（框架目录）"><a href="#thinkphp-（框架目录）" class="headerlink" title="thinkphp （框架目录）"></a>thinkphp （框架目录）</h4>
+<h4 id="thinkphp-（框架目录）"><a href="#thinkphp-（框架目录）" class="headerlink" title="thinkphp （框架目录）"></a>thinkphp （框架目录）</h4><p>ThinkPHP5 框架文件目录。</p>
+<ul>
+<li><strong>base.php</strong>，用于定义一些常量。</li>
+<li><strong>composer.json</strong>，用于定义 composer 的一些配置文件。</li>
+<li><strong>console.php</strong>，控制台的入口文件。</li>
+<li><strong>convention.php</strong>，框架默认的配置文件。</li>
+<li><strong>helper.php</strong>，存放一些助手函数。</li>
+<li><strong>lang</strong>，语言包，英文 =&gt; 中文。</li>
+<li><strong>library</strong>，框架核心目录。它有两个子目录，分别是 think 和 traits。其中 traits 是类库的扩展，think 存放整个框架的核心文件</li>
+<li><strong>LICENSE.txt</strong>，说明性文件。</li>
+<li><strong>phpunit.xml</strong>，phpunit 的测试配置文件。</li>
+<li><strong>start.php</strong>，框架启动文件。</li>
+<li><strong>tpl</strong>，存放框架默认模板的目录。其中有四个文件：default_index.tpl，dispatch_jump.tpl，page_trace.tpl 以及 think_exception.tpl。default_index.tpl 是自动生成的控制器模板文件；dispatch_jump.tpl 网站中间跳转文件；page_trace.tpl 是调试时生成的模板文件；think_exception.tpl 是抛出异常时页面展示的文件。</li>
+</ul>
+<h4 id="vendor（第三方类库目录（Composer））"><a href="#vendor（第三方类库目录（Composer））" class="headerlink" title="vendor（第三方类库目录（Composer））"></a>vendor（第三方类库目录（Composer））</h4><p>存放其他类库的目录。</p>
+<h3 id="目录命名规范"><a href="#目录命名规范" class="headerlink" title="目录命名规范"></a>目录命名规范</h3>
                             <hr>
                         </div>
                         <br>
