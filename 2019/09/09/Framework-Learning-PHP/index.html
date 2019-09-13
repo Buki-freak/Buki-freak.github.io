@@ -156,7 +156,21 @@
 <li><strong>tpl</strong>，存放框架默认模板的目录。其中有四个文件：default_index.tpl，dispatch_jump.tpl，page_trace.tpl 以及 think_exception.tpl。default_index.tpl 是自动生成的控制器模板文件；dispatch_jump.tpl 网站中间跳转文件；page_trace.tpl 是调试时生成的模板文件；think_exception.tpl 是抛出异常时页面展示的文件。</li>
 </ul>
 <h4 id="vendor（第三方类库目录（Composer））"><a href="#vendor（第三方类库目录（Composer））" class="headerlink" title="vendor（第三方类库目录（Composer））"></a>vendor（第三方类库目录（Composer））</h4><p>存放其他类库的目录。</p>
-<h3 id="目录命名规范"><a href="#目录命名规范" class="headerlink" title="目录命名规范"></a>目录命名规范</h3>
+<h3 id="目录命名规范"><a href="#目录命名规范" class="headerlink" title="目录命名规范"></a>目录命名规范</h3><h4 id="目录命名"><a href="#目录命名" class="headerlink" title="目录命名"></a>目录命名</h4><ul>
+<li><strong>目录使用小写 + 下划线的方式命名</strong>，在目录的命名中，所有的目录都只是小写的，需要分割时则使用下划线。<h4 id="类文件命名"><a href="#类文件命名" class="headerlink" title="类文件命名"></a>类文件命名</h4></li>
+<li><strong>类文件采用驼峰命名法，首字母大写，其余文件（如 config.php，router.php 等等）为小写 + 下划线命名</strong></li>
+<li><strong>所有的类文件名均以 .php 结尾</strong></li>
+<li><strong>类的文件名均以命名空间定义，且命名空间和类库文件所在的路径一致</strong><h4 id="类，函数和属性名（变量）的命名"><a href="#类，函数和属性名（变量）的命名" class="headerlink" title="类，函数和属性名（变量）的命名"></a>类，函数和属性名（变量）的命名</h4></li>
+<li><strong>类名和类文件名保持一致，采用驼峰命名法，首字母大写</strong></li>
+<li><strong>函数用驼峰命名，首字母小写其余单字使用大写</strong></li>
+<li><strong>属性名采用驼峰，首字母小写其余单字使用大写</strong></li>
+<li>双下划线 __ 开头的函数方法为魔术方法。<h4 id="常量的命名"><a href="#常量的命名" class="headerlink" title="常量的命名"></a>常量的命名</h4></li>
+<li><strong>常量以大写字母和下划线命名，尽量不以下划线开头</strong></li>
+<li><strong>配置参数以小写字母和下划线命名，尽量不以下划线开头</strong><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4></li>
+<li><strong>表和字段采用小写 + 下划线的命名方式，不能以下划线开头</strong></li>
+<li><strong>应用类库的命名空间统一为 app（application）</strong>，通常情况下默认 app 目录为顶级的命名空间。</li>
+</ul>
+<h3 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h3>
                             <hr>
                         </div>
                         <br>
