@@ -234,9 +234,46 @@ index 模块中的 User.php:
             return $this -&gt; showName(&quot;Joe&quot;);  // 传参 $name
         }
     }
-?&gt;</code></pre><h3 id="ThinkPHP5-配置"><a href="#ThinkPHP5-配置" class="headerlink" title="ThinkPHP5 配置"></a>ThinkPHP5 配置</h3><p>ThinkPHP 会将我们所有配置最终转化为数组来提供给我们使用。ThinkPHP 中有两种设置配置的方式。第一种是通过直接修改 thinkphp 目录下的 convention.php 的惯例配置。第二种是通过设置 application 目录下的 conf 配置文件目录来进行应用配置。</p>
-<h4 id="惯例配置（默认配置）"><a href="#惯例配置（默认配置）" class="headerlink" title="惯例配置（默认配置）"></a>惯例配置（默认配置）</h4><p>惯例配置保存在 thinkphp 目录下的 convention.php 中的惯例配置数组。使用 config() 函数可以返回 该数组。</p>
-<h4 id="应用配置（app-配置）"><a href="#应用配置（app-配置）" class="headerlink" title="应用配置（app 配置）"></a>应用配置（app 配置）</h4><p>应用配置是对整个应用有效，可以对设计带来方便。在 app 的同级目录下新建一个 conf 应用配置目录，同时也需要修改 public 目录下的 index.php 中的应用配置文件目录。</p>
+?&gt;</code></pre><h3 id="ThinkPHP5-配置"><a href="#ThinkPHP5-配置" class="headerlink" title="ThinkPHP5 配置"></a>ThinkPHP5 配置</h3><p>ThinkPHP 会将我们所有配置最终转化为数组来提供给我们使用。ThinkPHP 中有两种设置配置的方式。第一种是通过直接修改 thinkphp 目录下的 convention.php 的惯例配置。第二种是通过设置 application 目录下的 conf 配置文件目录来进行应用配置。使用 config() 函数可以返回应用配置数组。</p>
+<h4 id="惯例配置（默认配置）"><a href="#惯例配置（默认配置）" class="headerlink" title="惯例配置（默认配置）"></a>惯例配置（默认配置）</h4><p>惯例配置保存在 thinkphp 目录下的 convention.php 中的惯例配置数组。</p>
+<h4 id="应用配置（app-配置）"><a href="#应用配置（app-配置）" class="headerlink" title="应用配置（app 配置）"></a>应用配置（app 配置）</h4><p>应用配置是对整个应用有效，可以对设计带来方便。在 app 的同级目录下新建一个 conf 应用配置目录，然后在目录下增加 config.php 配置文件，同时也需要修改 public 目录下的 index.php 中的应用配置文件目录。 config.php 的配置中可以新增一些自定义的配置，亦可以覆盖惯例配置中的一些设置。config.php 实际上是使用 array_merge() 函数对多维数组进行操作来实现以上功能。</p>
+<p>关于 array_merge() 函数：<br><img src="/images/array_merge_function.png" alt></p>
+<h4 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h4><p>扩展配置的目录是 conf 应用配置目录下的 extra 目录。在 ThinkPHP5 的框架中，对于 config() 函数返回的数组，在 config.php 中增加的变量一个个变成该数组的字段；而在 extra 扩展配置目录中，会将 PHP 配置的文件名作为键名，同时类型为数组，增加的变量变为该文件名数组的变量。</p>
+<p>Example:</p>
+<pre><code>conf 目录下的 config.php:
+
+&lt;?php
+    return [
+        &#39;name&#39; =&gt; &#39;Joe&#39;,
+        &#39;emails&#39; =&gt; &#39;sm@qq.com&#39;
+    ];
+?&gt;
+
+
+extra 目录下的 email.php：
+&lt;?php
+    return [
+        &#39;host&#39; =&gt; &#39;smtp@qq.com&#39;,
+        &#39;name&#39; =&gt; &#39;Joe&#39;
+    ];
+?&gt;
+
+
+打印结果（config() 函数返回的数组中）：
+
+  // config.php 的配置返回对应字段
+  [&quot;name&quot;] =&gt; string(3) &quot;Joe&quot;
+  [&quot;emails&quot;] =&gt; string(9) &quot;sm@qq.com&quot;
+
+  // extra 目录中的配置返回数组
+  [&quot;email&quot;] =&gt; array(2) {
+    [&quot;host&quot;] =&gt; string(11) &quot;smtp@qq.com&quot;
+    [&quot;name&quot;] =&gt; string(3) &quot;Joe&quot;
+  }
+</code></pre><ul>
+<li><strong>特殊情况：conf 目录下允许直接新建 database.php 进行应用扩展配置设置。</strong></li>
+<li><strong>在介绍完的以上三种配置中，对于 database 配置优先级为: extra 目录下的 database.php &gt; conf 目录下的 database.php &gt; conf 目录下的 config.php &gt; thinkphp 目录下的 convention.php。</strong></li>
+</ul>
 
                             <hr>
                         </div>
