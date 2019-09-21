@@ -276,7 +276,35 @@ extra 目录下的 email.php：
 </ul>
 <h4 id="场景配置"><a href="#场景配置" class="headerlink" title="场景配置"></a>场景配置</h4><p>场景配置使用于在不同的开发地点有不同配置要求的情况，对项目做到分类分块，方便不同场景配置之间的快速切换。</p>
 <p>设置方法：在 conf 目录下的 config.php 的数组中添加一项 app_status 并赋值为场景名。然后在 conf 的目录在新建一个以场景名为名字的 PHP 文件，并设置该场景的特殊配置。</p>
-<p><strong>ThinkPHP5 在场景配置中，如果需要配置数组，我们需要配置该数组的所有项（因为 ThinkPHP5 会将整个原有数组覆盖掉）。</strong></p>
+<p><strong>注意：</strong><br><strong>ThinkPHP5 在场景配置中，如果需要配置数组，我们需要配置该数组的所有项（因为 ThinkPHP5 会将整个原有数组覆盖掉）。</strong></p>
+<h4 id="模块配置"><a href="#模块配置" class="headerlink" title="模块配置"></a>模块配置</h4><p>模块配置使用于在不同模块中有不同的配置要求的情况，对不同的模块做到分块配置的情况。</p>
+<p>设置方法：在 conf 目录下新建一个与模块名相同的目录，同时在新建的目录底下再新建一个 config.php 文件。<br><strong>注意：</strong></p>
+<ul>
+<li><strong>在模块名目录下的配置只其对应的模块有效。</strong></li>
+<li><strong>模块配置中亦可以设置模块内部的扩展配置。</strong></li>
+<li><strong>conf 目录下的作用域是所有模块，conf 中单独的模块目录下的作用域是对应的模块</strong></li>
+</ul>
+<h4 id="动态配置"><a href="#动态配置" class="headerlink" title="动态配置"></a>动态配置</h4><p>动态配置主要用于某个方法里面，进行模块的动态配置改变或者设置。</p>
+<p>设置方法：使用 config() 助手函数进行配置，其中 config() 函数中第一个参数为变量名，第二个参数为该变量的值。<br><strong>注意：</strong></p>
+<ul>
+<li><strong>利用 __construct() 函数进行动态设置会对整个模块（类）有效。</strong></li>
+<li><strong>在方法中进行动态设置只会对方法内局部有效。</strong></li>
+</ul>
+<h3 id="Config-类以及-Config"><a href="#Config-类以及-Config" class="headerlink" title="Config 类以及 Config"></a>Config 类以及 Config</h3><p>Config 类中的几个方法：</p>
+<ul>
+<li>range() 方法，用于调整配置的作用域。</li>
+<li>parse() 方法，用于对配置进行解析。</li>
+<li>load() 方法，用于加载配置。</li>
+<li>has() 方法，用于检测某一个配置是否存在。</li>
+<li>get() 方法，用于获取配置。</li>
+<li>set() 方法，用于设置配置。</li>
+<li>reset() 方法，用于重置配置参数。</li>
+</ul>
+<p>在模块中使用 Config 类有两种方法：</p>
+<ul>
+<li>第一种：在模块的类前面先声明 <strong>use think\Config;</strong>。</li>
+<li>第二种，使用 Config 类时在 Config 前面</li>
+</ul>
 
                             <hr>
                         </div>
