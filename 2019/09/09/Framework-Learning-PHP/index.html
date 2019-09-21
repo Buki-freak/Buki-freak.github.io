@@ -289,8 +289,9 @@ extra 目录下的 email.php：
 <ul>
 <li><strong>利用 __construct() 函数进行动态设置会对整个模块（类）有效。</strong></li>
 <li><strong>在方法中进行动态设置只会对方法内局部有效。</strong></li>
+<li><strong>优先级：动态 &gt; 静态</strong></li>
 </ul>
-<h3 id="Config-类以及-Config"><a href="#Config-类以及-Config" class="headerlink" title="Config 类以及 Config"></a>Config 类以及 Config</h3><p>Config 类中的几个方法：</p>
+<h3 id="Config-类以及-config-助手函数"><a href="#Config-类以及-config-助手函数" class="headerlink" title="Config 类以及 config() 助手函数"></a>Config 类以及 config() 助手函数</h3><h4 id="Config-类"><a href="#Config-类" class="headerlink" title="Config 类"></a>Config 类</h4><p>Config 类中的几个方法：</p>
 <ul>
 <li>range() 方法，用于调整配置的作用域。</li>
 <li>parse() 方法，用于对配置进行解析。</li>
@@ -300,11 +301,27 @@ extra 目录下的 email.php：
 <li>set() 方法，用于设置配置。</li>
 <li>reset() 方法，用于重置配置参数。</li>
 </ul>
-<p>在模块中使用 Config 类有两种方法：</p>
+<p>在模块中使用 Config 类有两种方式：</p>
 <ul>
 <li>第一种：在模块的类前面先声明 <strong>use think\Config;</strong>。</li>
 <li>第二种，使用 Config 类时在 Config 前面</li>
 </ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>Config::has() 函数进行判断时，会将 Null 值和 False（空值） 一同视为 False。</strong></li>
+<li><strong>对二维数组进行操作，需要使用 “.” 进行分割。</strong></li>
+</ul>
+<h4 id="config-助手函数"><a href="#config-助手函数" class="headerlink" title="config() 助手函数"></a>config() 助手函数</h4><p>PHP 默认的助手函数都是在 helper.php 中定义的。而 config() 函数有三个参数：第一个是 name（参数名），第二个是 value（参数值），第三个是 range（作用域），如下面所示：</p>
+<pre><code>config() 函数结构：
+
+function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
+    if (is_null($value) &amp;&amp; is_string($name)) {
+        return 0 === strpos($name, &#39;?&#39;) ? Config::has(substr($name, 1), $range) : Config::get($name, $range);
+        } 
+    else {
+        return Config::set($name, $value, $range);
+    }
+}</code></pre><p>config() 的参数中，如果变量名加上问号则代表查询该变量是否存在，返回值为布尔型；不加问号则直接返回该变量值的情况。实际上，默认下的 config() 助手函数是多个 Config 类函数封装后的结果。</p>
 
                             <hr>
                         </div>
