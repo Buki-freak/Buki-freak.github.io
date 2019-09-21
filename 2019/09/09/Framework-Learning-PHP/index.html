@@ -274,7 +274,10 @@ extra 目录下的 email.php：
 <li><strong>特殊情况：conf 目录下允许直接新建 database.php 进行应用扩展配置设置。</strong></li>
 <li><strong>在介绍完的以上三种配置中，对于 database 配置优先级为: extra 目录下的 database.php &gt; conf 目录下的 database.php &gt; conf 目录下的 config.php &gt; thinkphp 目录下的 convention.php。</strong></li>
 </ul>
-<h4 id="场景配置"><a href="#场景配置" class="headerlink" title="场景配置"></a>场景配置</h4>
+<h4 id="场景配置"><a href="#场景配置" class="headerlink" title="场景配置"></a>场景配置</h4><p>场景配置使用于在不同的开发地点有不同配置要求的情况，对项目做到分类分块，方便不同场景配置之间的快速切换。</p>
+<p>设置方法：在 conf 目录下的 config.php 的数组中添加一项 app_status 并赋值为场景名。然后在 conf 的目录在新建一个以场景名为名字的 PHP 文件，并设置该场景的特殊配置。</p>
+<p><strong>ThinkPHP5 在场景配置中，如果需要配置数组，我们需要配置该数组的所有项（因为 ThinkPHP5 会将整个原有数组覆盖掉）。</strong></p>
+
                             <hr>
                         </div>
                         <br>
