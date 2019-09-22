@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Framework_Learning_PHP ~ W366er</title>
+    <title>Framework_Learning_PHP_TP5 ~ W366er</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -100,28 +100,28 @@
                 <div class="py-5 z-depth-3 board">
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
-                            <h1 id="PHP-框架"><a href="#PHP-框架" class="headerlink" title="PHP 框架"></a>PHP 框架</h1><h2 id="ThinkPHP5框架"><a href="#ThinkPHP5框架" class="headerlink" title="ThinkPHP5框架"></a>ThinkPHP5框架</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+                            <h1 id="ThinkPHP5框架"><a href="#ThinkPHP5框架" class="headerlink" title="ThinkPHP5框架"></a>ThinkPHP5框架</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li><strong>ThinkPHP5 与 ThinkPHP3 差别很大</strong></li>
 <li><strong>对 API 进行了大量的优化</strong></li>
 <li><strong>支持使用 Composer 进行下载</strong></li>
 <li><strong>可以进行自动化模块部署</strong></li>
 </ul>
-<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>MVC 全称为 Model View Controller，是模型（M），视图（V），控制器（C）的缩写，是软件设计典范。它用一种业务逻辑，数据，界面显示分离的方法组织代码，将业务逻辑聚集到一个部件中，改进和个性化定制界面以及用户交互。</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>MVC 全称为 Model View Controller，是模型（M），视图（V），控制器（C）的缩写，是软件设计典范。它用一种业务逻辑，数据，界面显示分离的方法组织代码，将业务逻辑聚集到一个部件中，改进和个性化定制界面以及用户交互。</p>
 <p><img src="/images/MVC_process.png" alt></p>
-<h4 id="视图层（View）"><a href="#视图层（View）" class="headerlink" title="视图层（View）"></a>视图层（View）</h4><ul>
+<h3 id="视图层（View）"><a href="#视图层（View）" class="headerlink" title="视图层（View）"></a>视图层（View）</h3><ul>
 <li>当我们打开一个网站的时候，我们看到的就是视图层，它会等待用户的输入。用户输入后，会将用户输入的数据和指令发送到控制器层。</li>
-<li>接受来控制器层的通知并作出更新。<h4 id="控制器层（Controller）"><a href="#控制器层（Controller）" class="headerlink" title="控制器层（Controller）"></a>控制器层（Controller）</h4></li>
+<li>接受来控制器层的通知并作出更新。<h3 id="控制器层（Controller）"><a href="#控制器层（Controller）" class="headerlink" title="控制器层（Controller）"></a>控制器层（Controller）</h3></li>
 <li>接受来自视图层的用户输入数据和指令，并且将接受到的用户指令传递给模型层（Model）。</li>
-<li>接受来自模型层返回的结果，并向视图层发出通知。<h4 id="模型层（Model）"><a href="#模型层（Model）" class="headerlink" title="模型层（Model）"></a>模型层（Model）</h4></li>
+<li>接受来自模型层返回的结果，并向视图层发出通知。<h3 id="模型层（Model）"><a href="#模型层（Model）" class="headerlink" title="模型层（Model）"></a>模型层（Model）</h3></li>
 <li>接受来自控制器的用户指令。</li>
 <li>根据用户指令对数据库进行增删改查等操作，然后将操作的结果返回给控制器层。</li>
 </ul>
-<h4 id="MVC-的变形"><a href="#MVC-的变形" class="headerlink" title="MVC 的变形"></a>MVC 的变形</h4><ul>
+<h3 id="MVC-的变形"><a href="#MVC-的变形" class="headerlink" title="MVC 的变形"></a>MVC 的变形</h3><ul>
 <li>无 Model 模式的 Web 开发</li>
 <li>无 View 模式的 API 接口开发</li>
 <li>Model 再分层和 Controller 再分层</li>
 </ul>
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><h4 id="application-（应用目录）"><a href="#application-（应用目录）" class="headerlink" title="application （应用目录）"></a>application （应用目录）</h4><p>后续开发中编写的文件目录。其中包含：</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><h3 id="application-（应用目录）"><a href="#application-（应用目录）" class="headerlink" title="application （应用目录）"></a>application （应用目录）</h3><p>后续开发中编写的文件目录。其中包含：</p>
 <ul>
 <li><strong>index 模块（index 文件夹）</strong>，里面包含模型层（model 文件夹），视图层（view 文件夹），控制器层（controller 文件夹），三者组成 MVC。</li>
 <li><strong>command.php</strong>， 控制台的配置文件。当我们用命令行执行 ThinkPHP 的时候，后台会读取 command.php 的配置。</li>
@@ -131,8 +131,8 @@
 <li><strong>route.php</strong>， 路由文件。若需要对 URL 进行美化，可以通过修改 route.php，增加一些路由配置。</li>
 <li><strong>tag.php</strong>， 应用行为扩展文件。</li>
 </ul>
-<h4 id="extend（扩展类库目录）"><a href="#extend（扩展类库目录）" class="headerlink" title="extend（扩展类库目录）"></a>extend（扩展类库目录）</h4><p>类库的存放目录。</p>
-<h4 id="public（WEB-部署目录-对外访问目录）"><a href="#public（WEB-部署目录-对外访问目录）" class="headerlink" title="public（WEB 部署目录 / 对外访问目录）"></a>public（WEB 部署目录 / 对外访问目录）</h4><p>网站的根目录</p>
+<h3 id="extend（扩展类库目录）"><a href="#extend（扩展类库目录）" class="headerlink" title="extend（扩展类库目录）"></a>extend（扩展类库目录）</h3><p>类库的存放目录。</p>
+<h3 id="public（WEB-部署目录-对外访问目录）"><a href="#public（WEB-部署目录-对外访问目录）" class="headerlink" title="public（WEB 部署目录 / 对外访问目录）"></a>public（WEB 部署目录 / 对外访问目录）</h3><p>网站的根目录</p>
 <ul>
 <li><strong>favicon.ico</strong>，网页标签页上的图标。</li>
 <li><strong>index.php</strong>，网站的入口文件。</li>
@@ -140,8 +140,8 @@
 <li><strong>router.php</strong>，框架快速启动测试文件。若本地没有安装 Apache，只安装了 PHP，我们也可以通过 PHP 内置的 Web Server，以及 router.php 来进行启动 ThinkPHP5 框架。</li>
 <li><strong>static 目录</strong>，主要存放网站的静态文件，例如 CSS，JS 以及一些静态的图片。</li>
 </ul>
-<h4 id="runtime（缓存目录）"><a href="#runtime（缓存目录）" class="headerlink" title="runtime（缓存目录）"></a>runtime（缓存目录）</h4><p>网站运行的缓存文件目录，包括日志以及编译文件等等。</p>
-<h4 id="thinkphp-（框架目录）"><a href="#thinkphp-（框架目录）" class="headerlink" title="thinkphp （框架目录）"></a>thinkphp （框架目录）</h4><p>ThinkPHP5 框架文件目录。</p>
+<h3 id="runtime（缓存目录）"><a href="#runtime（缓存目录）" class="headerlink" title="runtime（缓存目录）"></a>runtime（缓存目录）</h3><p>网站运行的缓存文件目录，包括日志以及编译文件等等。</p>
+<h3 id="thinkphp-（框架目录）"><a href="#thinkphp-（框架目录）" class="headerlink" title="thinkphp （框架目录）"></a>thinkphp （框架目录）</h3><p>ThinkPHP5 框架文件目录。</p>
 <ul>
 <li><strong>base.php</strong>，用于定义一些常量。</li>
 <li><strong>composer.json</strong>，用于定义 composer 的一些配置文件。</li>
@@ -155,24 +155,24 @@
 <li><strong>start.php</strong>，框架启动文件。</li>
 <li><strong>tpl</strong>，存放框架默认模板的目录。其中有四个文件：default_index.tpl，dispatch_jump.tpl，page_trace.tpl 以及 think_exception.tpl。default_index.tpl 是自动生成的控制器模板文件；dispatch_jump.tpl 网站中间跳转文件；page_trace.tpl 是调试时生成的模板文件；think_exception.tpl 是抛出异常时页面展示的文件。</li>
 </ul>
-<h4 id="vendor（第三方类库目录（Composer））"><a href="#vendor（第三方类库目录（Composer））" class="headerlink" title="vendor（第三方类库目录（Composer））"></a>vendor（第三方类库目录（Composer））</h4><p>存放其他类库的目录。</p>
-<h3 id="目录命名规范"><a href="#目录命名规范" class="headerlink" title="目录命名规范"></a>目录命名规范</h3><h4 id="目录命名"><a href="#目录命名" class="headerlink" title="目录命名"></a>目录命名</h4><ul>
-<li><strong>目录使用小写 + 下划线的方式命名</strong>，在目录的命名中，所有的目录都只是小写的，需要分割时则使用下划线。<h4 id="类文件命名"><a href="#类文件命名" class="headerlink" title="类文件命名"></a>类文件命名</h4></li>
+<h3 id="vendor（第三方类库目录（Composer））"><a href="#vendor（第三方类库目录（Composer））" class="headerlink" title="vendor（第三方类库目录（Composer））"></a>vendor（第三方类库目录（Composer））</h3><p>存放其他类库的目录。</p>
+<h2 id="目录命名规范"><a href="#目录命名规范" class="headerlink" title="目录命名规范"></a>目录命名规范</h2><h3 id="目录命名"><a href="#目录命名" class="headerlink" title="目录命名"></a>目录命名</h3><ul>
+<li><strong>目录使用小写 + 下划线的方式命名</strong>，在目录的命名中，所有的目录都只是小写的，需要分割时则使用下划线。<h3 id="类文件命名"><a href="#类文件命名" class="headerlink" title="类文件命名"></a>类文件命名</h3></li>
 <li><strong>类文件采用驼峰命名法，首字母大写，其余文件（如 config.php，router.php 等等）为小写 + 下划线命名</strong></li>
 <li><strong>所有的类文件名均以 .php 结尾</strong></li>
-<li><strong>类的文件名均以命名空间定义，且命名空间和类库文件所在的路径一致</strong><h4 id="类，函数和属性名（变量）的命名"><a href="#类，函数和属性名（变量）的命名" class="headerlink" title="类，函数和属性名（变量）的命名"></a>类，函数和属性名（变量）的命名</h4></li>
+<li><strong>类的文件名均以命名空间定义，且命名空间和类库文件所在的路径一致</strong><h3 id="类，函数和属性名（变量）的命名"><a href="#类，函数和属性名（变量）的命名" class="headerlink" title="类，函数和属性名（变量）的命名"></a>类，函数和属性名（变量）的命名</h3></li>
 <li><strong>类名和类文件名保持一致，采用驼峰命名法，首字母大写</strong></li>
 <li><strong>函数用驼峰命名，首字母小写其余单字使用大写</strong></li>
 <li><strong>属性名采用驼峰，首字母小写其余单字使用大写</strong></li>
-<li>双下划线 __ 开头的函数方法为魔术方法。<h4 id="常量的命名"><a href="#常量的命名" class="headerlink" title="常量的命名"></a>常量的命名</h4></li>
+<li>双下划线 __ 开头的函数方法为魔术方法。<h3 id="常量的命名"><a href="#常量的命名" class="headerlink" title="常量的命名"></a>常量的命名</h3></li>
 <li><strong>常量以大写字母和下划线命名，尽量不以下划线开头</strong></li>
-<li><strong>配置参数以小写字母和下划线命名，尽量不以下划线开头</strong><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4></li>
+<li><strong>配置参数以小写字母和下划线命名，尽量不以下划线开头</strong><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3></li>
 <li><strong>表和字段采用小写 + 下划线的命名方式，不能以下划线开头</strong></li>
 <li><strong>应用类库的命名空间统一为 app（application）</strong>，通常情况下默认 app 目录为顶级的命名空间。</li>
 </ul>
-<h3 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h3><p>所有模块的命名空间均以 app 作为根命名空间。当我们用 URL 访问一个模块的时候，其格式是这样的：public(网站根目录) / (模块名) / （类名） / （函数名）。</p>
-<h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>命名空间表示着一个标识符的可见范围。一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。这样，在一个新的名字空间中可定义任何标识符，它们不会与任何已有的标识符发生冲突，因为已有的定义都处于其他名字空间中。（adapted from wiki）</p>
-<h4 id="application-下的-common-模块"><a href="#application-下的-common-模块" class="headerlink" title="application 下的 common 模块"></a>application 下的 common 模块</h4><p>common 模块是 ThinkPHP 默认的项目的通用模块，不允许使用 URL 进行直接访问。访问 common 模块的方法如下：</p>
+<h2 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h2><p>所有模块的命名空间均以 app 作为根命名空间。当我们用 URL 访问一个模块的时候，其格式是这样的：public(网站根目录) / (模块名) / （类名） / （函数名）。</p>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>命名空间表示着一个标识符的可见范围。一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。这样，在一个新的名字空间中可定义任何标识符，它们不会与任何已有的标识符发生冲突，因为已有的定义都处于其他名字空间中。（adapted from wiki）</p>
+<h3 id="application-下的-common-模块"><a href="#application-下的-common-模块" class="headerlink" title="application 下的 common 模块"></a>application 下的 common 模块</h3><p>common 模块是 ThinkPHP 默认的项目的通用模块，不允许使用 URL 进行直接访问。访问 common 模块的方法如下：</p>
 <p>Example:<br>普通的输入输出:</p>
 <pre><code>common 模块下的 Index.php:
 
@@ -234,11 +234,11 @@ index 模块中的 User.php:
             return $this -&gt; showName(&quot;Joe&quot;);  // 传参 $name
         }
     }
-?&gt;</code></pre><h3 id="ThinkPHP5-配置"><a href="#ThinkPHP5-配置" class="headerlink" title="ThinkPHP5 配置"></a>ThinkPHP5 配置</h3><p>ThinkPHP 会将我们所有配置最终转化为数组来提供给我们使用。ThinkPHP 中有两种设置配置的方式。第一种是通过直接修改 thinkphp 目录下的 convention.php 的惯例配置。第二种是通过设置 application 目录下的 conf 配置文件目录来进行应用配置。使用 config( ) 函数可以返回应用配置数组。</p>
-<h4 id="惯例配置（默认配置）"><a href="#惯例配置（默认配置）" class="headerlink" title="惯例配置（默认配置）"></a>惯例配置（默认配置）</h4><p>惯例配置保存在 thinkphp 目录下的 convention.php 中的惯例配置数组。</p>
-<h4 id="应用配置（app-配置）"><a href="#应用配置（app-配置）" class="headerlink" title="应用配置（app 配置）"></a>应用配置（app 配置）</h4><p>应用配置是对整个应用有效，可以对设计带来方便。在 app 的同级目录下新建一个 conf 应用配置目录，然后在目录下增加 config.php 配置文件，同时也需要修改 public 目录下的 index.php 中的应用配置文件目录。 config.php 的配置中可以新增一些自定义的配置，亦可以覆盖惯例配置中的一些设置。config.php 实际上是使用 array_merge() 函数对多维数组进行操作来实现以上功能。</p>
+?&gt;</code></pre><h2 id="ThinkPHP5-配置"><a href="#ThinkPHP5-配置" class="headerlink" title="ThinkPHP5 配置"></a>ThinkPHP5 配置</h2><p>ThinkPHP 会将我们所有配置最终转化为数组来提供给我们使用。ThinkPHP 中有两种设置配置的方式。第一种是通过直接修改 thinkphp 目录下的 convention.php 的惯例配置。第二种是通过设置 application 目录下的 conf 配置文件目录来进行应用配置。使用 config( ) 函数可以返回应用配置数组。</p>
+<h3 id="惯例配置（默认配置）"><a href="#惯例配置（默认配置）" class="headerlink" title="惯例配置（默认配置）"></a>惯例配置（默认配置）</h3><p>惯例配置保存在 thinkphp 目录下的 convention.php 中的惯例配置数组。</p>
+<h3 id="应用配置（app-配置）"><a href="#应用配置（app-配置）" class="headerlink" title="应用配置（app 配置）"></a>应用配置（app 配置）</h3><p>应用配置是对整个应用有效，可以对设计带来方便。在 app 的同级目录下新建一个 conf 应用配置目录，然后在目录下增加 config.php 配置文件，同时也需要修改 public 目录下的 index.php 中的应用配置文件目录。 config.php 的配置中可以新增一些自定义的配置，亦可以覆盖惯例配置中的一些设置。config.php 实际上是使用 array_merge() 函数对多维数组进行操作来实现以上功能。</p>
 <p>关于 array_merge() 函数：<br><img src="/images/array_merge_function.png" alt></p>
-<h4 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h4><p>扩展配置的目录是 conf 应用配置目录下的 extra 目录。在 ThinkPHP5 的框架中，对于 config( ) 函数返回的数组，在 config.php 中增加的变量一个个变成该数组的字段；而在 extra 扩展配置目录中，会将 PHP 配置的文件名作为键名，同时类型为数组，增加的变量变为该文件名数组的变量。</p>
+<h3 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h3><p>扩展配置的目录是 conf 应用配置目录下的 extra 目录。在 ThinkPHP5 的框架中，对于 config( ) 函数返回的数组，在 config.php 中增加的变量一个个变成该数组的字段；而在 extra 扩展配置目录中，会将 PHP 配置的文件名作为键名，同时类型为数组，增加的变量变为该文件名数组的变量。</p>
 <p>Example:</p>
 <pre><code>conf 目录下的 config.php:
 
@@ -274,24 +274,24 @@ extra 目录下的 email.php：
 <li><strong>特殊情况：conf 目录下允许直接新建 database.php 进行应用扩展配置设置。</strong></li>
 <li><strong>在介绍完的以上三种配置中，对于 database 配置优先级为: extra 目录下的 database.php &gt; conf 目录下的 database.php &gt; conf 目录下的 config.php &gt; thinkphp 目录下的 convention.php。</strong></li>
 </ul>
-<h4 id="场景配置"><a href="#场景配置" class="headerlink" title="场景配置"></a>场景配置</h4><p>场景配置使用于在不同的开发地点有不同配置要求的情况，对项目做到分类分块，方便不同场景配置之间的快速切换。</p>
+<h3 id="场景配置"><a href="#场景配置" class="headerlink" title="场景配置"></a>场景配置</h3><p>场景配置使用于在不同的开发地点有不同配置要求的情况，对项目做到分类分块，方便不同场景配置之间的快速切换。</p>
 <p>设置方法：在 conf 目录下的 config.php 的数组中添加一项 app_status 并赋值为场景名。然后在 conf 的目录在新建一个以场景名为名字的 PHP 文件，并设置该场景的特殊配置。</p>
 <p><strong>注意：</strong><br><strong>ThinkPHP5 在场景配置中，如果需要配置数组，我们需要配置该数组的所有项（因为 ThinkPHP5 会将整个原有数组覆盖掉）。</strong></p>
-<h4 id="模块配置"><a href="#模块配置" class="headerlink" title="模块配置"></a>模块配置</h4><p>模块配置使用于在不同模块中有不同的配置要求的情况，对不同的模块做到分块配置的情况。</p>
+<h3 id="模块配置"><a href="#模块配置" class="headerlink" title="模块配置"></a>模块配置</h3><p>模块配置使用于在不同模块中有不同的配置要求的情况，对不同的模块做到分块配置的情况。</p>
 <p>设置方法：在 conf 目录下新建一个与模块名相同的目录，同时在新建的目录底下再新建一个 config.php 文件。<br><strong>注意：</strong></p>
 <ul>
 <li><strong>在模块名目录下的配置只其对应的模块有效。</strong></li>
 <li><strong>模块配置中亦可以设置模块内部的扩展配置。</strong></li>
 <li><strong>conf 目录下的作用域是所有模块，conf 中单独的模块目录下的作用域是对应的模块</strong></li>
 </ul>
-<h4 id="动态配置"><a href="#动态配置" class="headerlink" title="动态配置"></a>动态配置</h4><p>动态配置主要用于某个方法里面，进行模块的动态配置改变或者设置。</p>
+<h3 id="动态配置"><a href="#动态配置" class="headerlink" title="动态配置"></a>动态配置</h3><p>动态配置主要用于某个方法里面，进行模块的动态配置改变或者设置。</p>
 <p>设置方法：使用 config( ) 助手函数进行配置，其中 config( ) 函数中第一个参数为变量名，第二个参数为该变量的值。<br><strong>注意：</strong></p>
 <ul>
 <li><strong>利用 __construct( ) 函数进行动态设置会对整个模块（类）有效。</strong></li>
 <li><strong>在方法中进行动态设置只会对方法内局部有效。</strong></li>
 <li><strong>优先级：动态 &gt; 静态</strong></li>
 </ul>
-<h4 id="Config-类以及-config-助手函数"><a href="#Config-类以及-config-助手函数" class="headerlink" title="Config 类以及 config( ) 助手函数"></a>Config 类以及 config( ) 助手函数</h4><h5 id="Config-类"><a href="#Config-类" class="headerlink" title="Config 类"></a>Config 类</h5><p>Config 类中的几个方法：</p>
+<h3 id="Config-类以及-config-助手函数"><a href="#Config-类以及-config-助手函数" class="headerlink" title="Config 类以及 config( ) 助手函数"></a>Config 类以及 config( ) 助手函数</h3><h4 id="Config-类"><a href="#Config-类" class="headerlink" title="Config 类"></a>Config 类</h4><p>Config 类中的几个方法：</p>
 <ul>
 <li>range( ) 方法，用于调整配置的作用域。</li>
 <li>parse( ) 方法，用于对配置进行解析。</li>
@@ -311,7 +311,7 @@ extra 目录下的 email.php：
 <li><strong>Config::has( ) 函数进行判断时，会将 Null 值和 False（空值） 一同视为 False。</strong></li>
 <li><strong>对二维数组进行操作，需要使用 “.” 进行分割。</strong></li>
 </ul>
-<h5 id="config-助手函数"><a href="#config-助手函数" class="headerlink" title="config( ) 助手函数"></a>config( ) 助手函数</h5><p>PHP 默认的助手函数都是在 helper.php 中定义的。而 config( ) 函数有三个参数：第一个是 name（参数名），第二个是 value（参数值），第三个是 range（作用域），如下面所示：</p>
+<h4 id="config-助手函数"><a href="#config-助手函数" class="headerlink" title="config( ) 助手函数"></a>config( ) 助手函数</h4><p>PHP 默认的助手函数都是在 helper.php 中定义的。而 config( ) 函数有三个参数：第一个是 name（参数名），第二个是 value（参数值），第三个是 range（作用域），如下面所示：</p>
 <pre><code>config() 函数结构：
 
 function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
@@ -322,23 +322,22 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
         return Config::set($name, $value, $range);
     }
 }</code></pre><p>config( ) 的参数中，如果变量名加上问号则代表查询该变量是否存在，返回值为布尔型；不加问号则直接返回该变量值的情况。实际上，默认下的 config( ) 助手函数是多个 Config 类函数封装后的结果。</p>
-<h4 id="环境变量-ENV-配置（框架有问题-ENV-返回值为空）"><a href="#环境变量-ENV-配置（框架有问题-ENV-返回值为空）" class="headerlink" title="环境变量 ENV 配置（框架有问题? $_ENV 返回值为空）"></a>环境变量 ENV 配置（框架有问题? $_ENV 返回值为空）</h4><p>在 ThinkPHP5 中允许在 app 的同级目录下新建一个 .env 文件。该文件会在整个框架运行的时候加载并且被进行读取。</p>
-<h3 id="URL和路由"><a href="#URL和路由" class="headerlink" title="URL和路由"></a>URL和路由</h3><h4 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h4><p>单入口文件：应用程序的所有 HTTP 请求都由某一个文件接受并由这个文件转发到功能代码中。ThinkPHP5 框架属于单入口。<br>5.0 版本的默认应用入口文件在 public/index.php。这里我们可以修改 base.php 中的一些默认配置。</p>
-<h4 id="隐藏入口文件"><a href="#隐藏入口文件" class="headerlink" title="隐藏入口文件"></a>隐藏入口文件</h4><p>通过 URL 重写隐藏应用的入口文件 index.php。<br>在 Apache 方法：</p>
+<h3 id="环境变量-ENV-配置（框架有问题-ENV-返回值为空）"><a href="#环境变量-ENV-配置（框架有问题-ENV-返回值为空）" class="headerlink" title="环境变量 ENV 配置（框架有问题? $_ENV 返回值为空）"></a>环境变量 ENV 配置（框架有问题? $_ENV 返回值为空）</h3><p>在 ThinkPHP5 中允许在 app 的同级目录下新建一个 .env 文件。该文件会在整个框架运行的时候加载并且被进行读取。</p>
+<h2 id="URL和路由"><a href="#URL和路由" class="headerlink" title="URL和路由"></a>URL和路由</h2><h3 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h3><p>单入口文件：应用程序的所有 HTTP 请求都由某一个文件接受并由这个文件转发到功能代码中。ThinkPHP5 框架属于单入口。<br>5.0 版本的默认应用入口文件在 public/index.php。这里我们可以修改 base.php 中的一些默认配置。</p>
+<h3 id="隐藏入口文件"><a href="#隐藏入口文件" class="headerlink" title="隐藏入口文件"></a>隐藏入口文件</h3><p>通过 URL 重写隐藏应用的入口文件 index.php。<br>在 Apache 方法：</p>
 <ul>
 <li>httpd.conf 配置文件中需要加载 mod_rewrite.so 模块</li>
 <li>同时 AllowOverride None 将 None 改为 All</li>
 <li><strong>框架 public/.htaccess 文件写入 RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L] 进行隐藏</strong></li>
 </ul>
-<h4 id="入口文件绑定"><a href="#入口文件绑定" class="headerlink" title="入口文件绑定"></a>入口文件绑定</h4><p>对 URL 入口文件绑定的方法有两种：<br><strong>第一种方法：在 public 目录下的 index.php 中设置 ‘BIND_MODULE’ 为指定的 app 路径。两种情况：</strong></p>
+<h3 id="入口文件绑定"><a href="#入口文件绑定" class="headerlink" title="入口文件绑定"></a>入口文件绑定</h3><p>对 URL 入口文件绑定的方法有两种：<br><strong>第一种方法：在 public 目录下的 index.php 中设置 ‘BIND_MODULE’ 为指定的 app 路径。两种情况：</strong></p>
 <ul>
 <li>设置模块名，访问时 控制器名 + 方法名</li>
 <li>设置 模块名 + 控制器名，访问时 方法名</li>
 </ul>
 <p><strong>第二种方法：public 目录下新建 api.php并进行配置，同时开启 ‘auto_bind_module’。然后在 app 中再新建一个 api 模块并进行设置（模块名不一定是 api）。</strong></p>
 <p>两种方法的区别：在没有对应的模块的情况下，第一种方法会直接报错。但使用第二种方法不会报错，而是转为访问 index 模块。</p>
-<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>目的：</p>
-
+<h3 id="路由（route-php）"><a href="#路由（route-php）" class="headerlink" title="路由（route.php）"></a>路由（route.php）</h3><h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><h3 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h3>
                             <hr>
                         </div>
                         <br>
@@ -416,7 +415,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Framework_Learning_PHP&nbsp;",
+            "Framework_Learning_PHP_TP5&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,
