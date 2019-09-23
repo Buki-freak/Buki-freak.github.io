@@ -337,7 +337,19 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 </ul>
 <p><strong>第二种方法：public 目录下新建 api.php并进行配置，同时开启 ‘auto_bind_module’。然后在 app 中再新建一个 api 模块并进行设置（模块名不一定是 api）。</strong></p>
 <p>两种方法的区别：在没有对应的模块的情况下，第一种方法会直接报错。但使用第二种方法不会报错，而是转为访问 index 模块。</p>
-<h3 id="路由（route-php）"><a href="#路由（route-php）" class="headerlink" title="路由（route.php）"></a>路由（route.php）</h3><h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><h3 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h3>
+<h3 id="路由（route-php）"><a href="#路由（route-php）" class="headerlink" title="路由（route.php）"></a>路由（route.php）</h3><p>暂不阐述。</p>
+<h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><h3 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h3><p>在 PHP 中，我们有三种方法可以获得 request 对象：</p>
+<ul>
+<li>使用助手函数 request( ) 返回对象。</li>
+<li>直接使用 request 类中的 instance( ) 函数来获得实例。</li>
+<li>注入对象。</li>
+</ul>
+<h3 id="请求对象的参数获取"><a href="#请求对象的参数获取" class="headerlink" title="请求对象的参数获取"></a>请求对象的参数获取</h3><p>请求对象中获取 URL 信息：<br><img src="/images/request_URL_information.png" alt></p>
+<p>获取请求参数：<br><img src="/images/request_parameters.png" alt></p>
+<p>同时 get, param, post, session, cookie 函数都支持数组查找方法。</p>
+<p>获取模块，控制器，操作：<br><img src="/images/request_URL_information.png" alt></p>
+<p>其余 mannual….</p>
+<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3>
                             <hr>
                         </div>
                         <br>
