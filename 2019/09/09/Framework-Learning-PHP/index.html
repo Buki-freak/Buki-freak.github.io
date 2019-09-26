@@ -351,7 +351,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 <p>其余 mannual….</p>
 <h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="images/input_types.png" alt></p>
 <p>其中 param 变量包括 get，post 以及 put 请求方法中的变量（包括了 pathinfo 中的变量）。若 param 参数中 get 和 post 方法出现了相同的参数名，则只返回一个 get 参数的值。</p>
-<h3 id="响应对象-Response"><a href="#响应对象-Response" class="headerlink" title="响应对象 Response"></a>响应对象 Response</h3><p>在 ThinkPHP5 中的控制器下不允许 die( )操作。<br>在响应的过程中，我们可以设置 default_return_type 的值对返回的响应类型进行设置。<br>Example:<br>默认配置：</p>
+<h3 id="响应对象-Response"><a href="#响应对象-Response" class="headerlink" title="响应对象 Response"></a>响应对象 Response</h3><p>在 ThinkPHP5 中的控制器下不允许 die( )操作。<br>控制器的所有操作方法都是 return 返回而不是直接输出，系统调用 Response::send 方法最终的应用返回的数据输出到页面或者客户端，并且自动转换成 default_return_type 参数配置的格式    。<br>在响应的过程中，我们可以设置 default_return_type 的值对返回的响应类型进行设置。<strong>发现不配置这个参数会无法直接返回打印变量，目前不太清楚。</strong><br>Example:<br>默认配置：</p>
 <pre><code>Code:
 &lt;?php
     namespace app\index\controller;
