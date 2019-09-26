@@ -338,7 +338,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 <p><strong>第二种方法：public 目录下新建 api.php并进行配置，同时开启 ‘auto_bind_module’。然后在 app 中再新建一个 api 模块并进行设置（模块名不一定是 api）。</strong></p>
 <p>两种方法的区别：在没有对应的模块的情况下，第一种方法会直接报错。但使用第二种方法不会报错，而是转为访问 index 模块。</p>
 <h3 id="路由（route-php）"><a href="#路由（route-php）" class="headerlink" title="路由（route.php）"></a>路由（route.php）</h3><p>暂不阐述。</p>
-<h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><h3 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h3><p>在 PHP 中，我们有三种方法可以获得 request 对象：</p>
+<h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><h3 id="请求对象-Request"><a href="#请求对象-Request" class="headerlink" title="请求对象 Request"></a>请求对象 Request</h3><p>在 PHP 中，我们有三种方法可以获得 request 对象：</p>
 <ul>
 <li>使用助手函数 request( ) 返回对象。</li>
 <li>直接使用 request 类中的 instance( ) 函数来获得实例。</li>
@@ -349,8 +349,51 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 <p>同时 get, param, post, session, cookie 函数都支持数组查找方法。</p>
 <p>获取模块，控制器，操作：<br><img src="/images/request_URL_information.png" alt></p>
 <p>其余 mannual….</p>
-<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )助手函数不允许进行自定义。<br><img src="images/input_types.png" alt></p>
-<p>其中 param 变量包括 get，post 以及 put 请求方法中的变量（包括了 pathinfo 中的变量）。</p>
+<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="images/input_types.png" alt></p>
+<p>其中 param 变量包括 get，post 以及 put 请求方法中的变量（包括了 pathinfo 中的变量）。若 param 参数中 get 和 post 方法出现了相同的参数名，则只返回一个 get 参数的值。</p>
+<h3 id="响应对象-Response"><a href="#响应对象-Response" class="headerlink" title="响应对象 Response"></a>响应对象 Response</h3><p>在 ThinkPHP5 中的控制器下不允许 die( )操作。<br>在响应的过程中，我们可以设置 default_return_type 的值对返回的响应类型进行设置。<br>Example:<br>默认配置：</p>
+<pre><code>Code:
+&lt;?php
+    namespace app\index\controller;
+
+    use think\Request;
+    use think\Config;
+
+    Class Index{
+        public function index(Request $request){
+            $res = [
+                &#39;code&#39; =&gt; 200, 
+                &#39;result&#39; =&gt; [
+                    &#39;list&#39; =&gt; [
+                        1, 2, 3, 4 , 5
+                    ]
+                ]
+            ];
+            return $res;
+        }
+    }</code></pre><p>Response:<br><img src="images/return_type_default_default.png" alt></p>
+<p>json 配置：</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+
+    use think\Request;
+    use think\Config;
+
+    Class Index{
+        public function index(Request $request){
+            $res = [
+                &#39;code&#39; =&gt; 200, 
+                &#39;result&#39; =&gt; [
+                    &#39;list&#39; =&gt; [
+                        1, 2, 3, 4 , 5
+                    ]
+                ]
+            ];
+            Config::set(&#39;default_return_type&#39;, &#39;json&#39;);
+            return $res;
+
+        }
+    }</code></pre><p>Response:<br><img src="images/return_types_default_json.png" alt></p>
 
                             <hr>
                         </div>
