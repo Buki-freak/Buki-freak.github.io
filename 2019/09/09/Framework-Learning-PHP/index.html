@@ -394,7 +394,16 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 
         }
     }</code></pre><p>Response:<br><img src="images/return_types_default_json.png" alt></p>
-<h2 id="视图层-View"><a href="#视图层-View" class="headerlink" title="视图层 View"></a>视图层 View</h2><p>视图层主要为用户提供一个界面进行一些操作，等待用户输入等等。通常视图层是一个 HTML。如果使用 view( )，则视图层默认的目录是在 app/模块名/view/index/index.html，在页面上直接返回这个 HTML 文件。<br>规则如下：</p>
+<h2 id="视图层-View"><a href="#视图层-View" class="headerlink" title="视图层 View"></a>视图层 View</h2><p>视图层主要为用户提供一个界面进行一些操作，等待用户输入等等。通常视图层是一个 HTML。view( )视图层默认的目录是在 app/模块名/view/index/。使用 view( ) 默认返回的是默认目录下的 index.html。在页面上直接返回这个 HTML 文件。与controller 控制器模块不同，view 目录下还需要新建文件夹。<br>第一个参数使用规则如下：<br>以下 view( )函数均在 index 模块的 Index 控制器的 index 方法中。</p>
+<ul>
+<li><strong>view(‘upload’) ==&gt; 在默认的目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
+<li><strong>view(‘admin/upload’) ==&gt; 在 app/index/view/admin/ 目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
+<li><strong>view(‘./upload.html’) ==&gt; 在网站入口目录 public/ 目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
+<li><strong>view(‘./html/upload/‘) ==&gt; 在网站入口目录 public/html/ 目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
+<li><strong>注意：访问网站入口目录的文件的情况与访问模块目录不同，需要在指定的文件后面加上后缀 html。</strong></li>
+</ul>
+<p>第二个参数可以通过数组传递一些变量的值。<br>第三个参数可以通过数组定义并初始化一些静态变量。    </p>
+<p><strong>实际上 view( ) 函数属于助手函数，类似于之前的 config( )，以及 input( )，其作用等同于 Controller -&gt; fetch( )。</strong></p>
 
                             <hr>
                         </div>
