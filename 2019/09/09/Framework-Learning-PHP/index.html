@@ -349,7 +349,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 <p>同时 get, param, post, session, cookie 函数都支持数组查找方法。</p>
 <p>获取模块，控制器，操作：<br><img src="/images/request_URL_information.png" alt></p>
 <p>其余 mannual….</p>
-<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="images/input_types.png" alt></p>
+<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="/images/input_types.png" alt></p>
 <p>其中 param 变量包括 get，post 以及 put 请求方法中的变量（包括了 pathinfo 中的变量）。若 param 参数中 get 和 post 方法出现了相同的参数名，则只返回一个 get 参数的值。</p>
 <h3 id="响应对象-Response"><a href="#响应对象-Response" class="headerlink" title="响应对象 Response"></a>响应对象 Response</h3><p>在 ThinkPHP5 中的控制器下不允许 die( )操作。<br>控制器的所有操作方法都是 return 返回而不是直接输出，系统调用 Response::send 方法最终的应用返回的数据输出到页面或者客户端，并且自动转换成 default_return_type 参数配置的格式    。<br>在响应的过程中，我们可以设置 default_return_type 的值对返回的响应类型进行设置。<strong>发现不配置这个参数会无法直接返回打印变量，目前不太清楚。</strong><br>Example:<br>默认配置：</p>
 <pre><code>Code:
@@ -371,7 +371,8 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
             ];
             return $res;
         }
-    }</code></pre><p>Response:<br><img src="images/return_type_default_default.png" alt></p>
+    }</code></pre><p>Response:</p>
+<p><img src="/images/return_type_default_default.png" alt></p>
 <p>json 配置：</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -393,7 +394,8 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
             return $res;
 
         }
-    }</code></pre><p>Response:<br><img src="images/return_types_default_json.png" alt></p>
+    }</code></pre><p>Response:</p>
+<p><img src="/images/return_types_default_json.png" alt></p>
 <h2 id="视图层-View"><a href="#视图层-View" class="headerlink" title="视图层 View"></a>视图层 View</h2><h3 id="View-函数"><a href="#View-函数" class="headerlink" title="View( )函数"></a>View( )函数</h3><p>视图层主要为用户提供一个界面进行一些操作，等待用户输入等等。通常视图层是一个 HTML。view( )视图层默认的目录是在 app/模块名/view/index/。使用 view( ) 默认返回的是默认目录下的 index.html。在页面上直接返回这个 HTML 文件。与controller 控制器模块不同，view 目录下还需要新建文件夹。<br>第一个参数使用规则如下：<br>以下 view( )函数均在 index 模块的 Index 控制器的 index 方法中。</p>
 <ul>
 <li><strong>view(‘upload’) ==&gt; 在默认的目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
@@ -475,7 +477,8 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
     &lt;p&gt;{$key4}&lt;/p&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>Result:<br><img src="images/result_of_parameter_giving.png" alt></p>
+&lt;/html&gt;</code></pre><p>Result:</p>
+<p><img src="/images/result_of_parameter_giving.png" alt></p>
 <p>从上面我们可以看到，变量赋值有四种方法：</p>
 <ul>
 <li>使用 Controller 类中的 assign 方法。</li>
@@ -516,7 +519,8 @@ use think\Env;
         &#39;view_replace_str&#39; =&gt; [
             &#39;VIEW&#39; =&gt; &#39;这是 view_replace_str 替换之后的内容&#39;
         ]
-];</code></pre><p>Result:<br><img src="images/result_of_parameter_replace.png" alt></p>
+];</code></pre><p>Result:</p>
+<p><img src="/images/result_of_parameter_replace.png" alt></p>
 <p>可以看到变量的替换有两种方法：</p>
 <ul>
 <li>使用 Controller 类 中的 fetch 方法（传变量数组，第三个参数）。</li>
@@ -544,7 +548,8 @@ use think\Env;
     echo APP_PATH;
     ?&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>Result:<br><img src="images/rusult_of_sign.png" alt></p>
+&lt;/html&gt;</code></pre><p>Result:</p>
+<p><img src="/images/rusult_of_sign.png" alt></p>
 <h3 id="变量输出-调节器"><a href="#变量输出-调节器" class="headerlink" title="变量输出 调节器"></a>变量输出 调节器</h3><p>使用管道符<br>Example:<br>Index.php</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -575,7 +580,8 @@ use think\Env;
     &lt;h2&gt;{$time} : {$time | date=&quot;Y-m-d&quot;, ###}&lt;/h2&gt;  // ###进行占位
     &lt;h2&gt;{$email} : {$email | md5 | strtoupper}&lt;/h2&gt;  // 多函数执行，顺序从左到右
 &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>Result:<br><img src="images/result_of_tube.png" alt></p>
+&lt;/html&gt;</code></pre><p>Result:</p>
+<p><img src="/images/result_of_tube.png" alt></p>
 <p>注意几点：</p>
 <ul>
 <li><strong>管道符形式除了函数方法之外，还可以给变量定缺省值，如：{$email : default=”123456”}。当控制器端没有给 $email 变量赋值时，会将 “123456” 赋给 $email。</strong></li>
@@ -595,7 +601,8 @@ use think\Env;
     {/*这里是 view 的注释*/}  // view 注释
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>查看页面源代码。<br>Result:<br><img src="images/result_of_notes.png" alt></p>
+&lt;/html&gt;</code></pre><p>查看页面源代码。<br>Result:</p>
+<p><img src="/images/result_of_notes.png" alt></p>
 <h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><p>ThinkPHP5 中有三种循环标签：第一个是 volist；第二个是 foreach；第三个是 for。</p>
 
                             <hr>
