@@ -545,7 +545,59 @@ use think\Env;
     ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>Result:<br><img src="images/rusult_of_sign.png" alt></p>
-<h3 id="变量输出调节器"><a href="#变量输出调节器" class="headerlink" title="变量输出调节器"></a>变量输出调节器</h3>
+<h3 id="变量输出-调节器"><a href="#变量输出-调节器" class="headerlink" title="变量输出 调节器"></a>变量输出 调节器</h3><p>使用管道符<br>Example:<br>Index.php</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+    use think\Controller;
+    use think\View;
+
+    class Index extends Controller{
+        public function index(){
+
+            $this -&gt; assign(&#39;email&#39;, &#39;12346588@qq.com&#39;);
+
+            $this -&gt; assign(&#39;time&#39;, time());
+
+            $this -&gt; assign(&#39;user&#39;, &#39;Joe&#39;);
+
+            return $this -&gt; fetch();
+        }
+    }</code></pre><p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;{$email} : {$email | md5}&lt;/h2&gt;
+    &lt;h2&gt;{$email} : {$email | substr=0, 8}&lt;/h2&gt;
+    &lt;h2&gt;{$time} : {$time | date=&quot;Y-m-d&quot;, ###}&lt;/h2&gt;  // ###进行占位
+    &lt;h2&gt;{$email} : {$email | md5 | strtoupper}&lt;/h2&gt;  // 多函数执行，顺序从左到右
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="images/result_of_tube.png" alt></p>
+<p>注意几点：</p>
+<ul>
+<li><strong>管道符形式除了函数方法之外，还可以给变量定缺省值，如：{$email : default=”123456”}。当控制器端没有给 $email 变量赋值时，会将 “123456” 赋给 $email。</strong></li>
+<li>如果不希望 {$变量名}，被解析，则可以在两端增加 {literal}…{/literal} 标签。在该标签内部的所有变量不被解析。</li>
+<li>html 自带的注释内容可以显示在 html 的页面上，但使用 ThinkPHP5 模板注释的内容不会显示在源代码页面上。如下：</li>
+</ul>
+<p>Example:</p>
+<p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--h1&gt;这里是 html 的注释&lt;/h1--&gt;  // html 注释
+    {/*这里是 view 的注释*/}  // view 注释
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>查看页面源代码。<br>Result:<br><img src="images/result_of_notes.png" alt></p>
+<h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><p>ThinkPHP5 中有三种循环标签：第一个是 volist；第二个是 foreach；第三个是 for。</p>
+
                             <hr>
                         </div>
                         <br>
