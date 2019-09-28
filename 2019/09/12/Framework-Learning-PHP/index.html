@@ -81,7 +81,7 @@
                     </span>
                     
                         <br>
-                        <p>Monday, September 9th 2019, 1:56 pm</p>
+                        <p>Thursday, September 12th 2019, 1:56 pm</p>
                     
                 </div>
             </div>
@@ -107,7 +107,7 @@
 <li><strong>可以进行自动化模块部署</strong></li>
 </ul>
 <h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>MVC 全称为 Model View Controller，是模型（M），视图（V），控制器（C）的缩写，是软件设计典范。它用一种业务逻辑，数据，界面显示分离的方法组织代码，将业务逻辑聚集到一个部件中，改进和个性化定制界面以及用户交互。</p>
-<p><img src="/images/MVC_process.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/MVC_process.png" alt></p>
 <h3 id="视图层（View）"><a href="#视图层（View）" class="headerlink" title="视图层（View）"></a>视图层（View）</h3><ul>
 <li>当我们打开一个网站的时候，我们看到的就是视图层，它会等待用户的输入。用户输入后，会将用户输入的数据和指令发送到控制器层。</li>
 <li>接受来控制器层的通知并作出更新。<h3 id="控制器层（Controller）"><a href="#控制器层（Controller）" class="headerlink" title="控制器层（Controller）"></a>控制器层（Controller）</h3></li>
@@ -237,7 +237,7 @@ index 模块中的 User.php:
 ?&gt;</code></pre><h2 id="ThinkPHP5-配置"><a href="#ThinkPHP5-配置" class="headerlink" title="ThinkPHP5 配置"></a>ThinkPHP5 配置</h2><p>ThinkPHP 会将我们所有配置最终转化为数组来提供给我们使用。ThinkPHP 中有两种设置配置的方式。第一种是通过直接修改 thinkphp 目录下的 convention.php 的惯例配置。第二种是通过设置 application 目录下的 conf 配置文件目录来进行应用配置。使用 config( ) 函数可以返回应用配置数组。</p>
 <h3 id="惯例配置（默认配置）"><a href="#惯例配置（默认配置）" class="headerlink" title="惯例配置（默认配置）"></a>惯例配置（默认配置）</h3><p>惯例配置保存在 thinkphp 目录下的 convention.php 中的惯例配置数组。</p>
 <h3 id="应用配置（app-配置）"><a href="#应用配置（app-配置）" class="headerlink" title="应用配置（app 配置）"></a>应用配置（app 配置）</h3><p>应用配置是对整个应用有效，可以对设计带来方便。在 app 的同级目录下新建一个 conf 应用配置目录，然后在目录下增加 config.php 配置文件，同时也需要修改 public 目录下的 index.php 中的应用配置文件目录 <strong>(define(‘CONF_PATH’, <strong>DIR</strong> . ‘/../conf/‘);)</strong>。 config.php 的配置中可以新增一些自定义的配置，亦可以覆盖惯例配置中的一些设置。config.php 实际上是使用 array_merge() 函数对多维数组进行操作来实现以上功能。</p>
-<p>关于 array_merge() 函数：<br><img src="/images/array_merge_function.png" alt></p>
+<p>关于 array_merge() 函数：<br><img src="/images/Framework-Learning-PHP/array_merge_function.png" alt></p>
 <h3 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h3><p>扩展配置的目录是 conf 应用配置目录下的 extra 目录。在 ThinkPHP5 的框架中，对于 config( ) 函数返回的数组，在 config.php 中增加的变量一个个变成该数组的字段；而在 extra 扩展配置目录中，会将 PHP 配置的文件名作为键名，同时类型为数组，增加的变量变为该文件名数组的变量。</p>
 <p>Example:</p>
 <pre><code>conf 目录下的 config.php:
@@ -344,12 +344,12 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 <li>直接使用 request 类中的 instance( ) 函数来获得实例。</li>
 <li>注入对象。</li>
 </ul>
-<h3 id="请求对象的参数获取"><a href="#请求对象的参数获取" class="headerlink" title="请求对象的参数获取"></a>请求对象的参数获取</h3><p>请求对象中获取 URL 信息：<br><img src="/images/request_URL_information.png" alt></p>
-<p>获取请求参数：<br><img src="/images/request_parameters.png" alt></p>
+<h3 id="请求对象的参数获取"><a href="#请求对象的参数获取" class="headerlink" title="请求对象的参数获取"></a>请求对象的参数获取</h3><p>请求对象中获取 URL 信息：<br><img src="/images/Framework-Learning-PHP/request_URL_information.png" alt></p>
+<p>获取请求参数：<br><img src="/images/Framework-Learning-PHP/request_parameters.png" alt></p>
 <p>同时 get, param, post, session, cookie 函数都支持数组查找方法。</p>
-<p>获取模块，控制器，操作：<br><img src="/images/request_URL_information.png" alt></p>
+<p>获取模块，控制器，操作：<br><img src="/images/Framework-Learning-PHP/request_URL_information.png" alt></p>
 <p>其余 mannual….</p>
-<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="/images/input_types.png" alt></p>
+<h3 id="input-助手函数"><a href="#input-助手函数" class="headerlink" title="input 助手函数"></a>input 助手函数</h3><p>input( )函数有三个参数，第一个为需要查询的变量名，第二个为变量的缺省值，第三个参数在不同方法中的不同。<br>input( )助手函数不允许进行自定义。<br><img src="/images/Framework-Learning-PHP/input_types.png" alt></p>
 <p>其中 param 变量包括 get，post 以及 put 请求方法中的变量（包括了 pathinfo 中的变量）。若 param 参数中 get 和 post 方法出现了相同的参数名，则只返回一个 get 参数的值。</p>
 <h3 id="响应对象-Response"><a href="#响应对象-Response" class="headerlink" title="响应对象 Response"></a>响应对象 Response</h3><p>在 ThinkPHP5 中的控制器下不允许 die( )操作。<br>控制器的所有操作方法都是 return 返回而不是直接输出，系统调用 Response::send 方法最终的应用返回的数据输出到页面或者客户端，并且自动转换成 default_return_type 参数配置的格式    。<br>在响应的过程中，我们可以设置 default_return_type 的值对返回的响应类型进行设置。<strong>发现不配置这个参数会无法直接返回打印变量，目前不太清楚。</strong><br>Example:<br>默认配置：</p>
 <pre><code>Code:
@@ -372,7 +372,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
             return $res;
         }
     }</code></pre><p>Response:</p>
-<p><img src="/images/return_type_default_default.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/return_type_default_default.png" alt></p>
 <p>json 配置：</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -395,7 +395,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 
         }
     }</code></pre><p>Response:</p>
-<p><img src="/images/return_types_default_json.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/return_types_default_json.png" alt></p>
 <h2 id="视图层-View"><a href="#视图层-View" class="headerlink" title="视图层 View"></a>视图层 View</h2><h3 id="View-函数"><a href="#View-函数" class="headerlink" title="View( )函数"></a>View( )函数</h3><p>视图层主要为用户提供一个界面进行一些操作，等待用户输入等等。通常视图层是一个 HTML。view( )视图层默认的目录是在 app/模块名/view/index/。使用 view( ) 默认返回的是默认目录下的 index.html。在页面上直接返回这个 HTML 文件。与controller 控制器模块不同，view 目录下还需要新建文件夹。<br>第一个参数使用规则如下：<br>以下 view( )函数均在 index 模块的 Index 控制器的 index 方法中。</p>
 <ul>
 <li><strong>view(‘upload’) ==&gt; 在默认的目录下寻找文件名为 upload 的 html 文件并返回。</strong></li>
@@ -478,7 +478,7 @@ function config($name = &#39;&#39;, $value = null, $range = &#39;&#39;){
 
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>Result:</p>
-<p><img src="/images/result_of_parameter_giving.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/result_of_parameter_giving.png" alt></p>
 <p>从上面我们可以看到，变量赋值有四种方法：</p>
 <ul>
 <li>使用 Controller 类中的 assign 方法。</li>
@@ -520,7 +520,7 @@ use think\Env;
             &#39;VIEW&#39; =&gt; &#39;这是 view_replace_str 替换之后的内容&#39;
         ]
 ];</code></pre><p>Result:</p>
-<p><img src="/images/result_of_parameter_replace.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/result_of_parameter_replace.png" alt></p>
 <p>可以看到变量的替换有两种方法：</p>
 <ul>
 <li>使用 Controller 类 中的 fetch 方法（传变量数组，第三个参数）。</li>
@@ -549,7 +549,7 @@ use think\Env;
     ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>Result:</p>
-<p><img src="/images/rusult_of_sign.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/rusult_of_sign.png" alt></p>
 <h3 id="变量输出-调节器"><a href="#变量输出-调节器" class="headerlink" title="变量输出 调节器"></a>变量输出 调节器</h3><p>使用管道符<br>Example:<br>Index.php</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -581,7 +581,7 @@ use think\Env;
     &lt;h2&gt;{$email} : {$email | md5 | strtoupper}&lt;/h2&gt;  // 多函数执行，顺序从左到右
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>Result:</p>
-<p><img src="/images/result_of_tube.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/result_of_tube.png" alt></p>
 <p>注意几点：</p>
 <ul>
 <li><strong>管道符形式除了函数方法之外，还可以给变量定缺省值，如：{$email : default=”123456”}。当控制器端没有给 $email 变量赋值时，会将 “123456” 赋给 $email。</strong></li>
@@ -602,8 +602,114 @@ use think\Env;
 
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>查看页面源代码。<br>Result:</p>
-<p><img src="/images/result_of_notes.png" alt></p>
+<p><img src="/images/Framework-Learning-PHP/result_of_notes.png" alt></p>
 <h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><p>ThinkPHP5 中有三种循环标签：第一个是 volist；第二个是 foreach；第三个是 for。</p>
+<h5 id="volist-volist-标签"><a href="#volist-volist-标签" class="headerlink" title="{volist} {/volist} 标签"></a>{volist} {/volist} 标签</h5><p>Example:<br>Index.php</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+    use think\Controller;
+    use think\View;
+
+    class Index extends Controller{
+        public function index(){
+
+            $list = [
+                &#39;user1&#39; =&gt; [
+                    &#39;name&#39; =&gt; &#39;Joe&#39;,
+                    &#39;email&#39; =&gt;&#39;Joe@qq.com&#39;
+                ],
+                &#39;user2&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Anna&#39;,
+                    &#39;email&#39; =&gt; &#39;Anna@qq.com&#39;
+                ],
+                &#39;user3&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Frank&#39;,
+                    &#39;email&#39; =&gt; &#39;Frank@qq.com&#39;
+                ]
+            ];
+
+            $this -&gt; assign(&#39;list&#39;, $list);
+
+            return $this -&gt;fetch();
+        }
+    }    </code></pre><p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--volist--&gt;
+
+    {volist name=&quot;list&quot; id=&quot;user&quot; offset=&quot;1&quot; length=&quot;1&quot;}
+
+        &lt;p&gt;{$user.name} : {$user.email}&lt;/p&gt;
+    {/volist}
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_ovlist_module_tags.png" alt></p>
+<p>在 volist 中，有下面几个参数（上面已经展示了四个）：</p>
+<ul>
+<li>name 是 对应的 PHP 文件中的列表变量名。</li>
+<li>id 相当于 需要使用的 list 的键名。</li>
+<li>offset 表示从第几个开始遍历 list。（从 0 开始）</li>
+<li>length 表示遍历的长度。</li>
+<li>mod 当前循环次数取余的模（每次模运算的结果储存在变量 $mod 中）。</li>
+<li>empty 当 list 为空时返回的结果。</li>
+<li>key 记录当前循环次数的变量名（默认情况下该变量名为 $i）。</li>
+</ul>
+<p><strong>{php} {/php} 在 html 页面文件中可以代替 <?php...?> 以保证安全性。</strong></p>
+<h5 id="foreach-foreach-标签"><a href="#foreach-foreach-标签" class="headerlink" title="{foreach} {/foreach} 标签"></a>{foreach} {/foreach} 标签</h5><p>该标签的使用方法与原生的 PHP 基本相同。<br>foreach 标签有两种格式：<br>第一种</p>
+<p>Example:<br>Index.php</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+    use think\Controller;
+    use think\View;
+
+    class Index extends Controller{
+        public function index(){
+
+            $list = [
+                &#39;user1&#39; =&gt; [
+                    &#39;name&#39; =&gt; &#39;Joe&#39;,
+                    &#39;email&#39; =&gt;&#39;Joe@qq.com&#39;
+                ],
+                &#39;user2&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Anna&#39;,
+                    &#39;email&#39; =&gt; &#39;Anna@qq.com&#39;
+                ],
+                &#39;user3&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Frank&#39;,
+                    &#39;email&#39; =&gt; &#39;Frank@qq.com&#39;
+                ]
+            ];
+
+            $this -&gt; assign(&#39;list&#39;, $list);
+
+            return $this -&gt;fetch();
+        }
+    }</code></pre><p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--foreach--&gt;
+
+    {foreach $list as $key}
+    &lt;p&gt;{$key.name} : {$key.email}&lt;/p&gt;
+    {/foreach}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_foreach_tags_one.png" alt></p>
 
                             <hr>
                         </div>
@@ -612,6 +718,8 @@ use think\Env;
                             
                             <p>
                                 <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/PHP">PHP</a>
                                 
                             </p>
                             
