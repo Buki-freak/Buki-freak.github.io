@@ -653,8 +653,8 @@ use think\Env;
 &lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_ovlist_module_tags.png" alt></p>
 <p>在 volist 中，有下面几个参数（上面已经展示了四个）：</p>
 <ul>
-<li>name 是 对应的 PHP 文件中的列表变量名。</li>
-<li>id 相当于 需要使用的 list 的键名。</li>
+<li>name 是对应的 PHP 文件中的列表变量名。</li>
+<li>id 相当于需要使用的 list 的键名。</li>
 <li>offset 表示从第几个开始遍历 list。（从 0 开始）</li>
 <li>length 表示遍历的长度。</li>
 <li>mod 当前循环次数取余的模（每次模运算的结果储存在变量 $mod 中）。</li>
@@ -662,7 +662,8 @@ use think\Env;
 <li>key 记录当前循环次数的变量名（默认情况下该变量名为 $i）。</li>
 </ul>
 <p><strong>{php} {/php} 在 html 页面文件中可以代替 <?php...?> 以保证安全性。</strong></p>
-<h5 id="foreach-foreach-标签"><a href="#foreach-foreach-标签" class="headerlink" title="{foreach} {/foreach} 标签"></a>{foreach} {/foreach} 标签</h5><p>该标签的使用方法与原生的 PHP 基本相同。<br>foreach 标签有两种格式：<br>第一种</p>
+<h5 id="foreach-foreach-标签"><a href="#foreach-foreach-标签" class="headerlink" title="{foreach} {/foreach} 标签"></a>{foreach} {/foreach} 标签</h5><p>该标签的使用方法与原生的 PHP 基本相同。<br>foreach 标签有两种格式：</p>
+<p>第一种方法类似有原生 PHP。</p>
 <p>Example:<br>Index.php</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -704,13 +705,91 @@ use think\Env;
 
     &lt;!--foreach--&gt;
 
-    {foreach $list as $key}
-    &lt;p&gt;{$key.name} : {$key.email}&lt;/p&gt;
+    {foreach $list as $vo}
+    &lt;p&gt;{$vo.name} : {$vo.email}&lt;/p&gt;
     {/foreach}
 
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_foreach_tags_one.png" alt></p>
+<p>第二种方法：</p>
+<p>Example:<br>Index.php</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+    use think\Controller;
+    use think\View;
 
+    class Index extends Controller{
+        public function index(){
+
+            $list = [
+                &#39;user1&#39; =&gt; [
+                    &#39;name&#39; =&gt; &#39;Joe&#39;,
+                    &#39;email&#39; =&gt;&#39;Joe@qq.com&#39;
+                ],
+                &#39;user2&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Anna&#39;,
+                    &#39;email&#39; =&gt; &#39;Anna@qq.com&#39;
+                ],
+                &#39;user3&#39; =&gt;[
+                    &#39;name&#39; =&gt; &#39;Frank&#39;,
+                    &#39;email&#39; =&gt; &#39;Frank@qq.com&#39;
+                ]
+            ];
+
+            $this -&gt; assign(&#39;list&#39;, $list);
+
+            return $this -&gt;fetch();
+        }
+    }</code></pre><p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--foreach--&gt;
+
+    {foreach name=&quot;list&quot; item=&quot;vo&quot;}
+    &lt;p&gt;{$vo.name} : {$vo.email}&lt;/p&gt;
+    {/foreach}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_foreach_tags_one.png" alt></p>
+<p>使用该方法的几个参数：</p>
+<ul>
+<li>name 是对应的 PHP 文件中的列表变量名。</li>
+<li>item 相当于需要使用的 list 的键名，<strong>注意 item 的值不能赋为 key。</strong></li>
+<li>在默认情况下，当前字段对应数组的键值会储存在变量 $key 中。如需要修改该变量名，则将  {foreach} 的参数 key 赋值为自定义的名字。</li>
+</ul>
+<h5 id="for-for-标签"><a href="#for-for-标签" class="headerlink" title="{for} {/for} 标签"></a>{for} {/for} 标签</h5><p>for 标签主要解决的是重复的输出操作。<br>Example:<br>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--for--&gt;
+
+    {for start=&quot;0&quot; end=&quot;10&quot;}
+        &lt;p&gt;{$i}&lt;/p&gt;
+    {/for}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_for_tags.png" alt></p>
+<p>使用该方法的几个参数：</p>
+<ul>
+<li>step 表示遍历时的步长。</li>
+<li>name 记录当前循环次数的变量名（默认情况下该变量名为 $i）。</li>
+</ul>
+<h4 id="比较标签"><a href="#比较标签" class="headerlink" title="比较标签"></a>比较标签</h4><h4 id="条件判断标签"><a href="#条件判断标签" class="headerlink" title="条件判断标签"></a>条件判断标签</h4>
                             <hr>
                         </div>
                         <br>
