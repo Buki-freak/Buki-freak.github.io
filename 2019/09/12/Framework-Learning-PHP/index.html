@@ -603,7 +603,8 @@ use think\Env;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>查看页面源代码。<br>Result:</p>
 <p><img src="/images/Framework-Learning-PHP/result_of_notes.png" alt></p>
-<h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><p>ThinkPHP5 中有三种循环标签：第一个是 volist；第二个是 foreach；第三个是 for。</p>
+<h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><p>模板标签使用花括号。</p>
+<h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><p>ThinkPHP5 中有三种循环标签：第一个是 volist；第二个是 foreach；第三个是 for。</p>
 <h5 id="volist-volist-标签"><a href="#volist-volist-标签" class="headerlink" title="{volist} {/volist} 标签"></a>{volist} {/volist} 标签</h5><p>Example:<br>Index.php</p>
 <pre><code>&lt;?php
     namespace app\index\controller;
@@ -789,7 +790,160 @@ use think\Env;
 <li>step 表示遍历时的步长。</li>
 <li>name 记录当前循环次数的变量名（默认情况下该变量名为 $i）。</li>
 </ul>
-<h4 id="比较标签"><a href="#比较标签" class="headerlink" title="比较标签"></a>比较标签</h4><h4 id="条件判断标签"><a href="#条件判断标签" class="headerlink" title="条件判断标签"></a>条件判断标签</h4>
+<h4 id="比较标签"><a href="#比较标签" class="headerlink" title="比较标签"></a>比较标签</h4><p>几个比较标签：</p>
+<ul>
+<li>{eq} {/eq} 或者 {equal} {/equal} 等于标签</li>
+<li>{neq} {/neq} 或者 {notequal} {/notequal} 不等于标签</li>
+<li>{gt} {/gt} 大于标签</li>
+<li>{lt} {/lt} 小于标签</li>
+<li>{egt} {/egt} 大于等于标签</li>
+<li>{elt} {/elt} 小于等于标签</li>
+</ul>
+<p>Example:<br>Index.php</p>
+<pre><code>&lt;?php
+    namespace app\index\controller;
+    use think\Controller;
+    use think\View;
+
+    class Index extends Controller{
+        public function index(){
+
+            $this -&gt; assign(&#39;a&#39;, 10);
+            $this -&gt; assign(&#39;b&#39;, 20);
+
+            return $this -&gt;fetch();
+        }
+    }</code></pre><p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--eq/equal--&gt;
+
+    {eq name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;等于&lt;/p&gt;
+    {else/}
+    &lt;p&gt;不等于&lt;/p&gt;
+    {/eq}
+
+    {equal name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;等于&lt;/p&gt;
+    {else/}
+    &lt;p&gt;不等于&lt;/p&gt;
+    {/equal}
+
+    &lt;!--neq/notequal--&gt;
+    {neq name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;不等于&lt;/p&gt;
+    {else/}
+    &lt;p&gt;等于&lt;/p&gt;
+    {/neq}
+
+    {notequal name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;不等于&lt;/p&gt;
+    {else/}
+    &lt;p&gt;等于&lt;/p&gt;
+    {/notequal}
+
+    &lt;!--gt--&gt;
+    {gt name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;正确&lt;/p&gt;
+    {else/}
+    &lt;p&gt;错误&lt;/p&gt;
+    {/gt}
+
+    &lt;!--lt--&gt;
+    {lt name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;正确&lt;/p&gt;
+    {else/}
+    &lt;p&gt;错误&lt;/p&gt;
+    {/lt}
+
+    &lt;!--egt--&gt;
+    {egt name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;正确&lt;/p&gt;
+    {else/}
+    &lt;p&gt;错误&lt;/p&gt;
+    {/egt}
+
+    &lt;!--elt--&gt;
+    {elt name=&quot;a&quot; value=&quot;10&quot;}
+    &lt;p&gt;正确&lt;/p&gt;
+    {else/}
+    &lt;p&gt;错误&lt;/p&gt;
+    {/elt}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_compare_tags.png" alt></p>
+<p>比较标签有两个参数：</p>
+<ul>
+<li>name 是待比较的变量名。</li>
+<li>value 用于和 name 比较的值（或者变量）。</li>
+</ul>
+<p><strong>Html 页面源码不会显示没有执行的语句。</strong></p>
+<h4 id="条件判断标签"><a href="#条件判断标签" class="headerlink" title="条件判断标签"></a>条件判断标签</h4><p>条件判断标签主要有以下几种：</p>
+<h5 id="switch-switch"><a href="#switch-switch" class="headerlink" title="{switch} {/switch}"></a>{switch} {/switch}</h5><p>Example:<br>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--switch--&gt;
+    {switch name=&quot;Think.get.name&quot;}
+        {case value=&quot;1&quot;}&lt;p&gt;Joe&lt;/p&gt;{/case}
+        {case value=&quot;2&quot;}&lt;P&gt;Amy&lt;/P&gt;{/case}
+        {case value=&quot;3&quot;}&lt;p&gt;Frank&lt;/p&gt;{/case}
+        {default /}&lt;p&gt;None&lt;/p&gt;
+    {/switch}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_switch_tags.png" alt>    </p>
+<p>switch 中的几个参数：</p>
+<ul>
+<li>name 需要进行比较的变量名。</li>
+<li>或条件可以使用 “ | ”。</li>
+<li>{default/} 为默认时的值。</li>
+</ul>
+<h5 id="range-range"><a href="#range-range" class="headerlink" title="{range} {/range}"></a>{range} {/range}</h5><p>Example:<br>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--range--&gt;
+
+    {range name=&quot;Think.get.name&quot; value=&quot;Amy,Joe&quot; type=&quot;in&quot;}
+    &lt;p&gt;当前 name 是 Amy 和 Joe 中的一个&lt;/p&gt;
+    {else/}
+    &lt;p&gt;当前 name 不是 Amy 和 Joe 中的一个&lt;/p&gt;
+    {/range}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_range_tags_in.png" alt></p>
+<p>range 中的参数：</p>
+<ul>
+<li>name 是待比较的变量名。</li>
+<li>value 是比较的值，如果有多个值则用 “，” 分割。</li>
+<li>type 是比较的模式，有 in，notin，between，notbetween。（这些 type 也可以自己作为标签）</li>
+</ul>
+<h5 id="defined-defined"><a href="#defined-defined" class="headerlink" title="{defined} {/defined}"></a>{defined} {/defined}</h5><p>define 标签用于判断变量是否已经被定义。</p>
+<h5 id="if-if"><a href="#if-if" class="headerlink" title="{if} {/if}"></a>{if} {/if}</h5>
                             <hr>
                         </div>
                         <br>
