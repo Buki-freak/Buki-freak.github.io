@@ -912,7 +912,7 @@ use think\Env;
 <p>switch 中的几个参数：</p>
 <ul>
 <li>name 需要进行比较的变量名。</li>
-<li>或条件可以使用 “ | ”。</li>
+<li>或条件可以使用 “ | ”进行分割。</li>
 <li>{default/} 为默认时的值。</li>
 </ul>
 <h5 id="range-range"><a href="#range-range" class="headerlink" title="{range} {/range}"></a>{range} {/range}</h5><p>Example:<br>Index.html</p>
@@ -935,15 +935,61 @@ use think\Env;
     {/range}
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_range_tags_in.png" alt></p>
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_range_tags.png" alt></p>
 <p>range 中的参数：</p>
 <ul>
 <li>name 是待比较的变量名。</li>
 <li>value 是比较的值，如果有多个值则用 “，” 分割。</li>
 <li>type 是比较的模式，有 in，notin，between，notbetween。（这些 type 也可以自己作为标签）</li>
 </ul>
-<h5 id="defined-defined"><a href="#defined-defined" class="headerlink" title="{defined} {/defined}"></a>{defined} {/defined}</h5><p>define 标签用于判断变量是否已经被定义。</p>
-<h5 id="if-if"><a href="#if-if" class="headerlink" title="{if} {/if}"></a>{if} {/if}</h5>
+<h5 id="defined-defined"><a href="#defined-defined" class="headerlink" title="{defined} {/defined}"></a>{defined} {/defined}</h5><p>define 标签用于判断某个常量是否已经被定义。</p>
+<p>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--define--&gt;
+    {defined name=&quot;APP_PATH&quot;}
+    &lt;p&gt;already define&lt;/p&gt;
+    {else/}
+    &lt;P&gt;not define&lt;/P&gt;
+    {/defined}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_defined_tags.png" alt></p>
+<h5 id="if-if"><a href="#if-if" class="headerlink" title="{if} {/if}"></a>{if} {/if}</h5><p>Example:<br>Index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;maga charset = &quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;这是文件 index/view/index/index.html&lt;/h1&gt;
+
+    &lt;!--if--&gt;
+
+    {if condition=&quot;($Think.get.name eq &#39;Joe&#39;) AND ($Think.get.id eq &#39;student&#39;)&quot;}
+    &lt;p&gt;qualified&lt;/p&gt;
+    {else/}
+    &lt;p&gt;unqualified&lt;/p&gt;
+    {/if}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>Result:<br><img src="/images/Framework-Learning-PHP/result_of_if_tags.png" alt></p>
+<p>需要注意的几点：</p>
+<ul>
+<li>condition 中的每一个条件都需要使用“（）” 闭合，条件和条件之间可以使用 AND 或者 OR 进行逻辑组合。条件中字符串使用单引号闭合。</li>
+<li>条件中的变量需要加上 dollar 符。</li>
+</ul>
+
                             <hr>
                         </div>
                         <br>
