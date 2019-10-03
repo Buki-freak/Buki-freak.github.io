@@ -102,8 +102,7 @@
                         <div class="markdown-body">
                             <p>之前基础的部分已经比较熟悉，现在学习比较陌生的知识，前面的知识会在后面再做补充。</p>
 <h1 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h1><h2 id="类（Class）"><a href="#类（Class）" class="headerlink" title="类（Class）"></a>类（Class）</h2><p>类用于确定对象将会拥有的特征（属性）和行为（方法）。</p>
-<p>其特点为：</p>
-<ul>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
 <li>类是对象的类型。</li>
 <li>类是具有相同属性和方法的一组对象的集合。</li>
 <li>属性是对象的特定项。</li>
@@ -112,12 +111,24 @@
 <li>所有的 JAVA 程序都以类（Class）为组织单元。</li>
 </ul>
 <p>可以用一个类表示多个具有相同属性和方法的对象，即一个类可以对应多个对象。</p>
-<p>定义类的步骤:</p>
+<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p>定义类的步骤:</p>
 <ul>
 <li>定义类名</li>
 <li>编写类的属性</li>
 <li>编写类的方法（可以没有方法）</li>
 </ul>
+<p>使用类的步骤：</p>
+<ul>
+<li>（一）创建对象（实例化）：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );<br>创建对象后，程序会对电脑类进行实例化成为一个对象。<br>如图：<br><img src="/images/the_realisation_of_a_class.png" alt></li>
+<li>（二）使用对象：<br>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</li>
+</ul>
+<h3 id="成员变量和局部变量"><a href="#成员变量和局部变量" class="headerlink" title="成员变量和局部变量"></a>成员变量和局部变量</h3><ul>
+<li><p>成员变量：在类中定义，用来描述对象将要有什么。一些成员变量可以在其他类中被使用。</p>
+</li>
+<li><p>局部变量：在类中的方法定义，在方法中临时保存数据。</p>
+</li>
+</ul>
+<p><strong>两者的区别：成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></p>
 
                             <hr>
                         </div>
