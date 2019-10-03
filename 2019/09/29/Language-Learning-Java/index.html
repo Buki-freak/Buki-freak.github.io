@@ -111,24 +111,48 @@
 <li>所有的 JAVA 程序都以类（Class）为组织单元。</li>
 </ul>
 <p>可以用一个类表示多个具有相同属性和方法的对象，即一个类可以对应多个对象。</p>
-<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p>定义类的步骤:</p>
-<ul>
+<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><h4 id="定义类的步骤"><a href="#定义类的步骤" class="headerlink" title="定义类的步骤:"></a>定义类的步骤:</h4><ul>
 <li>定义类名</li>
 <li>编写类的属性</li>
 <li>编写类的方法（可以没有方法）</li>
 </ul>
-<p>使用类的步骤：</p>
+<h4 id="使用类的步骤："><a href="#使用类的步骤：" class="headerlink" title="使用类的步骤："></a>使用类的步骤：</h4><h5 id="创建对象（实例化）："><a href="#创建对象（实例化）：" class="headerlink" title="创建对象（实例化）："></a>创建对象（实例化）：</h5><p>先了解下 JVM（JAVA 虚拟机）的内存结构，它由三部分组成：</p>
 <ul>
-<li>（一）创建对象（实例化）：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );<br>创建对象后，程序会对电脑类进行实例化成为一个对象。<br>如图：<br><img src="/images/the_realisation_of_a_class.png" alt></li>
-<li>（二）使用对象：<br>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</li>
+<li>方法区内存（只有一处）</li>
+<li>堆内存（只有一处）</li>
+<li>栈内存（数量与线程有关）</li>
 </ul>
-<h3 id="成员变量和局部变量"><a href="#成员变量和局部变量" class="headerlink" title="成员变量和局部变量"></a>成员变量和局部变量</h3><ul>
-<li><p>成员变量：在类中定义，用来描述对象将要有什么。一些成员变量可以在其他类中被使用。</p>
-</li>
-<li><p>局部变量：在类中的方法定义，在方法中临时保存数据。</p>
-</li>
+<p>类创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
+<p>创建过程如图：<br><img src="/images/the_realisation_of_a_class.png" alt></p>
+<ul>
+<li>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</li>
+<li>实际上这里的 类名( ) 是构造方法。</li>
+<li>对象会涉及到 JAVA 虚拟机内的三个内存区域：方法区内存，栈内存和堆内存。</li>
+<li>方法区内存：在类加载的时候，类（Class）字节码代码片段会被加载分配到该内存空间中。</li>
+<li>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作，对象的首地址（在堆内存中）在 new 的时候赋值给对象名变量，对象变量存放在栈内存中。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</li>
+<li>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</li>
 </ul>
-<p><strong>两者的区别：成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></p>
+<h5 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h5><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
+<h3 id="成员变量和局部变量（Member-variables-and-Local-variables）"><a href="#成员变量和局部变量（Member-variables-and-Local-variables）" class="headerlink" title="成员变量和局部变量（Member variables and Local variables）"></a>成员变量和局部变量（Member variables and Local variables）</h3><ul>
+<li>成员变量：在类中定义，用来描述对象将要有什么。成员变量包括类变量（静态变量）和实例变量。类变量储存在类的静态域中，实例变量储存在堆内存对应的对象内存中。</li>
+<li>局部变量：在类中的方法定义，在方法中临时保存数据，储存在栈内存中。</li>
+</ul>
+<p><strong>两者的区别：</strong></p>
+<ul>
+<li><strong>成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></li>
+<li><strong>JAVA 会给成员变量一个初始值（byte/short/long/int 类型为 0 ，float/double 类型为 0.0，boolean 类型为 false，char 类型为 \u0000）；而不会给局部变量赋予初始值。</strong></li>
+<li><strong>在方法内部，出现方法内局部变量和类的成员变量同名时，局部变量具有更高的优先级。</strong></li>
+<li><strong>成员变量的实例变量储存在堆内存中；局部变量储存在栈内存中。</strong></li>
+</ul>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>构造方法属于方法，是定义在 JAVA 类中的一个用来初始化对象的方法。它与类同名并且没有返回值。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li><strong>如果定义类的时候没有写入构造方法，编译时JAVA 会自动补充构造方法。</strong></li>
+<li><strong>如果定义类的时候写入了构造方法，则无论是有参、无参的构造方法，都不会自动补充构造方法。</strong></li>
+<li><strong>有参的构造方法可以和无参的构造方法并存。（参考函数重载）</strong></li>
+<li><strong>构造方法给属性赋值，并且可以设置值的条件。</strong></li>
+</ul>
+<h3 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h3><p>回头再看看。</p>
 
                             <hr>
                         </div>
