@@ -129,9 +129,10 @@
 <li>实际上这里的 类名( ) 是构造方法。</li>
 <li>对象会涉及到 JAVA 虚拟机内的三个内存区域：方法区内存，栈内存和堆内存。</li>
 <li>方法区内存：在类加载的时候，类（Class）字节码代码片段会被加载分配到该内存空间中。</li>
-<li>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作，对象的首地址（在堆内存中）在 new 的时候赋值给对象名变量，对象变量存放在栈内存中。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</li>
+<li>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作。对象的首地址（在堆内存中）在 new 的时候赋值给对象名变量，对象名变量存放在栈内存中（内部类除外。内部类的引用为引用数据类型，可以作为成员变量）。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</li>
 <li>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</li>
 </ul>
+<p><img src="/images/result_of_class_structure.png" alt></p>
 <h4 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h4><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
 <h2 id="成员变量和局部变量（Member-variables-and-Local-variables）"><a href="#成员变量和局部变量（Member-variables-and-Local-variables）" class="headerlink" title="成员变量和局部变量（Member variables and Local variables）"></a>成员变量和局部变量（Member variables and Local variables）</h2><ul>
 <li>成员变量：在类中定义，用来描述对象将要有什么。成员变量包括类变量（静态变量）和实例变量。类变量储存在类的静态域中，实例变量储存在堆内存对应的对象内存中。</li>
@@ -140,7 +141,7 @@
 <p><strong>两者的区别：</strong></p>
 <ul>
 <li><strong>成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></li>
-<li><strong>JAVA 会给成员变量一个初始值（byte/short/long/int 类型为 0 ，float/double 类型为 0.0，boolean 类型为 false，char 类型为 \u0000）；而不会给局部变量赋予初始值。</strong></li>
+<li><strong>JAVA 会给成员变量一个初始值（byte/short/long/int 类型为 0 ，float/double 类型为 0.0，boolean 类型为 false，char 类型为 \u0000， 引用数据类型为 NULL）；而不会给局部变量赋予初始值。</strong></li>
 <li><strong>在方法内部，出现方法内局部变量和类的成员变量同名时，局部变量具有更高的优先级。</strong></li>
 <li><strong>成员变量的实例变量储存在堆内存中；局部变量储存在栈内存中。</strong></li>
 </ul>
@@ -152,7 +153,7 @@
 <li><strong>有参的构造方法可以和无参的构造方法并存。（参考函数重载）</strong></li>
 <li><strong>构造方法给属性赋值，并且可以设置值的条件。</strong></li>
 </ul>
-<h2 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h2><p>回头再看看。</p>
+<h2 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h2><p>。。。</p>
 
                             <hr>
                         </div>
