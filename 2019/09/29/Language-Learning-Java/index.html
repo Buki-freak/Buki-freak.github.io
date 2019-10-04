@@ -101,7 +101,7 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <p>之前基础的部分已经比较熟悉，现在学习比较陌生的知识，前面的知识会在后面再做补充。</p>
-<h2 id="类（Class）与-对象（Object）"><a href="#类（Class）与-对象（Object）" class="headerlink" title="类（Class）与 对象（Object）"></a>类（Class）与 对象（Object）</h2><p>类用于确定对象将会拥有的特征（属性）和行为（方法）。</p>
+<h2 id="类-与-对象"><a href="#类-与-对象" class="headerlink" title="类 与 对象"></a>类 与 对象</h2><p>类用于确定对象将会拥有的特征（属性）和行为（方法）。</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li>类是对象的类型。</li>
 <li>类是具有相同属性和方法的一组对象的集合。</li>
@@ -110,9 +110,9 @@
 <li>类是抽象的概念，对象是一个确定的实体。</li>
 <li>所有的 JAVA 程序都以类（Class）为组织单元。</li>
 </ul>
-<p>可以用一个类表示多个具有相同属性和方法的对象，即一个类可以对应多个对象。</p>
+<p>一个类可以映射多个具有相同属性和方法的对象，即一个类可以对应多个对象。</p>
 <h2 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h2><h3 id="定义类的步骤"><a href="#定义类的步骤" class="headerlink" title="定义类的步骤:"></a>定义类的步骤:</h3><ul>
-<li>定义类名</li>
+<li>定义类名（类名的首字母大写）</li>
 <li>编写类的属性</li>
 <li>编写类的方法（可以没有方法）</li>
 </ul>
@@ -121,10 +121,10 @@
 <li>方法区内存（只有一处）</li>
 <li>堆内存（只有一处）</li>
 <li>栈内存（数量与线程有关，一个线程一个栈内存）</li>
-<li><em>三块内存中变化最频繁的是栈内存，最先有数据的是方法区内存，垃圾回收主要针对的是堆内存。*</em></li>
 </ul>
-<p>类创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
-<p>创建过程如图：<br><img src="/images/the_realisation_of_a_class.png" alt></p>
+<p><strong>三块内存中变化最频繁的是栈内存，最先有数据的是方法区内存，垃圾回收主要针对的是堆内存。</strong></p>
+<p>创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
+<p>创建过程如图：<br><img src="/images/Language-Learning/the_realisation_of_a_class.png" alt></p>
 <ul>
 <li>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</li>
 <li>实际上这里的 类名( ) 是构造方法。</li>
@@ -133,9 +133,9 @@
 <li>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作。方法执行完成之后，其对应的内存空间释放，进行弹栈操作。 对象（在堆内存中）的首地址在 new 的时候赋值给对象名变量，对象名变量存放在栈内存中（内部类除外。内部类的引用为引用数据类型，可以作为成员变量）。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</li>
 <li>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</li>
 </ul>
-<p><img src="/images/result_of_class_structure.png" alt></p>
+<p><img src="/images/Language-Learning/result_of_class_structure.png" alt></p>
 <h4 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h4><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
-<h2 id="成员变量和局部变量（Member-variables-and-Local-variables）"><a href="#成员变量和局部变量（Member-variables-and-Local-variables）" class="headerlink" title="成员变量和局部变量（Member variables and Local variables）"></a>成员变量和局部变量（Member variables and Local variables）</h2><ul>
+<h2 id="成员变量和局部变量（MVs-and-LVs）"><a href="#成员变量和局部变量（MVs-and-LVs）" class="headerlink" title="成员变量和局部变量（MVs and LVs）"></a>成员变量和局部变量（MVs and LVs）</h2><ul>
 <li>成员变量：在类中定义，用来描述对象将要有什么。成员变量包括类变量（静态变量）和实例变量。类变量储存在类的静态域（在方法区内存中），实例变量储存在堆内存对应的对象内存中。</li>
 <li>局部变量：在类中的方法定义，在方法中临时保存数据，储存在栈内存中。</li>
 </ul>
@@ -154,10 +154,10 @@
 <li><strong>有参的构造方法可以和无参的构造方法并存。（参考函数重载）</strong></li>
 <li><strong>构造方法给属性赋值，并且可以设置值的条件。</strong></li>
 </ul>
-<h2 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h2><p>。。。</p>
-<h2 id="垃圾回收机制（Garbage-Collection）"><a href="#垃圾回收机制（Garbage-Collection）" class="headerlink" title="垃圾回收机制（Garbage Collection）"></a>垃圾回收机制（Garbage Collection）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照GC 机制，垃圾回收器会将垃圾进行回收。</p>
-<h2 id="空指针异常（null-pointer-exception）"><a href="#空指针异常（null-pointer-exception）" class="headerlink" title="空指针异常（null pointer exception）"></a>空指针异常（null pointer exception）</h2><p>空引用数据类型（null）访问对应类实例相关（区别于静态）的数据（包括属性和方法）会引发空指针异常。</p>
-<p>Example:<br>Class apple</p>
+<h2 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h2><p>静态变量属于成员变量。它存储在类的静态域（静态域在方法区内存中）。</p>
+<h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照GC 机制，垃圾回收器会将垃圾进行回收。</p>
+<h2 id="空指针异常（null-pointer-exception）"><a href="#空指针异常（null-pointer-exception）" class="headerlink" title="空指针异常（null pointer exception）"></a>空指针异常（null pointer exception）</h2><p>空引用数据类型（null）访问对应类实例相关（区别于静态）的数据（包括实例变量和实例方法）会引发空指针异常。</p>
+<p>对于实例变量：<br>Example:<br>Class apple</p>
 <pre><code>public class apple {
     String color = &quot;red&quot;;
 
@@ -169,9 +169,29 @@
     apple a1 = new apple();
     a1 = null;
     System.out.println(a1.color);
-}</code></pre><p>Result:</p>
+}</code></pre><p>Result</p>
 <pre><code>Exception in thread &quot;main&quot; java.lang.NullPointerException
-    at test.main(test.java:15)</code></pre>
+    at test.main(test.java:15)</code></pre><p>对于实例方法：<br>Example:<br>Class apple</p>
+<pre><code>public class apple {
+    String color = &quot;red&quot;;
+
+    peer p;    
+
+    public void price() {  // 实例方法
+        System.out.println(&quot;1.23&quot;);
+    }
+
+}</code></pre><p>Main Function</p>
+<pre><code>public static void main(String[] args) {
+    apple a1 = new apple();
+
+    a1 = null;
+
+    a1.price();
+}</code></pre><p>Result</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.NullPointerException
+    at test.main(test.java:14)
+</code></pre>
                             <hr>
                         </div>
                         <br>
