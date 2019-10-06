@@ -125,7 +125,7 @@
 </ul>
 <p><strong>三块内存中变化最频繁的是栈内存，最先有数据的是方法区内存，垃圾回收主要针对的是堆内存。</strong></p>
 <p>创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
-<p>创建过程如图：<br><img src="/images/Language-Learning/the_realisation_of_a_class.png" alt></p>
+<p>创建过程如图：<br><img src="/images/Language-Learning-JAVA/the_realisation_of_a_class.png" alt></p>
 <ul>
 <li><p>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</p>
 </li>
@@ -140,7 +140,7 @@
 <li><p>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</p>
 </li>
 </ul>
-<p><img src="/images/Language-Learning/result_of_class_structure.png" alt></p>
+<p><img src="/images/Language-Learning-JAVA/result_of_class_structure.png" alt></p>
 <h4 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h4><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
 <h2 id="成员变量和局部变量（MVs-and-LVs）"><a href="#成员变量和局部变量（MVs-and-LVs）" class="headerlink" title="成员变量和局部变量（MVs and LVs）"></a>成员变量和局部变量（MVs and LVs）</h2><ul>
 <li>成员变量：在类中定义，用来描述对象将要有什么。成员变量包括类变量（静态变量）和实例变量。类变量储存在类的静态域（在方法区内存中），实例变量储存在堆内存对应的对象内存中。</li>
@@ -254,7 +254,7 @@ Main start....</code></pre><h3 id="实例代码块（使用少）"><a href="#实
 }</code></pre><p>Result</p>
 <pre><code>the price is : 10
 the weight is : 10</code></pre><h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照 GC 机制，垃圾回收器会将垃圾进行回收。</p>
-<p>机制的具体内容：<a href="cnblogs.com/sunniest/p/4575144.html">JAVA GC 机制</a></p>
+<p>机制的具体内容：<a href="http://cnblogs.com/sunniest/p/4575144.html" target="_blank" rel="noopener">JAVA GC 机制</a></p>
 <h2 id="空指针异常（null-pointer-exception）"><a href="#空指针异常（null-pointer-exception）" class="headerlink" title="空指针异常（null pointer exception）"></a>空指针异常（null pointer exception）</h2><p>空引用数据类型（null）访问对应类实例相关（区别于静态）的数据（包括实例变量和实例方法）会引发空指针异常。</p>
 <p>对于实例变量：<br>Example:<br>Class apple</p>
 <pre><code>public class apple {
@@ -333,7 +333,19 @@ public class apple {
 
 </code></pre><p>Result</p>
 <pre><code>价格过高！
-1</code></pre>
+1</code></pre><h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>关于继承：</p>
+<ul>
+<li>继承的基本作用是：代码复用。</li>
+<li>继承的重要作用是：为“方法的覆盖”和 “多态机制”做铺垫。</li>
+<li>JAVA 当中的继承只支持单继承，一个类不能同时继承很多类，只能继承一个类。（相比于 C++ ）</li>
+<li>若在继承中，B 类继承 A 类，则 A 类被称为：父类、基类、超类、superclass； A 类被称为：子类、派生类、subclass。</li>
+<li>私有类（private）和构造方法不支持继承。</li>
+<li>类与类之间可以间接继承。</li>
+<li>JAVA 中假设一个类没有显示继承任何类，该类默认继承 JAVA SE 库中提供的 java.lang.object 类。JAVA 中所有类都具有 object 类的特征。</li>
+</ul>
+<p>查看底层代码：<br>java_default_extends_class.png<br><img src="/images/Language-Learning-JAVA/java_default_extends_class.png" alt></p>
+<p>这里提到这个 object 类是整个类层次结构的根类，每个类默认都以这个类为超类。</p>
+
                             <hr>
                         </div>
                         <br>
