@@ -127,12 +127,18 @@
 <p>创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
 <p>创建过程如图：<br><img src="/images/Language-Learning/the_realisation_of_a_class.png" alt></p>
 <ul>
-<li>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</li>
-<li>实际上这里的 类名( ) 是构造方法。</li>
-<li>对象会涉及到 JAVA 虚拟机内的三个内存区域：方法区内存，栈内存和堆内存。</li>
-<li>方法区内存：在类加载的时候，类（Class）字节码代码片段会被加载分配到该内存空间中。</li>
-<li>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作。方法执行完成之后，其对应的内存空间释放，进行弹栈操作。 对象（在堆内存中）的首地址在 new 的时候赋值给对象名变量，对象名变量存放在栈内存中（内部类除外。内部类的引用为引用数据类型，可以作为成员变量）。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</li>
-<li>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</li>
+<li><p>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</p>
+</li>
+<li><p>实际上这里的 <strong>类名( )</strong> 是构造方法，构造方法返回引用数据类型结果给 对象名变量。</p>
+</li>
+<li><p>对象会涉及到 JAVA 虚拟机内的三个内存区域：方法区内存，栈内存和堆内存。</p>
+</li>
+<li><p>方法区内存：在类加载的时候，类（Class）字节码代码片段会被加载分配到该内存空间中。静态域也在方法区内存中。</p>
+</li>
+<li><p>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作。方法执行完成之后，其对应的内存空间释放，进行弹栈操作。 对象（在堆内存中）的首地址在 new 的时候赋值给对象名变量，对象名变量存放在栈内存中（内部类除外。内部类的引用为引用数据类型，可以作为成员变量）。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</p>
+</li>
+<li><p>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</p>
+</li>
 </ul>
 <p><img src="/images/Language-Learning/result_of_class_structure.png" alt></p>
 <h4 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h4><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
@@ -144,25 +150,117 @@
 <ul>
 <li><strong>成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></li>
 <li><strong>JAVA 会给成员变量一个初始值（byte/short/long/int 类型为 0 ，float/double 类型为 0.0，boolean 类型为 false，char 类型为 \u0000， 引用数据类型为 NULL）；而不会给局部变量赋予初始值。</strong></li>
-<li><strong>在方法内部，出现方法内局部变量和类的成员变量同名时，局部变量具有更高的优先级。</strong></li>
+<li><strong>在方法内部，出现方法内局部变量和类的成员变量同名时，局部变量具有更高的优先级。（考虑使用 this 的情况）</strong></li>
 <li><strong>成员变量的实例变量储存在堆内存中；局部变量储存在栈内存中。</strong></li>
 </ul>
-<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>构造方法属于方法，是定义在 JAVA 类中的一个用来初始化对象的方法。它与类同名并且没有返回值。</p>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>构造方法属于方法，是定义在 JAVA 类中的一个用来创建并且初始化对象的方法。它与类同名，并且没有 return 语句。每个构造方法实际上执行之后都有一个返回值，值的类型为类对应的引用数据类型。</p>
 <p><strong>特点：</strong></p>
 <ul>
-<li><strong>如果定义类的时候没有写入构造方法，编译时JAVA 会自动补充构造方法。</strong></li>
-<li><strong>如果定义类的时候写入了构造方法，则无论是有参、无参的构造方法，都不会自动补充构造方法。</strong></li>
+<li><strong>如果定义类的时候没有写入构造方法，编译时JAVA 会自动补充一个无参的构造方法，称为缺省构造函数。</strong></li>
+<li><strong>如果定义类的时候写入了构造方法，则写入的无论是有参、无参的构造方法，都不会自动补充构造方法。</strong></li>
 <li><strong>有参的构造方法可以和无参的构造方法并存。（参考函数重载）</strong></li>
 <li><strong>构造方法给属性赋值，并且可以设置值的条件。</strong></li>
 </ul>
-<h2 id="静态变量（Static）"><a href="#静态变量（Static）" class="headerlink" title="静态变量（Static）"></a>静态变量（Static）</h2><p>静态变量属于成员变量。它存储在类的静态域（静态域在方法区内存中）。</p>
-<h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照GC 机制，垃圾回收器会将垃圾进行回收。</p>
+<h2 id="静态变量和静态方法（Static）"><a href="#静态变量和静态方法（Static）" class="headerlink" title="静态变量和静态方法（Static）"></a>静态变量和静态方法（Static）</h2><p>静态变量属于成员变量，静态方法属于成员方法，但它们都是类级别的变量，和具体的类无关，可以在对象之间达到共享。注意 Main 方法也属于静态方法。</p>
+<ul>
+<li><p>对于属性，若所有的对象都有这个属性，并且所有对象的属性的值是一样的，则建议使用 static 以节省内存开销。</p>
+</li>
+<li><p>对于方法，若所有的对象都需要这个方法，那么也建议使用 static 以节省内存开销。</p>
+</li>
+<li><p>静态变量和静态方法在类加载的时候进行初始化，不需要通过创建对象，内存在开辟了。它存储在类的静态域（静态域在方法区内存中）。</p>
+</li>
+<li><p>有 static 关键字修饰的方法和属性调用格式：类名.属性/方法名（实参），引用的访问方式也可以，但是开发环境编辑器会报错；无 static 关键字修饰的方法和属性调用格式：引用.属性/方法名（实参），并且前提是类有创建了的实例对象。</p>
+</li>
+<li><p>静态方法中不能访问动态变量和方法。动态方法中可以访问动态变量和方法。</p>
+</li>
+<li><p>大多数“工具”类的方式是静态方法，因为“工具类”是为了方便编程。</p>
+</li>
+</ul>
+<h2 id="Main-方法"><a href="#Main-方法" class="headerlink" title="Main 方法"></a>Main 方法</h2><p>主方法的写法：<strong>public static void main(String [] args)</strong>（唯一，其他的名为 main 的方法重载）<br>其中：</p>
+<ul>
+<li>主方法默认并且优先执行。</li>
+<li>public 表示公开的，在任何位置都可以访问。</li>
+<li>static 表示静态的，不需要创建对象即可访问。</li>
+<li>void 表示 main 方法执行结束之后不返回任何值。</li>
+<li>（String [] args）是 main 方法的形式参数列表。</li>
+</ul>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>代码块分别静态代码块和实例代码块。</p>
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><ul>
+<li>static 可以用于静态代码块。在一个类中可以编写多个静态代码块。</li>
+<li>静态代码块在类加载的时候会按照从上到下的顺序执行，并且只执行一次。</li>
+<li>在静态代码块会完成预备工作，先完成数据的准备 ，如：初始化连接池，解析 XML 配置文件。</li>
+<li>静态代码块是 JAVA 为程序员准备的一个特殊时刻，这个特殊时刻被称为类加载时刻。</li>
+<li>静态代码块的执行会先于 Main 方法。</li>
+</ul>
+<p>Example:</p>
+<p>test.class</p>
+<pre><code>public class test {
+
+    static {
+        System.out.println(&quot;类加载 --&gt; 1.....&quot;);
+    }
+
+    static {
+        System.out.println(&quot;类加载 --&gt; 2.....&quot;);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(&quot;Main start....&quot;);
+    }
+}</code></pre><p>Result</p>
+<pre><code>类加载 --&gt; 1.....
+类加载 --&gt; 2.....
+Main start....</code></pre><h3 id="实例代码块（使用少）"><a href="#实例代码块（使用少）" class="headerlink" title="实例代码块（使用少）"></a>实例代码块（使用少）</h3><ul>
+<li>实例代码块可以编写多个，也是遵循自上而下的顺序执行。</li>
+<li>实例代码块在构造方法执行之前执行，构造方法依次执行，实例代码块对应执行一次。</li>
+<li>实例代码块是 JAVA 为程序员准备的一个特殊时机，这个特殊时机被称为对象初始化时机。</li>
+</ul>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>关于 this 关键字：</p>
+<ul>
+<li>this 是一种引用数据类型变量，属于对象的引用，this 变量中保存了内存地址指向自身，this 储存在 JAVA 虚拟机堆内存中。</li>
+<li>创建 100 个 JAVA 对象，每一个对象都有 this ，也就说有 100 个不同的 this。</li>
+<li>由于 this 在不同对象中的值不同，属于一个动态变量，所以在静态方法中不可以使用 this。</li>
+<li>this 有些情况下可以省略。</li>
+<li>在动态方法中，由于局部变量的优先级大于成员变量，如果出现局部变量与成员变量同名，则成员变量前需要使用 this，以避免混淆。</li>
+<li><strong>可以使用在构造方法当中，this 语句通过当前的构造方法调用其他的构造方法。（注意 this 语句只能放在构造函数的第一行且只能调用一次）</strong></li>
+</ul>
+<p>Example:</p>
+<p>apple.class</p>
+<pre><code>public class apple {
+    private int price;
+
+    private int weight;
+
+    public apple() {
+        this(10, 10);  // 在无参数构造方法中调用两参数构造方法
+    }
+
+    public apple(int price, int weight) {
+        this.price = price;
+        this.weight = weight;
+    }
+
+    public void print() {
+        System.out.println(&quot;the price is : &quot; + price);
+        System.out.println(&quot;the weight is : &quot; + weight);
+    }
+}</code></pre><p>Main Function</p>
+<pre><code>public class test {
+
+    public static void main(String[] args) {
+        apple a = new apple();
+        a.print();
+    }
+}</code></pre><p>Result</p>
+<pre><code>the price is : 10
+the weight is : 10</code></pre><h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照 GC 机制，垃圾回收器会将垃圾进行回收。</p>
+<p>机制的具体内容：<a href="cnblogs.com/sunniest/p/4575144.html">JAVA GC 机制</a></p>
 <h2 id="空指针异常（null-pointer-exception）"><a href="#空指针异常（null-pointer-exception）" class="headerlink" title="空指针异常（null pointer exception）"></a>空指针异常（null pointer exception）</h2><p>空引用数据类型（null）访问对应类实例相关（区别于静态）的数据（包括实例变量和实例方法）会引发空指针异常。</p>
 <p>对于实例变量：<br>Example:<br>Class apple</p>
 <pre><code>public class apple {
     String color = &quot;red&quot;;
 
-    peer p;
+    peer p;  //  p 默认值为 null
 
 }</code></pre><p>Main Function</p>
 <pre><code>public static void main(String[] args) {
@@ -192,7 +290,50 @@
 }</code></pre><p>Result</p>
 <pre><code>Exception in thread &quot;main&quot; java.lang.NullPointerException
     at test.main(test.java:14)
-</code></pre><h2 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h2>
+</code></pre><h2 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h2><h3 id="封装的好处"><a href="#封装的好处" class="headerlink" title="封装的好处"></a>封装的好处</h3><ul>
+<li>封装之后，对于事物来说，看不到这个事物比较复杂的一面，只能看到这个事物比较简单的一面。【 简单化 】</li>
+<li>封装之后才能成为真正地对象，成为真正地独立体。</li>
+<li>封装之后可以使这个事物的适应性增强，在任何情景都可以使用。</li>
+<li>封装，对于这个事物本身来说提高了安全性。</li>
+</ul>
+<h3 id="封装的步骤"><a href="#封装的步骤" class="headerlink" title="封装的步骤"></a>封装的步骤</h3><ul>
+<li>所有属性私有化，使用 private 关键字进行修饰，private 表示私有的，其修饰的所有数据只能在本类中访问。</li>
+<li>对外提供简单的操作入口，也就是说以后访问 private 属性必须通过这些简单的入口    进行访问。</li>
+<li>入口方法处编写业务逻辑代码进行安全控制，达到过滤的效果。</li>
+<li>通常的访问类型有 get 和 set，访问的入口方法命名规范为： set/get + 属性名首字母大写。这两种方法没有 static 关键字。（Eclipse 使用 source –&gt; generate setters and getters 自动生成）</li>
+</ul>
+<p>Example:</p>
+<p>apple.class</p>
+<pre><code>// class--&gt;apple
+public class apple {
+    private int price = 10;
+
+    public void setPrice(int tempPrice){  // set 方法不需要返回值
+        if(tempPrice &gt; 15){
+            System.out.println(&quot;价格过高！&quot;);
+            return;
+        }
+        price = tempPrice;
+    }
+
+    public int getPrice() {  // get 方法需要返回值
+        return price;
+    }
+
+}</code></pre><p>Main Function</p>
+<pre><code>public class test {
+    public static void main(String[] args) {
+
+        apple a = new apple();
+        a.setPrice(100);
+        int price = a.getPrice();
+        System.out.println(price);
+    }
+}
+
+</code></pre><p>Result</p>
+<pre><code>价格过高！
+1</code></pre>
                             <hr>
                         </div>
                         <br>
