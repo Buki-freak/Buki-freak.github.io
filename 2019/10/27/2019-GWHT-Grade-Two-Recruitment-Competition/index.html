@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>2019 GWHT Grade-Two Recruitment Competition ~ W366er</title>
+    <title>2019_GWHT_Grade_Two_Recruitment_Competition ~ W366er</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -144,7 +144,7 @@ if(isset($c)){
 <pre><code>payload: ?a=abc&amp;b=12345abc&amp;c=kjsgfd</code></pre><h1 id="遇见，遇见你"><a href="#遇见，遇见你" class="headerlink" title="遇见，遇见你"></a>遇见，遇见你</h1><p>扫到 shell.php，之后 intruder 爆破。</p>
 <h1 id="100年后的flag"><a href="#100年后的flag" class="headerlink" title="100年后的flag"></a>100年后的flag</h1><p>抓包修改 User Agent，包含 Iphone，OS，119，Safari即可。</p>
 <h1 id="easy-webber"><a href="#easy-webber" class="headerlink" title="easy_webber"></a>easy_webber</h1><p>hint.php 看源码。<br>审计源码，首先看到 <strong>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</strong>，手册里的意思：</p>
-<p>![](/images/2019 GWHT Grade-Two Recruitment Competition/CURLOPT_RETURNTRANSFER.png)</p>
+<p><img src="/images/2019_GWHT_Grade_Two_Recruitment_Competition/CURLOPT_RETURNTRANSFER.png" alt></p>
 <p>由此我们可以得知，访问页面的信息会通过 <strong>$output = curl_exec($ch);</strong> 传到 output 这个变量中。<br>整题目的意思是，要求我们传进一个网站（公网），并且访问返回的结果这个网址依次满足 password 所分解出来的单词。</p>
 <p>exp 如下：</p>
 <pre><code>&lt;?php
@@ -253,7 +253,7 @@ echo $arr[$counter];
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "2019 GWHT Grade-Two Recruitment Competition&nbsp;",
+            "2019_GWHT_Grade_Two_Recruitment_Competition&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,
