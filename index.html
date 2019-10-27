@@ -105,7 +105,35 @@
                 <p class="h4 index-header">2019 GWHT Grade-Two Recruitment Competition</p>
                 <div class="index-excerpt">
                     
-                        <div class="index-text mb-1"></div>
+                        <div class="index-text mb-1">只有 web 部分
+easy_web源码：
+﻿&lt;?php 
+show_source(__FILE__); 
+include(&quot;flag.php&quot;); 
+$a=@$_GET[&#39;a&#39;]; 
+$b=@$_GET[&#39;b&#39;]; 
+$c=@$_GET[&#39;c&#39;]; 
+if($a==0 and $a){ 
+    echo $flag1; 
+} 
+if(is_numeric($b)){ 
+    exit(); 
+} 
+if($b&gt;1234){ 
+    echo $flag2; 
+} 
+
+if(is_numeric($c)){ 
+    exit(); 
+} 
+if(isset($c)){ 
+    $args = $c; 
+    if(!preg_match(&quot;/^\w+$/&quot;,$args)){ 
+        die(&quot;args error!&quot;); 
+    } 
+    echo $flag3; 
+} 
+?&gt;审计代码，这题将 flag 分成三个部分，我们需要绕过五个</div>
                     
                 </div>
             </a>
