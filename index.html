@@ -101,6 +101,48 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/11/04/Sqli-Lab-Learning/">
+                <p class="h4 index-header">Sqli_Lab_Learning</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">Easy ChallengesLesson 17首先有一个 PHP 的 check_input 的过滤机制：
+function check_input($value)
+    {
+    if(!empty($value))
+        {
+        // truncation (see comments)
+        $value = substr($value,0,15);
+        }
+
+        // Stripslashes if magic quotes enabled
+        if (get_magic_quotes_gpc()) // 默认为 false
+            {
+            $value = stripslashes($value);  // 删除反斜杠
+            }
+
+        // Quote if not a number
+        if (!ctype_digit($value))
+            {
+            $value = &quot;&#39</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-04
+                    &nbsp;&nbsp;
+                    
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2019/10/27/2019-GWHT-Grade-Two-Recruitment-Competition/">
                 <p class="h4 index-header">2019_GWHT_Grade_Two_Recruitment_Competition</p>
                 <div class="index-excerpt">
