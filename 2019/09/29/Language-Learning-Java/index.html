@@ -692,31 +692,194 @@ void close() throws IOException</code></pre><h2 id="Reader-and-Writer"><a href="
 <p>读取的基本方法种类基本和 InputStream 相同，具体可以查看手册。</p>
 <p>Writer 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Categories_of_Writer.png" alt></p>
 <p>输出的基本方法种类基本和 OutputStream 相同，差别是多了一个 关于 string 的输出，具体可以查看手册。</p>
-<h2 id="字节流类型"><a href="#字节流类型" class="headerlink" title="字节流类型"></a>字节流类型</h2><table>
-<thead>
-<tr>
-<th>Tables</th>
-<th align="center">Are</th>
-<th align="right">Cool</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>col 1 is</td>
-<td align="center">left-aligned</td>
-<td align="right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td align="center">centered</td>
-<td align="right">$12</td>
-</tr>
-<tr>
-<td>col 3 is</td>
-<td align="center">right-aligned</td>
-<td align="right">$1</td>
-</tr>
-</tbody></table>
+<h2 id="字节流类型"><a href="#字节流类型" class="headerlink" title="字节流类型"></a>字节流类型</h2><p>分类如下：</p>
+<p><img src="/images/Language-Learning-JAVA/Byte.png" alt></p>
+<h3 id="FileInputStream-and-FileOutputStream"><a href="#FileInputStream-and-FileOutputStream" class="headerlink" title="FileInputStream and FileOutputStream"></a>FileInputStream and FileOutputStream</h3><p>Example:</p>
+<p>Code:</p>
+<pre><code>package Lesson_13;
+import java.io.*;
 
+public class TestFileInputStream {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+            int b = 0;
+            FileInputStream in = null;
+            try {
+                in = new FileInputStream(&quot;Lesson_13/TestFileInputStream.java&quot;);
+            }catch (FileNotFoundException e) {
+                // TODO: handle exception
+                System.out.println(&quot;找不到指定文件&quot;);
+                System.exit(-1);
+            }
+
+            try {
+                long num = 0;
+                while((b = in.read()) != -1) {
+                    System.out.print((char)b);
+                    num ++;
+                }
+                in.close();
+                System.out.println();
+                System.out.println(&quot;共读取了&quot; + num + &quot; 个字节&quot;);
+
+            }catch (IOException e) {
+                // TODO: handle exception
+                System.out.println(&quot;文件读取错误&quot;);
+                System.exit(-1);
+            }
+    }
+
+}
+</code></pre><p>Result:</p>
+<pre><code>package Lesson_13;
+import java.io.*;
+
+public class TestFileInputStream {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+            int b = 0;
+            FileInputStream in = null;
+            try {
+                in = new FileInputStream(&quot;Lesson_13/TestFileInputStream.java&quot;);
+            }catch (FileNotFoundException e) {
+                // TODO: handle exception
+                System.out.println(&quot;?????????¨????&quot;);
+                System.exit(-1);
+            }
+
+            try {
+                long num = 0;
+                while((b = in.read()) != -1) {
+                    System.out.print((char)b);
+                    num ++;
+                }
+                in.close();
+                System.out.println();
+                System.out.println(&quot;????????&quot; + num + &quot; ??×???&quot;);
+
+            }catch (IOException e) {
+                // TODO: handle exception
+                System.out.println(&quot;?????????í?ó&quot;);
+                System.exit(-1);
+            }
+    }
+
+}
+
+共读取了793 个字节
+</code></pre><p>在输出的结果中我们可以发现源代码中的中文变成了乱码，这是由于 FileInputStream 是字节流方式，正如之前所说的那样。</p>
+<p>FileOutputStream 和 FileInputStream 方法类似，这里就不再写了。</p>
+<h3 id="FileReader-and-FileWriter"><a href="#FileReader-and-FileWriter" class="headerlink" title="FileReader and FileWriter"></a>FileReader and FileWriter</h3><p>Example:<br>Code:</p>
+<pre><code>package Lesson_13;
+
+import java.io.*;
+
+public class TestReader {
+    public static void main(String[] args) {
+        FileReader fr = null;
+        int c = 0;
+        try {
+            fr = new FileReader(&quot;Lesson_13/TestReader.java&quot;);
+            while ((c = fr.read()) != -1) {
+                System.out.print((char) c);
+            }
+            fr.close();
+        } catch (FileNotFoundException e) {
+            // TODO: handle exception
+            System.out.println(&quot;找不到指定文件&quot;);
+        }catch (IOException e) {
+            // TODO: handle exception
+            System.out.println(&quot;读取文件错误&quot;);
+        }
+
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>package Lesson_13;
+
+import java.io.*;
+
+public class TestReader {
+    public static void main(String[] args) {
+        FileReader fr = null;
+        int c = 0;
+        try {
+            fr = new FileReader(&quot;Lesson_13/TestReader.java&quot;);
+            while ((c = fr.read()) != -1) {
+                System.out.print((char) c);
+            }
+            fr.close();
+        } catch (FileNotFoundException e) {
+            // TODO: handle exception
+            System.out.println(&quot;找不到指定文件&quot;);
+        }catch (IOException e) {
+            // TODO: handle exception
+            System.out.println(&quot;读取文件错误&quot;);
+        }
+
+    }
+}
+</code></pre><p><strong>从上面两个例子我们可以看到，Java 中的 char 所代表的字节大小取决于编码方式，它并不是唯一的。</strong></p>
+<p>字节流还有其他类型的类，这里只记录了 File 的。</p>
+<h2 id="处理流类型"><a href="#处理流类型" class="headerlink" title="处理流类型"></a>处理流类型</h2><p>处理流可以理解为包到别的流上的流。</p>
+<p>分类如下：<br><img src="/images/Language-Learning-JAVA/Deal.png" alt></p>
+<h3 id="Buffered-缓冲流"><a href="#Buffered-缓冲流" class="headerlink" title="Buffered 缓冲流"></a>Buffered 缓冲流</h3><p>缓冲流需要“套接”在相应的节点流之上，对读写的数据提供了缓冲的功能，提高了读写的效率，同时增加了一些新的方法。</p>
+<p>一般有四种缓冲流：</p>
+<ul>
+<li>BufferedReader</li>
+</ul>
+<p>–&gt; BufferedReader(Reader in)<br>–&gt; BufferedReader(Reader in, int sz)  // sz为自定义缓存区的大小</p>
+<ul>
+<li>BufferedWriter</li>
+</ul>
+<p>–&gt; BufferedWriter(Writer out)<br>–&gt; BufferedWriter(Writer out, int sz)</p>
+<ul>
+<li>BufferedInputStream</li>
+</ul>
+<p>–&gt; BufferedInputStream(InputStream in)<br>–&gt; BufferedInputStream(InputStream in, int sz)</p>
+<ul>
+<li>BufferedOutputStream</li>
+</ul>
+<p>–&gt; BufferedOutputStream(OutputStream out)<br>–&gt; BufferedOutputStream(OutputStream out, int sz)</p>
+<h4 id="BufferedInputStream"><a href="#BufferedInputStream" class="headerlink" title="BufferedInputStream"></a>BufferedInputStream</h4><p>Code:</p>
+<pre><code>package Lesson_13;
+import java.io.*;
+
+public class TestBufferedInputStream {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+            try {
+                FileInputStream fis=new FileInputStream(&quot;Lesson_13/TestBufferedInputStream.java&quot;);
+                BufferedInputStream bis=new BufferedInputStream(fis);
+                int c=0;
+                System.out.println(bis.read());
+                System.out.println(bis.read());
+                bis.mark(100);
+                for(int i=0;i&lt;=10&amp;&amp;(c=bis.read()) != -1;i++) {
+                    System.out.print((char)c + &quot; &quot;);
+                }
+                System.out.println();
+                bis.reset();
+                for(int i=0;i&lt;=10&amp;&amp;(c=bis.read()) != -1;i++) {
+                    System.out.print((char)c + &quot; &quot;);
+                }
+                bis.close();
+            }
+            catch (IOException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+    }
+
+}
+</code></pre><p>Result:</p>
+<pre><code>112
+97
+c k a g e   L e s s o 
+c k a g e   L e s s o </code></pre><h3 id="Stop-Here"><a href="#Stop-Here" class="headerlink" title="Stop Here"></a>Stop Here</h3>
                             <hr>
                         </div>
                         <br>
