@@ -642,6 +642,80 @@ public class TestInterface {
 <li>一个类可以实现多个无关的接口。</li>
 <li>与继承关系类似，接口与实现类之间存在多态性。（Teacher 既是 Singer 也是 Painter）</li>
 </ul>
+<h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>Java.io 包中定义了多个流类型（类或者抽象类）来实现输入 / 输出功能；可以从三个角度进行分类：</p>
+<ul>
+<li>按数据流方向的不同可以分为输入流和输出流。</li>
+<li>按处理数据单位不同可以分为字节流(8 bits)和字符流(16 bits)。</li>
+<li>按照功能不同可以分为节点流和处理流。</li>
+</ul>
+<p><strong>Java.io 中的类都分别继承自以下四个抽象类：</strong></p>
+<p><img src="/images/Language-Learning-JAVA/IO_Class.png" alt></p>
+<p>节点流和处理流的区别：</p>
+<ul>
+<li>节点流可以从一个特定的数据源（节点）读取数据（如：文件，内存）。</li>
+<li>处理流是“连接”在已存在的流（节点流或处理流）之上，通过对数据的处理为程序提供更为强大的读写功能。</li>
+</ul>
+<h2 id="InputStream-and-OutputStream"><a href="#InputStream-and-OutputStream" class="headerlink" title="InputStream and OutputStream"></a>InputStream and OutputStream</h2><p>InputStream 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Inputstream.png" alt></p>
+<p>读取的基本方法：</p>
+<pre><code>// 读取一个字节并且以整数的形式返回（0 ~ 255），
+、、 如果返回 -1 这说明已经到达输入流的末尾
+int read() throws IOException
+
+// 读取一系列字节并且储存到一个数组 buffer，
+// 返回实际读取的字节数，如果读取前已经到输入流的末尾返回 -1
+int read(byte[] buffer) throws IOException
+
+// 读取 length 个字节
+// 并且存储到一个字节数组 buffer，从 offset 位置开始
+// 返回实际读取的字节数，如果读取前已经到输入流的末尾返回 -1
+int read(byte[] buffer, int offset, int length) throws IOException
+
+// 关闭流释放内存资源
+void close() throws IOException</code></pre><p>OutputStream 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Outputstream.png" alt></p>
+<p>输出的基本方法：</p>
+<pre><code>// 向输出流中写入一个字节数据，该字节数据为参数 b 的低八位
+void write(int b) throws IOException
+
+// 将一个字节类型的数组中的数据写入输入流
+void write(byte[] b) throws IOException
+
+// 将一个字节类型的数组中的从指定位置（off）开始的
+// len 个字节写入到输出流
+void write(byte[] b, int off, int len) throws IOException
+
+// 将输出流中的缓冲数据全部写出到目的地
+// 一般用于 close() 函数之前，防止缓冲区的剩余数据被丢弃。
+void flush() throw IOException
+
+// 关闭流释放内存资源
+void close() throws IOException</code></pre><h2 id="Reader-and-Writer"><a href="#Reader-and-Writer" class="headerlink" title="Reader and Writer"></a>Reader and Writer</h2><p>Reader 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Reader.png" alt></p>
+<p>读取的基本方法种类基本和 InputStream 相同，具体可以查看手册。</p>
+<p>Writer 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Categories_of_Writer.png" alt></p>
+<p>输出的基本方法种类基本和 OutputStream 相同，差别是多了一个 关于 string 的输出，具体可以查看手册。</p>
+<h2 id="字节流类型"><a href="#字节流类型" class="headerlink" title="字节流类型"></a>字节流类型</h2><table>
+<thead>
+<tr>
+<th>Tables</th>
+<th align="center">Are</th>
+<th align="right">Cool</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>col 1 is</td>
+<td align="center">left-aligned</td>
+<td align="right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td align="center">centered</td>
+<td align="right">$12</td>
+</tr>
+<tr>
+<td>col 3 is</td>
+<td align="center">right-aligned</td>
+<td align="right">$1</td>
+</tr>
+</tbody></table>
 
                             <hr>
                         </div>
