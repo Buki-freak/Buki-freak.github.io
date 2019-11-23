@@ -271,7 +271,13 @@ public ClassName{
 }</code></pre><ul>
 <li>在任何情况下，构造一个类的实例时，将会调用沿着继承链的所有父类的构造方法。</li>
 </ul>
-<h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><p><strong>stop here</strong></p>
+<h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><p>当我们不希望有子类来重写我们所指定的方法或者不希望变量被改变的时候，我们可以使用 final 这个关键字。<br><strong>以下三种情况：</strong></p>
+<ul>
+<li>final 的变量的值不能够被改变。（成员变量和局部变量）</li>
+<li>final 的方法不能够被重写。</li>
+<li>final 的类不能够被继承。</li>
+</ul>
+<p>典型的 final 类：String，Math，Boolean 等等。</p>
 <h2 id="继承方法链"><a href="#继承方法链" class="headerlink" title="继承方法链"></a>继承方法链</h2><p>当构造一个子类的对象时，子类构造方法会在完成自己的任务之前，首先调用它的父类的构造方法。如果父类继承自其他类，那么父类构造方法又会在完成自己的任务之前，调用它自己的父类的构造方法，这整个机制被称为继承方法链。</p>
 <h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照 GC 机制，垃圾回收器会将垃圾进行回收。</p>
 <p>机制的具体内容：<a href="http://cnblogs.com/sunniest/p/4575144.html" target="_blank" rel="noopener">JAVA GC 机制</a></p>
@@ -527,7 +533,116 @@ apple is red</code></pre><p>对于向上转型：</p>
             Cat c = new Cat(&quot;Lily&quot;, &quot;Blue&quot;);
             c.enjoy();
     }
-}</code></pre><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2>
+}</code></pre><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是抽象方法和常量值定义的集合。</p>
+<p>接口的特点：</p>
+<ul>
+<li>从本质上讲，接口是一种特殊的抽象类，这种抽象类中只包含常量和方法的定义，而没有变量和方法的实现。</li>
+<li>接口可以弥补 JAVA 中一个类只能继承一个类的缺点。</li>
+<li>接口中的方法全部都是抽象方法（abstract 关键字可缺省），并且这些方法默认为 public 也只能是 public。</li>
+<li>属性的关键字必须为 public static final。</li>
+<li>接口可以继承其他的接口，并且添加新的属性和新的抽象方法。</li>
+</ul>
+<p>Example:</p>
+<pre><code>interface Singer {
+    public void sing();
+
+    public void sleep();
+}
+
+interface Painter {
+    public void paint();
+
+    public void eat();
+}
+
+class Student implements Singer {
+    private String name;
+
+    Student(String name) {
+        this.name = name;
+    }
+
+    public void study() {
+        System.out.println(this.name + &quot;: is studying&quot;);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void sing() {
+        System.out.println(this.name + &quot;:student is singing&quot;);
+    }
+
+    public void sleep() {
+        System.out.println(this.name + &quot;:student is sleeping&quot;);
+    }
+}
+
+class Teacher implements Singer, Painter {
+    private String name;
+
+    public Teacher(String name) {
+        this.name = name;
+    }
+
+    public void teach() {
+        System.out.println(this.name + &quot;:teacher is teaching&quot;);
+
+    }
+
+    public void sing() {
+        System.out.println(this.name + &quot;: teacher is singing&quot;);
+    }
+
+    public void sleep() {
+        System.out.println(this.name + &quot;:teacher is sleeping&quot;);
+    }
+
+    public void paint() {
+        System.out.println(this.name + &quot;:teacher is painting&quot;);
+    }
+
+    public void eat() {
+        System.out.println(this.name + &quot;:Teacher is eating&quot;);
+    }
+}
+
+public class TestInterface {
+    public static void main(String args[]) {
+        Student s0 = new Student(&quot;le&quot;);
+        s0.sing();
+        s0.sleep();
+        s0.study();
+
+        Teacher t0=new Teacher(&quot;te&quot;);
+        t0.sing();
+        t0.sleep();
+        t0.paint();
+        t0.eat();
+        t0.teach();
+
+        Singer s1 = new Student(&quot;ce&quot;);
+        s1.sing();
+        s1.sleep();
+
+
+        Singer s2 = new Teacher(&quot;le&quot;);
+        s2.sing();
+        s2.sleep();
+
+        Painter p1 = (Painter) s2;
+        p1.paint();
+        p1.eat();
+}
+}
+</code></pre><p>从上面的例子中可以看到几个特点：</p>
+<ul>
+<li>多个无关的类可以实现同一个接口。</li>
+<li>一个类可以实现多个无关的接口。</li>
+<li>与继承关系类似，接口与实现类之间存在多态性。（Teacher 既是 Singer 也是 Painter）</li>
+</ul>
+
                             <hr>
                         </div>
                         <br>
