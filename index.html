@@ -106,7 +106,27 @@
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">JAVAFX先放一放
-线程</div>
+线程线程是一个文件（进程）里面有不同的执行路径（多路径执行）。其中的路径是所谓的线程。一般 main 方法叫程序的主线程。
+特点：
+
+Java 的线程是通过 Java.lang.Tread 类来实现。
+VM 启动时会有一个由主方法所定义的线程。
+可以通过创建 Thread 的实例来创建新的线程。
+每个线程都是通过某个特定 Thread 对象所对应的方法 run() 来完成其操作的，方法 run() 称为线程体。
+通过调用 Thread 类的 start() 方法来启动一个线程。
+
+
+线程的实现线程有两种实现：
+第一种实现：Code:
+package Lesson_14;
+
+public class TestThread1 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runner r = new Runner();
+        Thread runner1 = new Thread(r);
+        ru</div>
                     
                 </div>
             </a>
