@@ -492,7 +492,141 @@ t1: 27
 t1: 28
 t1: 29
 t1: 30
-</code></pre><h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2>
+</code></pre><h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2><p>Java 会提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程。<br>线程调度器按照线程的优先级决定应该调度哪个线程来执行。</p>
+<ul>
+<li><strong>线程的优先级用数字来表示，范围从1到10。</strong></li>
+<li>一个线程的缺省优先级为5。</li>
+<li>优先级的值越大，优先级越高。</li>
+<li>通过 setpriortiy 的方式来进行优先级的设置。</li>
+</ul>
+<p>Example:</p>
+<p>Code</p>
+<pre><code>package Lesson_14;
+
+public class TestPriority {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runnable r1 = new T1();
+        Runnable r2 = new T2();
+        Thread t1 = new Thread(r1);
+        Thread t2 = new Thread(r2);
+        t1.setPriority(Thread.MAX_PRIORITY);
+        t1.start();
+        t2.start();
+    }
+
+}
+
+class T1 implements Runnable {
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        for (int i = 0; i &lt;= 300; i++) {
+            System.out.println(&quot;T1: &quot; + i);
+        }
+    }
+
+}
+
+class T2 implements Runnable {
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        for (int i = 0; i &lt;= 300; i++) {
+            System.out.println(&quot;------T2: &quot; + i);
+        }
+    }
+
+}
+</code></pre><h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>当有一个线程在对内存进行操作时，其他线程都不可以对这个内存地址进行操作，直到该线程完成操作， 其他线程才能对该内存地址进行操作，这就是线程同步。</p>
+<h3 id="Synchronize-锁定（并发执行）"><a href="#Synchronize-锁定（并发执行）" class="headerlink" title="Synchronize 锁定（并发执行）"></a>Synchronize 锁定（并发执行）</h3><p><strong>首先我们来看一下，线程之间的同步（相当于进程中的并发）引发的一些特殊的问题。</strong></p>
+<p>Example</p>
+<p>Code:</p>
+<pre><code>package Lesson_14;
+
+public class TestSyn implements Runnable {
+    Timer timer = new Timer();
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestSyn test = new TestSyn();
+        Thread t1 = new Thread(test);
+        Thread t2 = new Thread(test);
+        t1.setName(&quot;t1&quot;);
+        t2.setName(&quot;t2&quot;);
+        t1.start();
+        t2.start();
+
+    }
+
+    public void run() {
+        timer.add(Thread.currentThread().getName());
+    }
+
+}
+
+class Timer {
+    private static int num = 0;
+
+    public void add(String name) {
+        num++;
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        System.out.println(name + &quot;, 你是第&quot; + num + &quot;个使用timer的线程。&quot;);
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>t1, 你是第2个使用timer的线程。
+t2, 你是第2个使用timer的线程。
+</code></pre><p>在上面的例子中我们可以大概的看到，如果当线程一进行 num ++ 操作后执行中断，再由线程二来执行时，num 会再次加一，这样使得线程一和线程二的输出都是“二”。</p>
+<p>为了解决这个问题，我们需要用到关键字 Synchronize 来对某一段代码进行对象的锁定。如果有另外一个对象也需要访问这一段代码，则需要等待。</p>
+<p>Code:</p>
+<pre><code>package Lesson_14;
+
+public class TestSyn implements Runnable {
+    Timer timer = new Timer();
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestSyn test = new TestSyn();
+        Thread t1 = new Thread(test);
+        Thread t2 = new Thread(test);
+        t1.setName(&quot;t1&quot;);
+        t2.setName(&quot;t2&quot;);
+        t1.start();
+        t2.start();
+
+    }
+
+    public void run() {
+        timer.add(Thread.currentThread().getName());
+    }
+
+}
+
+class Timer {
+    private static int num = 0;
+
+    public synchronized  void add(String name) {
+        num++;
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        System.out.println(name + &quot;, 你是第&quot; + num + &quot;个使用timer的线程。&quot;);
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>t1, 你是第1个使用timer的线程。
+t2, 你是第2个使用timer的线程。
+</code></pre><h3 id="（死锁）"><a href="#（死锁）" class="headerlink" title="（死锁）"></a>（死锁）</h3>
                             <hr>
                         </div>
                         <br>
