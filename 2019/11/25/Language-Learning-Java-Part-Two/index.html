@@ -584,7 +584,7 @@ class Timer {
 </code></pre><p>Result:</p>
 <pre><code>t1, 你是第2个使用timer的线程。
 t2, 你是第2个使用timer的线程。
-</code></pre><p>在上面的例子中我们可以大概的看到，如果当线程一进行 num ++ 操作后执行中断，再由线程二来执行时，num 会再次加一，这样使得线程一和线程二的输出都是“二”。</p>
+</code></pre><p>在上面的例子中我们可以大概的看到，如果当线程一进行 num ++ 操作后执行中断，再由线程二来执行时，num 会再次加一，这样使得线程一和线程二的输出都是 2。</p>
 <p>为了解决这个问题，我们需要用到关键字 Synchronize 来对某一段代码进行对象的锁定。如果有另外一个对象也需要访问这一段代码，则需要等待。</p>
 <p>Code:</p>
 <pre><code>package Lesson_14;
@@ -626,7 +626,61 @@ class Timer {
 </code></pre><p>Result:</p>
 <pre><code>t1, 你是第1个使用timer的线程。
 t2, 你是第2个使用timer的线程。
-</code></pre><h3 id="（死锁）"><a href="#（死锁）" class="headerlink" title="（死锁）"></a>（死锁）</h3>
+</code></pre><h4 id="（死锁）"><a href="#（死锁）" class="headerlink" title="（死锁）"></a>（死锁）</h4><p>Code:</p>
+<pre><code>package Lesson_14;
+
+public class TestDeadLock implements Runnable {
+    public int flag = 1;
+    static Object o1 = new Object();
+    static Object o2 = new Object();
+
+    public void run() {
+        System.out.println(&quot;flag = &quot; + flag);
+        if (flag == 1) {
+            synchronized (o1) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+                synchronized (o2) {
+                    System.out.println(&quot;1&quot;);
+                }
+            }
+        }
+        if (flag == 0) {
+            synchronized (o2) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+                synchronized (o1) {
+                    System.out.println(&quot;0&quot;);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestDeadLock td1 = new TestDeadLock();
+        TestDeadLock td2 = new TestDeadLock();
+        td1.flag = 1;
+        td2.flag = 0;
+        Thread t1 = new Thread(td1);
+        Thread t2 = new Thread(td2);
+        t1.start();
+        t2.start();
+    }
+
+}
+</code></pre><p>Result:</p>
+<pre><code>flag = 1
+flag = 0
+（进程未停止...</code></pre>
                             <hr>
                         </div>
                         <br>
