@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Programming">
+    <meta name="author" content="Haojen Lau">
+    <meta name="keywords" content>
+    <title>SUCTF2019 Partial Writeup ~ w366er</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>w366er</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>星期二, 九月 3日 2019, 11:28 上午</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="signup-–-Re"><a href="#signup-–-Re" class="headerlink" title="signup – Re"></a>signup – Re</h1><p>当时我没可能看到这题，某位 pwn 大佬兼队友给我提了。Re 题竟然是 RSA！n,e,c,全部给出来了，脚本题，直接跑脚本。<br>flag为 suctf{Pwn_@_hundred_years}。</p>
+<h1 id="DSA-–-Crypto"><a href="#DSA-–-Crypto" class="headerlink" title="DSA – Crypto"></a>DSA – Crypto</h1><p>DSA 题，共享 k 攻击。<br>首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模 p 体系下的。<br>还有变量 m，k，r，s，以及hash加密函数H( )。其中:<br>r = (g ^ k mod p) mod q<br>s = k^(-1) * (H(m) + xr) mod q<br>根据定义，(m, r, s)组成签名，签名是在模 q 体系下的。<br>然后理解一波共享 k 攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了 k。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">假设有公钥相同的两次加密结果，已知k相同，由于r = <span class="comment">(g ^ k mod p)</span> mod q，所以 r<span class="number">1</span> = r<span class="number">2</span>。然后又有：</span><br><span class="line">s<span class="number">1</span> = k^<span class="comment">(-1)</span> * <span class="comment">(H(m1)</span> + xr) mod q</span><br><span class="line">s<span class="number">2</span> = k^<span class="comment">(-1)</span> * <span class="comment">(H(m2)</span> + xr) mod q</span><br><span class="line">变换可以得到：</span><br><span class="line">s<span class="number">1</span> * k ≡ H<span class="comment">(m1)</span> + xr <span class="comment">(mod q)</span></span><br><span class="line">s<span class="number">2</span> * k ≡ H<span class="comment">(m2)</span> + xr <span class="comment">(mod q)</span></span><br><span class="line">两式可以相减，得到：</span><br><span class="line">k * <span class="comment">(s1 - s2)</span> ≡ H<span class="comment">(m1)</span> - H<span class="comment">(m2)</span> <span class="comment">(mod q)</span></span><br><span class="line">最终得：</span><br><span class="line">k = <span class="comment">(H(m1)</span> - H<span class="comment">(m2)</span>) * <span class="comment">(s1 - s2)</span>^<span class="comment">(-1)</span> mod q</span><br><span class="line">接着求x，</span><br><span class="line">已知：s<span class="number">1</span> ≡ k^<span class="comment">(-1)</span> * <span class="comment">(H(m1)</span> + xr) <span class="comment">(mod q)</span>，所以有：s<span class="number">1</span> * k ≡ H<span class="comment">(m1)</span> + xr <span class="comment">(mod q)</span></span><br><span class="line">最终化简得：</span><br><span class="line">x = <span class="comment">((s1 * k -H(m1)</span>) * r ^ <span class="comment">(-1)</span>) mod q</span><br></pre></td></tr></table></figure>
+
+<p>在 12 次加密中出现了四组共享k的情况，选出其中一组计算得到k，x。这题的 hash 加密函数H( )是 md5，然后利用 s = k^(-1) * (H(m) + xr) mod q 伪造签名即可。<br>flag 为 flag{Wh4t_a_Prety_Si3nature!}。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/Write%20up">Write up</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "SUCTF2019 Partial Writeup&nbsp;",
+        ],
+        cursorChar: ">",
+        typeSpeed: 90,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>

