@@ -113,19 +113,121 @@
 </ul>
 <h2 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h2><p>线程有两种实现：</p>
 <p>第一种实现：<br>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThread1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Runner r = <span class="keyword">new</span> Runner();</span><br><span class="line">		Thread runner1 = <span class="keyword">new</span> Thread(r);</span><br><span class="line">		runner1.start();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// Main Thread</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"Main Thread -----&gt; "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"Runner1 -----&gt; "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">0</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">1</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">2</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">3</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">0</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">4</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">5</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">6</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">7</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">1</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">2</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">3</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">4</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">5</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">8</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">9</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">10</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">11</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">6</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">12</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">13</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">14</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">7</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">8</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">9</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">10</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">11</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">12</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">13</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">14</span></span><br></pre></td></tr></table></figure>
+public class TestThread1 {
 
-<p>第二种实现</p>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runner r = new Runner();
+        Thread runner1 = new Thread(r);
+        runner1.start();
+
+
+        // Main Thread
+        for(int i=0;i&lt;15;i++) {
+            System.out.println(&quot;Main Thread -----&gt; &quot; + i);
+        }
+    }
+
+}
+
+class Runner implements Runnable{
+    public void run() {
+        for(int i=0;i&lt;15;i++) {
+            System.out.println(&quot;Runner1 -----&gt; &quot; + i);
+        }
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>Main Thread -----&gt; 0
+Main Thread -----&gt; 1
+Main Thread -----&gt; 2
+Main Thread -----&gt; 3
+Runner1 -----&gt; 0
+Main Thread -----&gt; 4
+Main Thread -----&gt; 5
+Main Thread -----&gt; 6
+Main Thread -----&gt; 7
+Runner1 -----&gt; 1
+Runner1 -----&gt; 2
+Runner1 -----&gt; 3
+Runner1 -----&gt; 4
+Runner1 -----&gt; 5
+Main Thread -----&gt; 8
+Main Thread -----&gt; 9
+Main Thread -----&gt; 10
+Main Thread -----&gt; 11
+Runner1 -----&gt; 6
+Main Thread -----&gt; 12
+Main Thread -----&gt; 13
+Main Thread -----&gt; 14
+Runner1 -----&gt; 7
+Runner1 -----&gt; 8
+Runner1 -----&gt; 9
+Runner1 -----&gt; 10
+Runner1 -----&gt; 11
+Runner1 -----&gt; 12
+Runner1 -----&gt; 13
+Runner1 -----&gt; 14
+</code></pre><p>第二种实现</p>
 <p>Code：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThread2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Runner1 runner1 = <span class="keyword">new</span> Runner1();</span><br><span class="line">		runner1.start();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Main Thread</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">15</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"Main Thread -----&gt; "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">15</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"Runner1 -----&gt; "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">0</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">0</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">1</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">2</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">3</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">4</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">5</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">1</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">6</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">7</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">8</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">2</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">9</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">10</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">11</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">12</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">13</span></span><br><span class="line">R<span class="function"><span class="title">unner1</span> -----&gt;</span> <span class="number">14</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">3</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">4</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">5</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">6</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">7</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">8</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">9</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">10</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">11</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">12</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">13</span></span><br><span class="line">M<span class="function"><span class="title">ain</span> Thread -----&gt;</span> <span class="number">14</span></span><br></pre></td></tr></table></figure>
+public class TestThread2 {
 
-<p>通常我们只使用第一种方法，因为接口比继承更加灵活，所以只要能使用 Runable 接口，尽量不继承 Thread 类。</p>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runner1 runner1 = new Runner1();
+        runner1.start();
+
+        // Main Thread
+        for (int i = 0; i &lt; 15; i++) {
+            System.out.println(&quot;Main Thread -----&gt; &quot; + i);
+        }
+    }
+
+}
+
+final class Runner1 extends Thread {
+    public void run() {
+        for (int i = 0; i &lt; 15; i++) {
+            System.out.println(&quot;Runner1 -----&gt; &quot; + i);
+        }
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>Main Thread -----&gt; 0
+Runner1 -----&gt; 0
+Runner1 -----&gt; 1
+Runner1 -----&gt; 2
+Runner1 -----&gt; 3
+Runner1 -----&gt; 4
+Runner1 -----&gt; 5
+Main Thread -----&gt; 1
+Runner1 -----&gt; 6
+Runner1 -----&gt; 7
+Runner1 -----&gt; 8
+Main Thread -----&gt; 2
+Runner1 -----&gt; 9
+Runner1 -----&gt; 10
+Runner1 -----&gt; 11
+Runner1 -----&gt; 12
+Runner1 -----&gt; 13
+Runner1 -----&gt; 14
+Main Thread -----&gt; 3
+Main Thread -----&gt; 4
+Main Thread -----&gt; 5
+Main Thread -----&gt; 6
+Main Thread -----&gt; 7
+Main Thread -----&gt; 8
+Main Thread -----&gt; 9
+Main Thread -----&gt; 10
+Main Thread -----&gt; 11
+Main Thread -----&gt; 12
+Main Thread -----&gt; 13
+Main Thread -----&gt; 14
+</code></pre><p>通常我们只使用第一种方法，因为接口比继承更加灵活，所以只要能使用 Runable 接口，尽量不继承 Thread 类。</p>
 <h2 id="线程状态转换"><a href="#线程状态转换" class="headerlink" title="线程状态转换"></a>线程状态转换</h2><p><img src="/images/Language-Learning-JAVA/Process_of_Thread.png" alt></p>
 <p>类似于进程的状态转换。</p>
 <h2 id="线程的基本控制方法"><a href="#线程的基本控制方法" class="headerlink" title="线程的基本控制方法"></a>线程的基本控制方法</h2><p><img src="/images/Language-Learning-JAVA/Control_Funcions_of_Thread.png" alt></p>
@@ -134,39 +236,263 @@
 <p><img src="/images/Language-Learning-JAVA/Sleep.png" alt></p>
 <p>interrupt 方法:<br><img src="/images/Language-Learning-JAVA/interrupt.png" alt></p>
 <p>Code:</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> <span class="type">Lesson_14</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.<span class="type">Date</span>;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestSleep</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	public static void main(<span class="type">String</span>[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Mythread</span> thread = <span class="keyword">new</span> <span class="type">Mythread</span>();</span><br><span class="line">		thread.start();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="type">Thread</span>.sleep(<span class="number">10000</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">		&#125;</span><br><span class="line">		thread.interrupt();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">			<span class="type">System</span>.out.println(<span class="string">"==="</span> + <span class="keyword">new</span> <span class="type">Date</span>() + <span class="string">"==="</span>);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				<span class="type">System</span>.out.println(<span class="string">"=== End ==="</span>);</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">===Mon Nov 25 21:50:59 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:00 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:01 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:02 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:03 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:04 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:05 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:06 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:07 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 21:51:08 CST <span class="attribute">2019</span>===</span><br><span class="line">=== End ===</span><br></pre></td></tr></table></figure>
+import java.util.Date;
 
-<p>因为 interrupt 方法略带粗暴，所以我们通常使用更加温和的方式对线程进行中断。</p>
+public class TestSleep {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Mythread thread = new Mythread();
+        thread.start();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        thread.interrupt();
+    }
+
+}
+
+class Mythread extends Thread{
+    public void run() {
+        while(true) {
+            System.out.println(&quot;===&quot; + new Date() + &quot;===&quot;);
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO: handle exception
+                System.out.println(&quot;=== End ===&quot;);
+                return;
+            }
+        }
+    }
+}</code></pre><p>Result:</p>
+<pre><code>===Mon Nov 25 21:50:59 CST 2019===
+===Mon Nov 25 21:51:00 CST 2019===
+===Mon Nov 25 21:51:01 CST 2019===
+===Mon Nov 25 21:51:02 CST 2019===
+===Mon Nov 25 21:51:03 CST 2019===
+===Mon Nov 25 21:51:04 CST 2019===
+===Mon Nov 25 21:51:05 CST 2019===
+===Mon Nov 25 21:51:06 CST 2019===
+===Mon Nov 25 21:51:07 CST 2019===
+===Mon Nov 25 21:51:08 CST 2019===
+=== End ===
+</code></pre><p>因为 interrupt 方法略带粗暴，所以我们通常使用更加温和的方式对线程进行中断。</p>
 <p>通过设置一个标志变量也可以实现目的。</p>
 <p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.plaf.TextUI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSleep</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Mythread thread = <span class="keyword">new</span> Mythread();</span><br><span class="line">		thread.start();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Thread.sleep(<span class="number">10000</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">		&#125;</span><br><span class="line">		thread.flag=<span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(flag) &#123;</span><br><span class="line">			System.out.println(<span class="string">"==="</span> + <span class="keyword">new</span> Date() + <span class="string">"==="</span>);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">				flag = <span class="keyword">false</span>;</span><br><span class="line">				System.out.println(<span class="string">"=== End ==="</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">===Mon Nov 25 22:00:19 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:20 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:21 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:22 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:23 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:24 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:25 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:26 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:27 CST <span class="attribute">2019</span>===</span><br><span class="line">===Mon Nov 25 22:00:28 CST <span class="attribute">2019</span>===</span><br></pre></td></tr></table></figure>
+import java.util.Date;
 
-<p>得到一样的效果。</p>
+import javax.swing.plaf.TextUI;
+
+public class TestSleep {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Mythread thread = new Mythread();
+        thread.start();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        thread.flag=false;
+    }
+
+}
+
+class Mythread extends Thread{
+    boolean flag = true;
+    public void run() {
+        while(flag) {
+            System.out.println(&quot;===&quot; + new Date() + &quot;===&quot;);
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO: handle exception
+                flag = false;
+                System.out.println(&quot;=== End ===&quot;);
+            }
+        }
+    }
+}</code></pre><p>Result:</p>
+<pre><code>===Mon Nov 25 22:00:19 CST 2019===
+===Mon Nov 25 22:00:20 CST 2019===
+===Mon Nov 25 22:00:21 CST 2019===
+===Mon Nov 25 22:00:22 CST 2019===
+===Mon Nov 25 22:00:23 CST 2019===
+===Mon Nov 25 22:00:24 CST 2019===
+===Mon Nov 25 22:00:25 CST 2019===
+===Mon Nov 25 22:00:26 CST 2019===
+===Mon Nov 25 22:00:27 CST 2019===
+===Mon Nov 25 22:00:28 CST 2019===</code></pre><p>得到一样的效果。</p>
 <h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><p>查看手册。</p>
 <p><img src="/images/Language-Learning-JAVA/Join.png" alt></p>
 <p>也可以理解为合并线程。</p>
 <p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestJoin</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Mythread2 t1 = <span class="keyword">new</span> Mythread2(<span class="string">"anc"</span>);</span><br><span class="line">		t1.start();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			t1.join();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"I am main thread"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mythread2</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Mythread2</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="keyword">super</span>(s);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++) &#123; </span><br><span class="line">			System.out.println(<span class="string">"I am "</span> + getName());</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			sleep(<span class="number">10000</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am anc</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br><span class="line"><span class="literal">I</span> am main thread</span><br></pre></td></tr></table></figure>
+public class TestJoin {
 
-<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>查看手册。</p>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Mythread2 t1 = new Mythread2(&quot;anc&quot;);
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+
+
+        for(int i=1;i&lt;=10;i++) {
+            System.out.println(&quot;I am main thread&quot;);
+        }
+    }
+
+}
+
+
+
+class Mythread2 extends Thread{
+    public Mythread2(String s) {
+        // TODO Auto-generated constructor stub
+        super(s);
+    }
+
+    public void run() {
+        for(int i=1;i&lt;=10;i++) { 
+            System.out.println(&quot;I am &quot; + getName());
+        }
+
+        try {
+            sleep(10000);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+            return;
+        }
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am anc
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+I am main thread
+</code></pre><h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>查看手册。</p>
 <p><img src="/images/Language-Learning-JAVA/yield.png" alt></p>
 <p>手册中写到忽略这个线程，我们可以理解为该线程让出 CPU 的位置给其他线程。</p>
 <p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestYield</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Mythread3 t1 = <span class="keyword">new</span> Mythread3(<span class="string">"t1"</span>);</span><br><span class="line">		Mythread3 t2 = <span class="keyword">new</span> Mythread3(<span class="string">"t2"</span>);</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mythread3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Mythread3</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="keyword">super</span>(s);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">30</span>; i++) &#123;</span><br><span class="line">			System.out.println(getName() + <span class="string">": "</span> + i);</span><br><span class="line">			<span class="keyword">if</span> (i % <span class="number">10</span> == <span class="number">0</span>) &#123;</span><br><span class="line">				yield();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">t2:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">2</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">3</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">4</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">5</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">6</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">7</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">8</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">9</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">10</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">2</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">11</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">3</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">4</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">5</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">6</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">7</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">8</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">12</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">9</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">13</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">14</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">15</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">10</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">16</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">11</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">17</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">12</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">18</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">19</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">20</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">21</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">22</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">23</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">13</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">24</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">14</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">25</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">15</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">26</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">16</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">17</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">27</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">28</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">29</span></span><br><span class="line"><span class="symbol">t2:</span> <span class="number">30</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">18</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">19</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">20</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">21</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">22</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">23</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">24</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">25</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">26</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">27</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">28</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">29</span></span><br><span class="line"><span class="symbol">t1:</span> <span class="number">30</span></span><br></pre></td></tr></table></figure>
+public class TestYield {
 
-<h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2><p>Java 会提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程。<br>线程调度器按照线程的优先级决定应该调度哪个线程来执行。</p>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Mythread3 t1 = new Mythread3(&quot;t1&quot;);
+        Mythread3 t2 = new Mythread3(&quot;t2&quot;);
+        t1.start();
+        t2.start();
+    }
+
+}
+
+class Mythread3 extends Thread {
+    public Mythread3(String s) {
+        // TODO Auto-generated constructor stub
+        super(s);
+    }
+
+    public void run() {
+        for (int i = 1; i &lt;= 30; i++) {
+            System.out.println(getName() + &quot;: &quot; + i);
+            if (i % 10 == 0) {
+                yield();
+            }
+        }
+    }
+}</code></pre><p>Result:</p>
+<pre><code>t2: 1
+t2: 2
+t2: 3
+t2: 4
+t2: 5
+t2: 6
+t2: 7
+t2: 8
+t2: 9
+t1: 1
+t2: 10
+t1: 2
+t2: 11
+t1: 3
+t1: 4
+t1: 5
+t1: 6
+t1: 7
+t1: 8
+t2: 12
+t1: 9
+t2: 13
+t2: 14
+t2: 15
+t1: 10
+t2: 16
+t1: 11
+t2: 17
+t1: 12
+t2: 18
+t2: 19
+t2: 20
+t2: 21
+t2: 22
+t2: 23
+t1: 13
+t2: 24
+t1: 14
+t2: 25
+t1: 15
+t2: 26
+t1: 16
+t1: 17
+t2: 27
+t2: 28
+t2: 29
+t2: 30
+t1: 18
+t1: 19
+t1: 20
+t1: 21
+t1: 22
+t1: 23
+t1: 24
+t1: 25
+t1: 26
+t1: 27
+t1: 28
+t1: 29
+t1: 30
+</code></pre><h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2><p>Java 会提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程。<br>线程调度器按照线程的优先级决定应该调度哪个线程来执行。</p>
 <ul>
 <li><strong>线程的优先级用数字来表示，范围从1到10。</strong></li>
 <li>一个线程的缺省优先级为5。</li>
@@ -175,30 +501,186 @@
 </ul>
 <p>Example:</p>
 <p>Code</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPriority</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Runnable r1 = <span class="keyword">new</span> T1();</span><br><span class="line">		Runnable r2 = <span class="keyword">new</span> T2();</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(r1);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(r2);</span><br><span class="line">		t1.setPriority(Thread.MAX_PRIORITY);</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T1</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">300</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"T1: "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T2</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">300</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">"------T2: "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>当有一个线程在对内存进行操作时，其他线程都不可以对这个内存地址进行操作，直到该线程完成操作， 其他线程才能对该内存地址进行操作，这就是线程同步。</p>
+public class TestPriority {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runnable r1 = new T1();
+        Runnable r2 = new T2();
+        Thread t1 = new Thread(r1);
+        Thread t2 = new Thread(r2);
+        t1.setPriority(Thread.MAX_PRIORITY);
+        t1.start();
+        t2.start();
+    }
+
+}
+
+class T1 implements Runnable {
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        for (int i = 0; i &lt;= 300; i++) {
+            System.out.println(&quot;T1: &quot; + i);
+        }
+    }
+
+}
+
+class T2 implements Runnable {
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        for (int i = 0; i &lt;= 300; i++) {
+            System.out.println(&quot;------T2: &quot; + i);
+        }
+    }
+
+}
+</code></pre><h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>当有一个线程在对内存进行操作时，其他线程都不可以对这个内存地址进行操作，直到该线程完成操作， 其他线程才能对该内存地址进行操作，这就是线程同步。</p>
 <h3 id="Synchronize-锁定（并发执行）"><a href="#Synchronize-锁定（并发执行）" class="headerlink" title="Synchronize 锁定（并发执行）"></a>Synchronize 锁定（并发执行）</h3><p><strong>首先我们来看一下，线程之间的同步（相当于进程中的并发）引发的一些特殊的问题。</strong></p>
 <p>Example</p>
 <p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSyn</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		TestSyn test = <span class="keyword">new</span> TestSyn();</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(test);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(test);</span><br><span class="line">		t1.setName(<span class="string">"t1"</span>);</span><br><span class="line">		t2.setName(<span class="string">"t2"</span>);</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		timer.add(Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		num++;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Thread.sleep(<span class="number">1</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + <span class="string">", 你是第"</span> + num + <span class="string">"个使用timer的线程。"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t1, 你是第<span class="number">2</span>个使用<span class="section">timer</span>的线程。</span><br><span class="line">t2, 你是第<span class="number">2</span>个使用<span class="section">timer</span>的线程。</span><br></pre></td></tr></table></figure>
+public class TestSyn implements Runnable {
+    Timer timer = new Timer();
 
-<p>在上面的例子中我们可以大概的看到，如果当线程一进行 num ++ 操作后执行中断，再由线程二来执行时，num 会再次加一，这样使得线程一和线程二的输出都是 2。</p>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestSyn test = new TestSyn();
+        Thread t1 = new Thread(test);
+        Thread t2 = new Thread(test);
+        t1.setName(&quot;t1&quot;);
+        t2.setName(&quot;t2&quot;);
+        t1.start();
+        t2.start();
+
+    }
+
+    public void run() {
+        timer.add(Thread.currentThread().getName());
+    }
+
+}
+
+class Timer {
+    private static int num = 0;
+
+    public void add(String name) {
+        num++;
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        System.out.println(name + &quot;, 你是第&quot; + num + &quot;个使用timer的线程。&quot;);
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>t1, 你是第2个使用timer的线程。
+t2, 你是第2个使用timer的线程。
+</code></pre><p>在上面的例子中我们可以大概的看到，如果当线程一进行 num ++ 操作后执行中断，再由线程二来执行时，num 会再次加一，这样使得线程一和线程二的输出都是 2。</p>
 <p>为了解决这个问题，我们需要用到关键字 Synchronize 来对某一段代码进行对象的锁定。如果有另外一个对象也需要访问这一段代码，则需要等待。</p>
 <p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSyn</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		TestSyn test = <span class="keyword">new</span> TestSyn();</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(test);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(test);</span><br><span class="line">		t1.setName(<span class="string">"t1"</span>);</span><br><span class="line">		t2.setName(<span class="string">"t2"</span>);</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		timer.add(Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span>  <span class="keyword">void</span> <span class="title">add</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		num++;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Thread.sleep(<span class="number">1</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + <span class="string">", 你是第"</span> + num + <span class="string">"个使用timer的线程。"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package Lesson_14;
 
-<p>Result:</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t1, 你是第<span class="number">1</span>个使用<span class="section">timer</span>的线程。</span><br><span class="line">t2, 你是第<span class="number">2</span>个使用<span class="section">timer</span>的线程。</span><br></pre></td></tr></table></figure>
+public class TestSyn implements Runnable {
+    Timer timer = new Timer();
 
-<h4 id="（死锁）"><a href="#（死锁）" class="headerlink" title="（死锁）"></a>（死锁）</h4><p>Code:</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lesson_14;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class TestDeadLock implements Runnable &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="built_in">int</span> flag = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">Object</span> o1 = <span class="keyword">new</span> <span class="keyword">Object</span>();</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">Object</span> o2 = <span class="keyword">new</span> <span class="keyword">Object</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> run() &#123;</span><br><span class="line">		System.out.<span class="built_in">println</span>(<span class="string">"flag = "</span> + flag);</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">					System.out.<span class="built_in">println</span>(<span class="string">"1"</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">					System.out.<span class="built_in">println</span>(<span class="string">"0"</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		TestDeadLock td1 = <span class="keyword">new</span> TestDeadLock();</span><br><span class="line">		TestDeadLock td2 = <span class="keyword">new</span> TestDeadLock();</span><br><span class="line">		td1.flag = <span class="number">1</span>;</span><br><span class="line">		td2.flag = <span class="number">0</span>;</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(td1);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(td2);</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestSyn test = new TestSyn();
+        Thread t1 = new Thread(test);
+        Thread t2 = new Thread(test);
+        t1.setName(&quot;t1&quot;);
+        t2.setName(&quot;t2&quot;);
+        t1.start();
+        t2.start();
 
-<p>Result:</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flag = 1</span><br><span class="line">flag = 0</span><br><span class="line">（进程未停止...</span><br></pre></td></tr></table></figure>
+    }
+
+    public void run() {
+        timer.add(Thread.currentThread().getName());
+    }
+
+}
+
+class Timer {
+    private static int num = 0;
+
+    public synchronized  void add(String name) {
+        num++;
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            // TODO: handle exception
+        }
+        System.out.println(name + &quot;, 你是第&quot; + num + &quot;个使用timer的线程。&quot;);
+    }
+}
+</code></pre><p>Result:</p>
+<pre><code>t1, 你是第1个使用timer的线程。
+t2, 你是第2个使用timer的线程。
+</code></pre><h4 id="（死锁）"><a href="#（死锁）" class="headerlink" title="（死锁）"></a>（死锁）</h4><p>Code:</p>
+<pre><code>package Lesson_14;
+
+public class TestDeadLock implements Runnable {
+    public int flag = 1;
+    static Object o1 = new Object();
+    static Object o2 = new Object();
+
+    public void run() {
+        System.out.println(&quot;flag = &quot; + flag);
+        if (flag == 1) {
+            synchronized (o1) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+                synchronized (o2) {
+                    System.out.println(&quot;1&quot;);
+                }
+            }
+        }
+        if (flag == 0) {
+            synchronized (o2) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+                synchronized (o1) {
+                    System.out.println(&quot;0&quot;);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TestDeadLock td1 = new TestDeadLock();
+        TestDeadLock td2 = new TestDeadLock();
+        td1.flag = 1;
+        td2.flag = 0;
+        Thread t1 = new Thread(td1);
+        Thread t2 = new Thread(td2);
+        t1.start();
+        t2.start();
+    }
+
+}
+</code></pre><p>Result:</p>
+<pre><code>flag = 1
+flag = 0
+（进程未停止...</code></pre>
                             <hr>
                         </div>
                         <br>

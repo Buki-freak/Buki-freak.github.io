@@ -102,9 +102,33 @@
                         <div class="markdown-body">
                             <p><strong>只有 web 部分</strong></p>
 <h1 id="easy-web"><a href="#easy-web" class="headerlink" title="easy_web"></a>easy_web</h1><p>源码：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">﻿&lt;?php </span><br><span class="line">show_source(__FILE__); </span><br><span class="line">include(<span class="string">"flag.php"</span>); </span><br><span class="line"><span class="variable">$a</span>=@<span class="variable">$_GET</span>[<span class="string">'a'</span>]; </span><br><span class="line"><span class="variable">$b</span>=@<span class="variable">$_GET</span>[<span class="string">'b'</span>]; </span><br><span class="line"><span class="variable">$c</span>=@<span class="variable">$_GET</span>[<span class="string">'c'</span>]; </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$a</span>==<span class="number">0</span> and <span class="variable">$a</span>)&#123; </span><br><span class="line">    echo <span class="variable">$flag1</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">if</span>(is_numeric(<span class="variable">$b</span>))&#123; </span><br><span class="line">    <span class="keyword">exit</span>(); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$b</span>&gt;<span class="number">1234</span>)&#123; </span><br><span class="line">    echo <span class="variable">$flag2</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(is_numeric(<span class="variable">$c</span>))&#123; </span><br><span class="line">    <span class="keyword">exit</span>(); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">if</span>(isset(<span class="variable">$c</span>))&#123; </span><br><span class="line">    <span class="variable">$args</span> = <span class="variable">$c</span>; </span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">"/^\w+$/"</span>,<span class="variable">$args</span>))&#123; </span><br><span class="line">        die(<span class="string">"args error!"</span>); </span><br><span class="line">    &#125; </span><br><span class="line">    echo <span class="variable">$flag3</span>; </span><br><span class="line">&#125; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>﻿&lt;?php 
+show_source(__FILE__); 
+include(&quot;flag.php&quot;); 
+$a=@$_GET[&#39;a&#39;]; 
+$b=@$_GET[&#39;b&#39;]; 
+$c=@$_GET[&#39;c&#39;]; 
+if($a==0 and $a){ 
+    echo $flag1; 
+} 
+if(is_numeric($b)){ 
+    exit(); 
+} 
+if($b&gt;1234){ 
+    echo $flag2; 
+} 
 
-<p>审计代码，这题将 flag 分成三个部分，我们需要绕过五个判断来得到其三个部分。<br><strong>五个判断：</strong></p>
+if(is_numeric($c)){ 
+    exit(); 
+} 
+if(isset($c)){ 
+    $args = $c; 
+    if(!preg_match(&quot;/^\w+$/&quot;,$args)){ 
+        die(&quot;args error!&quot;); 
+    } 
+    echo $flag3; 
+} 
+?&gt;</code></pre><p>审计代码，这题将 flag 分成三个部分，我们需要绕过五个判断来得到其三个部分。<br><strong>五个判断：</strong></p>
 <ul>
 <li>第一个判断，a 变量需要弱等于 0 ，并且 a 不等于 0。</li>
 <li>第二个判断和第三个判断，b 不为数字并且 b 需要大于 1234。</li>
@@ -117,20 +141,40 @@
 <li>对于 b，和 a 基本相同，这里不同的是 数字开头的字符串会转换为对应的数字。b 等于12345abc 绕过。</li>
 <li>c，由于不能是数字，所以等于纯字母或者混合字符串即可。</li>
 </ul>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">payload:</span> ?a=abc<span class="variable">&amp;b</span>=<span class="number">12345</span>abc<span class="variable">&amp;c</span>=kjsgfd</span><br></pre></td></tr></table></figure>
-
-<h1 id="遇见，遇见你"><a href="#遇见，遇见你" class="headerlink" title="遇见，遇见你"></a>遇见，遇见你</h1><p>扫到 shell.php，之后 intruder 爆破。</p>
+<pre><code>payload: ?a=abc&amp;b=12345abc&amp;c=kjsgfd</code></pre><h1 id="遇见，遇见你"><a href="#遇见，遇见你" class="headerlink" title="遇见，遇见你"></a>遇见，遇见你</h1><p>扫到 shell.php，之后 intruder 爆破。</p>
 <h1 id="100年后的flag"><a href="#100年后的flag" class="headerlink" title="100年后的flag"></a>100年后的flag</h1><p>抓包修改 User Agent，包含 Iphone，OS，119，Safari即可。</p>
 <h1 id="easy-webber"><a href="#easy-webber" class="headerlink" title="easy_webber"></a>easy_webber</h1><p>hint.php 看源码。<br>审计源码，首先看到 <strong>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</strong>，手册里的意思：</p>
 <p><img src="/images/2019_GWHT_Grade_Two_Recruitment_Competition/CURLOPT_RETURNTRANSFER.png" alt></p>
 <p>由此我们可以得知，访问页面的信息会通过 <strong>$output = curl_exec($ch);</strong> 传到 output 这个变量中。<br>整题目的意思是，要求我们传进一个网站（公网），并且访问返回的结果这个网址依次满足 password 所分解出来的单词。</p>
 <p>exp 如下：</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">// 数字输出网页计数器</span></span><br><span class="line">$max_len = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">$CounterFile = <span class="string">"counter.dat"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!file_exists($CounterFile))&#123;</span><br><span class="line">	$counter = <span class="number">-1</span>;</span><br><span class="line">	$cf = <span class="keyword">fopen</span>($CounterFile, <span class="string">"w"</span>);</span><br><span class="line">	fputs($cf, <span class="string">'0'</span>);</span><br><span class="line">	<span class="keyword">fclose</span>($cf);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">	$cf = <span class="keyword">fopen</span>($CounterFile, <span class="string">"r"</span>);</span><br><span class="line">	$counter = <span class="keyword">trim</span>(fgets($cf, $max_len));</span><br><span class="line">	<span class="keyword">fclose</span>($cf);</span><br><span class="line">&#125;</span><br><span class="line">$counter ++;</span><br><span class="line">$cf = <span class="keyword">fopen</span>($CounterFile, <span class="string">"w"</span>);</span><br><span class="line">fputs($cf, $counter);</span><br><span class="line"><span class="keyword">fclose</span>($cf);</span><br><span class="line"></span><br><span class="line">$password = <span class="string">"If you dont work hard you never know how desperate you will be"</span>;</span><br><span class="line">$arr = explode(<span class="string">' '</span>, $password);</span><br><span class="line">echo $arr[$counter];</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+    // 数字输出网页计数器
+$max_len = 10;
 
-<p>counter.dat</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-1</span></span><br></pre></td></tr></table></figure>
+$CounterFile = &quot;counter.dat&quot;;
 
-<p>之后挂到服务器上。由于服务器中文件访问权限受限，所以还要修改服务器权限，利用 <strong>sudo chmod 777 [file]</strong>将 exp.php 和 counter.dat 两个文件设置为 777 权限。最后传入服务器 url 即可。</p>
+if(!file_exists($CounterFile)){
+    $counter = -1;
+    $cf = fopen($CounterFile, &quot;w&quot;);
+    fputs($cf, &#39;0&#39;);
+    fclose($cf);
+
+}
+else{
+    $cf = fopen($CounterFile, &quot;r&quot;);
+    $counter = trim(fgets($cf, $max_len));
+    fclose($cf);
+}
+$counter ++;
+$cf = fopen($CounterFile, &quot;w&quot;);
+fputs($cf, $counter);
+fclose($cf);
+
+$password = &quot;If you dont work hard you never know how desperate you will be&quot;;
+$arr = explode(&#39; &#39;, $password);
+echo $arr[$counter];
+?&gt;</code></pre><p>counter.dat</p>
+<pre><code>-1</code></pre><p>之后挂到服务器上。由于服务器中文件访问权限受限，所以还要修改服务器权限，利用 <strong>sudo chmod 777 [file]</strong>将 exp.php 和 counter.dat 两个文件设置为 777 权限。最后传入服务器 url 即可。</p>
 
                             <hr>
                         </div>

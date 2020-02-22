@@ -104,49 +104,271 @@
 <p><img src="/images/web_front/HTML_DOM.png" alt></p>
 <p>Example:</p>
 <p>通过 window.screen 查看屏幕尺寸信息。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">alert(screen.width + <span class="string">"x"</span>+screen.height);</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+alert(screen.width + &quot;x&quot;+screen.height);
+&lt;/script&gt;</code></pre><p>通过 window.document 修改 标签 的内容。</p>
+<pre><code>&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>通过 window.document 修改 标签 的内容。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.4th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML DOM<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">change</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">    	<span class="keyword">var</span> spanObj=<span class="built_in">window</span>.document.getElementById(<span class="string">'emotion'</span>);</span></span><br><span class="line"><span class="actionscript">    	spanObj.innerHTML=<span class="string">"bad"</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		Today is a <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"emotion"</span>&gt;</span>good<span class="tag">&lt;/<span class="name">span</span>&gt;</span> day.</span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"change();"</span>&gt;</span>Change<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+&lt;head&gt;
+    &lt;title&gt;HTML DOM&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
 
-<h2 id="目录的开合范例"><a href="#目录的开合范例" class="headerlink" title="目录的开合范例"></a>目录的开合范例</h2><p>Example:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.4th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML DOM 选单开合操作<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">toggleMenu</span><span class="params">(number)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> menu = <span class="built_in">document</span>.getElementById(<span class="string">"menu_"</span>+number);</span></span><br><span class="line"><span class="actionscript">        menu.classList.toggle(<span class="string">"hide"</span>); <span class="comment">// 类名切换</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.hide</span> &#123;</span></span><br><span class="line">        display: none;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"toggleMenu(1);"</span>&gt;</span>选单的标题 1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"menu_1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 1-1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 1-2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 1-3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"toggleMenu(2);"</span>&gt;</span>选单的标题 2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"menu_2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 2-1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 2-2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 2-3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"toggleMenu(3);"</span>&gt;</span>选单的标题 3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"menu_3"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 3-1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 3-2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 3-3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    function change(){
+        var spanObj=window.document.getElementById(&#39;emotion&#39;);
+        spanObj.innerHTML=&quot;bad&quot;;
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
 
-<p>注意：</p>
+&lt;body&gt;
+    &lt;div&gt;
+        Today is a &lt;span id=&quot;emotion&quot;&gt;good&lt;/span&gt; day.
+    &lt;/div&gt;
+    &lt;button onclick=&quot;change();&quot;&gt;Change&lt;/button&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h2 id="目录的开合范例"><a href="#目录的开合范例" class="headerlink" title="目录的开合范例"></a>目录的开合范例</h2><p>Example:</p>
+<pre><code>&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;HTML DOM 选单开合操作&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function toggleMenu(number) {
+        var menu = document.getElementById(&quot;menu_&quot;+number);
+        menu.classList.toggle(&quot;hide&quot;); // 类名切换
+    }
+    &lt;/script&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    .hide {
+        display: none;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div onclick=&quot;toggleMenu(1);&quot;&gt;选单的标题 1&lt;/div&gt;
+    &lt;ul id=&quot;menu_1&quot;&gt;
+        &lt;li&gt;项目 1-1&lt;/li&gt;
+        &lt;li&gt;项目 1-2&lt;/li&gt;
+        &lt;li&gt;项目 1-3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div onclick=&quot;toggleMenu(2);&quot;&gt;选单的标题 2&lt;/div&gt;
+    &lt;ul id=&quot;menu_2&quot;&gt;
+        &lt;li&gt;项目 2-1&lt;/li&gt;
+        &lt;li&gt;项目 2-2&lt;/li&gt;
+        &lt;li&gt;项目 2-3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div onclick=&quot;toggleMenu(3);&quot;&gt;选单的标题 3&lt;/div&gt;
+    &lt;ul id=&quot;menu_3&quot;&gt;
+        &lt;li&gt;项目 3-1&lt;/li&gt;
+        &lt;li&gt;项目 3-2&lt;/li&gt;
+        &lt;li&gt;项目 3-3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>注意：</p>
 <p><strong>document.getElementById(elementID : String)</strong><br><em>An ID should be unique within a page. However, if more than one element with the specified ID exists, the getElementById() method returns the first element in the source code.</em></p>
 <p><strong>element.classList.toggle(class, true|true)</strong><br><em>The first parameter removes the specified class from an element, and returns false. *<br>*If the class does not exist, it is added to the element, and the return value is true.</em></p>
 <h1 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h1><h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>Example:</p>
 <p>使用 addEventListener。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.2nd, 2020 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Javascript 事件动态处理--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Event 事件处理<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 用 Javascript 的程式，动态的注册事件处理器</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>&#123; <span class="comment">// 进行动态事件处理器注册</span></span></span><br><span class="line">        /* 这个为旧版本的写法</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);</span></span><br><span class="line"><span class="actionscript">        btn.onclick = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; <span class="comment">// 该函数称为事件处理器，on + 事件名称</span></span></span><br><span class="line"><span class="actionscript">            alert(<span class="string">"Click"</span>);</span></span><br><span class="line">        &#125;;</span><br><span class="line">        */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        /* 新版本的写法</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);</span></span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">handler</span><span class="params">()</span></span>&#123; <span class="comment">// 准备一个事件处理器</span></span></span><br><span class="line"><span class="actionscript">            alert(<span class="string">"Click"</span>);</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="actionscript">        btn.addEventListener(<span class="string">"click"</span>, handler); <span class="comment">// click 为事件名称</span></span></span><br><span class="line">        */</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"init();"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 动态注册，通过 load 事件进行，在 HTML 载入完成后进行 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">onclick</span>=<span class="string">"alert('in');"</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="comment">&lt;!-- 静态注册，写在标签上，在载入 HTML 的时候进行 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!-- Feb.2nd, 2020 --&gt;
+&lt;!-- Javascript 事件动态处理--&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>注意：</p>
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Event 事件处理&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    // 用 Javascript 的程式，动态的注册事件处理器
+
+    function init() { // 进行动态事件处理器注册
+        /* 这个为旧版本的写法
+        var btn = document.getElementById(&quot;btn&quot;);
+        btn.onclick = function() { // 该函数称为事件处理器，on + 事件名称
+            alert(&quot;Click&quot;);
+        };
+        */
+
+
+        /* 新版本的写法
+        var btn = document.getElementById(&quot;btn&quot;);
+        function handler(){ // 准备一个事件处理器
+            alert(&quot;Click&quot;);
+        };
+        btn.addEventListener(&quot;click&quot;, handler); // click 为事件名称
+        */
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body onload=&quot;init();&quot;&gt;
+    &lt;!-- 动态注册，通过 load 事件进行，在 HTML 载入完成后进行 --&gt;
+    &lt;button id=&quot;btn&quot; onclick=&quot;alert(&#39;in&#39;);&quot;&gt;Click&lt;/button&gt; &lt;!-- 静态注册，写在标签上，在载入 HTML 的时候进行 --&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>注意：</p>
 <p><em>使用 addEventListener 动态添加的处理器不会将静态处理器覆盖。</em></p>
 <h2 id="事件对象-EventObj"><a href="#事件对象-EventObj" class="headerlink" title="事件对象 EventObj"></a>事件对象 EventObj</h2><p>事件对象一般用 e 表示。</p>
 <p>Example:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.4th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>事件物件 Event Object<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    	<span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);</span></span><br><span class="line"><span class="actionscript">    	<span class="keyword">var</span> handler=<span class="function"><span class="keyword">function</span><span class="params">(e)</span></span>&#123; <span class="comment">// 事件处理器的第一个参数默认为事件对象 e</span></span></span><br><span class="line"><span class="actionscript">    		alert(e.clientX+<span class="string">","</span>+e.clientY);</span></span><br><span class="line">    	&#125;</span><br><span class="line"><span class="actionscript">    	btn.addEventListener(<span class="string">"click"</span>, handler);</span></span><br><span class="line">    	/*</span><br><span class="line">    		1. 使用者点击了按钮，触发 click 事件。</span><br><span class="line"><span class="javascript">    		<span class="number">2.</span> 浏览器主动收集和事件有关的资讯，，并产生 Event <span class="built_in">Object</span> 事件物件。</span></span><br><span class="line">    		3. 呼叫已经注册的事件处理器（事件处理函数）</span><br><span class="line">    			handler(eventObj);</span><br><span class="line">    	 */</span><br><span class="line">    	</span><br><span class="line">    	/*</span><br><span class="line"><span class="javascript">    	<span class="built_in">document</span>.addEventListener(<span class="string">"keydown"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">    		alert(e.keyCode); <span class="comment">// 获得按键的 ASCII 码</span></span></span><br><span class="line">    	&#125;);</span><br><span class="line">    	*/</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"init();"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>注意：</p>
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;事件物件 Event Object&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function init() {
+        var btn=document.getElementById(&quot;btn&quot;);
+        var handler=function(e){ // 事件处理器的第一个参数默认为事件对象 e
+            alert(e.clientX+&quot;,&quot;+e.clientY);
+        }
+        btn.addEventListener(&quot;click&quot;, handler);
+        /*
+            1. 使用者点击了按钮，触发 click 事件。
+            2. 浏览器主动收集和事件有关的资讯，，并产生 Event Object 事件物件。
+            3. 呼叫已经注册的事件处理器（事件处理函数）
+                handler(eventObj);
+         */
+
+        /*
+        document.addEventListener(&quot;keydown&quot;, function(e){
+            alert(e.keyCode); // 获得按键的 ASCII 码
+        });
+        */
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body onload=&quot;init();&quot;&gt;
+    &lt;button id=&quot;btn&quot;&gt;Click&lt;/button&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>注意：</p>
 <p><strong>element.addEventListener(event : String, functionname : function)</strong><br><em>Do not use the “on” prefix. For example, use “click” instead of “onclick”.</em></p>
 <h2 id="Timing-事件"><a href="#Timing-事件" class="headerlink" title="Timing 事件"></a>Timing 事件</h2><p><strong>Definiton</strong><br><em>The window object allows execution of code at specified time intervals.These time intervals are called timing events.</em></p>
 <p>Example:</p>
 <p>使用 setTimeout。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.4th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>自动排程 Schedule<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    	<span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">    		alert(<span class="string">"Hello world"</span>);</span></span><br><span class="line">    	&#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"init();"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>注意：</p>
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;自动排程 Schedule&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function init() {
+        window.setTimeout(function(){
+            alert(&quot;Hello world&quot;);
+        }, 2000);
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body onload=&quot;init();&quot;&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>注意：</p>
 <p><strong>window.setTimeout(function, milliseconds : number)</strong><br><em>Executes a function, after waiting a specified number of milliseconds.</em></p>
 <p>使用 setInterval。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.4th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>自动排程 Schedule<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    	<span class="built_in">window</span>.setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">    		alert(<span class="string">"Hello world"</span>);</span></span><br><span class="line">    	&#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"init();"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>注意：<br><strong>window.setInterval(function, milliseconds : number, param1, param2, …)</strong><br><em>Same as setTimeout(), but repeats the execution of the function continuously.</em><br><em>param1, param2, …    Optional. Additional parameters to pass to the function.</em></p>
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;自动排程 Schedule&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function init() {
+        window.setInterval(function(){
+            alert(&quot;Hello world&quot;);
+        }, 2000);
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body onload=&quot;init();&quot;&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>注意：<br><strong>window.setInterval(function, milliseconds : number, param1, param2, …)</strong><br><em>Same as setTimeout(), but repeats the execution of the function continuously.</em><br><em>param1, param2, …    Optional. Additional parameters to pass to the function.</em></p>
 <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h2 id="线性转换"><a href="#线性转换" class="headerlink" title="线性转换"></a>线性转换</h2><p>包括 位移，缩放，旋转，斜歪。</p>
 <p>Example:</p>
 <p>四种变换。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.5th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS 3 线性转换： 位移、缩放、旋转、斜歪<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span> &#123;</span></span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: red;</span><br><span class="line"><span class="css">        <span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(100<span class="selector-tag">px</span>, 50<span class="selector-tag">px</span>); <span class="comment">/* 位移。 param1 代表 X 方向的位移; param2 代表 Y 方向的位移 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-tag">transform</span>: <span class="selector-tag">scale</span>(1<span class="selector-class">.5</span>, 1); <span class="comment">/*缩放。 param1 代表 X 方向缩放倍数; param2 代表 Y 方向缩放倍数*/</span></span></span><br><span class="line"><span class="css">		<span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(30<span class="selector-tag">deg</span>); <span class="comment">/*旋转。 param 代表顺时针旋转的度数。*/</span></span></span><br><span class="line"><span class="css">		<span class="selector-tag">transform</span>: <span class="selector-tag">skew</span>(45<span class="selector-tag">deg</span>, 0<span class="selector-tag">deg</span>); <span class="comment">/*斜歪。 param1 代表 X 方向的斜歪; param2 代表 Y 方向的斜歪*/</span></span></span><br><span class="line"></span><br><span class="line"><span class="css">		<span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(100<span class="selector-tag">px</span>, 50<span class="selector-tag">px</span>) <span class="selector-tag">scale</span>(1<span class="selector-class">.5</span>, 1) <span class="selector-tag">rotate</span>(30<span class="selector-tag">deg</span>) <span class="selector-tag">skew</span>(45<span class="selector-tag">deg</span>, 0<span class="selector-tag">deg</span>); <span class="comment">/* 设置需要综合在一起写 */</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"margin: 0px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!-- Feb.5th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-<p>立方体。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Feb.5th, 2020 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS 3 线性转换： 位移、缩放、旋转、斜歪<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.cube</span>&gt;<span class="selector-class">.top</span> &#123;</span></span><br><span class="line">        width: 240px;</span><br><span class="line">        height: 60px;</span><br><span class="line"><span class="css">        <span class="selector-tag">background-color</span>: <span class="selector-id">#dddddd</span>;</span></span><br><span class="line">        transform: skew(-45deg, 0deg) translate(30px, 0px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="selector-class">.cube</span>&gt;<span class="selector-class">.center</span> &#123;</span></span><br><span class="line">        width: 240px;</span><br><span class="line">        height: 240px;</span><br><span class="line"><span class="css">        <span class="selector-tag">background-color</span>: <span class="selector-id">#aaaaaa</span>;</span></span><br><span class="line">        display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="selector-class">.cube</span>&gt;<span class="selector-class">.right</span> &#123;</span></span><br><span class="line">        width: 60px;</span><br><span class="line">        height: 240px;</span><br><span class="line"><span class="css">        <span class="selector-tag">background-color</span>: <span class="selector-id">#888888</span>;</span></span><br><span class="line">        display: inline-block;</span><br><span class="line">        transform: skew(0deg, -45deg) translate(0px, -30px);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"margin: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;CSS 3 线性转换： 位移、缩放、旋转、斜歪&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        transform: translate(100px, 50px); /* 位移。 param1 代表 X 方向的位移; param2 代表 Y 方向的位移 */
+        transform: scale(1.5, 1); /*缩放。 param1 代表 X 方向缩放倍数; param2 代表 Y 方向缩放倍数*/
+        transform: rotate(30deg); /*旋转。 param 代表顺时针旋转的度数。*/
+        transform: skew(45deg, 0deg); /*斜歪。 param1 代表 X 方向的斜歪; param2 代表 Y 方向的斜歪*/
 
-<p>References:</p>
+        transform: translate(100px, 50px) scale(1.5, 1) rotate(30deg) skew(45deg, 0deg); /* 设置需要综合在一起写 */
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body style=&quot;margin: 0px;&quot;&gt;
+    &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>立方体。</p>
+<pre><code>&lt;!-- Feb.5th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;CSS 3 线性转换： 位移、缩放、旋转、斜歪&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    .cube&gt;.top {
+        width: 240px;
+        height: 60px;
+        background-color: #dddddd;
+        transform: skew(-45deg, 0deg) translate(30px, 0px);
+    }
+
+    .cube&gt;.center {
+        width: 240px;
+        height: 240px;
+        background-color: #aaaaaa;
+        display: inline-block;
+    }
+
+    .cube&gt;.right {
+        width: 60px;
+        height: 240px;
+        background-color: #888888;
+        display: inline-block;
+        transform: skew(0deg, -45deg) translate(0px, -30px);
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body style=&quot;margin: 100px;&quot;&gt;
+    &lt;div class=&quot;cube&quot;&gt;
+        &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;center&quot;&gt;&lt;/div&gt;&lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>References:</p>
 <p><a href="https://www.youtube.com/user/padalab" target="_blank" rel="noopener">https://www.youtube.com/user/padalab</a></p>
 <p><a href="https://www.w3schools.com/jsref/" target="_blank" rel="noopener">https://www.w3schools.com/jsref/</a></p>
 

@@ -109,10 +109,20 @@
 
 Example:
 通过 window.screen 查看屏幕尺寸信息。
-123&lt;script type="text/javascript"&gt;alert(screen.width + "x"+screen.height);&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+alert(screen.width + &quot;x&quot;+screen.height);
+&lt;/script&gt;通过 window.document 修改 标签 的内容。
+&lt;!-- Feb.4th, 2020 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 
-通过 window.document 修改 标签 的内容。
-1234567891011121314151617181920212223&lt;!-- Feb.4th, 2020 --&gt;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;    &lt;title&gt;HTML DOM&lt;/title&gt;    &lt;script type="text/javascript"&gt;    function change()&#123;    	var spanObj=window.document.getElementById('emotion');    	spanObj.innerHTML="bad";    &#125</div>
+&lt;head&gt;
+    &lt;title&gt;HTML DOM&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+    function change(){
+        var spanObj=window.document.getElementById(&#39;emotion&#39;);
+        spanObj.innerHTML=&quot;</div>
                     
                 </div>
             </a>
@@ -126,64 +136,6 @@ Example:
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/Web">Web</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/01/10/Learning-of-Matlab/">
-                <p class="h4 index-header">Learning_of_Matlab</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">由于被大佬拉去参加数模美赛，所以寒假学习一波 Matlab，顺便恶补一波数学。
-Matlab 使用的方式主要有两种，一种是命令行形式（在命令行窗口中），另一种是脚本形式（在 .m 后缀的文件中编写）。有点像 python 噢_
-学习方法：
-
-多查找 Mathwork Document
-多打代码（理论和实践结合）
-
-零碎的基础Elementary Math Functions 包含五个：
-
-Arithmetic (算术函数)
-Trigonometry（三角函数）
-Exponential and Logarithm（指数、对数函数）
-Complex Numbers（复数函数）
-Cartesian Coordinate System Conversion（直角坐标系函数）
-
-who 命令可以显示工作区中所有变量名。whos 命令可以显示工作区中所有变量的详细信息。
-特殊变量：
-
-ans answer 变量
-i, j 复数
-Inf 无限大
-eps  计算机中的最小正数 2.2204e-16
-NaN 非数字
-pi π
-
-变量的优先级：
-
-命令行显示的格式可以由 format 命令进行设置。
-
-l</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-10
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Matlab">Matlab</a>&nbsp;
                         
                     
                 </div>
@@ -212,7 +164,15 @@ VM 启动时会有一个由主方法所定义的线程。
 
 线程的实现线程有两种实现：
 第一种实现：Code:
-1234567891011121314151617181920212223242526package Lesson_14;public class TestThread1 &#123;	public static void main(String[] args) &#123;		// TODO Auto-generated method stub		Runner r = new Runner();		Thread runner1 = </div>
+package Lesson_14;
+
+public class TestThread1 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Runner r = new Runner();
+        Thread runner1 = new Thread(r);
+        ru</div>
                     
                 </div>
             </a>
@@ -242,7 +202,24 @@ VM 启动时会有一个由主方法所定义的线程。
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">Basic ChallengesLesson 17首先有一个 PHP 的 check_input 的过滤机制：
-1234567891011121314151617181920212223242526function check_input($value)	&#123;	if(!empty($value))		&#123;		// truncation (see comments)		$value = substr($value,0,15);		&#125;		// Stripslashes if magic quotes enabled		if (get_magic_quotes_gpc()) // 默认为 false			&#123;			$value = stripslashes($value);  // 删除反斜杠			&#125;		// Quote if not a number		if (!ctype_digit($value))			&#123;			$value = "'" . mysql_real_escape_string($value) . "'";			&#12</div>
+function check_input($value)
+    {
+    if(!empty($value))
+        {
+        // truncation (see comments)
+        $value = substr($value,0,15);
+        }
+
+        // Stripslashes if magic quotes enabled
+        if (get_magic_quotes_gpc()) // 默认为 false
+            {
+            $value = stripslashes($value);  // 删除反斜杠
+            }
+
+        // Quote if not a number
+        if (!ctype_digit($value))
+            {
+            $value = &quot;&#3</div>
                     
                 </div>
             </a>
@@ -273,9 +250,33 @@ VM 启动时会有一个由主方法所定义的线程。
                     
                         <div class="index-text mb-1">只有 web 部分
 easy_web源码：
-123456789101112131415161718192021222324252627﻿&lt;?php show_source(__FILE__); include("flag.php"); $a=@$_GET['a']; $b=@$_GET['b']; $c=@$_GET['c']; if($a==0 and $a)&#123;     echo $flag1; &#125; if(is_numeric($b))&#123;     exit(); &#125; if($b&gt;1234)&#123;     echo $flag2; &#125; if(is_numeric($c))&#123;     exit(); &#125; if(isset($c))&#123;     $args = $c;     if(!preg_match("/^\w+$/",$args))&#123;         die("args error!");     &#125;     echo $flag3; &#125; ?&gt;
+﻿&lt;?php 
+show_source(__FILE__); 
+include(&quot;flag.php&quot;); 
+$a=@$_GET[&#39;a&#39;]; 
+$b=@$_GET[&#39;b&#39;]; 
+$c=@$_GET[&#39;c&#39;]; 
+if($a==0 and $a){ 
+    echo $flag1; 
+} 
+if(is_numeric($b)){ 
+    exit(); 
+} 
+if($b&gt;1234){ 
+    echo $flag2; 
+} 
 
-审计</div>
+if(is_numeric($c)){ 
+    exit(); 
+} 
+if(isset($c)){ 
+    $args = $c; 
+    if(!preg_match(&quot;/^\w+$/&quot;,$args)){ 
+        die(&quot;args error!&quot;); 
+    } 
+    echo $flag3; 
+} 
+?&gt;审计代码，这题将 flag 分成三个部分，我们需要绕过五个</div>
                     
                 </div>
             </a>
@@ -289,41 +290,6 @@ easy_web源码：
                         |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
                         
                             <a href="/tags/Write%20up">Write up</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/10/07/Learning-Docker/">
-                <p class="h4 index-header">Learning-Docker</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">
-https://yeasy.gitbooks.io/docker_practice/image/dockerfile/copy.html
-https://docs.docker.com/engine/reference/commandline/cp/
-https://panda1g1.github.io/2018/07/24/docker/
-https://xi4or0uji.github.io/2019/02/19/%E7%94%A8docker%E6%90%AD%E4%B8%AActf%E9%A2%98%E7%9B%AE/
-
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-07
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Docker">Docker</a>&nbsp;
                         
                     
                 </div>
@@ -440,11 +406,19 @@ Model 再分</div>
                 <div class="index-excerpt">
                     
                         <div class="index-text mb-1">函数函数形参与实参function 定义函数时，单括号中的为参数栏，它包括形参（可以以表达式的形式），默认值（缺省值），强类型参数，可变数量的参数列表，值传递和引用传递。例如，在调用上面的 foo( ) 函数时，单括号中的 1 是实参。如下：
-1234567function foo($arg_1, $arg_2, /*...*/, $arg_n)&#123;	$sum = $arg_1 + ... + $arg_n;	echo "Example function .\n";	return $return_value;&#125;foo(1..);
+function foo($arg_1, $arg_2, /*...*/, $arg_n){
+    $sum = $arg_1 + ... + $arg_n;
+    echo &quot;Example function .\n&quot;;
+    return $return_value;
+}
 
-函数的默认值function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。
+foo(1..);函数的默认值function 定义函数时，若在参数栏给参数赋值，则在调用该函数时，如果缺省该参数，则使用该参数的缺省值。书写时，带缺省值的参数通常放到参数栏的最后，像下面的代码一样。
 Example:
-123456789101112Code: function foo($arg_1, /*...*/, $arg_n, $arg_2=value)&#123;	$sum = $arg_1 + ... + $arg_n;	echo $arg_2;</div>
+Code: 
+function foo($arg_1, /*...*/, $arg_n, $arg_2=value){
+    $sum = $arg_1 + ... + $arg_n;
+    echo $arg_2;
+    </div>
                     
                 </div>
             </a>
@@ -475,7 +449,11 @@ Example:
                     
                         <div class="index-text mb-1">signup – Re当时我没可能看到这题，某位 pwn 大佬兼队友给我提了。Re 题竟然是 RSA！n,e,c,全部给出来了，脚本题，直接跑脚本。flag为 suctf{Pwn_@_hundred_years}。
 DSA – CryptoDSA 题，共享 k 攻击。首先清楚DSA中的几个变量，p，q，g，x，y。根据定义，(p, q, g, y)组成公钥，公钥是在模 p 体系下的。还有变量 m，k，r，s，以及hash加密函数H( )。其中:r = (g ^ k mod p) mod qs = k^(-1) * (H(m) + xr) mod q根据定义，(m, r, s)组成签名，签名是在模 q 体系下的。然后理解一波共享 k 攻击的原理，这种攻击的前提是：在公钥相同的两次签名中共享了 k。
-1234567891011121314假设有公钥相同的两次加密结果，已知k相同，由于r = (g ^ k mod p) mod q，所以 r1 = r2。然后又有：s1 = k^(-1) * (H(m1) + xr) mod qs2 = k^(-1) * (H(m2) + xr) mod q变</div>
+假设有公钥相同的两次加密结果，已知k相同，由于r = (g ^ k mod p) mod q，所以 r1 = r2。然后又有：
+s1 = k^(-1) * (H(m1) + xr) mod q
+s2 = k^(-1) * (H(m2) + xr) mod q
+变换可以得到：
+s1 * k ≡ </div>
                     
                 </div>
             </a>
@@ -496,18 +474,78 @@ DSA – CryptoDSA 题，共享 k 攻击。首先清楚DSA中的几个变量，p�
         </div>
     </div>
 
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/29/about-today/">
+                <p class="h4 index-header">Writing Example</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">这是斜体
+这是粗体
+这是删除线
+一级标题二级标题三级标题四级标题五级标题六级标题行内形式：我的博客
+
+无序列表项1
 
 
-<nav aria-label="index posts navigation">
-<ul class="pagination pg-blue justify-content-center mt-5">
-    
-    
-        <li class="page-item">
-        <a class="page-link" href="/page/2/">Next</a>
-        </li>
-    
-</ul>
-</nav>
+无序列表项2
+
+
+无序列表项3
+
+
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-29
+                    &nbsp;&nbsp;
+                    
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/27/hello-world/">
+                <p class="h4 index-header">Hello World</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
+More info: Writing
+Run server$ hexo server
+More info: Server
+Generate static files$ hexo generate
+More info: Generating
+Deploy to remote sites$ hexo deploy
+More info: Deployment
+</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-27
+                    &nbsp;&nbsp;
+                    
+                    
+                </div>
+            
+        </div>
+    </div>
+
+
 
                         </div>
                     </div>
@@ -550,7 +588,7 @@ DSA – CryptoDSA 题，共享 k 攻击。首先清楚DSA中的几个变量，p�
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Nothing is here.&nbsp;",
+            "Learning for fun!&nbsp;",
         ],
         cursorChar: "|",
         typeSpeed: 90,
