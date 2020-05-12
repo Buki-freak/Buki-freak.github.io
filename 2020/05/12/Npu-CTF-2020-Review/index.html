@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Programming">
+    <meta name="author" content="Haojen Lau">
+    <meta name="keywords" content>
+    <title>Npu-CTF-2020-Review - buki</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>星期二, 五月 12日 2020, 9:20 晚上</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>Only review in Crypto.</p>
+<h1 id="What-does-the-tag-mean"><a href="#What-does-the-tag-mean" class="headerlink" title="What does the tag mean"></a>What does the tag mean</h1><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Solved</td>
+<td>Solved in the competition</td>
+</tr>
+<tr>
+<td>Unlved</td>
+<td>Unsolved in the competition</td>
+</tr>
+</tbody></table>
+<h1 id="Mersenne-Twister-unsolved"><a href="#Mersenne-Twister-unsolved" class="headerlink" title="Mersenne Twister(unsolved)"></a>Mersenne Twister(unsolved)</h1><p>This challenge is related to Mersenne Twister Encryption. However, there are differences between them exactly. Here is the file:</p>
+<p><strong>Mersenne Twiser.py</strong></p>
+<pre><code class="python">from hashlib import *
+from itertools import *
+from binascii import hexlify , unhexlify
+
+from flag import flag ,seed
+
+assert len(flag) == 26
+assert flag[:7] == &#39;npuctf{&#39;
+assert flag[-1] == &#39;}&#39;
+
+XOR = lambda s1 ,s2 : bytes([x1 ^ x2 for x1 ,x2 in zip(s1 , s2)])
+
+class mt73991:
+    def __init__(self , seed):
+        self.state = [seed] + [0] * 232
+        self.flag = 0
+        self.srand()
+        self.generate()
+    def srand(self):
+        for i in range(232):
+            self.state[i+1] = 1812433253 * (self.state[i] ^ (self.state[i] &gt;&gt; 27)) - i
+            self.state[i+1] &amp;= 0xffffffff
+
+
+    def generate(self):
+        for i in range(233):
+            y = (self.state[i] &amp; 0x80000000) | (self.state[(i+1)%233] &amp; 0x7fffffff)
+            temp = y &gt;&gt; 1
+            temp ^= self.state[(i + 130) % 233]
+            if y &amp; 1:
+                temp ^= 0x9908f23f
+            self.state[i] = temp
+    def getramdanbits(self):
+        if self.flag == 233:
+            self.generate()
+            self.flag = 0
+        bits = self.Next(self.state[self.flag]).to_bytes(4 , &#39;big&#39;)
+        self.flag += 1
+        return bits
+
+    def Next(self , tmp):
+        tmp ^= (tmp &gt;&gt; 11)
+        tmp ^= (tmp &lt;&lt; 7) &amp; 0x9ddf4680
+        tmp ^= (tmp &lt;&lt; 15) &amp; 0xefc65400
+        tmp ^= (tmp &gt;&gt; 18) &amp; 0x34adf670
+        return tmp
+
+def encrypt(key , plain):
+    tmp = md5(plain).digest()
+    return hexlify(XOR(tmp , key))
+
+if __name__ == &quot;__main__&quot;:
+    flag = flag.encode()
+    random = mt73991(seed)
+    f = open(&#39;./cipher.txt&#39; , &#39;wb&#39;)
+    for i in flag:
+        key = b&#39;&#39;.join([random.getramdanbits() for _ in range(4)])
+        cipher = encrypt(key , chr(i).encode())
+        f.write(cipher)
+</code></pre>
+<p><strong>cipher.txt</strong></p>
+<pre><code>a 832 bytes long hex string</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
+<h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>Only a few conditions are given.</p>
+<blockquote>
+<p>the encryption result in cipher.txt</p>
+<p>the period length</p>
+<p>partial flag</p>
+<p>the length of the flag</p>
+<p>encryption function</p>
+</blockquote>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>Given that the first part of the flag is “npuctf{“, which is a 7 bytes long string, we can retrieve the first 28 generated states with the according cipher in cipher.txt. Since we also know the last byte of the string(“}”) and the length of the string, we can easily retrieve the 100th~103th generated states. </p>
+<p>Then we look into the generate function.</p>
+<pre><code class="python">    def generate(self):
+        for i in range(233):
+            y = (self.state[i] &amp; 0x80000000) | (self.state[(i + 1) % 233] &amp; 0x7fffffff)
+            temp = y &gt;&gt; 1
+            temp ^= self.state[(i + 130) % 233]
+            if y &amp; 1:
+                temp ^= 0x9908f23f
+            self.state[i] = temp</code></pre>
+<p>Suppose that i equals to 103, we try to write down that situation.</p>
+<pre><code class="python">    def generate(self):
+        for i in range(233):
+            y = (self.state[103] &amp; 0x80000000) | (self.state[(104) % 233] &amp; 0x7fffffff)
+            temp = y &gt;&gt; 1  # 1
+            temp ^= self.state[(0) % 233]  # 2
+            if y &amp; 1:
+                temp ^= 0x9908f23f
+            self.state[103] = temp  # 3</code></pre>
+<p>In this situation, it is possible for us to retrieve the initial 104th state, which means that we can get the seed through inversing. There are two possibilities in this situation(state[104] is odd or even). We try to draw a table.</p>
+<table>
+<thead>
+<tr>
+<th>possibilites</th>
+<th>hb(1)</th>
+<th>hb(2)</th>
+<th>hb(3)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>even</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>odd</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>hb in the table above means the highest bit of the value in the line #n. Based on the fact that the true hb(3) is 0, which is the highest bit of the 103th generated state, it is impossible for the 104th initial state to be odd. Therefore, we can retrieve y and the low 31 bits of the 104 initial state. Since the highest bit is unknown, we can guess it (zero or one). Therefore, there are two possible seeds, which can be judged in the end. Because the seed is retrieved, we can decrypt the cipher easily.(Something just like Symmetric Cipher)</p>
+<p>By the way, the md5 function in encrypt function seems to be useless because it only encrypts one character, for which we can correspondingly generate an md5 dictionary of all printable characters and print the corresponding characters.</p>
+<h2 id="Realization"><a href="#Realization" class="headerlink" title="Realization"></a>Realization</h2><p>Here is my realization.</p>
+<pre><code class="python">import hashlib
+import binascii
+from Cryptodome.Util.number import *
+import string
+
+XOR = lambda s1, s2: bytes([x1 ^ x2 for x1, x2 in zip(s1, s2)])
+initial_state = [0] * 233
+initial_state2 = [0] * 233
+cipher = [&#39;cef4876036ee8b55aa59bca043725bf3&#39;,
+          &#39;50a5e491debdef7ef7d63e9609a288ca&#39;,
+          &#39;1e2c82a7fe566bd8709e73c8d495ea50&#39;,
+          &#39;4a486ed11189faf8e6fb35617e47d2d1&#39;,
+          &#39;ad5e4783e96afeaae9f7104ec477fb39&#39;,
+          &#39;fe4ec619bf58289709e15c4449f03fc5&#39;,
+          &#39;1cba918cd0ebfdc12376b41e78154064&#39;,
+          &#39;82733b3b200826b6c78d86563edaea94&#39;,
+          &#39;dccf459a4291517a4b8367d7b4a53aee&#39;,
+          &#39;cd7e0accf661bfc726f5ba62e1c0e041&#39;,
+          &#39;00108ad32e7d5711f780185cba5cf31d&#39;,
+          &#39;328bee84066be4ab9582cf9d4bfe3c6f&#39;,
+          &#39;96a7732e1c37d800c90fd46277147f0a&#39;,
+          &#39;26c149dcd5eeb0f2df0c075627bc220b&#39;,
+          &#39;e5eefdd67186056ac28c21e155a7f247&#39;,
+          &#39;664aaecdb498134de274df10114d1f06&#39;,
+          &#39;f84dd21820f150d69c9439d909dec0f5&#39;,
+          &#39;ccfeab61b62db2ea91d31bc8163ff16c&#39;,
+          &#39;7f458006bd5ac4a5f5bfae2770b23ccf&#39;,
+          &#39;b7195b76aa0a9aa146831667a7b9fe08&#39;,
+          &#39;c19e691afadccb3ca5169ef3fabaa3da&#39;,
+          &#39;d47d536e89ed4cee6f788bc969c3ad31&#39;,
+          &#39;37850ebfc46a73af2b0c036c3da4b4a1&#39;,
+          &#39;6506f499445c604dd73eeb846a52f881&#39;,
+          &#39;515a3ad0ab448b4f9ed3e0ab1fffac60&#39;,
+          &#39;b223dde6450ba6198e90e14de107aaf2&#39;]
+
+starts = &quot;npuctf{&quot;
+ends = &quot;}&quot;
+
+
+class mt73991:
+    def __init__(self, seed):
+        self.state = [seed] + [0] * 232
+        self.flag = 0
+        self.srand()
+        self.generate()
+
+    def srand(self):
+        for i in range(232):
+            self.state[i + 1] = 1812433253 * (self.state[i] ^ (self.state[i] &gt;&gt; 27)) - i
+            self.state[i + 1] &amp;= 0xffffffff
+
+    def generate(self):
+        for i in range(233):
+            y = (self.state[i] &amp; 0x80000000) | (self.state[(i + 1) % 233] &amp; 0x7fffffff)
+            temp = y &gt;&gt; 1
+            temp ^= self.state[(i + 130) % 233]
+            if y &amp; 1:
+                temp ^= 0x9908f23f
+            self.state[i] = temp
+
+    def getramdanbits(self):
+        if self.flag == 233:
+            self.generate()
+            self.flag = 0
+        bits = self.Next(self.state[self.flag]).to_bytes(4, &#39;big&#39;)
+        self.flag += 1
+        return bits
+
+    def Next(self, tmp):
+        tmp ^= (tmp &gt;&gt; 11)
+        tmp ^= (tmp &lt;&lt; 7) &amp; 0x9ddf4680
+        tmp ^= (tmp &lt;&lt; 15) &amp; 0xefc65400
+        tmp ^= (tmp &gt;&gt; 18) &amp; 0x34adf670
+        return tmp
+
+
+def USMR(x, shift, mask):
+    res = x
+    for i in range(32):
+        res = x ^ (res &gt;&gt; shift &amp; mask)
+    return res
+
+
+def USML(x, shift, mask):
+    res = x
+    for i in range(32):
+        res = x ^ (res &lt;&lt; shift &amp; mask)
+    return res
+
+
+def inv_Next(x):
+    x = USMR(x, 18, 0x34adf670)
+    x = USML(x, 15, 0xefc65400)
+    x = USML(x, 7, 0x9ddf4680)
+    x = USR(x, 11, 0xffffffff)
+    return x
+
+
+def inv_srand(value, index):
+    for i in range(index-1, -1, -1):
+        value += i
+        value *= inverse(1812433253, 0x100000000)
+        value = USR(value, 27, 0xffffffff)
+        value &amp;= 0xffffffff
+    return value
+
+
+def USR(value, shift, mask):
+    i = 0
+    res = 0
+    while i * shift &lt; 32:
+        partMask = ((0xffffffff &lt;&lt; (32 - shift)) &amp; 0xffffffff) &gt;&gt; (shift * i)
+        part = value &amp; partMask
+        value ^= (part &gt;&gt; shift) &amp; mask
+        res |= part
+        i += 1
+    return res
+
+
+# hash all known characters
+hash_starts = []
+for i in starts:
+    hash_starts.append(hashlib.md5(i.encode()).digest())
+# print(hash_starts)
+hash_ends = hashlib.md5(ends.encode()).digest()
+
+state = [0] * 233
+
+# first 7 characters
+for i in range(len(starts)):
+    key = XOR(hash_starts[i], binascii.unhexlify(cipher[i]))
+    for j in range(4):
+        tmp = inv_Next(bytes_to_long(key[4*j:4*j+4]))
+        state[4*i+j] = tmp
+# print(state[:28])  # check pass
+
+
+def decrypt(key, cipher):
+    cipher = binascii.unhexlify(cipher)
+    temp = XOR(key, cipher)
+    for i in md5_dic:
+        if temp == i:
+            print(string.printable[md5_dic.index(i)], end=&quot;&quot;)
+
+
+# the last character
+key = XOR(hash_ends, binascii.unhexlify(cipher[-1]))
+for i in range(4):
+    tmp = inv_Next(bytes_to_long(key[4*i:4*i+4]))
+    state[100+i] = tmp
+# print(state[100:104]) # check pass
+
+
+# Since it can be simplified, there are only two situations of old_state[104]
+
+# old_state[104] is even
+y = (state[0] ^ state[103]) &lt;&lt; 1  # recover y
+# print(y) # check pass
+poss_1 = y &amp; 0x7fffffff
+poss_2 = (y &amp; 0x7fffffff) | 0x80000000
+
+# print(poss_1)
+# print(poss_2)
+# check pass
+
+
+# get the seed of each situation
+poss_1 = inv_srand(poss_1, 104)
+poss_2 = inv_srand(poss_2, 104)
+print(poss_1)
+print(poss_2)
+
+
+# generate md5 dictionary
+md5_dic = []
+for i in string.printable:
+    md5_dic.append(hashlib.md5(i.encode()).digest())
+
+
+random_1 = mt73991(poss_1)
+random_2 = mt73991(poss_2)
+
+# recover the flag from random_1
+flag = &quot;&quot;
+for i in range(26):
+    key = b&#39;&#39;.join([random_1.getramdanbits() for _ in range(4)])
+    decrypt(key, cipher[i])
+
+# Since random_1 is the correct one, random_2 can be ignored.
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Mersenne_Twister</a></p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/Review">Review</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Npu-CTF-2020-Review&nbsp;",
+        ],
+        cursorChar: "|",
+        typeSpeed: 90,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "left",
+        visible: "true",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3");
+    </script>
+  
+</body>
+</html>
