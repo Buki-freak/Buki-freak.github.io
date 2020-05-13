@@ -180,7 +180,7 @@ if __name__ == &quot;__main__&quot;:
         f.write(cipher)
 </code></pre>
 <p><strong>cipher.txt</strong></p>
-<pre><code>a 832 bytes long hex string</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
+<pre><code>an 832 bytes long hex string</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
 <h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>Only a few conditions are given.</p>
 <blockquote>
 <p>the encryption result in cipher.txt</p>
@@ -208,7 +208,7 @@ if __name__ == &quot;__main__&quot;:
             if y &amp; 1:
                 temp ^= 0x9908f23f
             self.state[103] = temp  # 3</code></pre>
-<p>In this situation, it is possible for us to retrieve the initial 104th state, which means that we can get the seed through inversing. There are two possibilities in this situation(state[104] is odd or even). We try to draw a table.</p>
+<p>In this situation, it is possible for us to retrieve the104th initial state, which means that we can get the seed through inversing. There are two possibilities in this situation(state[104] is odd or even). We try to draw a table.</p>
 <table>
 <thead>
 <tr>
@@ -423,6 +423,76 @@ for i in range(26):
     decrypt(key, cipher[i])
 
 # Since random_1 is the correct one, random_2 can be ignored.
+</code></pre>
+<p>这题一开始出题人搞错了。。。自闭了一下午</p>
+<h2 id="认清形势，建立信心"><a href="#认清形势，建立信心" class="headerlink" title="认清形势，建立信心"></a>认清形势，建立信心</h2><p>After observing the task.py, we can find that this is a classical discrete logarithm problem. Let’s see the file.</p>
+<p><strong>task.py</strong></p>
+<pre><code class="python">from Crypto.Util.number import *
+from gmpy2 import *
+from secret import flag
+
+p = getPrime(25)
+e = # Hidden
+q = getPrime(25)
+n = p * q
+m = bytes_to_long(flag.strip(b&quot;npuctf{&quot;).strip(b&quot;}&quot;))
+
+c = pow(m, e, n)
+print(c)
+print(pow(2, e, n))
+print(pow(4, e, n))
+print(pow(8, e, n))
+
+&#39;&#39;&#39;
+169169912654178
+128509160179202
+518818742414340
+358553002064450
+&#39;&#39;&#39;
+</code></pre>
+<h2 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation"></a>Explanation</h2><p>There are many methods to solve discrete logarithm problems, BSGS(Baby Steps Giant Steps), SPH method and so on.</p>
+<h2 id="Condition-1"><a href="#Condition-1" class="headerlink" title="Condition"></a>Condition</h2><p>There are four equations in task.py and the remains of four equations are given. The flag is in the first equations. Here is what we have known.</p>
+<blockquote>
+<p>The length of q and p</p>
+<p>remains of four equations</p>
+</blockquote>
+<p>My idea is that n is possible to be solved and after that we can use the second equation to calculate e, using  discrete logarithm calculation methods.</p>
+<h2 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h2><p>We can notice that:<br>$$<br>n;|;gcd(c1^{3};-;c3,;c1^{2};-;c2)<br>$$<br>From this character and another character that n is the product of two big prime number, we can get n.</p>
+<p>After that, it is really convenient that we can use discrete_log() function in Sage to calculate e. Luckily, e is coprime with n, so the inverse exists. The decryption is the similar with rsa.</p>
+<h2 id="Realization-1"><a href="#Realization-1" class="headerlink" title="Realization"></a>Realization</h2><p>My realization.</p>
+<pre><code class="python">#! /usr/bin/env sage
+from Crypto.Util.number import long_to_bytes
+import gmpy2
+
+def gcd(a, b):
+    if b == 0:
+        return a, 0
+    a, b = gcd(b, a % b)
+    return a, b
+
+c = 169169912654178
+c_1 = 128509160179202
+c_2 = 518818742414340
+c_3 = 358553002064450
+
+dc_1 = c_1 ** 2 - c_2
+dc_2 = c_1 ** 3 - c_3
+n = gcd(dc_1, dc_2)[0] / 2
+# print(n) # check pass
+
+n.factor()
+p = 18195301
+q = 28977097
+phi = (p - 1) * (q - 1)
+
+e = discrete_log(Mod(c_1, n), Mod(2, n))
+# print(e)  # check pass
+
+# print(gcd(e, phi)[0])  # check pass
+d = gmpy2.invert(e, phi)
+m = pow(c, d, n)
+print(long_to_bytes(m))
+
 </code></pre>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Mersenne_Twister</a></p>
 
