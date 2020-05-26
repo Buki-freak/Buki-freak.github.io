@@ -250,6 +250,8 @@ Encrypt(Plaintext2)
 # ciphertext1 = 12078640933356268898100798377710191641
 # ciphertext2 = 79124196547094980420644350061749775
 </code></pre>
+<p><strong>enc1.png</strong></p>
+<p><strong>enc2.png</strong></p>
 <p><strong>Stream Cipher Insertion Attack</strong></p>
 <p>Such a pity that I didn’t figure it out at that time. From two groups of plaintexts and ciphertexts we can recover keystream at the start. However, the second keystream has one bit less than the first one, from which we easily can retrieve m0, then k1, after that m1 and so on.</p>
 <pre><code class="python">&#39;&#39;&#39;
@@ -436,7 +438,7 @@ M = 1027525863162945579517388007453944560333789660598754989713963965835764309927
 Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
 &#39;&#39;&#39;
 </code></pre>
-<h2 id="Knapsack-Solved"><a href="#Knapsack-Solved" class="headerlink" title="Knapsack(Solved)"></a>Knapsack(Solved)</h2><p>quiz.py</p>
+<h2 id="Knapsack-Solved"><a href="#Knapsack-Solved" class="headerlink" title="Knapsack(Solved)"></a>Knapsack(Solved)</h2><p><strong>quiz.py</strong></p>
 <pre><code class="python">from Crypto.Util.number import *
 from functools import reduce
 
@@ -472,6 +474,12 @@ save(Ciper,Key2)
 <pre><code>a long hex string</code></pre><p><strong>pub.txt</strong></p>
 <pre><code>1015 public keys</code></pre><p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
 <h2 id="backpacker-Unsolved"><a href="#backpacker-Unsolved" class="headerlink" title="backpacker(Unsolved)"></a>backpacker(Unsolved)</h2><p>Remain confused</p>
+<h1 id="What-I-have-done"><a href="#What-I-have-done" class="headerlink" title="What I have done"></a><strong>What I have done</strong></h1><p>Finish learning symmetric cipher and the first chapter of Network Introduction. </p>
+<h1 id="Things-to-Improve"><a href="#Things-to-Improve" class="headerlink" title="Things to Improve"></a>Things to Improve</h1><ul>
+<li>Don’t be panic when encountering a challenge that is never met</li>
+<li>Be more concentrated on study</li>
+<li>LLL algorithm</li>
+</ul>
 
                             <hr>
                         </div>
