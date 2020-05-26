@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Programming">
+    <meta name="author" content="Haojen Lau">
+    <meta name="keywords" content>
+    <title>das-CTF&amp;GK-CTF-2020-Writeup - buki</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>星期日, 五月 24日 2020, 9:30 上午</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <p>Only writeup in Crypto.</p>
+<h1 id="GKCTF"><a href="#GKCTF" class="headerlink" title="GKCTF"></a>GKCTF</h1><h2 id="小学生的密码学-Solved"><a href="#小学生的密码学-Solved" class="headerlink" title="小学生的密码学(Solved)"></a>小学生的密码学(Solved)</h2><p>Pretty easy affince cipher. Both keys are given.</p>
+<h2 id="babycrypto-Solved"><a href="#babycrypto-Solved" class="headerlink" title="babycrypto(Solved)"></a>babycrypto(Solved)</h2><p>Partial high bits of p is known.</p>
+<pre><code class="Python"># Use sage to run the script
+# Reference: https://www.jianshu.com/p/1a0e876d5929
+from sage.all import *
+from Crypto.Util.number import long_to_bytes
+
+# All variables are in hex
+n = 0xb119849bc4523e49c6c038a509a74cda628d4ca0e4d0f28e677d57f3c3c7d0d876ef07d7581fe05a060546fedd7d061d3bc70d679b6c5dd9bc66c5bdad8f2ef898b1e785496c4989daf716a1c89d5c174da494eee7061bcb6d52cafa337fc2a7bba42c918bbd3104dff62ecc9d3704a455a6ce282de0d8129e26c840734ffd302bec5f0a66e0e6d00b5c50fa57c546cff9d7e6a978db77997082b4cb927df9847dfffef55138cb946c62c9f09b968033745b5b6868338c64819a8e92a827265f9abd409359a9471d8c3a2631b80e5b462ba42336717700998ff38536c2436e24ac19228cd2d7a909ead1a8494ff6c3a7151e888e115b68cc6a7a8c6cf8a6c005
+
+# Padding zeros to p --&gt; p4
+p4 = 0xe4e4b390c1d201dae2c00a4669c0865cc5767bc444f5d310f3cfc75872d96feb89e556972c99ae20753e3314240a52df5dccd076a47c6b5d11b531b92d901b2b512aeb0b263bbfd624fe3d52e5e238beeb581ebe012b2f176a4ffd1e0d2aa8c4d3a2656573b727d4d3136513a931428b00000000000000000000000000000000
+cipher = 1422566584480199878714663051468143513667934216213366733442059106529451931078271460363335887054199577950679102659270179475911101747625120544429262334214483688332111552004535828182425152965223599160129610990036911146029170033592055768983427904835395850414634659565092191460875900237711597421272312032796440948509724492027247376113218678183443222364531669985128032971256792532015051829041230203814090194611041172775368357197854451201260927117792277559690205342515437625417792867692280849139537687763919269337822899746924269847694138899165820004160319118749298031065800530869562704671435709578921901495688124042302500361
+e2 = 65537
+kbits = 128  # kbits represent the loss bits
+PR.&lt;x&gt; = PolynomialRing(Zmod(n))  # Create a polynomial ring
+f = x + p4
+roots = f.small_roots(X=2^kbits, beta=0.4)
+if roots:        
+    p = p4 + int(roots[0])
+    assert n % p == 0
+    q = n / int(p)
+    phin = (p-1)*(q-1)
+    d = inverse_mod(e2,phin)
+    flag = pow(cipher,d,n)
+    print long_to_bytes(flag)</code></pre>
+<h2 id="汉字的密码-Solved"><a href="#汉字的密码-Solved" class="headerlink" title="汉字的密码(Solved)"></a>汉字的密码(Solved)</h2><p>当铺密码+Substitution Cipher</p>
+<pre><code class="python">dic = [66, 74, 62, 67, 118, 83, 72, 77, 86, 55, 71, 57, 82, 57, 64, 63, 51, 107]
+delta = 1
+for i in dic:
+    print(chr(i+delta), end=&quot;&quot;)
+    delta += 1
+# FLAG{YOU_ARE_GOOD}</code></pre>
+<h2 id="Backdoor-Unsolved"><a href="#Backdoor-Unsolved" class="headerlink" title="Backdoor(Unsolved)"></a>Backdoor(Unsolved)</h2><p>Remain confused</p>
+<h1 id="DASCTF"><a href="#DASCTF" class="headerlink" title="DASCTF"></a>DASCTF</h1><h2 id="bbcrypto-Solved"><a href="#bbcrypto-Solved" class="headerlink" title="bbcrypto(Solved)"></a>bbcrypto(Solved)</h2><p><strong>quiz.py</strong></p>
+<pre><code class="python"># -*- coding:utf-8 -*-
+import A,SALT
+from itertools import *
+
+def encrypt(m, a, si):
+    c=&quot;&quot;
+    for i in range(len(m)):
+        c+=hex(((ord(m[i])) * a + ord(next(si))) % 128)[2:].zfill(2)
+    return c
+if __name__ == &quot;__main__&quot;:
+    m = &#39;flag{********************************}&#39;
+    a = A
+    salt = SALT
+    assert(len(salt)==3)
+    assert(salt.isalpha())
+    si = cycle(salt.lower())
+    print(&quot;明文内容为：&quot;)
+    print(m)
+    print(&quot;加密后的密文为：&quot;)
+    c=encrypt(m, a, si)
+    print(c)
+    #加密后的密文为：
+    #177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d
+</code></pre>
+<p>The length of salt is 3 and we have already known that the plain starts with “flag{“. Solve linear congruent equations to get the salt.</p>
+<pre><code class="python">c = &quot;177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d&quot;
+li_c = [int(c[i:i+2], 16) for i in range(0, len(c), 2)]
+# print(li_c)
+m = &quot;flag{&quot;
+d_c = li_c[3] - li_c[0]
+# print(d_c)
+d_m = ord(m[3]) - ord(m[0])
+# print(d_m)  # a = 57 mod 128
+a = 57
+# print((li_c[0] - a * ord(m[0])) % 128)
+# print(chr(97))  y1 = &#39;a&#39;
+# print((li_c[1] - a * ord(m[1])) % 128)
+# print(chr(104)) y2 = &#39;h&#39;
+# print((li_c[2] - a * ord(m[2])) % 128)
+# print(chr(104))  # y3 = &#39;h&#39;
+# print((li_c[3] - a * ord(m[3])) % 128)
+m = &quot;&quot;
+from gmpy2 import invert
+import itertools
+inv_a = invert(a, 128)
+key = itertools.cycle(&quot;ahh&quot;)
+for i in li_c:
+    m += chr(((i - ord(next(key))) * inv_a) % 128)
+print(m)
+</code></pre>
+<h2 id="encrypt-img-Solved"><a href="#encrypt-img-Solved" class="headerlink" title="encrypt_img(Solved)"></a>encrypt_img(Solved)</h2><p><strong>quiz.py</strong></p>
+<pre><code class="python">from numpy import array
+from PIL import Image
+from secret import Key
+
+Plaintext1 = &quot;RC4IsInteresting&quot;
+Plaintext2 = &quot;ThisIsAEasyGame&quot;
+cnt = 0
+
+
+class RC4():
+    def __init__(self, Key):
+        self.S = [i for i in range(256)]  # 0 - 255
+        self.K = [ord(Key[i % len(Key)])*2 for i in range(256)]   # KEY * 2(0-255)
+        self.I, self.J = 0, 0
+        self.KSA()
+
+    def KSA(self):
+        for i in range(256):
+            j = (i+self.K[i]+self.S[i]) % 256
+            self.S[i], self.S[j] = self.S[j], self.S[i]
+
+    def next(self):
+        self.I = (self.I+1) % 256
+        self.J = (self.J+self.S[self.I]) % 256
+        self.S[self.J], self.S[self.I] = self.S[self.I], self.S[self.J]
+        tmp = (self.S[self.J] + self.S[self.I]) % 256
+        return self.S[tmp]
+
+
+class Encrypt():
+    def __init__(self, plain):
+        global cnt
+        cnt += 1
+        self.rc4 = RC4(Key)
+        self.testRC4(plain)
+        flag_file = Image.open(r&quot;flag.png&quot;)
+        img = array(flag_file)
+        self.enc(img)
+
+    def testRC4(self, plain):
+        ciphertext = 0
+        for i in plain:
+            ciphertext = (ciphertext &lt;&lt; 8)+ord(i) ^ self.rc4.next()
+        print(&quot;ciphertext{} = {}&quot;.format(cnt, ciphertext))
+
+    def enc(self, img):
+        a, b, _ = img.shape
+        for x in range(0, a):
+            for y in range(0, b):
+                pixel = img[x, y]
+                for i in range(0, 3):
+                    pixel[i] = pixel[i] ^ self.rc4.next()
+                img[x][y] = pixel
+        enc = Image.fromarray(img)
+        enc.save(&quot;enc{}.png&quot;.format(cnt))
+
+
+Encrypt(Plaintext1)
+Encrypt(Plaintext2)
+
+# ciphertext1 = 12078640933356268898100798377710191641
+# ciphertext2 = 79124196547094980420644350061749775
+</code></pre>
+<p><strong>Stream Cipher Insertion Attack</strong></p>
+<p>Such a pity that I didn’t figure it out at that time. From two groups of plaintexts and ciphertexts we can recover keystream at the start. However, the second keystream has one bit less than the first one, from which we easily can retrieve m0, then k1, after that m1 and so on.</p>
+<pre><code class="python">&#39;&#39;&#39;
+plaintext1 = &quot;RC4IsInteresting&quot;
+plaintext2 = &quot;ThisIsAEasyGame&quot;
+
+ciphertext1 = 12078640933356268898100798377710191641
+ciphertext2 = 79124196547094980420644350061749775
+
+key1 = []
+for i in range(len(plaintext1) - 1, -1, -1):
+     key1 = [ord(plaintext1[i]) ^ (ciphertext1 &amp; 0xff)] + key1
+     ciphertext1 &gt;&gt;= 8
+print(key1)
+
+key2 = []
+for i in range(len(plaintext2) - 1, -1, -1):
+     key2 = [ord(plaintext2[i]) ^ (ciphertext2 &amp; 0xff)] + key2
+     ciphertext2 &gt;&gt;= 8
+print(key2)
+
+# [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106, 126]
+# [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106]
+&#39;&#39;&#39;
+# Suppose the bit length of the flag.png is n bits, key1 and key2 can be written like:
+# key1: k1, k2, ..., kn
+# key2: k0, k1, ..., k(n-1)
+# Above we have already known k0 is 126, which is the last key of plaintext2,
+# we can retrieve m0, then k1, after that m1 and so on
+from PIL import Image
+from numpy import array
+
+img1 = array(Image.open(r&quot;./enc1.png&quot;))
+img2 = array(Image.open(r&quot;./enc2.png&quot;))
+
+
+def recovery_img(im1, im2, k):
+    x1, y1, z1 = im1.shape
+    for i in range(x1):
+        for j in range(y1):
+            pixel1 = im1[i, j]
+            pixel2 = im2[i, j]
+            for _ in range(3):
+                pixel2[_] = pixel2[_] ^ k
+                k = pixel1[_] ^ pixel2[_]
+    im2 = Image.fromarray(im2)
+    im2.save(&quot;dec.png&quot;)
+
+
+recovery_img(img1, img2, 126)
+</code></pre>
+<h2 id="babyLCG-Solved"><a href="#babyLCG-Solved" class="headerlink" title="babyLCG(Solved)"></a>babyLCG(Solved)</h2><p><strong>quiz.py</strong></p>
+<pre><code class="python">from Crypto.Util.number import*
+from secret import flag
+
+
+class LCG:
+    def __init__(self):
+        self.a = getRandomNBitInteger(32)
+        self.b = getRandomNBitInteger(32)
+        self.m = getPrime(32)
+        self.seed = getRandomNBitInteger(32)
+
+    def next(self):
+        self.seed = (self.a*self.seed+self.b) % self.m
+        return self.seed &gt;&gt; 16
+
+    def output(self):
+        print(&quot;a = {}\nb = {}\nm = {}&quot;.format(self.a, self.b, self.m))
+        print(&quot;state1 = {}&quot;.format(self.next()))
+        print(&quot;state2 = {}&quot;.format(self.next()))
+
+
+class DH:
+    def __init__(self):
+        self.lcg = LCG()
+        self.lcg.output()
+        self.g = getRandomNBitInteger(128)
+        self.m = getPrime(256)
+        self.A, self.a = self.gen_AB()
+        self.B, self.b = self.gen_AB()
+        self.key = pow(self.A, self.b, self.m)
+
+    def gen_AB(self):
+        x = &#39;&#39;
+        for _ in range(64):
+            x += &#39;1&#39; if self.lcg.next() % 2 else &#39;0&#39;
+        return pow(self.g, int(x, 2), self.m), int(x, 2)
+
+
+DH = DH()
+flag = bytes_to_long(flag)
+print(&quot;g = {}\nA = {}\nB = {}\nM = {}&quot;.format(DH.g, DH.A, DH.B, DH.m))
+print(&quot;Cipher = {}&quot;.format(flag ^ DH.key))
+
+&#39;&#39;&#39;
+a = 3844066521
+b = 3316005024
+m = 2249804527
+state1 = 16269
+state2 = 4249
+g = 183096451267674849541594370111199688704
+A = 102248652770540219619953045171664636108622486775480799200725530949685509093530
+B = 74913924633988481450801262607456437193056607965094613549273335198280176291445
+M = 102752586316294557951738800745394456033378966059875498971396396583576430992701
+Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
+&#39;&#39;&#39;
+</code></pre>
+<p><strong>LCG+Diffie Hellman Exchange Key</strong></p>
+<p>The seed is too small ,as a result, we use brute-force attack to get the seed and recover the key. When we XOR the cipher with the key, the plain is figured out.</p>
+<pre><code class="python">&#39;&#39;&#39;
+a = 3844066521
+b = 3316005024
+m = 2249804527
+&#39;&#39;&#39;
+
+
+class LCG:
+    def __init__(self):
+        self.a = 3844066521
+        self.b = 3316005024
+        self.m = 2249804527
+        self.seed = 714405490
+
+    def next(self):
+        self.seed = (self.a*self.seed+self.b) % self.m
+        return self.seed &gt;&gt; 16
+
+    def output(self):
+        print(&quot;a = {}\nb = {}\nm = {}&quot;.format(self.a, self.b, self.m))
+        print(&quot;state1 = {}&quot;.format(self.next()))
+        print(&quot;state2 = {}&quot;.format(self.next()))
+
+
+class DH:
+    def __init__(self):
+        self.lcg = LCG()
+        self.lcg.output()
+        self.g = 183096451267674849541594370111199688704
+        self.m = 102752586316294557951738800745394456033378966059875498971396396583576430992701
+        self.A, self.a = self.gen_AB()  # a private key
+        self.B, self.b = self.gen_AB()  # b private key
+        self.key = pow(self.A, self.b, self.m)
+
+    def gen_AB(self):
+        x = &#39;&#39;
+        for _ in range(64):
+            x += &#39;1&#39; if self.lcg.next() % 2 else &#39;0&#39;
+        return pow(self.g, int(x, 2), self.m), int(x, 2)
+
+
+&#39;&#39;&#39;
+def next(x):
+    return (x * a + b) % m
+
+
+def brute_force():
+    for i in range(1&lt;&lt;32):
+        if i % 10000000 == 0:
+            print(&quot;count:&quot;, i)
+        res = next(i)
+        if (res &gt;&gt; 16) == 16269 and (next(res) &gt;&gt; 16) == 4249:
+            print(i)
+            break
+&#39;&#39;&#39;
+
+
+DH = DH()
+cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
+print(&quot;g = {}\nA = {}\nB = {}\nM = {}&quot;.format(DH.g, DH.A, DH.B, DH.m))
+print(&quot;flag = {}&quot;.format(cipher ^ DH.key))
+# flag = 13040004482819966666226297285938773653367957972934959074317939536564198335643452104954492541
+# flag{4dfe14e0c6c21ffcf5a3b4f0ed1911f6}
+&#39;&#39;&#39;
+a = 3844066521
+b = 3316005024
+m = 2249804527
+state1 = 16269
+state2 = 4249
+g = 183096451267674849541594370111199688704
+A = 102248652770540219619953045171664636108622486775480799200725530949685509093530
+B = 74913924633988481450801262607456437193056607965094613549273335198280176291445
+M = 102752586316294557951738800745394456033378966059875498971396396583576430992701
+Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
+&#39;&#39;&#39;
+</code></pre>
+<h2 id="Knapsack-Solved"><a href="#Knapsack-Solved" class="headerlink" title="Knapsack(Solved)"></a>Knapsack(Solved)</h2><p>quiz.py</p>
+<pre><code class="python">from Crypto.Util.number import *
+from functools import reduce
+
+def genKey(length):
+    A, B = getPrime(64), getPrime(1025)
+
+    Rn = getPrime(1024)
+    key1 = [Rn//2**i for i in range(1, length+1)]
+    key2 = [i*A % B for i in key1]
+    return key1,key2
+
+
+def encrypt(text,key):
+    Sum=0
+    for i in range(len(text)):
+        Sum+=int(text[i])*key[i]
+    return Sum
+
+def save(Ciper,Key):
+    f1=open(&quot;pub.txt&quot;,&quot;w&quot;)
+    for i in range(len(Key)):
+        f1.write(str(Key[i])+&#39;\n&#39;)
+    f2=open(&quot;cip.txt&quot;,&quot;w&quot;)
+    f2.write(hex(Ciper))
+
+
+FLAG = bin(bytes_to_long(flag.encode()))[2:]
+Key1,Key2 = genKey(len(FLAG))
+Ciper = encrypt(FLAG,Key1)
+save(Ciper,Key2)
+</code></pre>
+<p><strong>cip.txt</strong></p>
+<pre><code>a long hex string</code></pre><p><strong>pub.txt</strong></p>
+<pre><code>1015 public keys</code></pre><p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
+<h2 id="backpacker-Unsolved"><a href="#backpacker-Unsolved" class="headerlink" title="backpacker(Unsolved)"></a>backpacker(Unsolved)</h2><p>Remain confused</p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/Writeup">Writeup</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "das-CTF&GK-CTF-2020-Writeup&nbsp;",
+        ],
+        cursorChar: "|",
+        typeSpeed: 90,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "left",
+        visible: "true",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3");
+    </script>
+  
+</body>
+</html>
