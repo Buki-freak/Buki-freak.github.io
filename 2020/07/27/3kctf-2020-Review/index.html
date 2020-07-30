@@ -196,6 +196,80 @@ print(plaintext)</code></pre>
 <p>flag_encrypted</p>
 <p>…</p>
 </blockquote>
+<p>Excellent realization of LFSR and block cipher encryption in C. </p>
+<p>We notice that the initial vector is fixed, 0xa2 :) Addtionally, the key is fixed too, which means we can always get the same key stream. Moreover, I find something wired in cipher.c:</p>
+<pre><code>          case ECB:
+              temp_ciphertext = temp_keystream ^ temp_plaintext;
+              break;</code></pre><p>We can create a file with only ‘\x00’ and encrypt it in ECB mode to get the keystream. </p>
+<p>Since there are five modes, we can only try every situations.</p>
+<p>Woooool, finally catch ya! OFB!</p>
+<pre><code class="python">In [20]: plaintext = &#39;&#39;                                                         
+
+In [21]: for i in range(113): 
+    ...:     iv = iv ^ keystream[i] 
+    ...:     temp = iv ^ cipher[i] 
+    ...:     plaintext += chr(temp) 
+    ...:                                                                        
+
+In [22]: plaintext                                                              
+Out[22]: &#39;3k{my_hands_are_registered_as_lethal_weapons_that_means_we_get_into_a_fight_i_accidentally_kill_you_i_go_to_jail}&#39;</code></pre>
+<p>The flag is : 3k{my_hands_are_registered_as_lethal_weapons_that_means_we_get_into_a_fight_i_accidentally_kill_you_i_go_to_jail}</p>
+<h1 id="You-shall-not-get-my-cookies"><a href="#You-shall-not-get-my-cookies" class="headerlink" title="You shall not get my cookies"></a>You shall not get my cookies</h1><p>Given an example cipher, and if the cipher can be correctly decrypted, it will send “Nop” back.</p>
+<p>I follow the write up here: <a href="https://ctftime.org/writeup/22602" target="_blank" rel="noopener">https://ctftime.org/writeup/22602</a></p>
+<p>Notice that there is an error in the write up above: if the length of a block is 16 bytes, it will be appended a block of sixteen ‘\x16’ according to PKCS#7 padding principle.</p>
+<p>Here is my exp:</p>
+<pre><code class="python"># -*- coding:utf-8 -*-
+from pwn import *
+from Crypto.Util.number import bytes_to_long
+# context.log_level = &#39;debug&#39;
+
+target = &#39;youshallnotgetmycookies.3k.ctf.to&#39;
+port = 13337
+
+cipher = &quot;6F6A6A2C6E780D070A19001707060C0D&quot;
+
+suffix = &#39;&#39;
+fake_iv = &#39;&#39;
+dc = &#39;&#39;
+try:
+    for i in range(1,17):
+        assert(len(dc) == 2*(i-1))
+        for j in range(0x100):
+            guess = hex(j)[2:].upper().zfill(2)
+            fake_iv = &#39;00&#39; * (16-i) + guess + suffix
+            print(&#39;[-]&#39; + fake_iv)
+            p = remote(target, port)
+            p.sendlineafter(&#39;So... whats your cookie: &#39;, fake_iv + cipher)
+            res = p.recvall(timeout=4)
+            p.close()
+            res = res.decode()
+            if  len(res) == 11:
+                pad = bytes([i])
+                dc = hex(int(guess, 16) ^ bytes_to_long(pad))[2:].upper().zfill(2) + dc
+                suffix = hex(int(dc, 16) ^ bytes_to_long(bytes([(i+1)]) * i))[2:].upper().zfill(i*2)
+                print(&#39;[-]  D(C1) &#39;+ dc)
+                break
+    print(&#39;[-]  D(C1) &#39;+ dc)
+except pwnlib.exception.PwnlibException:
+    pass
+
+# 1C091F451A0B070D00130A1D0D0C0607  for the first block to be d(C2)
+# B0A608DDC37A458EEC0B74D37E888E8A  for the second block
+# ...3B143145885BB42C94 for the third block
+# C2
+# 90C560B2A01529EF986E54B016E1FEAA
+
+# C1
+# 6F6A6A2C6E780D070A19001707060C0D
+# Calculate d(C1)
+# 218A7AEECEFB49CADF3D227AD84A21CF
+
+# Calculate C0
+# 6CEB0A82ABDB06ABAB50471BB46A63A6
+
+# The whole fake cipher:
+# 6CEB0A82ABDB06ABAB50471BB46A63A66F6A6A2C6E780D070A19001707060C0D90C560B2A01529EF986E54B016E1FEAA</code></pre>
+<p>It cost 2 hours running this script twice.</p>
 
                             <hr>
                         </div>
