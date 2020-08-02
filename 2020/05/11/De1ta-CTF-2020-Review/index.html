@@ -103,7 +103,7 @@
                             <p>Only review in Crypto.</p>
 <h1 id="nlfsr-unsolved"><a href="#nlfsr-unsolved" class="headerlink" title="nlfsr(unsolved)"></a>nlfsr(unsolved)</h1><p>This challenge consists of 4 linear feedback shift registers (below I use LFSR instead), with accordingly 19 bits, 19 bits, 6 bits and 3 bits state length. Here is the given file:</p>
 <p><strong>quiz.py</strong></p>
-<pre><code class="python">from flag import a, b, c, d, flag
+<pre><code class="lang-python">from flag import a, b, c, d, flag
 assert flag == &quot;De1CTF{&quot; + &#39;&#39;.join([hex(i)[2:] for i in [a, b, c, d]]) + &quot;}&quot;
 assert [len(bin(i)[2:]) for i in [a, b, c, d]] == [19, 19, 13, 6]
 
@@ -133,7 +133,8 @@ def genkey(nb):
 genkey(128*1024)
 </code></pre>
 <p><strong>data</strong></p>
-<pre><code>a string that comprises of 128*1024*8 bits(only zero or one)</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>There are four LFSR in quiz.py and each round, four LFSR simultaneously compute four according output. Then the combination function combines these four bits and output the combination result into file data.</p>
+<pre><code>a string that comprises of 128*1024*8 bits(only zero or one)
+</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>There are four LFSR in quiz.py and each round, four LFSR simultaneously compute four according output. Then the combination function combines these four bits and output the combination result into file data.</p>
 <h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>Since LFSR is the basic knowledge for us, there will more no more explanation on it. So let’s see what we have  got from the files.</p>
 <blockquote>
 <p>the initial state length of each LFSR</p>
@@ -141,8 +142,11 @@ genkey(128*1024)
 <p>a combination function</p>
 <p>many rounds combination results</p>
 </blockquote>
-<p>It seems to be a simple quiz because we have already known the taps of each LFSR. However, each output of four LFSR is combined as one bit, from which we can hardly retrieve the outputs of four LFSR. If we use pure brute-force attack method, the complexity would be:<br>$$<br>O(2^{47})<br>$$<br> Such a large scale. We must relate one or some output of four LFSR to the combination result and solve the each state independently. We can use a strategies called <strong>correlation attack</strong> in stream cipher.</p>
+<p>It seems to be a simple quiz because we have already known the taps of each LFSR. However, each output of four LFSR is combined as one bit, from which we can hardly retrieve the outputs of four LFSR. If we use pure brute-force attack method, the complexity would be:</p>
+<script type="math/tex; mode=display">
+O(2^{47})</script><p> Such a large scale. We must relate one or some output of four LFSR to the combination result and solve the each state independently. We can use a strategies called <strong>correlation attack</strong> in stream cipher.</p>
 <h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>We first look into each possible situation of four LFSR and write down the result.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -153,7 +157,8 @@ genkey(128*1024)
 <th>combine</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -265,10 +270,17 @@ genkey(128*1024)
 <td>1</td>
 <td>1</td>
 </tr>
-</tbody></table>
-<p>In the table, ao represents the single output of LFSR-1 and so on. It is very obvious that ao has 75% correlation with the combination output, and we also know that if we have the correct initial state of LFSR-1,  three out of four output of LFSR-1 will be the same as the combination bits. As a result, we can independently search the initial state of LFSR-1, and the correct initial state should be the fittest one. Now the complexity comes down to:<br>$$<br>O(2^{19}+2^{28})=O({2^{28}})<br>$$<br>This is already considerable in brute-force attack method (I use approximately 3 hours with C++, half a day with python to solve). But sadly, outputs of other LFSR just has 50% correlation with the combination output (actually no correlation). We can look into the combination function:</p>
-<pre><code>(ao*bo) ^ (bo*co) ^ (bo*do) ^ co ^ do</code></pre><p>And interestingly it can be transformed into:</p>
-<pre><code>(ao*bo) ^ ((bo^1) * (co^do))</code></pre><p>Calculating the XOR result of co and do by ourselves, we can surprisingly find that there is correlation between (co^do) and the combination result. Try to write down the table again.</p>
+</tbody>
+</table>
+</div>
+<p>In the table, ao represents the single output of LFSR-1 and so on. It is very obvious that ao has 75% correlation with the combination output, and we also know that if we have the correct initial state of LFSR-1,  three out of four output of LFSR-1 will be the same as the combination bits. As a result, we can independently search the initial state of LFSR-1, and the correct initial state should be the fittest one. Now the complexity comes down to:</p>
+<script type="math/tex; mode=display">
+O(2^{19}+2^{28})=O({2^{28}})</script><p>This is already considerable in brute-force attack method (I use approximately 3 hours with C++, half a day with python to solve). But sadly, outputs of other LFSR just has 50% correlation with the combination output (actually no correlation). We can look into the combination function:</p>
+<pre><code>(ao*bo) ^ (bo*co) ^ (bo*do) ^ co ^ do
+</code></pre><p>And interestingly it can be transformed into:</p>
+<pre><code>(ao*bo) ^ ((bo^1) * (co^do))
+</code></pre><p>Calculating the XOR result of co and do by ourselves, we can surprisingly find that there is correlation between (co^do) and the combination result. Try to write down the table again.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -278,7 +290,8 @@ genkey(128*1024)
 <th>combine</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -326,11 +339,14 @@ genkey(128*1024)
 <td>1</td>
 <td>1</td>
 </tr>
-</tbody></table>
-<p>Again we can know from the table that (co^do) has 75% correlation with the combination output, which is the same as ao. There the complexity comes down again to:<br>$$<br>O(2^{19}+2^{9}+2^{19})=O(2^{20})<br>$$</p>
-<p>The complexity is very considerable now.</p>
+</tbody>
+</table>
+</div>
+<p>Again we can know from the table that (co^do) has 75% correlation with the combination output, which is the same as ao. There the complexity comes down again to:</p>
+<script type="math/tex; mode=display">
+O(2^{19}+2^{9}+2^{19})=O(2^{20})</script><p>The complexity is very considerable now.</p>
 <h2 id="Realization"><a href="#Realization" class="headerlink" title="Realization"></a>Realization</h2><p>Official realization</p>
-<pre><code class="python"># coding:utf8
+<pre><code class="lang-python"># coding:utf8
 import time
 
 
@@ -408,7 +424,8 @@ if __name__ == &quot;__main__&quot;:
     &quot;De1CTF{%s}&quot; % (&#39;&#39;.join([hex(i)[2:] for i in [a, b, c, d]]))
     end_time = time.time()
     print(&quot;Used time:&quot;, end_time - start_time)
-# De1CTF{58bb578d5611363f}</code></pre>
+# De1CTF{58bb578d5611363f}
+</code></pre>
 <p>Other challenges still remain confused.</p>
 <h1 id="What-I-have-done"><a href="#What-I-have-done" class="headerlink" title="What I have done"></a>What I have done</h1><p>I spent half of my afternoon writing this article, and I still have a long way to go. Keep on learning IELTS and number theory.</p>
 <h1 id="Things-to-Learn-and-Improve"><a href="#Things-to-Learn-and-Improve" class="headerlink" title="Things to Learn and Improve"></a>Things to Learn and Improve</h1><ul>

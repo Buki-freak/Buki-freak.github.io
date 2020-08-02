@@ -102,7 +102,7 @@
                         <div class="markdown-body">
                             <p>比赛排得很密，gkd 把 writeup 写了。</p>
 <h1 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h1><p>签到题，对于每一次加密，明文空间小，于是直接遍历。</p>
-<pre><code class="python">n = ...
+<pre><code class="lang-python">n = ...
 cipher = ...
 
 
@@ -115,9 +115,10 @@ for i in range(len(cipher)):
         if pow(ord(s),e,n) == cipher[i]:
             plaintext += s
             print(plaintext)
-            break</code></pre>
+            break
+</code></pre>
 <h1 id="hardRSA"><a href="#hardRSA" class="headerlink" title="hardRSA"></a>hardRSA</h1><p>已知 d 低 539 位，q 为 510 位，计算低位 q 的方法可以直接获得 q。</p>
-<pre><code class="python">import gmpy2
+<pre><code class="lang-python">import gmpy2
 from Crypto.Util.number import long_to_bytes
 
 def find_q(d0, kbits, e, n, p):
@@ -144,7 +145,8 @@ if __name__ == &#39;__main__&#39;:
     r = n // q // p
     phi = (r - 1) * (p - 1) * (q - 1)
     d = gmpy2.invert(e,phi)
-    print(long_to_bytes(pow(c,d,n)))</code></pre>
+    print(long_to_bytes(pow(c,d,n)))
+</code></pre>
 <p><strong>ps：之后把推导过程补上</strong></p>
 <h1 id="AliceHomework"><a href="#AliceHomework" class="headerlink" title="AliceHomework"></a>AliceHomework</h1><p>LLL 没跑出来，疑惑.jpg</p>
 <h1 id="PolyCrypto"><a href="#PolyCrypto" class="headerlink" title="PolyCrypto"></a>PolyCrypto</h1><p>没时间看题。。。tcl</p>

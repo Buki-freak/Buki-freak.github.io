@@ -101,14 +101,15 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <h1 id="pyzzle1"><a href="#pyzzle1" class="headerlink" title="pyzzle1"></a>pyzzle1</h1><p>Given a cst tree code, use libcst package in python to transform it into source code:</p>
-<pre><code class="python">from libcst import *
+<pre><code class="lang-python">from libcst import *
 abc = Module(....
 )
 
 with open(&#39;...&#39;,&#39;w&#39;) as f:
-    f.write(str(abc.code))</code></pre>
+    f.write(str(abc.code))
+</code></pre>
 <p>Here is the source code in python:</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 import binascii
 
 plaintext = &quot;REDACTED&quot;
@@ -156,9 +157,10 @@ cipher = L3+R3
 # plaintext = L6+R6
 # plaintext = int(plaintext, 2)
 # plaintext = binascii.unhexlify(&#39;%x&#39; % plaintext)
-# print(plaintext)</code></pre>
+# print(plaintext)
+</code></pre>
 <p>This is a pretty easy structure, we can easily recover plaintext by:</p>
-<pre><code class="python">import binascii
+<pre><code class="lang-python">import binascii
 
 def exor(a, b):
     temp = &quot;&quot;
@@ -186,7 +188,8 @@ plaintext = L1+R1
 plaintext = int(plaintext, 2)
 plaintext = binascii.unhexlify(&#39;%x&#39; % plaintext)
 plaintext = binascii.unhexlify(plaintext)
-print(plaintext)</code></pre>
+print(plaintext)
+</code></pre>
 <p>The flag is : 3k{almost_done_shizzle_up_my_nizzle}</p>
 <h1 id="Once-upon-a-time"><a href="#Once-upon-a-time" class="headerlink" title="Once_upon_a_time"></a>Once_upon_a_time</h1><p>Given a program and encrypted flag:</p>
 <blockquote>
@@ -200,10 +203,11 @@ print(plaintext)</code></pre>
 <p>We notice that the initial vector is fixed, 0xa2 :) Addtionally, the key is fixed too, which means we can always get the same key stream. Moreover, I find something wired in cipher.c:</p>
 <pre><code>          case ECB:
               temp_ciphertext = temp_keystream ^ temp_plaintext;
-              break;</code></pre><p>We can create a file with only ‘\x00’ and encrypt it in ECB mode to get the keystream. </p>
+              break;
+</code></pre><p>We can create a file with only ‘\x00’ and encrypt it in ECB mode to get the keystream. </p>
 <p>Since there are five modes, we can only try every situations.</p>
 <p>Woooool, finally catch ya! OFB!</p>
-<pre><code class="python">In [20]: plaintext = &#39;&#39;                                                         
+<pre><code class="lang-python">In [20]: plaintext = &#39;&#39;                                                         
 
 In [21]: for i in range(113): 
     ...:     iv = iv ^ keystream[i] 
@@ -212,13 +216,14 @@ In [21]: for i in range(113):
     ...:                                                                        
 
 In [22]: plaintext                                                              
-Out[22]: &#39;3k{my_hands_are_registered_as_lethal_weapons_that_means_we_get_into_a_fight_i_accidentally_kill_you_i_go_to_jail}&#39;</code></pre>
+Out[22]: &#39;3k{my_hands_are_registered_as_lethal_weapons_that_means_we_get_into_a_fight_i_accidentally_kill_you_i_go_to_jail}&#39;
+</code></pre>
 <p>The flag is : 3k{my_hands_are_registered_as_lethal_weapons_that_means_we_get_into_a_fight_i_accidentally_kill_you_i_go_to_jail}</p>
 <h1 id="You-shall-not-get-my-cookies"><a href="#You-shall-not-get-my-cookies" class="headerlink" title="You shall not get my cookies"></a>You shall not get my cookies</h1><p>Given an example cipher, and if the cipher can be correctly decrypted, it will send “Nop” back.</p>
 <p>I follow the write up here: <a href="https://ctftime.org/writeup/22602" target="_blank" rel="noopener">https://ctftime.org/writeup/22602</a></p>
 <p>Notice that there is an error in the write up above: if the length of a block is 16 bytes, it will be appended a block of sixteen ‘\x16’ according to PKCS#7 padding principle.</p>
 <p>Here is my exp:</p>
-<pre><code class="python"># -*- coding:utf-8 -*-
+<pre><code class="lang-python"># -*- coding:utf-8 -*-
 from pwn import *
 from Crypto.Util.number import bytes_to_long
 # context.log_level = &#39;debug&#39;
@@ -268,7 +273,8 @@ except pwnlib.exception.PwnlibException:
 # 6CEB0A82ABDB06ABAB50471BB46A63A6
 
 # The whole fake cipher:
-# 6CEB0A82ABDB06ABAB50471BB46A63A66F6A6A2C6E780D070A19001707060C0D90C560B2A01529EF986E54B016E1FEAA</code></pre>
+# 6CEB0A82ABDB06ABAB50471BB46A63A66F6A6A2C6E780D070A19001707060C0D90C560B2A01529EF986E54B016E1FEAA
+</code></pre>
 <p>It cost 2 hours running this script twice.</p>
 
                             <hr>

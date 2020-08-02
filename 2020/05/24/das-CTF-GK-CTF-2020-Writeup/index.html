@@ -103,7 +103,7 @@
                             <p>Only writeup in Crypto.</p>
 <h1 id="GKCTF"><a href="#GKCTF" class="headerlink" title="GKCTF"></a>GKCTF</h1><h2 id="小学生的密码学-Solved"><a href="#小学生的密码学-Solved" class="headerlink" title="小学生的密码学(Solved)"></a>小学生的密码学(Solved)</h2><p>Pretty easy affince cipher. Both keys are given.</p>
 <h2 id="babycrypto-Solved"><a href="#babycrypto-Solved" class="headerlink" title="babycrypto(Solved)"></a>babycrypto(Solved)</h2><p>Partial high bits of p is known.</p>
-<pre><code class="Python"># Use sage to run the script
+<pre><code class="lang-Python"># Use sage to run the script
 # Reference: https://www.jianshu.com/p/1a0e876d5929
 from sage.all import *
 from Crypto.Util.number import long_to_bytes
@@ -126,17 +126,19 @@ if roots:
     phin = (p-1)*(q-1)
     d = inverse_mod(e2,phin)
     flag = pow(cipher,d,n)
-    print long_to_bytes(flag)</code></pre>
+    print long_to_bytes(flag)
+</code></pre>
 <h2 id="汉字的密码-Solved"><a href="#汉字的密码-Solved" class="headerlink" title="汉字的密码(Solved)"></a>汉字的密码(Solved)</h2><p>当铺密码+Substitution Cipher</p>
-<pre><code class="python">dic = [66, 74, 62, 67, 118, 83, 72, 77, 86, 55, 71, 57, 82, 57, 64, 63, 51, 107]
+<pre><code class="lang-python">dic = [66, 74, 62, 67, 118, 83, 72, 77, 86, 55, 71, 57, 82, 57, 64, 63, 51, 107]
 delta = 1
 for i in dic:
     print(chr(i+delta), end=&quot;&quot;)
     delta += 1
-# FLAG{YOU_ARE_GOOD}</code></pre>
+# FLAG{YOU_ARE_GOOD}
+</code></pre>
 <h2 id="Backdoor-Unsolved"><a href="#Backdoor-Unsolved" class="headerlink" title="Backdoor(Unsolved)"></a>Backdoor(Unsolved)</h2><p>Remain confused</p>
 <h1 id="DASCTF"><a href="#DASCTF" class="headerlink" title="DASCTF"></a>DASCTF</h1><h2 id="bbcrypto-Solved"><a href="#bbcrypto-Solved" class="headerlink" title="bbcrypto(Solved)"></a>bbcrypto(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="python"># -*- coding:utf-8 -*-
+<pre><code class="lang-python"># -*- coding:utf-8 -*-
 import A,SALT
 from itertools import *
 
@@ -161,7 +163,7 @@ if __name__ == &quot;__main__&quot;:
     #177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d
 </code></pre>
 <p>The length of salt is 3 and we have already known that the plain starts with “flag{“. Solve linear congruent equations to get the salt.</p>
-<pre><code class="python">c = &quot;177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d&quot;
+<pre><code class="lang-python">c = &quot;177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d&quot;
 li_c = [int(c[i:i+2], 16) for i in range(0, len(c), 2)]
 # print(li_c)
 m = &quot;flag{&quot;
@@ -187,7 +189,7 @@ for i in li_c:
 print(m)
 </code></pre>
 <h2 id="encrypt-img-Solved"><a href="#encrypt-img-Solved" class="headerlink" title="encrypt_img(Solved)"></a>encrypt_img(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="python">from numpy import array
+<pre><code class="lang-python">from numpy import array
 from PIL import Image
 from secret import Key
 
@@ -254,7 +256,7 @@ Encrypt(Plaintext2)
 <p><strong>enc2.png</strong></p>
 <p><strong>Stream Cipher Insertion Attack</strong></p>
 <p>Such a pity that I didn’t figure it out at that time. From two groups of plaintexts and ciphertexts we can recover keystream at the start. However, the second keystream has one bit less than the first one, from which we easily can retrieve m0, then k1, after that m1 and so on.</p>
-<pre><code class="python">&#39;&#39;&#39;
+<pre><code class="lang-python">&#39;&#39;&#39;
 plaintext1 = &quot;RC4IsInteresting&quot;
 plaintext2 = &quot;ThisIsAEasyGame&quot;
 
@@ -304,7 +306,7 @@ def recovery_img(im1, im2, k):
 recovery_img(img1, img2, 126)
 </code></pre>
 <h2 id="babyLCG-Solved"><a href="#babyLCG-Solved" class="headerlink" title="babyLCG(Solved)"></a>babyLCG(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="python">from Crypto.Util.number import*
+<pre><code class="lang-python">from Crypto.Util.number import*
 from secret import flag
 
 
@@ -362,7 +364,7 @@ Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949
 </code></pre>
 <p><strong>LCG+Diffie Hellman Exchange Key</strong></p>
 <p>The seed is too small ,as a result, we use brute-force attack to get the seed and recover the key. When we XOR the cipher with the key, the plain is figured out.</p>
-<pre><code class="python">&#39;&#39;&#39;
+<pre><code class="lang-python">&#39;&#39;&#39;
 a = 3844066521
 b = 3316005024
 m = 2249804527
@@ -439,7 +441,7 @@ Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949
 &#39;&#39;&#39;
 </code></pre>
 <h2 id="Knapsack-Solved"><a href="#Knapsack-Solved" class="headerlink" title="Knapsack(Solved)"></a>Knapsack(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="python">from Crypto.Util.number import *
+<pre><code class="lang-python">from Crypto.Util.number import *
 from functools import reduce
 
 def genKey(length):
@@ -471,8 +473,10 @@ Ciper = encrypt(FLAG,Key1)
 save(Ciper,Key2)
 </code></pre>
 <p><strong>cip.txt</strong></p>
-<pre><code>a long hex string</code></pre><p><strong>pub.txt</strong></p>
-<pre><code>1015 public keys</code></pre><p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
+<pre><code>a long hex string
+</code></pre><p><strong>pub.txt</strong></p>
+<pre><code>1015 public keys
+</code></pre><p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
 <h2 id="backpacker-Unsolved"><a href="#backpacker-Unsolved" class="headerlink" title="backpacker(Unsolved)"></a>backpacker(Unsolved)</h2><p>Remain confused</p>
 <h1 id="What-I-have-done"><a href="#What-I-have-done" class="headerlink" title="What I have done"></a><strong>What I have done</strong></h1><p>Finish learning symmetric cipher and the first chapter of Network Introduction. </p>
 <h1 id="Things-to-Improve"><a href="#Things-to-Improve" class="headerlink" title="Things to Improve"></a>Things to Improve</h1><ul>

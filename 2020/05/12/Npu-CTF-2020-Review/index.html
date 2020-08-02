@@ -101,14 +101,16 @@
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
                             <p>Only review in Crypto.</p>
-<h1 id="What-does-the-tag-mean"><a href="#What-does-the-tag-mean" class="headerlink" title="What does the tag mean"></a>What does the tag mean</h1><table>
+<h1 id="What-does-the-tag-mean"><a href="#What-does-the-tag-mean" class="headerlink" title="What does the tag mean"></a>What does the tag mean</h1><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Status</th>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Solved</td>
 <td>Solved in the competition</td>
 </tr>
@@ -116,10 +118,12 @@
 <td>Unlved</td>
 <td>Unsolved in the competition</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h1 id="Mersenne-Twister-unsolved"><a href="#Mersenne-Twister-unsolved" class="headerlink" title="Mersenne Twister(unsolved)"></a>Mersenne Twister(unsolved)</h1><p>This challenge is related to Mersenne Twister Encryption. However, there are differences between them exactly. Here is the file:</p>
 <p><strong>Mersenne Twiser.py</strong></p>
-<pre><code class="python">from hashlib import *
+<pre><code class="lang-python">from hashlib import *
 from itertools import *
 from binascii import hexlify , unhexlify
 
@@ -180,7 +184,8 @@ if __name__ == &quot;__main__&quot;:
         f.write(cipher)
 </code></pre>
 <p><strong>cipher.txt</strong></p>
-<pre><code>an 832 bytes long hex string</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
+<pre><code>an 832 bytes long hex string
+</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
 <h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>Only a few conditions are given.</p>
 <blockquote>
 <p>the encryption result in cipher.txt</p>
@@ -191,24 +196,27 @@ if __name__ == &quot;__main__&quot;:
 </blockquote>
 <h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>Given that the first part of the flag is “npuctf{“, which is a 7 bytes long string, we can retrieve the first 28 generated states with the according cipher in cipher.txt. Since we also know the last byte of the string(“}”) and the length of the string, we can easily retrieve the 100th~103th generated states. </p>
 <p>Then we look into the generate function.</p>
-<pre><code class="python">    def generate(self):
+<pre><code class="lang-python">    def generate(self):
         for i in range(233):
             y = (self.state[i] &amp; 0x80000000) | (self.state[(i + 1) % 233] &amp; 0x7fffffff)
             temp = y &gt;&gt; 1
             temp ^= self.state[(i + 130) % 233]
             if y &amp; 1:
                 temp ^= 0x9908f23f
-            self.state[i] = temp</code></pre>
+            self.state[i] = temp
+</code></pre>
 <p>Suppose that i equals to 103, we try to write down that situation.</p>
-<pre><code class="python">    def generate(self):
+<pre><code class="lang-python">    def generate(self):
         for i in range(233):
             y = (self.state[103] &amp; 0x80000000) | (self.state[(104) % 233] &amp; 0x7fffffff)
             temp = y &gt;&gt; 1  # 1
             temp ^= self.state[(0) % 233]  # 2
             if y &amp; 1:
                 temp ^= 0x9908f23f
-            self.state[103] = temp  # 3</code></pre>
+            self.state[103] = temp  # 3
+</code></pre>
 <p>In this situation, it is possible for us to retrieve the104th initial state, which means that we can get the seed through inversing. There are two possibilities in this situation(state[104] is odd or even). We try to draw a table.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -218,7 +226,8 @@ if __name__ == &quot;__main__&quot;:
 <th>hb(3)</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>even</td>
 <td>0</td>
 <td>0</td>
@@ -230,11 +239,13 @@ if __name__ == &quot;__main__&quot;:
 <td>0</td>
 <td>1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>hb in the table above means the highest bit of the value in the line #n. Based on the fact that the true hb(3) is 0, which is the highest bit of the 103th generated state, it is impossible for the 104th initial state to be odd. Therefore, we can retrieve y and the low 31 bits of the 104 initial state. Since the highest bit is unknown, we can guess it (zero or one). Therefore, there are two possible seeds, which can be judged in the end. Because the seed is retrieved, we can decrypt the cipher easily.(Something just like Symmetric Cipher)</p>
 <p>By the way, the md5 function in encrypt function seems to be useless because it only encrypts one character, for which we can correspondingly generate an md5 dictionary of all printable characters and print the corresponding characters.</p>
 <h2 id="Realization"><a href="#Realization" class="headerlink" title="Realization"></a>Realization</h2><p>Here is my realization.</p>
-<pre><code class="python">import hashlib
+<pre><code class="lang-python">import hashlib
 import binascii
 from Cryptodome.Util.number import *
 import string
@@ -427,7 +438,7 @@ for i in range(26):
 <p>这题一开始出题人搞错了。。。自闭了一下午</p>
 <h1 id="认清形势，建立信心"><a href="#认清形势，建立信心" class="headerlink" title="认清形势，建立信心"></a>认清形势，建立信心</h1><p>After observing the task.py, we can find that this is a classical discrete logarithm problem. Let’s see the file.</p>
 <p><strong>task.py</strong></p>
-<pre><code class="python">from Crypto.Util.number import *
+<pre><code class="lang-python">from Crypto.Util.number import *
 from gmpy2 import *
 from secret import flag
 
@@ -457,10 +468,12 @@ print(pow(8, e, n))
 <p>remains of four equations</p>
 </blockquote>
 <p>My idea is that n is possible to be solved and after that we can use the second equation to calculate e, using  discrete logarithm calculation methods.</p>
-<h2 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h2><p>We can notice that:<br>$$<br>n;|;gcd(c1^{3};-;c3,;c1^{2};-;c2)<br>$$<br>From this character and another character that n is the product of two big prime number, we can get n.</p>
+<h2 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h2><p>We can notice that:</p>
+<script type="math/tex; mode=display">
+n\;|\;gcd(c1^{3}\;-\;c3,\;c1^{2}\;-\;c2)</script><p>From this character and another character that n is the product of two big prime number, we can get n.</p>
 <p>After that, it is really convenient that we can use discrete_log() function in Sage to calculate e. Luckily, e is coprime with n, so the inverse exists. The decryption is the similar with rsa.</p>
 <h2 id="Realization-1"><a href="#Realization-1" class="headerlink" title="Realization"></a>Realization</h2><p>My realization.</p>
-<pre><code class="python">#! /usr/bin/env sage
+<pre><code class="lang-python">#! /usr/bin/env sage
 from Crypto.Util.number import long_to_bytes
 import gmpy2
 
@@ -492,7 +505,6 @@ e = discrete_log(Mod(c_1, n), Mod(2, n))
 d = gmpy2.invert(e, phi)
 m = pow(c, d, n)
 print(long_to_bytes(m))
-
 </code></pre>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Mersenne_Twister</a></p>
 
