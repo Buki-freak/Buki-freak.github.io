@@ -37,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/tags/index.html</loc>
+    <loc>https://buki-freak.github.io/repository/index.html</loc>
     
     <lastmod>2020-08-03</lastmod>
     
@@ -51,7 +51,7 @@
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/repository/index.html</loc>
+    <loc>https://buki-freak.github.io/tags/index.html</loc>
     
     <lastmod>2020-08-03</lastmod>
     
@@ -123,14 +123,14 @@
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/tags/Learning/</loc>
+    <loc>https://buki-freak.github.io/tags/Writeup/</loc>
     <lastmod>2020-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/tags/Writeup/</loc>
+    <loc>https://buki-freak.github.io/tags/Learning/</loc>
     <lastmod>2020-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
