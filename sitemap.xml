@@ -102,13 +102,6 @@
 
   
   <url>
-    <loc>https://buki-freak.github.io/tags/Learning/</loc>
-    <lastmod>2020-08-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://buki-freak.github.io/tags/Daily-Post/</loc>
     <lastmod>2020-08-03</lastmod>
     <changefreq>daily</changefreq>
@@ -124,6 +117,13 @@
   
   <url>
     <loc>https://buki-freak.github.io/tags/Review/</loc>
+    <lastmod>2020-08-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://buki-freak.github.io/tags/Learning/</loc>
     <lastmod>2020-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
