@@ -1,593 +1,479 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
+<html lang=zh>
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Programming">
-    <meta name="author" content="Haojen Lau">
-    <meta name="keywords" content>
-    <title>das-CTF&amp;GK-CTF-2020-Writeup - buki</title>
-    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
-    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
-    
-        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
-    
-    <link rel="stylesheet" href="/css/main.css">
-
-    
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>das-CTF&amp;GK-CTF-2020-Writeup | buk1&#39;s blog</title>
+  <meta name="description" content="Only writeup in Crypto.  GKCTF  小学生的密码学(Solved) Pretty easy affince cipher. Both keys are given.  babycrypto(Solved) Partial high bits of p is known. 123456789101112131415161718192021222324# Use sage">
+<meta name="keywords" content="Writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="das-CTF&amp;GK-CTF-2020-Writeup">
+<meta property="og:url" content="https://buki-freak.github.io/2020/05/24/das-CTF-GK-CTF-2020-Writeup/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="Only writeup in Crypto.  GKCTF  小学生的密码学(Solved) Pretty easy affince cipher. Both keys are given.  babycrypto(Solved) Partial high bits of p is known. 123456789101112131415161718192021222324# Use sage">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-03T03:26:26.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="das-CTF&amp;GK-CTF-2020-Writeup">
+<meta name="twitter:description" content="Only writeup in Crypto.  GKCTF  小学生的密码学(Solved) Pretty easy affince cipher. Both keys are given.  babycrypto(Solved) Partial high bits of p is known. 123456789101112131415161718192021222324# Use sage">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/05/24/das-CTF-GK-CTF-2020-Writeup/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
 </head>
 
 
-<body>
-<header style="height: 30vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-<div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/archives/">Archives</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/categories/">Categories</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/tags/">Tags</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/about/">About</a>
-            </li>
-            
-        </ul>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
 
 
-</nav>
-    <div class="view intro-2"
-         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
-        <div class="full-bg-img">
-            <div class="mask rgba-black-light flex-center">
-                <div class="container text-center white-text wow fadeInUp">
-                    <span class="h2" id="subtitle">
-                        
-                    </span>
-                    
-                        <br>
-                        <p>星期日, 五月 24日 2020, 9:30 上午</p>
-                    
-                </div>
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
             </div>
         </div>
     </div>
-</header>
+</div>
 
-<main>
     
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-das-CTF-GK-CTF-2020-Writeup" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
         
+  
+    <h1 class="article-title" itemprop="name">
+      das-CTF&amp;GK-CTF-2020-Writeup
+    </h1>
+  
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="d-none d-lg-block col-lg-2"></div>
-            <div class="col-lg-8 nopadding-md">
-                <div class="py-5 z-depth-3 board">
-                    <div class="post-content mx-auto">
-                        <div class="markdown-body">
-                            <p>Only writeup in Crypto.</p>
-<h1 id="GKCTF"><a href="#GKCTF" class="headerlink" title="GKCTF"></a>GKCTF</h1><h2 id="小学生的密码学-Solved"><a href="#小学生的密码学-Solved" class="headerlink" title="小学生的密码学(Solved)"></a>小学生的密码学(Solved)</h2><p>Pretty easy affince cipher. Both keys are given.</p>
-<h2 id="babycrypto-Solved"><a href="#babycrypto-Solved" class="headerlink" title="babycrypto(Solved)"></a>babycrypto(Solved)</h2><p>Partial high bits of p is known.</p>
-<pre><code class="lang-Python"># Use sage to run the script
-# Reference: https://www.jianshu.com/p/1a0e876d5929
-from sage.all import *
-from Crypto.Util.number import long_to_bytes
-
-# All variables are in hex
-n = 0xb119849bc4523e49c6c038a509a74cda628d4ca0e4d0f28e677d57f3c3c7d0d876ef07d7581fe05a060546fedd7d061d3bc70d679b6c5dd9bc66c5bdad8f2ef898b1e785496c4989daf716a1c89d5c174da494eee7061bcb6d52cafa337fc2a7bba42c918bbd3104dff62ecc9d3704a455a6ce282de0d8129e26c840734ffd302bec5f0a66e0e6d00b5c50fa57c546cff9d7e6a978db77997082b4cb927df9847dfffef55138cb946c62c9f09b968033745b5b6868338c64819a8e92a827265f9abd409359a9471d8c3a2631b80e5b462ba42336717700998ff38536c2436e24ac19228cd2d7a909ead1a8494ff6c3a7151e888e115b68cc6a7a8c6cf8a6c005
-
-# Padding zeros to p --&gt; p4
-p4 = 0xe4e4b390c1d201dae2c00a4669c0865cc5767bc444f5d310f3cfc75872d96feb89e556972c99ae20753e3314240a52df5dccd076a47c6b5d11b531b92d901b2b512aeb0b263bbfd624fe3d52e5e238beeb581ebe012b2f176a4ffd1e0d2aa8c4d3a2656573b727d4d3136513a931428b00000000000000000000000000000000
-cipher = 1422566584480199878714663051468143513667934216213366733442059106529451931078271460363335887054199577950679102659270179475911101747625120544429262334214483688332111552004535828182425152965223599160129610990036911146029170033592055768983427904835395850414634659565092191460875900237711597421272312032796440948509724492027247376113218678183443222364531669985128032971256792532015051829041230203814090194611041172775368357197854451201260927117792277559690205342515437625417792867692280849139537687763919269337822899746924269847694138899165820004160319118749298031065800530869562704671435709578921901495688124042302500361
-e2 = 65537
-kbits = 128  # kbits represent the loss bits
-PR.&lt;x&gt; = PolynomialRing(Zmod(n))  # Create a polynomial ring
-f = x + p4
-roots = f.small_roots(X=2^kbits, beta=0.4)
-if roots:        
-    p = p4 + int(roots[0])
-    assert n % p == 0
-    q = n / int(p)
-    phin = (p-1)*(q-1)
-    d = inverse_mod(e2,phin)
-    flag = pow(cipher,d,n)
-    print long_to_bytes(flag)
-</code></pre>
-<h2 id="汉字的密码-Solved"><a href="#汉字的密码-Solved" class="headerlink" title="汉字的密码(Solved)"></a>汉字的密码(Solved)</h2><p>当铺密码+Substitution Cipher</p>
-<pre><code class="lang-python">dic = [66, 74, 62, 67, 118, 83, 72, 77, 86, 55, 71, 57, 82, 57, 64, 63, 51, 107]
-delta = 1
-for i in dic:
-    print(chr(i+delta), end=&quot;&quot;)
-    delta += 1
-# FLAG{YOU_ARE_GOOD}
-</code></pre>
-<h2 id="Backdoor-Unsolved"><a href="#Backdoor-Unsolved" class="headerlink" title="Backdoor(Unsolved)"></a>Backdoor(Unsolved)</h2><p>Remain confused</p>
-<h1 id="DASCTF"><a href="#DASCTF" class="headerlink" title="DASCTF"></a>DASCTF</h1><h2 id="bbcrypto-Solved"><a href="#bbcrypto-Solved" class="headerlink" title="bbcrypto(Solved)"></a>bbcrypto(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="lang-python"># -*- coding:utf-8 -*-
-import A,SALT
-from itertools import *
-
-def encrypt(m, a, si):
-    c=&quot;&quot;
-    for i in range(len(m)):
-        c+=hex(((ord(m[i])) * a + ord(next(si))) % 128)[2:].zfill(2)
-    return c
-if __name__ == &quot;__main__&quot;:
-    m = &#39;flag{********************************}&#39;
-    a = A
-    salt = SALT
-    assert(len(salt)==3)
-    assert(salt.isalpha())
-    si = cycle(salt.lower())
-    print(&quot;明文内容为：&quot;)
-    print(m)
-    print(&quot;加密后的密文为：&quot;)
-    c=encrypt(m, a, si)
-    print(c)
-    #加密后的密文为：
-    #177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d
-</code></pre>
-<p>The length of salt is 3 and we have already known that the plain starts with “flag{“. Solve linear congruent equations to get the salt.</p>
-<pre><code class="lang-python">c = &quot;177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d&quot;
-li_c = [int(c[i:i+2], 16) for i in range(0, len(c), 2)]
-# print(li_c)
-m = &quot;flag{&quot;
-d_c = li_c[3] - li_c[0]
-# print(d_c)
-d_m = ord(m[3]) - ord(m[0])
-# print(d_m)  # a = 57 mod 128
-a = 57
-# print((li_c[0] - a * ord(m[0])) % 128)
-# print(chr(97))  y1 = &#39;a&#39;
-# print((li_c[1] - a * ord(m[1])) % 128)
-# print(chr(104)) y2 = &#39;h&#39;
-# print((li_c[2] - a * ord(m[2])) % 128)
-# print(chr(104))  # y3 = &#39;h&#39;
-# print((li_c[3] - a * ord(m[3])) % 128)
-m = &quot;&quot;
-from gmpy2 import invert
-import itertools
-inv_a = invert(a, 128)
-key = itertools.cycle(&quot;ahh&quot;)
-for i in li_c:
-    m += chr(((i - ord(next(key))) * inv_a) % 128)
-print(m)
-</code></pre>
-<h2 id="encrypt-img-Solved"><a href="#encrypt-img-Solved" class="headerlink" title="encrypt_img(Solved)"></a>encrypt_img(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="lang-python">from numpy import array
-from PIL import Image
-from secret import Key
-
-Plaintext1 = &quot;RC4IsInteresting&quot;
-Plaintext2 = &quot;ThisIsAEasyGame&quot;
-cnt = 0
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/" class="article-date">
+	  <time datetime="2020-05-24T01:30:24.000Z" itemprop="datePublished">2020-05-24</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Writeup/">Writeup</a>
+  </span>
 
 
-class RC4():
-    def __init__(self, Key):
-        self.S = [i for i in range(256)]  # 0 - 255
-        self.K = [ord(Key[i % len(Key)])*2 for i in range(256)]   # KEY * 2(0-255)
-        self.I, self.J = 0, 0
-        self.KSA()
-
-    def KSA(self):
-        for i in range(256):
-            j = (i+self.K[i]+self.S[i]) % 256
-            self.S[i], self.S[j] = self.S[j], self.S[i]
-
-    def next(self):
-        self.I = (self.I+1) % 256
-        self.J = (self.J+self.S[self.I]) % 256
-        self.S[self.J], self.S[self.I] = self.S[self.I], self.S[self.J]
-        tmp = (self.S[self.J] + self.S[self.I]) % 256
-        return self.S[tmp]
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
 
-class Encrypt():
-    def __init__(self, plain):
-        global cnt
-        cnt += 1
-        self.rc4 = RC4(Key)
-        self.testRC4(plain)
-        flag_file = Image.open(r&quot;flag.png&quot;)
-        img = array(flag_file)
-        self.enc(img)
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
 
-    def testRC4(self, plain):
-        ciphertext = 0
-        for i in plain:
-            ciphertext = (ciphertext &lt;&lt; 8)+ord(i) ^ self.rc4.next()
-        print(&quot;ciphertext{} = {}&quot;.format(cnt, ciphertext))
-
-    def enc(self, img):
-        a, b, _ = img.shape
-        for x in range(0, a):
-            for y in range(0, b):
-                pixel = img[x, y]
-                for i in range(0, 3):
-                    pixel[i] = pixel[i] ^ self.rc4.next()
-                img[x][y] = pixel
-        enc = Image.fromarray(img)
-        enc.save(&quot;enc{}.png&quot;.format(cnt))
-
-
-Encrypt(Plaintext1)
-Encrypt(Plaintext2)
-
-# ciphertext1 = 12078640933356268898100798377710191641
-# ciphertext2 = 79124196547094980420644350061749775
-</code></pre>
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>Only writeup in Crypto.</p>
+<h1 id="gkctf"><a class="markdownIt-Anchor" href="#gkctf"></a> GKCTF</h1>
+<h2 id="小学生的密码学solved"><a class="markdownIt-Anchor" href="#小学生的密码学solved"></a> 小学生的密码学(Solved)</h2>
+<p>Pretty easy affince cipher. Both keys are given.</p>
+<h2 id="babycryptosolved"><a class="markdownIt-Anchor" href="#babycryptosolved"></a> babycrypto(Solved)</h2>
+<p>Partial high bits of p is known.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use sage to run the script</span></span><br><span class="line"><span class="comment"># Reference: https://www.jianshu.com/p/1a0e876d5929</span></span><br><span class="line"><span class="keyword">from</span> sage.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"></span><br><span class="line"><span class="comment"># All variables are in hex</span></span><br><span class="line">n = <span class="number">0xb119849bc4523e49c6c038a509a74cda628d4ca0e4d0f28e677d57f3c3c7d0d876ef07d7581fe05a060546fedd7d061d3bc70d679b6c5dd9bc66c5bdad8f2ef898b1e785496c4989daf716a1c89d5c174da494eee7061bcb6d52cafa337fc2a7bba42c918bbd3104dff62ecc9d3704a455a6ce282de0d8129e26c840734ffd302bec5f0a66e0e6d00b5c50fa57c546cff9d7e6a978db77997082b4cb927df9847dfffef55138cb946c62c9f09b968033745b5b6868338c64819a8e92a827265f9abd409359a9471d8c3a2631b80e5b462ba42336717700998ff38536c2436e24ac19228cd2d7a909ead1a8494ff6c3a7151e888e115b68cc6a7a8c6cf8a6c005</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Padding zeros to p --&gt; p4</span></span><br><span class="line">p4 = <span class="number">0xe4e4b390c1d201dae2c00a4669c0865cc5767bc444f5d310f3cfc75872d96feb89e556972c99ae20753e3314240a52df5dccd076a47c6b5d11b531b92d901b2b512aeb0b263bbfd624fe3d52e5e238beeb581ebe012b2f176a4ffd1e0d2aa8c4d3a2656573b727d4d3136513a931428b00000000000000000000000000000000</span></span><br><span class="line">cipher = <span class="number">1422566584480199878714663051468143513667934216213366733442059106529451931078271460363335887054199577950679102659270179475911101747625120544429262334214483688332111552004535828182425152965223599160129610990036911146029170033592055768983427904835395850414634659565092191460875900237711597421272312032796440948509724492027247376113218678183443222364531669985128032971256792532015051829041230203814090194611041172775368357197854451201260927117792277559690205342515437625417792867692280849139537687763919269337822899746924269847694138899165820004160319118749298031065800530869562704671435709578921901495688124042302500361</span></span><br><span class="line">e2 = <span class="number">65537</span></span><br><span class="line">kbits = <span class="number">128</span>  <span class="comment"># kbits represent the loss bits</span></span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))  <span class="comment"># Create a polynomial ring</span></span><br><span class="line">f = x + p4</span><br><span class="line">roots = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)</span><br><span class="line"><span class="keyword">if</span> roots:        </span><br><span class="line">    p = p4 + int(roots[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">assert</span> n % p == <span class="number">0</span></span><br><span class="line">    q = n / int(p)</span><br><span class="line">    phin = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">    d = inverse_mod(e2,phin)</span><br><span class="line">    flag = pow(cipher,d,n)</span><br><span class="line">    <span class="keyword">print</span> long_to_bytes(flag)</span><br></pre></td></tr></table></figure>
+<h2 id="汉字的密码solved"><a class="markdownIt-Anchor" href="#汉字的密码solved"></a> 汉字的密码(Solved)</h2>
+<p>当铺密码+Substitution Cipher</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dic = [<span class="number">66</span>, <span class="number">74</span>, <span class="number">62</span>, <span class="number">67</span>, <span class="number">118</span>, <span class="number">83</span>, <span class="number">72</span>, <span class="number">77</span>, <span class="number">86</span>, <span class="number">55</span>, <span class="number">71</span>, <span class="number">57</span>, <span class="number">82</span>, <span class="number">57</span>, <span class="number">64</span>, <span class="number">63</span>, <span class="number">51</span>, <span class="number">107</span>]</span><br><span class="line">delta = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">    print(chr(i+delta), end=<span class="string">""</span>)</span><br><span class="line">    delta += <span class="number">1</span></span><br><span class="line"><span class="comment"># FLAG&#123;YOU_ARE_GOOD&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="backdoorunsolved"><a class="markdownIt-Anchor" href="#backdoorunsolved"></a> Backdoor(Unsolved)</h2>
+<p>Remain confused</p>
+<h1 id="dasctf"><a class="markdownIt-Anchor" href="#dasctf"></a> DASCTF</h1>
+<h2 id="bbcryptosolved"><a class="markdownIt-Anchor" href="#bbcryptosolved"></a> bbcrypto(Solved)</h2>
+<p><strong><a href="http://quiz.py" target="_blank" rel="noopener">quiz.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> A,SALT</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(m, a, si)</span>:</span></span><br><span class="line">    c=<span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        c+=hex(((ord(m[i])) * a + ord(next(si))) % <span class="number">128</span>)[<span class="number">2</span>:].zfill(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    m = <span class="string">'flag&#123;********************************&#125;'</span></span><br><span class="line">    a = A</span><br><span class="line">    salt = SALT</span><br><span class="line">    <span class="keyword">assert</span>(len(salt)==<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">assert</span>(salt.isalpha())</span><br><span class="line">    si = cycle(salt.lower())</span><br><span class="line">    print(<span class="string">"明文内容为："</span>)</span><br><span class="line">    print(m)</span><br><span class="line">    print(<span class="string">"加密后的密文为："</span>)</span><br><span class="line">    c=encrypt(m, a, si)</span><br><span class="line">    print(c)</span><br><span class="line">    <span class="comment">#加密后的密文为：</span></span><br><span class="line">    <span class="comment">#177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d</span></span><br></pre></td></tr></table></figure>
+<p>The length of salt is 3 and we have already known that the plain starts with “flag{”. Solve linear congruent equations to get the salt.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">c = <span class="string">"177401504b0125272c122743171e2c250a602e3a7c206e014a012703273a3c0160173a73753d"</span></span><br><span class="line">li_c = [int(c[i:i+<span class="number">2</span>], <span class="number">16</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(c), <span class="number">2</span>)]</span><br><span class="line"><span class="comment"># print(li_c)</span></span><br><span class="line">m = <span class="string">"flag&#123;"</span></span><br><span class="line">d_c = li_c[<span class="number">3</span>] - li_c[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># print(d_c)</span></span><br><span class="line">d_m = ord(m[<span class="number">3</span>]) - ord(m[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># print(d_m)  # a = 57 mod 128</span></span><br><span class="line">a = <span class="number">57</span></span><br><span class="line"><span class="comment"># print((li_c[0] - a * ord(m[0])) % 128)</span></span><br><span class="line"><span class="comment"># print(chr(97))  y1 = 'a'</span></span><br><span class="line"><span class="comment"># print((li_c[1] - a * ord(m[1])) % 128)</span></span><br><span class="line"><span class="comment"># print(chr(104)) y2 = 'h'</span></span><br><span class="line"><span class="comment"># print((li_c[2] - a * ord(m[2])) % 128)</span></span><br><span class="line"><span class="comment"># print(chr(104))  # y3 = 'h'</span></span><br><span class="line"><span class="comment"># print((li_c[3] - a * ord(m[3])) % 128)</span></span><br><span class="line">m = <span class="string">""</span></span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">inv_a = invert(a, <span class="number">128</span>)</span><br><span class="line">key = itertools.cycle(<span class="string">"ahh"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> li_c:</span><br><span class="line">    m += chr(((i - ord(next(key))) * inv_a) % <span class="number">128</span>)</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+<h2 id="encrypt_imgsolved"><a class="markdownIt-Anchor" href="#encrypt_imgsolved"></a> encrypt_img(Solved)</h2>
+<p><strong><a href="http://quiz.py" target="_blank" rel="noopener">quiz.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> array</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> Key</span><br><span class="line"></span><br><span class="line">Plaintext1 = <span class="string">"RC4IsInteresting"</span></span><br><span class="line">Plaintext2 = <span class="string">"ThisIsAEasyGame"</span></span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RC4</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, Key)</span>:</span></span><br><span class="line">        self.S = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>)]  <span class="comment"># 0 - 255</span></span><br><span class="line">        self.K = [ord(Key[i % len(Key)])*<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>)]   <span class="comment"># KEY * 2(0-255)</span></span><br><span class="line">        self.I, self.J = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        self.KSA()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">KSA</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">            j = (i+self.K[i]+self.S[i]) % <span class="number">256</span></span><br><span class="line">            self.S[i], self.S[j] = self.S[j], self.S[i]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.I = (self.I+<span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">        self.J = (self.J+self.S[self.I]) % <span class="number">256</span></span><br><span class="line">        self.S[self.J], self.S[self.I] = self.S[self.I], self.S[self.J]</span><br><span class="line">        tmp = (self.S[self.J] + self.S[self.I]) % <span class="number">256</span></span><br><span class="line">        <span class="keyword">return</span> self.S[tmp]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Encrypt</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, plain)</span>:</span></span><br><span class="line">        <span class="keyword">global</span> cnt</span><br><span class="line">        cnt += <span class="number">1</span></span><br><span class="line">        self.rc4 = RC4(Key)</span><br><span class="line">        self.testRC4(plain)</span><br><span class="line">        flag_file = Image.open(<span class="string">r"flag.png"</span>)</span><br><span class="line">        img = array(flag_file)</span><br><span class="line">        self.enc(img)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testRC4</span><span class="params">(self, plain)</span>:</span></span><br><span class="line">        ciphertext = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> plain:</span><br><span class="line">            ciphertext = (ciphertext &lt;&lt; <span class="number">8</span>)+ord(i) ^ self.rc4.next()</span><br><span class="line">        print(<span class="string">"ciphertext&#123;&#125; = &#123;&#125;"</span>.format(cnt, ciphertext))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enc</span><span class="params">(self, img)</span>:</span></span><br><span class="line">        a, b, _ = img.shape</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, a):</span><br><span class="line">            <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">0</span>, b):</span><br><span class="line">                pixel = img[x, y]</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">3</span>):</span><br><span class="line">                    pixel[i] = pixel[i] ^ self.rc4.next()</span><br><span class="line">                img[x][y] = pixel</span><br><span class="line">        enc = Image.fromarray(img)</span><br><span class="line">        enc.save(<span class="string">"enc&#123;&#125;.png"</span>.format(cnt))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Encrypt(Plaintext1)</span><br><span class="line">Encrypt(Plaintext2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ciphertext1 = 12078640933356268898100798377710191641</span></span><br><span class="line"><span class="comment"># ciphertext2 = 79124196547094980420644350061749775</span></span><br></pre></td></tr></table></figure>
 <p><strong>enc1.png</strong></p>
 <p><strong>enc2.png</strong></p>
 <p><strong>Stream Cipher Insertion Attack</strong></p>
 <p>Such a pity that I didn’t figure it out at that time. From two groups of plaintexts and ciphertexts we can recover keystream at the start. However, the second keystream has one bit less than the first one, from which we easily can retrieve m0, then k1, after that m1 and so on.</p>
-<pre><code class="lang-python">&#39;&#39;&#39;
-plaintext1 = &quot;RC4IsInteresting&quot;
-plaintext2 = &quot;ThisIsAEasyGame&quot;
-
-ciphertext1 = 12078640933356268898100798377710191641
-ciphertext2 = 79124196547094980420644350061749775
-
-key1 = []
-for i in range(len(plaintext1) - 1, -1, -1):
-     key1 = [ord(plaintext1[i]) ^ (ciphertext1 &amp; 0xff)] + key1
-     ciphertext1 &gt;&gt;= 8
-print(key1)
-
-key2 = []
-for i in range(len(plaintext2) - 1, -1, -1):
-     key2 = [ord(plaintext2[i]) ^ (ciphertext2 &amp; 0xff)] + key2
-     ciphertext2 &gt;&gt;= 8
-print(key2)
-
-# [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106, 126]
-# [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106]
-&#39;&#39;&#39;
-# Suppose the bit length of the flag.png is n bits, key1 and key2 can be written like:
-# key1: k1, k2, ..., kn
-# key2: k0, k1, ..., k(n-1)
-# Above we have already known k0 is 126, which is the last key of plaintext2,
-# we can retrieve m0, then k1, after that m1 and so on
-from PIL import Image
-from numpy import array
-
-img1 = array(Image.open(r&quot;./enc1.png&quot;))
-img2 = array(Image.open(r&quot;./enc2.png&quot;))
-
-
-def recovery_img(im1, im2, k):
-    x1, y1, z1 = im1.shape
-    for i in range(x1):
-        for j in range(y1):
-            pixel1 = im1[i, j]
-            pixel2 = im2[i, j]
-            for _ in range(3):
-                pixel2[_] = pixel2[_] ^ k
-                k = pixel1[_] ^ pixel2[_]
-    im2 = Image.fromarray(im2)
-    im2.save(&quot;dec.png&quot;)
-
-
-recovery_img(img1, img2, 126)
-</code></pre>
-<h2 id="babyLCG-Solved"><a href="#babyLCG-Solved" class="headerlink" title="babyLCG(Solved)"></a>babyLCG(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="lang-python">from Crypto.Util.number import*
-from secret import flag
-
-
-class LCG:
-    def __init__(self):
-        self.a = getRandomNBitInteger(32)
-        self.b = getRandomNBitInteger(32)
-        self.m = getPrime(32)
-        self.seed = getRandomNBitInteger(32)
-
-    def next(self):
-        self.seed = (self.a*self.seed+self.b) % self.m
-        return self.seed &gt;&gt; 16
-
-    def output(self):
-        print(&quot;a = {}\nb = {}\nm = {}&quot;.format(self.a, self.b, self.m))
-        print(&quot;state1 = {}&quot;.format(self.next()))
-        print(&quot;state2 = {}&quot;.format(self.next()))
-
-
-class DH:
-    def __init__(self):
-        self.lcg = LCG()
-        self.lcg.output()
-        self.g = getRandomNBitInteger(128)
-        self.m = getPrime(256)
-        self.A, self.a = self.gen_AB()
-        self.B, self.b = self.gen_AB()
-        self.key = pow(self.A, self.b, self.m)
-
-    def gen_AB(self):
-        x = &#39;&#39;
-        for _ in range(64):
-            x += &#39;1&#39; if self.lcg.next() % 2 else &#39;0&#39;
-        return pow(self.g, int(x, 2), self.m), int(x, 2)
-
-
-DH = DH()
-flag = bytes_to_long(flag)
-print(&quot;g = {}\nA = {}\nB = {}\nM = {}&quot;.format(DH.g, DH.A, DH.B, DH.m))
-print(&quot;Cipher = {}&quot;.format(flag ^ DH.key))
-
-&#39;&#39;&#39;
-a = 3844066521
-b = 3316005024
-m = 2249804527
-state1 = 16269
-state2 = 4249
-g = 183096451267674849541594370111199688704
-A = 102248652770540219619953045171664636108622486775480799200725530949685509093530
-B = 74913924633988481450801262607456437193056607965094613549273335198280176291445
-M = 102752586316294557951738800745394456033378966059875498971396396583576430992701
-Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
-&#39;&#39;&#39;
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">plaintext1 = "RC4IsInteresting"</span></span><br><span class="line"><span class="string">plaintext2 = "ThisIsAEasyGame"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ciphertext1 = 12078640933356268898100798377710191641</span></span><br><span class="line"><span class="string">ciphertext2 = 79124196547094980420644350061749775</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">key1 = []</span></span><br><span class="line"><span class="string">for i in range(len(plaintext1) - 1, -1, -1):</span></span><br><span class="line"><span class="string">     key1 = [ord(plaintext1[i]) ^ (ciphertext1 &amp; 0xff)] + key1</span></span><br><span class="line"><span class="string">     ciphertext1 &gt;&gt;= 8</span></span><br><span class="line"><span class="string">print(key1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">key2 = []</span></span><br><span class="line"><span class="string">for i in range(len(plaintext2) - 1, -1, -1):</span></span><br><span class="line"><span class="string">     key2 = [ord(plaintext2[i]) ^ (ciphertext2 &amp; 0xff)] + key2</span></span><br><span class="line"><span class="string">     ciphertext2 &gt;&gt;= 8</span></span><br><span class="line"><span class="string">print(key2)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106, 126]</span></span><br><span class="line"><span class="string"># [91, 85, 118, 176, 158, 228, 216, 21, 145, 123, 89, 181, 165, 203, 106]</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># Suppose the bit length of the flag.png is n bits, key1 and key2 can be written like:</span></span><br><span class="line"><span class="comment"># key1: k1, k2, ..., kn</span></span><br><span class="line"><span class="comment"># key2: k0, k1, ..., k(n-1)</span></span><br><span class="line"><span class="comment"># Above we have already known k0 is 126, which is the last key of plaintext2,</span></span><br><span class="line"><span class="comment"># we can retrieve m0, then k1, after that m1 and so on</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> array</span><br><span class="line"></span><br><span class="line">img1 = array(Image.open(<span class="string">r"./enc1.png"</span>))</span><br><span class="line">img2 = array(Image.open(<span class="string">r"./enc2.png"</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recovery_img</span><span class="params">(im1, im2, k)</span>:</span></span><br><span class="line">    x1, y1, z1 = im1.shape</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x1):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(y1):</span><br><span class="line">            pixel1 = im1[i, j]</span><br><span class="line">            pixel2 = im2[i, j]</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">                pixel2[_] = pixel2[_] ^ k</span><br><span class="line">                k = pixel1[_] ^ pixel2[_]</span><br><span class="line">    im2 = Image.fromarray(im2)</span><br><span class="line">    im2.save(<span class="string">"dec.png"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">recovery_img(img1, img2, <span class="number">126</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="babylcgsolved"><a class="markdownIt-Anchor" href="#babylcgsolved"></a> babyLCG(Solved)</h2>
+<p><strong><a href="http://quiz.py" target="_blank" rel="noopener">quiz.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a = getRandomNBitInteger(<span class="number">32</span>)</span><br><span class="line">        self.b = getRandomNBitInteger(<span class="number">32</span>)</span><br><span class="line">        self.m = getPrime(<span class="number">32</span>)</span><br><span class="line">        self.seed = getRandomNBitInteger(<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.seed = (self.a*self.seed+self.b) % self.m</span><br><span class="line">        <span class="keyword">return</span> self.seed &gt;&gt; <span class="number">16</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">output</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"a = &#123;&#125;\nb = &#123;&#125;\nm = &#123;&#125;"</span>.format(self.a, self.b, self.m))</span><br><span class="line">        print(<span class="string">"state1 = &#123;&#125;"</span>.format(self.next()))</span><br><span class="line">        print(<span class="string">"state2 = &#123;&#125;"</span>.format(self.next()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DH</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.lcg = LCG()</span><br><span class="line">        self.lcg.output()</span><br><span class="line">        self.g = getRandomNBitInteger(<span class="number">128</span>)</span><br><span class="line">        self.m = getPrime(<span class="number">256</span>)</span><br><span class="line">        self.A, self.a = self.gen_AB()</span><br><span class="line">        self.B, self.b = self.gen_AB()</span><br><span class="line">        self.key = pow(self.A, self.b, self.m)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gen_AB</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">64</span>):</span><br><span class="line">            x += <span class="string">'1'</span> <span class="keyword">if</span> self.lcg.next() % <span class="number">2</span> <span class="keyword">else</span> <span class="string">'0'</span></span><br><span class="line">        <span class="keyword">return</span> pow(self.g, int(x, <span class="number">2</span>), self.m), int(x, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DH = DH()</span><br><span class="line">flag = bytes_to_long(flag)</span><br><span class="line">print(<span class="string">"g = &#123;&#125;\nA = &#123;&#125;\nB = &#123;&#125;\nM = &#123;&#125;"</span>.format(DH.g, DH.A, DH.B, DH.m))</span><br><span class="line">print(<span class="string">"Cipher = &#123;&#125;"</span>.format(flag ^ DH.key))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">a = 3844066521</span></span><br><span class="line"><span class="string">b = 3316005024</span></span><br><span class="line"><span class="string">m = 2249804527</span></span><br><span class="line"><span class="string">state1 = 16269</span></span><br><span class="line"><span class="string">state2 = 4249</span></span><br><span class="line"><span class="string">g = 183096451267674849541594370111199688704</span></span><br><span class="line"><span class="string">A = 102248652770540219619953045171664636108622486775480799200725530949685509093530</span></span><br><span class="line"><span class="string">B = 74913924633988481450801262607456437193056607965094613549273335198280176291445</span></span><br><span class="line"><span class="string">M = 102752586316294557951738800745394456033378966059875498971396396583576430992701</span></span><br><span class="line"><span class="string">Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
 <p><strong>LCG+Diffie Hellman Exchange Key</strong></p>
 <p>The seed is too small ,as a result, we use brute-force attack to get the seed and recover the key. When we XOR the cipher with the key, the plain is figured out.</p>
-<pre><code class="lang-python">&#39;&#39;&#39;
-a = 3844066521
-b = 3316005024
-m = 2249804527
-&#39;&#39;&#39;
-
-
-class LCG:
-    def __init__(self):
-        self.a = 3844066521
-        self.b = 3316005024
-        self.m = 2249804527
-        self.seed = 714405490
-
-    def next(self):
-        self.seed = (self.a*self.seed+self.b) % self.m
-        return self.seed &gt;&gt; 16
-
-    def output(self):
-        print(&quot;a = {}\nb = {}\nm = {}&quot;.format(self.a, self.b, self.m))
-        print(&quot;state1 = {}&quot;.format(self.next()))
-        print(&quot;state2 = {}&quot;.format(self.next()))
-
-
-class DH:
-    def __init__(self):
-        self.lcg = LCG()
-        self.lcg.output()
-        self.g = 183096451267674849541594370111199688704
-        self.m = 102752586316294557951738800745394456033378966059875498971396396583576430992701
-        self.A, self.a = self.gen_AB()  # a private key
-        self.B, self.b = self.gen_AB()  # b private key
-        self.key = pow(self.A, self.b, self.m)
-
-    def gen_AB(self):
-        x = &#39;&#39;
-        for _ in range(64):
-            x += &#39;1&#39; if self.lcg.next() % 2 else &#39;0&#39;
-        return pow(self.g, int(x, 2), self.m), int(x, 2)
-
-
-&#39;&#39;&#39;
-def next(x):
-    return (x * a + b) % m
-
-
-def brute_force():
-    for i in range(1&lt;&lt;32):
-        if i % 10000000 == 0:
-            print(&quot;count:&quot;, i)
-        res = next(i)
-        if (res &gt;&gt; 16) == 16269 and (next(res) &gt;&gt; 16) == 4249:
-            print(i)
-            break
-&#39;&#39;&#39;
-
-
-DH = DH()
-cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
-print(&quot;g = {}\nA = {}\nB = {}\nM = {}&quot;.format(DH.g, DH.A, DH.B, DH.m))
-print(&quot;flag = {}&quot;.format(cipher ^ DH.key))
-# flag = 13040004482819966666226297285938773653367957972934959074317939536564198335643452104954492541
-# flag{4dfe14e0c6c21ffcf5a3b4f0ed1911f6}
-&#39;&#39;&#39;
-a = 3844066521
-b = 3316005024
-m = 2249804527
-state1 = 16269
-state2 = 4249
-g = 183096451267674849541594370111199688704
-A = 102248652770540219619953045171664636108622486775480799200725530949685509093530
-B = 74913924633988481450801262607456437193056607965094613549273335198280176291445
-M = 102752586316294557951738800745394456033378966059875498971396396583576430992701
-Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703
-&#39;&#39;&#39;
-</code></pre>
-<h2 id="Knapsack-Solved"><a href="#Knapsack-Solved" class="headerlink" title="Knapsack(Solved)"></a>Knapsack(Solved)</h2><p><strong>quiz.py</strong></p>
-<pre><code class="lang-python">from Crypto.Util.number import *
-from functools import reduce
-
-def genKey(length):
-    A, B = getPrime(64), getPrime(1025)
-
-    Rn = getPrime(1024)
-    key1 = [Rn//2**i for i in range(1, length+1)]
-    key2 = [i*A % B for i in key1]
-    return key1,key2
-
-
-def encrypt(text,key):
-    Sum=0
-    for i in range(len(text)):
-        Sum+=int(text[i])*key[i]
-    return Sum
-
-def save(Ciper,Key):
-    f1=open(&quot;pub.txt&quot;,&quot;w&quot;)
-    for i in range(len(Key)):
-        f1.write(str(Key[i])+&#39;\n&#39;)
-    f2=open(&quot;cip.txt&quot;,&quot;w&quot;)
-    f2.write(hex(Ciper))
-
-
-FLAG = bin(bytes_to_long(flag.encode()))[2:]
-Key1,Key2 = genKey(len(FLAG))
-Ciper = encrypt(FLAG,Key1)
-save(Ciper,Key2)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">a = 3844066521</span></span><br><span class="line"><span class="string">b = 3316005024</span></span><br><span class="line"><span class="string">m = 2249804527</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a = <span class="number">3844066521</span></span><br><span class="line">        self.b = <span class="number">3316005024</span></span><br><span class="line">        self.m = <span class="number">2249804527</span></span><br><span class="line">        self.seed = <span class="number">714405490</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.seed = (self.a*self.seed+self.b) % self.m</span><br><span class="line">        <span class="keyword">return</span> self.seed &gt;&gt; <span class="number">16</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">output</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"a = &#123;&#125;\nb = &#123;&#125;\nm = &#123;&#125;"</span>.format(self.a, self.b, self.m))</span><br><span class="line">        print(<span class="string">"state1 = &#123;&#125;"</span>.format(self.next()))</span><br><span class="line">        print(<span class="string">"state2 = &#123;&#125;"</span>.format(self.next()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DH</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.lcg = LCG()</span><br><span class="line">        self.lcg.output()</span><br><span class="line">        self.g = <span class="number">183096451267674849541594370111199688704</span></span><br><span class="line">        self.m = <span class="number">102752586316294557951738800745394456033378966059875498971396396583576430992701</span></span><br><span class="line">        self.A, self.a = self.gen_AB()  <span class="comment"># a private key</span></span><br><span class="line">        self.B, self.b = self.gen_AB()  <span class="comment"># b private key</span></span><br><span class="line">        self.key = pow(self.A, self.b, self.m)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gen_AB</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">64</span>):</span><br><span class="line">            x += <span class="string">'1'</span> <span class="keyword">if</span> self.lcg.next() % <span class="number">2</span> <span class="keyword">else</span> <span class="string">'0'</span></span><br><span class="line">        <span class="keyword">return</span> pow(self.g, int(x, <span class="number">2</span>), self.m), int(x, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">def next(x):</span></span><br><span class="line"><span class="string">    return (x * a + b) % m</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def brute_force():</span></span><br><span class="line"><span class="string">    for i in range(1&lt;&lt;32):</span></span><br><span class="line"><span class="string">        if i % 10000000 == 0:</span></span><br><span class="line"><span class="string">            print("count:", i)</span></span><br><span class="line"><span class="string">        res = next(i)</span></span><br><span class="line"><span class="string">        if (res &gt;&gt; 16) == 16269 and (next(res) &gt;&gt; 16) == 4249:</span></span><br><span class="line"><span class="string">            print(i)</span></span><br><span class="line"><span class="string">            break</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DH = DH()</span><br><span class="line">cipher = <span class="number">13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703</span></span><br><span class="line">print(<span class="string">"g = &#123;&#125;\nA = &#123;&#125;\nB = &#123;&#125;\nM = &#123;&#125;"</span>.format(DH.g, DH.A, DH.B, DH.m))</span><br><span class="line">print(<span class="string">"flag = &#123;&#125;"</span>.format(cipher ^ DH.key))</span><br><span class="line"><span class="comment"># flag = 13040004482819966666226297285938773653367957972934959074317939536564198335643452104954492541</span></span><br><span class="line"><span class="comment"># flag&#123;4dfe14e0c6c21ffcf5a3b4f0ed1911f6&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">a = 3844066521</span></span><br><span class="line"><span class="string">b = 3316005024</span></span><br><span class="line"><span class="string">m = 2249804527</span></span><br><span class="line"><span class="string">state1 = 16269</span></span><br><span class="line"><span class="string">state2 = 4249</span></span><br><span class="line"><span class="string">g = 183096451267674849541594370111199688704</span></span><br><span class="line"><span class="string">A = 102248652770540219619953045171664636108622486775480799200725530949685509093530</span></span><br><span class="line"><span class="string">B = 74913924633988481450801262607456437193056607965094613549273335198280176291445</span></span><br><span class="line"><span class="string">M = 102752586316294557951738800745394456033378966059875498971396396583576430992701</span></span><br><span class="line"><span class="string">Cipher = 13040004482819935755130996285494678592830702618071750116744173145400949521388647864913527703</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h2 id="knapsacksolved"><a class="markdownIt-Anchor" href="#knapsacksolved"></a> Knapsack(Solved)</h2>
+<p><strong><a href="http://quiz.py" target="_blank" rel="noopener">quiz.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genKey</span><span class="params">(length)</span>:</span></span><br><span class="line">    A, B = getPrime(<span class="number">64</span>), getPrime(<span class="number">1025</span>)</span><br><span class="line"></span><br><span class="line">    Rn = getPrime(<span class="number">1024</span>)</span><br><span class="line">    key1 = [Rn//<span class="number">2</span>**i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, length+<span class="number">1</span>)]</span><br><span class="line">    key2 = [i*A % B <span class="keyword">for</span> i <span class="keyword">in</span> key1]</span><br><span class="line">    <span class="keyword">return</span> key1,key2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(text,key)</span>:</span></span><br><span class="line">    Sum=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(text)):</span><br><span class="line">        Sum+=int(text[i])*key[i]</span><br><span class="line">    <span class="keyword">return</span> Sum</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(Ciper,Key)</span>:</span></span><br><span class="line">    f1=open(<span class="string">"pub.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(Key)):</span><br><span class="line">        f1.write(str(Key[i])+<span class="string">'\n'</span>)</span><br><span class="line">    f2=open(<span class="string">"cip.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">    f2.write(hex(Ciper))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FLAG = bin(bytes_to_long(flag.encode()))[<span class="number">2</span>:]</span><br><span class="line">Key1,Key2 = genKey(len(FLAG))</span><br><span class="line">Ciper = encrypt(FLAG,Key1)</span><br><span class="line">save(Ciper,Key2)</span><br></pre></td></tr></table></figure>
 <p><strong>cip.txt</strong></p>
-<pre><code>a long hex string
-</code></pre><p><strong>pub.txt</strong></p>
-<pre><code>1015 public keys
-</code></pre><p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
-<h2 id="backpacker-Unsolved"><a href="#backpacker-Unsolved" class="headerlink" title="backpacker(Unsolved)"></a>backpacker(Unsolved)</h2><p>Remain confused</p>
-<h1 id="What-I-have-done"><a href="#What-I-have-done" class="headerlink" title="What I have done"></a><strong>What I have done</strong></h1><p>Finish learning symmetric cipher and the first chapter of Network Introduction. </p>
-<h1 id="Things-to-Improve"><a href="#Things-to-Improve" class="headerlink" title="Things to Improve"></a>Things to Improve</h1><ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">a</span> <span class="keyword">long</span> hex <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
+<p><strong>pub.txt</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1015 </span>public keys</span><br></pre></td></tr></table></figure>
+<p>The last few key in pub.txt is too small, which actually is the original private key. We can use them to recover the original private key.</p>
+<h2 id="backpackerunsolved"><a class="markdownIt-Anchor" href="#backpackerunsolved"></a> backpacker(Unsolved)</h2>
+<p>Remain confused</p>
+<h1 id="what-i-have-done"><a class="markdownIt-Anchor" href="#what-i-have-done"></a> <strong>What I have done</strong></h1>
+<p>Finish learning symmetric cipher and the first chapter of Network Introduction.</p>
+<h1 id="things-to-improve"><a class="markdownIt-Anchor" href="#things-to-improve"></a> Things to Improve</h1>
+<ul>
 <li>Don’t be panic when encountering a challenge that is never met</li>
 <li>Be more concentrated on study</li>
 <li>LLL algorithm</li>
 </ul>
 
-                            <hr>
-                        </div>
-                        <br>
-                        <div>
-                            
-                            <p>
-                                <i class="iconfont icon-tag"></i>
-                                
-                                    <a class="hover-with-bg" href="/tags/Writeup">Writeup</a>
-                                
-                            </p>
-                            
-                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="d-none d-lg-block col-lg-2 toc-container">
-            
-  <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
-    <div id="tocbot"></div>
-  </div>
-
-        </div>
+      
     </div>
-</div>
-
-<!-- custom -->
-
-
-<!-- Comments -->
-<div class="col-lg-7 mx-auto nopadding-md">
-    <div class="container comments mx-auto" id="comments">
-        
-    </div>
-</div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/05/24/das-CTF-GK-CTF-2020-Writeup/" title="das-CTF&amp;GK-CTF-2020-Writeup" target="_blank" rel="external">https://buki-freak.github.io/2020/05/24/das-CTF-GK-CTF-2020-Writeup/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/06/30/2020-First-Half-Review/" title="2020-First-Half-Review"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/12/Npu-CTF-2020-Review/" title="Npu-CTF-2020-Review"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer class="mt-5">
-  <div class="text-center py-3">
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
-    <br><br>
-    <span id="busuanzi_container_site_pv">
-    <b>Reads: </b><span id="busuanzi_value_site_pv"></span><b> times</b><b> | </b><b>Visits: </b><span id="busuanzi_value_site_uv"></span><b> people</b>
-    </span><br>
-    
-  </div>
-</footer>
-
-  <!-- SCRIPTS -->
-  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
-  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
-  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
-  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
-  <script src="/js/main.js"></script>
-  
-    
-      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
-    
-    <script src="/js/post.js"></script>
-  
-  
-    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
-    <script>
-      $(document).ready(function(){
-        $('pre').addClass('prettyprint linenums');
-        prettyPrint();
-      })
-    </script>
-  
-  
-    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
-    <script>
-        var typed = new Typed('#subtitle', {
-          strings: [
-            '  ',
-            "das-CTF&GK-CTF-2020-Writeup&nbsp;",
-        ],
-        cursorChar: "|",
-        typeSpeed: 90,
-        startDelay: 300, //开始之前延迟300毫秒
-        loop: false,
-        });
-        $(".typed-cursor").addClass("h2");
-    </script>
-  
-  
-    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
-    <script>
-      anchors.options = {
-        placement: "left",
-        visible: "true",
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-      };
-      anchors.add(".post-content > h1,h2,h3");
-    </script>
-  
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
 </html>

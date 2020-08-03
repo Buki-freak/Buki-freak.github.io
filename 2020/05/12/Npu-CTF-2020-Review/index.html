@@ -1,107 +1,265 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
+<html lang=zh>
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Programming">
-    <meta name="author" content="Haojen Lau">
-    <meta name="keywords" content>
-    <title>Npu-CTF-2020-Review - buki</title>
-    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
-    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
-    
-        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
-    
-    <link rel="stylesheet" href="/css/main.css">
-
-    
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>Npu-CTF-2020-Review | buk1&#39;s blog</title>
+  <meta name="description" content="Only review in Crypto.  What does the tag mean    Status Description     Solved Solved in the competition   Unlved Unsolved in the competition     Mersenne Twister(unsolved) This challenge is related">
+<meta name="keywords" content="Review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Npu-CTF-2020-Review">
+<meta property="og:url" content="https://buki-freak.github.io/2020/05/12/Npu-CTF-2020-Review/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="Only review in Crypto.  What does the tag mean    Status Description     Solved Solved in the competition   Unlved Unsolved in the competition     Mersenne Twister(unsolved) This challenge is related">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-03T03:26:42.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Npu-CTF-2020-Review">
+<meta name="twitter:description" content="Only review in Crypto.  What does the tag mean    Status Description     Solved Solved in the competition   Unlved Unsolved in the competition     Mersenne Twister(unsolved) This challenge is related">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/05/12/Npu-CTF-2020-Review/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
 </head>
 
 
-<body>
-<header style="height: 30vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-<div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/archives/">Archives</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/categories/">Categories</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/tags/">Tags</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/about/">About</a>
-            </li>
-            
-        </ul>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
 
 
-</nav>
-    <div class="view intro-2"
-         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
-        <div class="full-bg-img">
-            <div class="mask rgba-black-light flex-center">
-                <div class="container text-center white-text wow fadeInUp">
-                    <span class="h2" id="subtitle">
-                        
-                    </span>
-                    
-                        <br>
-                        <p>星期二, 五月 12日 2020, 9:20 晚上</p>
-                    
-                </div>
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
             </div>
         </div>
     </div>
-</header>
+</div>
 
-<main>
     
-        
+      
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="d-none d-lg-block col-lg-2"></div>
-            <div class="col-lg-8 nopadding-md">
-                <div class="py-5 z-depth-3 board">
-                    <div class="post-content mx-auto">
-                        <div class="markdown-body">
-                            <p>Only review in Crypto.</p>
-<h1 id="What-does-the-tag-mean"><a href="#What-does-the-tag-mean" class="headerlink" title="What does the tag mean"></a>What does the tag mean</h1><div class="table-container">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="drafts-Npu-CTF-2020-Review" class="article article-type-drafts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Npu-CTF-2020-Review
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/12/Npu-CTF-2020-Review/" class="article-date">
+	  <time datetime="2020-05-12T13:20:15.000Z" itemprop="datePublished">2020-05-12</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/12/Npu-CTF-2020-Review/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>Only review in Crypto.</p>
+<h1 id="what-does-the-tag-mean"><a class="markdownIt-Anchor" href="#what-does-the-tag-mean"></a> What does the tag mean</h1>
 <table>
 <thead>
 <tr>
@@ -120,73 +278,16 @@
 </tr>
 </tbody>
 </table>
-</div>
-<h1 id="Mersenne-Twister-unsolved"><a href="#Mersenne-Twister-unsolved" class="headerlink" title="Mersenne Twister(unsolved)"></a>Mersenne Twister(unsolved)</h1><p>This challenge is related to Mersenne Twister Encryption. However, there are differences between them exactly. Here is the file:</p>
-<p><strong>Mersenne Twiser.py</strong></p>
-<pre><code class="lang-python">from hashlib import *
-from itertools import *
-from binascii import hexlify , unhexlify
-
-from flag import flag ,seed
-
-assert len(flag) == 26
-assert flag[:7] == &#39;npuctf{&#39;
-assert flag[-1] == &#39;}&#39;
-
-XOR = lambda s1 ,s2 : bytes([x1 ^ x2 for x1 ,x2 in zip(s1 , s2)])
-
-class mt73991:
-    def __init__(self , seed):
-        self.state = [seed] + [0] * 232
-        self.flag = 0
-        self.srand()
-        self.generate()
-    def srand(self):
-        for i in range(232):
-            self.state[i+1] = 1812433253 * (self.state[i] ^ (self.state[i] &gt;&gt; 27)) - i
-            self.state[i+1] &amp;= 0xffffffff
-
-
-    def generate(self):
-        for i in range(233):
-            y = (self.state[i] &amp; 0x80000000) | (self.state[(i+1)%233] &amp; 0x7fffffff)
-            temp = y &gt;&gt; 1
-            temp ^= self.state[(i + 130) % 233]
-            if y &amp; 1:
-                temp ^= 0x9908f23f
-            self.state[i] = temp
-    def getramdanbits(self):
-        if self.flag == 233:
-            self.generate()
-            self.flag = 0
-        bits = self.Next(self.state[self.flag]).to_bytes(4 , &#39;big&#39;)
-        self.flag += 1
-        return bits
-
-    def Next(self , tmp):
-        tmp ^= (tmp &gt;&gt; 11)
-        tmp ^= (tmp &lt;&lt; 7) &amp; 0x9ddf4680
-        tmp ^= (tmp &lt;&lt; 15) &amp; 0xefc65400
-        tmp ^= (tmp &gt;&gt; 18) &amp; 0x34adf670
-        return tmp
-
-def encrypt(key , plain):
-    tmp = md5(plain).digest()
-    return hexlify(XOR(tmp , key))
-
-if __name__ == &quot;__main__&quot;:
-    flag = flag.encode()
-    random = mt73991(seed)
-    f = open(&#39;./cipher.txt&#39; , &#39;wb&#39;)
-    for i in flag:
-        key = b&#39;&#39;.join([random.getramdanbits() for _ in range(4)])
-        cipher = encrypt(key , chr(i).encode())
-        f.write(cipher)
-</code></pre>
+<h1 id="mersenne-twisterunsolved"><a class="markdownIt-Anchor" href="#mersenne-twisterunsolved"></a> Mersenne Twister(unsolved)</h1>
+<p>This challenge is related to Mersenne Twister Encryption. However, there are differences between them exactly. Here is the file:</p>
+<p><strong>Mersenne <a href="http://Twiser.py" target="_blank" rel="noopener">Twiser.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> hexlify , unhexlify</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag ,seed</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> len(flag) == <span class="number">26</span></span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">7</span>] == <span class="string">'npuctf&#123;'</span></span><br><span class="line"><span class="keyword">assert</span> flag[<span class="number">-1</span>] == <span class="string">'&#125;'</span></span><br><span class="line"></span><br><span class="line">XOR = <span class="keyword">lambda</span> s1 ,s2 : bytes([x1 ^ x2 <span class="keyword">for</span> x1 ,x2 <span class="keyword">in</span> zip(s1 , s2)])</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mt73991</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self , seed)</span>:</span></span><br><span class="line">        self.state = [seed] + [<span class="number">0</span>] * <span class="number">232</span></span><br><span class="line">        self.flag = <span class="number">0</span></span><br><span class="line">        self.srand()</span><br><span class="line">        self.generate()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">srand</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">232</span>):</span><br><span class="line">            self.state[i+<span class="number">1</span>] = <span class="number">1812433253</span> * (self.state[i] ^ (self.state[i] &gt;&gt; <span class="number">27</span>)) - i</span><br><span class="line">            self.state[i+<span class="number">1</span>] &amp;= <span class="number">0xffffffff</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">233</span>):</span><br><span class="line">            y = (self.state[i] &amp; <span class="number">0x80000000</span>) | (self.state[(i+<span class="number">1</span>)%<span class="number">233</span>] &amp; <span class="number">0x7fffffff</span>)</span><br><span class="line">            temp = y &gt;&gt; <span class="number">1</span></span><br><span class="line">            temp ^= self.state[(i + <span class="number">130</span>) % <span class="number">233</span>]</span><br><span class="line">            <span class="keyword">if</span> y &amp; <span class="number">1</span>:</span><br><span class="line">                temp ^= <span class="number">0x9908f23f</span></span><br><span class="line">            self.state[i] = temp</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getramdanbits</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.flag == <span class="number">233</span>:</span><br><span class="line">            self.generate()</span><br><span class="line">            self.flag = <span class="number">0</span></span><br><span class="line">        bits = self.Next(self.state[self.flag]).to_bytes(<span class="number">4</span> , <span class="string">'big'</span>)</span><br><span class="line">        self.flag += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> bits</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Next</span><span class="params">(self , tmp)</span>:</span></span><br><span class="line">        tmp ^= (tmp &gt;&gt; <span class="number">11</span>)</span><br><span class="line">        tmp ^= (tmp &lt;&lt; <span class="number">7</span>) &amp; <span class="number">0x9ddf4680</span></span><br><span class="line">        tmp ^= (tmp &lt;&lt; <span class="number">15</span>) &amp; <span class="number">0xefc65400</span></span><br><span class="line">        tmp ^= (tmp &gt;&gt; <span class="number">18</span>) &amp; <span class="number">0x34adf670</span></span><br><span class="line">        <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(key , plain)</span>:</span></span><br><span class="line">    tmp = md5(plain).digest()</span><br><span class="line">    <span class="keyword">return</span> hexlify(XOR(tmp , key))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    flag = flag.encode()</span><br><span class="line">    random = mt73991(seed)</span><br><span class="line">    f = open(<span class="string">'./cipher.txt'</span> , <span class="string">'wb'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> flag:</span><br><span class="line">        key = <span class="string">b''</span>.join([random.getramdanbits() <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>)])</span><br><span class="line">        cipher = encrypt(key , chr(i).encode())</span><br><span class="line">        f.write(cipher)</span><br></pre></td></tr></table></figure>
 <p><strong>cipher.txt</strong></p>
-<pre><code>an 832 bytes long hex string
-</code></pre><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
-<h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>Only a few conditions are given.</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">an</span> <span class="number">832</span> <span class="keyword">bytes</span> <span class="keyword">long</span> hex <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
+<h2 id="explanation"><a class="markdownIt-Anchor" href="#explanation"></a> Explanation</h2>
+<p>Mersenne Twister is a kind of PRNG, whose derives from the fact that its period length is chosen to be a Mersenne Prime. This Mersenne Twister challenge has a 32-bit length.</p>
+<h2 id="condition"><a class="markdownIt-Anchor" href="#condition"></a> Condition</h2>
+<p>Only a few conditions are given.</p>
 <blockquote>
 <p>the encryption result in cipher.txt</p>
 <p>the period length</p>
@@ -194,29 +295,13 @@ if __name__ == &quot;__main__&quot;:
 <p>the length of the flag</p>
 <p>encryption function</p>
 </blockquote>
-<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>Given that the first part of the flag is “npuctf{“, which is a 7 bytes long string, we can retrieve the first 28 generated states with the according cipher in cipher.txt. Since we also know the last byte of the string(“}”) and the length of the string, we can easily retrieve the 100th~103th generated states. </p>
+<h2 id="details"><a class="markdownIt-Anchor" href="#details"></a> Details</h2>
+<p>Given that the first part of the flag is “npuctf{”, which is a 7 bytes long string, we can retrieve the first 28 generated states with the according cipher in cipher.txt. Since we also know the last byte of the string(&quot;}&quot;) and the length of the string, we can easily retrieve the 100th~103th generated states.</p>
 <p>Then we look into the generate function.</p>
-<pre><code class="lang-python">    def generate(self):
-        for i in range(233):
-            y = (self.state[i] &amp; 0x80000000) | (self.state[(i + 1) % 233] &amp; 0x7fffffff)
-            temp = y &gt;&gt; 1
-            temp ^= self.state[(i + 130) % 233]
-            if y &amp; 1:
-                temp ^= 0x9908f23f
-            self.state[i] = temp
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">233</span>):</span><br><span class="line">        y = (self.state[i] &amp; <span class="number">0x80000000</span>) | (self.state[(i + <span class="number">1</span>) % <span class="number">233</span>] &amp; <span class="number">0x7fffffff</span>)</span><br><span class="line">        temp = y &gt;&gt; <span class="number">1</span></span><br><span class="line">        temp ^= self.state[(i + <span class="number">130</span>) % <span class="number">233</span>]</span><br><span class="line">        <span class="keyword">if</span> y &amp; <span class="number">1</span>:</span><br><span class="line">            temp ^= <span class="number">0x9908f23f</span></span><br><span class="line">        self.state[i] = temp</span><br></pre></td></tr></table></figure>
 <p>Suppose that i equals to 103, we try to write down that situation.</p>
-<pre><code class="lang-python">    def generate(self):
-        for i in range(233):
-            y = (self.state[103] &amp; 0x80000000) | (self.state[(104) % 233] &amp; 0x7fffffff)
-            temp = y &gt;&gt; 1  # 1
-            temp ^= self.state[(0) % 233]  # 2
-            if y &amp; 1:
-                temp ^= 0x9908f23f
-            self.state[103] = temp  # 3
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">233</span>):</span><br><span class="line">        y = (self.state[<span class="number">103</span>] &amp; <span class="number">0x80000000</span>) | (self.state[(<span class="number">104</span>) % <span class="number">233</span>] &amp; <span class="number">0x7fffffff</span>)</span><br><span class="line">        temp = y &gt;&gt; <span class="number">1</span>  <span class="comment"># 1</span></span><br><span class="line">        temp ^= self.state[(<span class="number">0</span>) % <span class="number">233</span>]  <span class="comment"># 2</span></span><br><span class="line">        <span class="keyword">if</span> y &amp; <span class="number">1</span>:</span><br><span class="line">            temp ^= <span class="number">0x9908f23f</span></span><br><span class="line">        self.state[<span class="number">103</span>] = temp  <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
 <p>In this situation, it is possible for us to retrieve the104th initial state, which means that we can get the seed through inversing. There are two possibilities in this situation(state[104] is odd or even). We try to draw a table.</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -241,376 +326,202 @@ if __name__ == &quot;__main__&quot;:
 </tr>
 </tbody>
 </table>
-</div>
 <p>hb in the table above means the highest bit of the value in the line #n. Based on the fact that the true hb(3) is 0, which is the highest bit of the 103th generated state, it is impossible for the 104th initial state to be odd. Therefore, we can retrieve y and the low 31 bits of the 104 initial state. Since the highest bit is unknown, we can guess it (zero or one). Therefore, there are two possible seeds, which can be judged in the end. Because the seed is retrieved, we can decrypt the cipher easily.(Something just like Symmetric Cipher)</p>
 <p>By the way, the md5 function in encrypt function seems to be useless because it only encrypts one character, for which we can correspondingly generate an md5 dictionary of all printable characters and print the corresponding characters.</p>
-<h2 id="Realization"><a href="#Realization" class="headerlink" title="Realization"></a>Realization</h2><p>Here is my realization.</p>
-<pre><code class="lang-python">import hashlib
-import binascii
-from Cryptodome.Util.number import *
-import string
-
-XOR = lambda s1, s2: bytes([x1 ^ x2 for x1, x2 in zip(s1, s2)])
-initial_state = [0] * 233
-initial_state2 = [0] * 233
-cipher = [&#39;cef4876036ee8b55aa59bca043725bf3&#39;,
-          &#39;50a5e491debdef7ef7d63e9609a288ca&#39;,
-          &#39;1e2c82a7fe566bd8709e73c8d495ea50&#39;,
-          &#39;4a486ed11189faf8e6fb35617e47d2d1&#39;,
-          &#39;ad5e4783e96afeaae9f7104ec477fb39&#39;,
-          &#39;fe4ec619bf58289709e15c4449f03fc5&#39;,
-          &#39;1cba918cd0ebfdc12376b41e78154064&#39;,
-          &#39;82733b3b200826b6c78d86563edaea94&#39;,
-          &#39;dccf459a4291517a4b8367d7b4a53aee&#39;,
-          &#39;cd7e0accf661bfc726f5ba62e1c0e041&#39;,
-          &#39;00108ad32e7d5711f780185cba5cf31d&#39;,
-          &#39;328bee84066be4ab9582cf9d4bfe3c6f&#39;,
-          &#39;96a7732e1c37d800c90fd46277147f0a&#39;,
-          &#39;26c149dcd5eeb0f2df0c075627bc220b&#39;,
-          &#39;e5eefdd67186056ac28c21e155a7f247&#39;,
-          &#39;664aaecdb498134de274df10114d1f06&#39;,
-          &#39;f84dd21820f150d69c9439d909dec0f5&#39;,
-          &#39;ccfeab61b62db2ea91d31bc8163ff16c&#39;,
-          &#39;7f458006bd5ac4a5f5bfae2770b23ccf&#39;,
-          &#39;b7195b76aa0a9aa146831667a7b9fe08&#39;,
-          &#39;c19e691afadccb3ca5169ef3fabaa3da&#39;,
-          &#39;d47d536e89ed4cee6f788bc969c3ad31&#39;,
-          &#39;37850ebfc46a73af2b0c036c3da4b4a1&#39;,
-          &#39;6506f499445c604dd73eeb846a52f881&#39;,
-          &#39;515a3ad0ab448b4f9ed3e0ab1fffac60&#39;,
-          &#39;b223dde6450ba6198e90e14de107aaf2&#39;]
-
-starts = &quot;npuctf{&quot;
-ends = &quot;}&quot;
-
-
-class mt73991:
-    def __init__(self, seed):
-        self.state = [seed] + [0] * 232
-        self.flag = 0
-        self.srand()
-        self.generate()
-
-    def srand(self):
-        for i in range(232):
-            self.state[i + 1] = 1812433253 * (self.state[i] ^ (self.state[i] &gt;&gt; 27)) - i
-            self.state[i + 1] &amp;= 0xffffffff
-
-    def generate(self):
-        for i in range(233):
-            y = (self.state[i] &amp; 0x80000000) | (self.state[(i + 1) % 233] &amp; 0x7fffffff)
-            temp = y &gt;&gt; 1
-            temp ^= self.state[(i + 130) % 233]
-            if y &amp; 1:
-                temp ^= 0x9908f23f
-            self.state[i] = temp
-
-    def getramdanbits(self):
-        if self.flag == 233:
-            self.generate()
-            self.flag = 0
-        bits = self.Next(self.state[self.flag]).to_bytes(4, &#39;big&#39;)
-        self.flag += 1
-        return bits
-
-    def Next(self, tmp):
-        tmp ^= (tmp &gt;&gt; 11)
-        tmp ^= (tmp &lt;&lt; 7) &amp; 0x9ddf4680
-        tmp ^= (tmp &lt;&lt; 15) &amp; 0xefc65400
-        tmp ^= (tmp &gt;&gt; 18) &amp; 0x34adf670
-        return tmp
-
-
-def USMR(x, shift, mask):
-    res = x
-    for i in range(32):
-        res = x ^ (res &gt;&gt; shift &amp; mask)
-    return res
-
-
-def USML(x, shift, mask):
-    res = x
-    for i in range(32):
-        res = x ^ (res &lt;&lt; shift &amp; mask)
-    return res
-
-
-def inv_Next(x):
-    x = USMR(x, 18, 0x34adf670)
-    x = USML(x, 15, 0xefc65400)
-    x = USML(x, 7, 0x9ddf4680)
-    x = USR(x, 11, 0xffffffff)
-    return x
-
-
-def inv_srand(value, index):
-    for i in range(index-1, -1, -1):
-        value += i
-        value *= inverse(1812433253, 0x100000000)
-        value = USR(value, 27, 0xffffffff)
-        value &amp;= 0xffffffff
-    return value
-
-
-def USR(value, shift, mask):
-    i = 0
-    res = 0
-    while i * shift &lt; 32:
-        partMask = ((0xffffffff &lt;&lt; (32 - shift)) &amp; 0xffffffff) &gt;&gt; (shift * i)
-        part = value &amp; partMask
-        value ^= (part &gt;&gt; shift) &amp; mask
-        res |= part
-        i += 1
-    return res
-
-
-# hash all known characters
-hash_starts = []
-for i in starts:
-    hash_starts.append(hashlib.md5(i.encode()).digest())
-# print(hash_starts)
-hash_ends = hashlib.md5(ends.encode()).digest()
-
-state = [0] * 233
-
-# first 7 characters
-for i in range(len(starts)):
-    key = XOR(hash_starts[i], binascii.unhexlify(cipher[i]))
-    for j in range(4):
-        tmp = inv_Next(bytes_to_long(key[4*j:4*j+4]))
-        state[4*i+j] = tmp
-# print(state[:28])  # check pass
-
-
-def decrypt(key, cipher):
-    cipher = binascii.unhexlify(cipher)
-    temp = XOR(key, cipher)
-    for i in md5_dic:
-        if temp == i:
-            print(string.printable[md5_dic.index(i)], end=&quot;&quot;)
-
-
-# the last character
-key = XOR(hash_ends, binascii.unhexlify(cipher[-1]))
-for i in range(4):
-    tmp = inv_Next(bytes_to_long(key[4*i:4*i+4]))
-    state[100+i] = tmp
-# print(state[100:104]) # check pass
-
-
-# Since it can be simplified, there are only two situations of old_state[104]
-
-# old_state[104] is even
-y = (state[0] ^ state[103]) &lt;&lt; 1  # recover y
-# print(y) # check pass
-poss_1 = y &amp; 0x7fffffff
-poss_2 = (y &amp; 0x7fffffff) | 0x80000000
-
-# print(poss_1)
-# print(poss_2)
-# check pass
-
-
-# get the seed of each situation
-poss_1 = inv_srand(poss_1, 104)
-poss_2 = inv_srand(poss_2, 104)
-print(poss_1)
-print(poss_2)
-
-
-# generate md5 dictionary
-md5_dic = []
-for i in string.printable:
-    md5_dic.append(hashlib.md5(i.encode()).digest())
-
-
-random_1 = mt73991(poss_1)
-random_2 = mt73991(poss_2)
-
-# recover the flag from random_1
-flag = &quot;&quot;
-for i in range(26):
-    key = b&#39;&#39;.join([random_1.getramdanbits() for _ in range(4)])
-    decrypt(key, cipher[i])
-
-# Since random_1 is the correct one, random_2 can be ignored.
-</code></pre>
+<h2 id="realization"><a class="markdownIt-Anchor" href="#realization"></a> Realization</h2>
+<p>Here is my realization.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> Cryptodome.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">XOR = <span class="keyword">lambda</span> s1, s2: bytes([x1 ^ x2 <span class="keyword">for</span> x1, x2 <span class="keyword">in</span> zip(s1, s2)])</span><br><span class="line">initial_state = [<span class="number">0</span>] * <span class="number">233</span></span><br><span class="line">initial_state2 = [<span class="number">0</span>] * <span class="number">233</span></span><br><span class="line">cipher = [<span class="string">'cef4876036ee8b55aa59bca043725bf3'</span>,</span><br><span class="line">          <span class="string">'50a5e491debdef7ef7d63e9609a288ca'</span>,</span><br><span class="line">          <span class="string">'1e2c82a7fe566bd8709e73c8d495ea50'</span>,</span><br><span class="line">          <span class="string">'4a486ed11189faf8e6fb35617e47d2d1'</span>,</span><br><span class="line">          <span class="string">'ad5e4783e96afeaae9f7104ec477fb39'</span>,</span><br><span class="line">          <span class="string">'fe4ec619bf58289709e15c4449f03fc5'</span>,</span><br><span class="line">          <span class="string">'1cba918cd0ebfdc12376b41e78154064'</span>,</span><br><span class="line">          <span class="string">'82733b3b200826b6c78d86563edaea94'</span>,</span><br><span class="line">          <span class="string">'dccf459a4291517a4b8367d7b4a53aee'</span>,</span><br><span class="line">          <span class="string">'cd7e0accf661bfc726f5ba62e1c0e041'</span>,</span><br><span class="line">          <span class="string">'00108ad32e7d5711f780185cba5cf31d'</span>,</span><br><span class="line">          <span class="string">'328bee84066be4ab9582cf9d4bfe3c6f'</span>,</span><br><span class="line">          <span class="string">'96a7732e1c37d800c90fd46277147f0a'</span>,</span><br><span class="line">          <span class="string">'26c149dcd5eeb0f2df0c075627bc220b'</span>,</span><br><span class="line">          <span class="string">'e5eefdd67186056ac28c21e155a7f247'</span>,</span><br><span class="line">          <span class="string">'664aaecdb498134de274df10114d1f06'</span>,</span><br><span class="line">          <span class="string">'f84dd21820f150d69c9439d909dec0f5'</span>,</span><br><span class="line">          <span class="string">'ccfeab61b62db2ea91d31bc8163ff16c'</span>,</span><br><span class="line">          <span class="string">'7f458006bd5ac4a5f5bfae2770b23ccf'</span>,</span><br><span class="line">          <span class="string">'b7195b76aa0a9aa146831667a7b9fe08'</span>,</span><br><span class="line">          <span class="string">'c19e691afadccb3ca5169ef3fabaa3da'</span>,</span><br><span class="line">          <span class="string">'d47d536e89ed4cee6f788bc969c3ad31'</span>,</span><br><span class="line">          <span class="string">'37850ebfc46a73af2b0c036c3da4b4a1'</span>,</span><br><span class="line">          <span class="string">'6506f499445c604dd73eeb846a52f881'</span>,</span><br><span class="line">          <span class="string">'515a3ad0ab448b4f9ed3e0ab1fffac60'</span>,</span><br><span class="line">          <span class="string">'b223dde6450ba6198e90e14de107aaf2'</span>]</span><br><span class="line"></span><br><span class="line">starts = <span class="string">"npuctf&#123;"</span></span><br><span class="line">ends = <span class="string">"&#125;"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mt73991</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, seed)</span>:</span></span><br><span class="line">        self.state = [seed] + [<span class="number">0</span>] * <span class="number">232</span></span><br><span class="line">        self.flag = <span class="number">0</span></span><br><span class="line">        self.srand()</span><br><span class="line">        self.generate()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">srand</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">232</span>):</span><br><span class="line">            self.state[i + <span class="number">1</span>] = <span class="number">1812433253</span> * (self.state[i] ^ (self.state[i] &gt;&gt; <span class="number">27</span>)) - i</span><br><span class="line">            self.state[i + <span class="number">1</span>] &amp;= <span class="number">0xffffffff</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">233</span>):</span><br><span class="line">            y = (self.state[i] &amp; <span class="number">0x80000000</span>) | (self.state[(i + <span class="number">1</span>) % <span class="number">233</span>] &amp; <span class="number">0x7fffffff</span>)</span><br><span class="line">            temp = y &gt;&gt; <span class="number">1</span></span><br><span class="line">            temp ^= self.state[(i + <span class="number">130</span>) % <span class="number">233</span>]</span><br><span class="line">            <span class="keyword">if</span> y &amp; <span class="number">1</span>:</span><br><span class="line">                temp ^= <span class="number">0x9908f23f</span></span><br><span class="line">            self.state[i] = temp</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getramdanbits</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.flag == <span class="number">233</span>:</span><br><span class="line">            self.generate()</span><br><span class="line">            self.flag = <span class="number">0</span></span><br><span class="line">        bits = self.Next(self.state[self.flag]).to_bytes(<span class="number">4</span>, <span class="string">'big'</span>)</span><br><span class="line">        self.flag += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> bits</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Next</span><span class="params">(self, tmp)</span>:</span></span><br><span class="line">        tmp ^= (tmp &gt;&gt; <span class="number">11</span>)</span><br><span class="line">        tmp ^= (tmp &lt;&lt; <span class="number">7</span>) &amp; <span class="number">0x9ddf4680</span></span><br><span class="line">        tmp ^= (tmp &lt;&lt; <span class="number">15</span>) &amp; <span class="number">0xefc65400</span></span><br><span class="line">        tmp ^= (tmp &gt;&gt; <span class="number">18</span>) &amp; <span class="number">0x34adf670</span></span><br><span class="line">        <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">USMR</span><span class="params">(x, shift, mask)</span>:</span></span><br><span class="line">    res = x</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        res = x ^ (res &gt;&gt; shift &amp; mask)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">USML</span><span class="params">(x, shift, mask)</span>:</span></span><br><span class="line">    res = x</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        res = x ^ (res &lt;&lt; shift &amp; mask)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inv_Next</span><span class="params">(x)</span>:</span></span><br><span class="line">    x = USMR(x, <span class="number">18</span>, <span class="number">0x34adf670</span>)</span><br><span class="line">    x = USML(x, <span class="number">15</span>, <span class="number">0xefc65400</span>)</span><br><span class="line">    x = USML(x, <span class="number">7</span>, <span class="number">0x9ddf4680</span>)</span><br><span class="line">    x = USR(x, <span class="number">11</span>, <span class="number">0xffffffff</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inv_srand</span><span class="params">(value, index)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(index<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        value += i</span><br><span class="line">        value *= inverse(<span class="number">1812433253</span>, <span class="number">0x100000000</span>)</span><br><span class="line">        value = USR(value, <span class="number">27</span>, <span class="number">0xffffffff</span>)</span><br><span class="line">        value &amp;= <span class="number">0xffffffff</span></span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">USR</span><span class="params">(value, shift, mask)</span>:</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i * shift &lt; <span class="number">32</span>:</span><br><span class="line">        partMask = ((<span class="number">0xffffffff</span> &lt;&lt; (<span class="number">32</span> - shift)) &amp; <span class="number">0xffffffff</span>) &gt;&gt; (shift * i)</span><br><span class="line">        part = value &amp; partMask</span><br><span class="line">        value ^= (part &gt;&gt; shift) &amp; mask</span><br><span class="line">        res |= part</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># hash all known characters</span></span><br><span class="line">hash_starts = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> starts:</span><br><span class="line">    hash_starts.append(hashlib.md5(i.encode()).digest())</span><br><span class="line"><span class="comment"># print(hash_starts)</span></span><br><span class="line">hash_ends = hashlib.md5(ends.encode()).digest()</span><br><span class="line"></span><br><span class="line">state = [<span class="number">0</span>] * <span class="number">233</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># first 7 characters</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(starts)):</span><br><span class="line">    key = XOR(hash_starts[i], binascii.unhexlify(cipher[i]))</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        tmp = inv_Next(bytes_to_long(key[<span class="number">4</span>*j:<span class="number">4</span>*j+<span class="number">4</span>]))</span><br><span class="line">        state[<span class="number">4</span>*i+j] = tmp</span><br><span class="line"><span class="comment"># print(state[:28])  # check pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(key, cipher)</span>:</span></span><br><span class="line">    cipher = binascii.unhexlify(cipher)</span><br><span class="line">    temp = XOR(key, cipher)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> md5_dic:</span><br><span class="line">        <span class="keyword">if</span> temp == i:</span><br><span class="line">            print(string.printable[md5_dic.index(i)], end=<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the last character</span></span><br><span class="line">key = XOR(hash_ends, binascii.unhexlify(cipher[<span class="number">-1</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    tmp = inv_Next(bytes_to_long(key[<span class="number">4</span>*i:<span class="number">4</span>*i+<span class="number">4</span>]))</span><br><span class="line">    state[<span class="number">100</span>+i] = tmp</span><br><span class="line"><span class="comment"># print(state[100:104]) # check pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Since it can be simplified, there are only two situations of old_state[104]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># old_state[104] is even</span></span><br><span class="line">y = (state[<span class="number">0</span>] ^ state[<span class="number">103</span>]) &lt;&lt; <span class="number">1</span>  <span class="comment"># recover y</span></span><br><span class="line"><span class="comment"># print(y) # check pass</span></span><br><span class="line">poss_1 = y &amp; <span class="number">0x7fffffff</span></span><br><span class="line">poss_2 = (y &amp; <span class="number">0x7fffffff</span>) | <span class="number">0x80000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(poss_1)</span></span><br><span class="line"><span class="comment"># print(poss_2)</span></span><br><span class="line"><span class="comment"># check pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># get the seed of each situation</span></span><br><span class="line">poss_1 = inv_srand(poss_1, <span class="number">104</span>)</span><br><span class="line">poss_2 = inv_srand(poss_2, <span class="number">104</span>)</span><br><span class="line">print(poss_1)</span><br><span class="line">print(poss_2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate md5 dictionary</span></span><br><span class="line">md5_dic = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> string.printable:</span><br><span class="line">    md5_dic.append(hashlib.md5(i.encode()).digest())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">random_1 = mt73991(poss_1)</span><br><span class="line">random_2 = mt73991(poss_2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># recover the flag from random_1</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">    key = <span class="string">b''</span>.join([random_1.getramdanbits() <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>)])</span><br><span class="line">    decrypt(key, cipher[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Since random_1 is the correct one, random_2 can be ignored.</span></span><br></pre></td></tr></table></figure>
 <p>这题一开始出题人搞错了。。。自闭了一下午</p>
-<h1 id="认清形势，建立信心"><a href="#认清形势，建立信心" class="headerlink" title="认清形势，建立信心"></a>认清形势，建立信心</h1><p>After observing the task.py, we can find that this is a classical discrete logarithm problem. Let’s see the file.</p>
-<p><strong>task.py</strong></p>
-<pre><code class="lang-python">from Crypto.Util.number import *
-from gmpy2 import *
-from secret import flag
-
-p = getPrime(25)
-e = # Hidden
-q = getPrime(25)
-n = p * q
-m = bytes_to_long(flag.strip(b&quot;npuctf{&quot;).strip(b&quot;}&quot;))
-
-c = pow(m, e, n)
-print(c)
-print(pow(2, e, n))
-print(pow(4, e, n))
-print(pow(8, e, n))
-
-&#39;&#39;&#39;
-169169912654178
-128509160179202
-518818742414340
-358553002064450
-&#39;&#39;&#39;
-</code></pre>
-<h2 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation"></a>Explanation</h2><p>There are many methods to solve discrete logarithm problems, BSGS(Baby Steps Giant Steps), SPH method and so on.</p>
-<h2 id="Condition-1"><a href="#Condition-1" class="headerlink" title="Condition"></a>Condition</h2><p>There are four equations in task.py and the remains of four equations are given. The flag is in the first equations. Here is what we have known.</p>
+<h1 id="认清形势建立信心"><a class="markdownIt-Anchor" href="#认清形势建立信心"></a> 认清形势，建立信心</h1>
+<p>After observing the <a href="http://task.py" target="_blank" rel="noopener">task.py</a>, we can find that this is a classical discrete logarithm problem. Let’s see the file.</p>
+<p><strong><a href="http://task.py" target="_blank" rel="noopener">task.py</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">25</span>)</span><br><span class="line">e = <span class="comment"># Hidden</span></span><br><span class="line">q = getPrime(<span class="number">25</span>)</span><br><span class="line">n = p * q</span><br><span class="line">m = bytes_to_long(flag.strip(<span class="string">b"npuctf&#123;"</span>).strip(<span class="string">b"&#125;"</span>))</span><br><span class="line"></span><br><span class="line">c = pow(m, e, n)</span><br><span class="line">print(c)</span><br><span class="line">print(pow(<span class="number">2</span>, e, n))</span><br><span class="line">print(pow(<span class="number">4</span>, e, n))</span><br><span class="line">print(pow(<span class="number">8</span>, e, n))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">169169912654178</span></span><br><span class="line"><span class="string">128509160179202</span></span><br><span class="line"><span class="string">518818742414340</span></span><br><span class="line"><span class="string">358553002064450</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h2 id="explanation-2"><a class="markdownIt-Anchor" href="#explanation-2"></a> Explanation</h2>
+<p>There are many methods to solve discrete logarithm problems, BSGS(Baby Steps Giant Steps), SPH method and so on.</p>
+<h2 id="condition-2"><a class="markdownIt-Anchor" href="#condition-2"></a> Condition</h2>
+<p>There are four equations in <a href="http://task.py" target="_blank" rel="noopener">task.py</a> and the remains of four equations are given. The flag is in the first equations. Here is what we have known.</p>
 <blockquote>
 <p>The length of q and p</p>
 <p>remains of four equations</p>
 </blockquote>
 <p>My idea is that n is possible to be solved and after that we can use the second equation to calculate e, using  discrete logarithm calculation methods.</p>
-<h2 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h2><p>We can notice that:</p>
-<script type="math/tex; mode=display">
-n\;|\;gcd(c1^{3}\;-\;c3,\;c1^{2}\;-\;c2)</script><p>From this character and another character that n is the product of two big prime number, we can get n.</p>
+<h2 id="details-2"><a class="markdownIt-Anchor" href="#details-2"></a> Details</h2>
+<p>We can notice that:</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mtext>  </mtext><mi mathvariant="normal">∣</mi><mtext>  </mtext><mi>g</mi><mi>c</mi><mi>d</mi><mo stretchy="false">(</mo><mi>c</mi><msup><mn>1</mn><mn>3</mn></msup><mtext>  </mtext><mo>−</mo><mtext>  </mtext><mi>c</mi><mn>3</mn><mo separator="true">,</mo><mtext>  </mtext><mi>c</mi><msup><mn>1</mn><mn>2</mn></msup><mtext>  </mtext><mo>−</mo><mtext>  </mtext><mi>c</mi><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n\;|\;gcd(c1^{3}\;-\;c3,\;c1^{2}\;-\;c2)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0585479999999998em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">c</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord">2</span><span class="mclose">)</span></span></span></span></span></p>
+<p>From this character and another character that n is the product of two big prime number, we can get n.</p>
 <p>After that, it is really convenient that we can use discrete_log() function in Sage to calculate e. Luckily, e is coprime with n, so the inverse exists. The decryption is the similar with rsa.</p>
-<h2 id="Realization-1"><a href="#Realization-1" class="headerlink" title="Realization"></a>Realization</h2><p>My realization.</p>
-<pre><code class="lang-python">#! /usr/bin/env sage
-from Crypto.Util.number import long_to_bytes
-import gmpy2
+<h2 id="realization-2"><a class="markdownIt-Anchor" href="#realization-2"></a> Realization</h2>
+<p>My realization.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env sage</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">ture<span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">tureture<span class="keyword">return</span> a, <span class="number">0</span></span><br><span class="line">turea, b = gcd(b, a % b)</span><br><span class="line">ture<span class="keyword">return</span> a, b</span><br><span class="line"></span><br><span class="line">c = <span class="number">169169912654178</span></span><br><span class="line">c_1 = <span class="number">128509160179202</span></span><br><span class="line">c_2 = <span class="number">518818742414340</span></span><br><span class="line">c_3 = <span class="number">358553002064450</span></span><br><span class="line"></span><br><span class="line">dc_1 = c_1 ** <span class="number">2</span> - c_2</span><br><span class="line">dc_2 = c_1 ** <span class="number">3</span> - c_3</span><br><span class="line">n = gcd(dc_1, dc_2)[<span class="number">0</span>] / <span class="number">2</span></span><br><span class="line"><span class="comment"># print(n) # check pass</span></span><br><span class="line"></span><br><span class="line">n.factor()</span><br><span class="line">p = <span class="number">18195301</span></span><br><span class="line">q = <span class="number">28977097</span></span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">e = discrete_log(Mod(c_1, n), Mod(<span class="number">2</span>, n))</span><br><span class="line"><span class="comment"># print(e)  # check pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(gcd(e, phi)[0])  # check pass</span></span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">m = pow(c, d, n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h2 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h2>
+<p><a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Mersenne_Twister</a></p>
 
-def gcd(a, b):
-    if b == 0:
-        return a, 0
-    a, b = gcd(b, a % b)
-    return a, b
-
-c = 169169912654178
-c_1 = 128509160179202
-c_2 = 518818742414340
-c_3 = 358553002064450
-
-dc_1 = c_1 ** 2 - c_2
-dc_2 = c_1 ** 3 - c_3
-n = gcd(dc_1, dc_2)[0] / 2
-# print(n) # check pass
-
-n.factor()
-p = 18195301
-q = 28977097
-phi = (p - 1) * (q - 1)
-
-e = discrete_log(Mod(c_1, n), Mod(2, n))
-# print(e)  # check pass
-
-# print(gcd(e, phi)[0])  # check pass
-d = gmpy2.invert(e, phi)
-m = pow(c, d, n)
-print(long_to_bytes(m))
-</code></pre>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Mersenne_Twister</a></p>
-
-                            <hr>
-                        </div>
-                        <br>
-                        <div>
-                            
-                            <p>
-                                <i class="iconfont icon-tag"></i>
-                                
-                                    <a class="hover-with-bg" href="/tags/Review">Review</a>
-                                
-                            </p>
-                            
-                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="d-none d-lg-block col-lg-2 toc-container">
-            
-  <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
-    <div id="tocbot"></div>
-  </div>
-
-        </div>
+      
     </div>
-</div>
-
-<!-- custom -->
-
-
-<!-- Comments -->
-<div class="col-lg-7 mx-auto nopadding-md">
-    <div class="container comments mx-auto" id="comments">
-        
-    </div>
-</div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/05/12/Npu-CTF-2020-Review/" title="Npu-CTF-2020-Review" target="_blank" rel="external">https://buki-freak.github.io/2020/05/12/Npu-CTF-2020-Review/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/" title="das-CTF&amp;GK-CTF-2020-Writeup"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/03/2020-05-03/" title="2020-05-03"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer class="mt-5">
-  <div class="text-center py-3">
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
-    <br><br>
-    <span id="busuanzi_container_site_pv">
-    <b>Reads: </b><span id="busuanzi_value_site_pv"></span><b> times</b><b> | </b><b>Visits: </b><span id="busuanzi_value_site_uv"></span><b> people</b>
-    </span><br>
-    
-  </div>
-</footer>
-
-  <!-- SCRIPTS -->
-  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
-  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
-  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
-  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
-  <script src="/js/main.js"></script>
-  
-    
-      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
-    
-    <script src="/js/post.js"></script>
-  
-  
-    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
-    <script>
-      $(document).ready(function(){
-        $('pre').addClass('prettyprint linenums');
-        prettyPrint();
-      })
-    </script>
-  
-  
-    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
-    <script>
-        var typed = new Typed('#subtitle', {
-          strings: [
-            '  ',
-            "Npu-CTF-2020-Review&nbsp;",
-        ],
-        cursorChar: "|",
-        typeSpeed: 90,
-        startDelay: 300, //开始之前延迟300毫秒
-        loop: false,
-        });
-        $(".typed-cursor").addClass("h2");
-    </script>
-  
-  
-    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
-    <script>
-      anchors.options = {
-        placement: "left",
-        visible: "true",
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-      };
-      anchors.add(".post-content > h1,h2,h3");
-    </script>
-  
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
 </html>

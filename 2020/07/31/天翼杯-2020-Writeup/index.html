@@ -1,259 +1,441 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
+<html lang=zh>
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Programming">
-    <meta name="author" content="Haojen Lau">
-    <meta name="keywords" content>
-    <title>天翼杯-2020-Writeup - buki</title>
-    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
-    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
-    
-        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
-    
-    <link rel="stylesheet" href="/css/main.css">
-
-    
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>天翼杯-2020-Writeup | buk1&#39;s blog</title>
+  <meta name="description" content="比赛排得很密，gkd 把 writeup 写了。  easyRSA 签到题，对于每一次加密，明文空间小，于是直接遍历。 1234567891011121314n = ...cipher = ...import stringe = 11299plaintext = &apos;&apos;for i in range(len(cipher)):    for s in string.printable:">
+<meta name="keywords" content="Writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="天翼杯-2020-Writeup">
+<meta property="og:url" content="https://buki-freak.github.io/2020/07/31/天翼杯-2020-Writeup/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="比赛排得很密，gkd 把 writeup 写了。  easyRSA 签到题，对于每一次加密，明文空间小，于是直接遍历。 1234567891011121314n = ...cipher = ...import stringe = 11299plaintext = &apos;&apos;for i in range(len(cipher)):    for s in string.printable:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-03T03:24:09.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="天翼杯-2020-Writeup">
+<meta name="twitter:description" content="比赛排得很密，gkd 把 writeup 写了。  easyRSA 签到题，对于每一次加密，明文空间小，于是直接遍历。 1234567891011121314n = ...cipher = ...import stringe = 11299plaintext = &apos;&apos;for i in range(len(cipher)):    for s in string.printable:">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/07/31/天翼杯-2020-Writeup/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
 </head>
 
 
-<body>
-<header style="height: 30vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-<div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/archives/">Archives</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/categories/">Categories</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/tags/">Tags</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/about/">About</a>
-            </li>
-            
-        </ul>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
 
 
-</nav>
-    <div class="view intro-2"
-         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
-        <div class="full-bg-img">
-            <div class="mask rgba-black-light flex-center">
-                <div class="container text-center white-text wow fadeInUp">
-                    <span class="h2" id="subtitle">
-                        
-                    </span>
-                    
-                        <br>
-                        <p>星期五, 七月 31日 2020, 11:00 晚上</p>
-                    
-                </div>
-            </div>
-        </div>
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
 </header>
 
-<main>
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
     
-        
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="d-none d-lg-block col-lg-2"></div>
-            <div class="col-lg-8 nopadding-md">
-                <div class="py-5 z-depth-3 board">
-                    <div class="post-content mx-auto">
-                        <div class="markdown-body">
-                            <p>比赛排得很密，gkd 把 writeup 写了。</p>
-<h1 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h1><p>签到题，对于每一次加密，明文空间小，于是直接遍历。</p>
-<pre><code class="lang-python">n = ...
-cipher = ...
-
-
-
-import string
-e = 11299
-plaintext = &#39;&#39;
-for i in range(len(cipher)):
-    for s in string.printable:
-        if pow(ord(s),e,n) == cipher[i]:
-            plaintext += s
-            print(plaintext)
-            break
-</code></pre>
-<h1 id="hardRSA"><a href="#hardRSA" class="headerlink" title="hardRSA"></a>hardRSA</h1><p>已知 d 低 539 位，q 为 510 位，计算低位 q 的方法可以直接获得 q。</p>
-<pre><code class="lang-python">import gmpy2
-from Crypto.Util.number import long_to_bytes
-
-def find_q(d0, kbits, e, n, p):
-    X = var(&#39;X&#39;)
-    for k in range(1, e+1):
-        results = solve_mod([e*d0*X - k*(p-1)*X*(n//p-X+1) + (p-1)*k*(n//p) == X], 2^kbits)
-        for x in results:
-            q0 = ZZ(x[0])
-            if n % q0 == 0:
-                return q0
-
-
-if __name__ == &#39;__main__&#39;:
-    n = 12723332779402711330767180202990021139894727917028981722242076998825097254419567024122271773380821224949951558669351311750240296591612098048129709925844660421849429715755474874708286508736369884566273719494870891070006251521469139401722700298201541140391493575314714966432624976434199682124684035067305114749262672684081617896579640435891181745346695293618235303178334371123418790204709073465264408888007492994820133128499094347122686903153588634296508454120927
-    e = 7
-    p = 3141886348112988339174865432179206412942588390228169645162293920470188882447855208783220899752887620221059861467348059334030873350571979462363834615231089
-    c = 8696771272015513736887843395612361647314297287781507609196936354183211655364744684164300710583625473872942712063309507651496314800393009480421886926137403759228421858414833429980059903049311837014449093365911603108158352871851677457256058510822509157407703210866317472894586087554001158540951787167699161720491198674848526093644131709561995379565643716017359731201935855247285498574923656191121426618306186331615280461405913653781283860760013215603007314688132
-    d0 = 0x414946b9c40728f9801e61e98ec6d17525cbe4163a5ffb8367b65c652ae4cc3abce62e70afbfb84fcf937b3119953b48922be19ef4312c4f3a88313368ca6c9b1d658b7
-
-    nbits = n.nbits()
-    kbits = d0.nbits()
-
-    q = find_q(d0, kbits, e, n, p)
-    r = n // q // p
-    phi = (r - 1) * (p - 1) * (q - 1)
-    d = gmpy2.invert(e,phi)
-    print(long_to_bytes(pow(c,d,n)))
-</code></pre>
-<p><strong>ps：之后把推导过程补上</strong></p>
-<h1 id="AliceHomework"><a href="#AliceHomework" class="headerlink" title="AliceHomework"></a>AliceHomework</h1><p>LLL 没跑出来，疑惑.jpg</p>
-<h1 id="PolyCrypto"><a href="#PolyCrypto" class="headerlink" title="PolyCrypto"></a>PolyCrypto</h1><p>没时间看题。。。tcl</p>
-
-                            <hr>
-                        </div>
-                        <br>
-                        <div>
-                            
-                            <p>
-                                <i class="iconfont icon-tag"></i>
-                                
-                                    <a class="hover-with-bg" href="/tags/Writeup">Writeup</a>
-                                
-                            </p>
-                            
-                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-                            
-                        </div>
-                    </div>
-                </div>
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
             </div>
-        <div class="d-none d-lg-block col-lg-2 toc-container">
-            
-  <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
-    <div id="tocbot"></div>
-  </div>
-
         </div>
     </div>
 </div>
 
-<!-- custom -->
-
-
-<!-- Comments -->
-<div class="col-lg-7 mx-auto nopadding-md">
-    <div class="container comments mx-auto" id="comments">
-        
-    </div>
-</div>
     
-</main>
+      
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer class="mt-5">
-  <div class="text-center py-3">
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
-    <br><br>
-    <span id="busuanzi_container_site_pv">
-    <b>Reads: </b><span id="busuanzi_value_site_pv"></span><b> times</b><b> | </b><b>Visits: </b><span id="busuanzi_value_site_uv"></span><b> people</b>
-    </span><br>
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
     
   </div>
-</footer>
+</aside>
 
-  <!-- SCRIPTS -->
-  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
-  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
-  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
-  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
-  <script src="/js/main.js"></script>
   
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-天翼杯-2020-Writeup" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
-    
-    <script src="/js/post.js"></script>
-  
-  
-    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
-    <script>
-      $(document).ready(function(){
-        $('pre').addClass('prettyprint linenums');
-        prettyPrint();
-      })
-    </script>
-  
-  
-    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
-    <script>
-        var typed = new Typed('#subtitle', {
-          strings: [
-            '  ',
-            "天翼杯-2020-Writeup&nbsp;",
-        ],
-        cursorChar: "|",
-        typeSpeed: 90,
-        startDelay: 300, //开始之前延迟300毫秒
-        loop: false,
-        });
-        $(".typed-cursor").addClass("h2");
-    </script>
-  
-  
-    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
-    <script>
-      anchors.options = {
-        placement: "left",
-        visible: "true",
+    <div class="article-header">
+      
         
-      };
-      anchors.add(".post-content > h1,h2,h3");
-    </script>
   
+    <h1 class="article-title" itemprop="name">
+      天翼杯-2020-Writeup
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/07/31/天翼杯-2020-Writeup/" class="article-date">
+	  <time datetime="2020-07-31T15:00:19.000Z" itemprop="datePublished">2020-07-31</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Writeup/">Writeup</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/31/天翼杯-2020-Writeup/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 219(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>比赛排得很密，gkd 把 writeup 写了。</p>
+<h1 id="easyrsa"><a class="markdownIt-Anchor" href="#easyrsa"></a> easyRSA</h1>
+<p>签到题，对于每一次加密，明文空间小，于是直接遍历。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n = ...</span><br><span class="line">cipher = ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">e = <span class="number">11299</span></span><br><span class="line">plaintext = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(cipher)):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> string.printable:</span><br><span class="line">        <span class="keyword">if</span> pow(ord(s),e,n) == cipher[i]:</span><br><span class="line">            plaintext += s</span><br><span class="line">            print(plaintext)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h1 id="hardrsa"><a class="markdownIt-Anchor" href="#hardrsa"></a> hardRSA</h1>
+<p>已知 d 低 539 位，q 为 510 位，计算低位 q 的方法可以直接获得 q。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_q</span><span class="params">(d0, kbits, e, n, p)</span>:</span></span><br><span class="line">    X = var(<span class="string">'X'</span>)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>, e+<span class="number">1</span>):</span><br><span class="line">        results = solve_mod([e*d0*X - k*(p<span class="number">-1</span>)*X*(n//p-X+<span class="number">1</span>) + (p<span class="number">-1</span>)*k*(n//p) == X], <span class="number">2</span>^kbits)</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> results:</span><br><span class="line">            q0 = ZZ(x[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">if</span> n % q0 == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> q0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n = <span class="number">12723332779402711330767180202990021139894727917028981722242076998825097254419567024122271773380821224949951558669351311750240296591612098048129709925844660421849429715755474874708286508736369884566273719494870891070006251521469139401722700298201541140391493575314714966432624976434199682124684035067305114749262672684081617896579640435891181745346695293618235303178334371123418790204709073465264408888007492994820133128499094347122686903153588634296508454120927</span></span><br><span class="line">    e = <span class="number">7</span></span><br><span class="line">    p = <span class="number">3141886348112988339174865432179206412942588390228169645162293920470188882447855208783220899752887620221059861467348059334030873350571979462363834615231089</span></span><br><span class="line">    c = <span class="number">8696771272015513736887843395612361647314297287781507609196936354183211655364744684164300710583625473872942712063309507651496314800393009480421886926137403759228421858414833429980059903049311837014449093365911603108158352871851677457256058510822509157407703210866317472894586087554001158540951787167699161720491198674848526093644131709561995379565643716017359731201935855247285498574923656191121426618306186331615280461405913653781283860760013215603007314688132</span></span><br><span class="line">    d0 = <span class="number">0x414946b9c40728f9801e61e98ec6d17525cbe4163a5ffb8367b65c652ae4cc3abce62e70afbfb84fcf937b3119953b48922be19ef4312c4f3a88313368ca6c9b1d658b7</span></span><br><span class="line">    </span><br><span class="line">    nbits = n.nbits()</span><br><span class="line">    kbits = d0.nbits()</span><br><span class="line"></span><br><span class="line">    q = find_q(d0, kbits, e, n, p)</span><br><span class="line">    r = n // q // p</span><br><span class="line">    phi = (r - <span class="number">1</span>) * (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">    d = gmpy2.invert(e,phi)</span><br><span class="line">    print(long_to_bytes(pow(c,d,n)))</span><br></pre></td></tr></table></figure>
+<p><strong>ps：之后把推导过程补上</strong></p>
+<h1 id="alicehomework"><a class="markdownIt-Anchor" href="#alicehomework"></a> AliceHomework</h1>
+<p>LLL 没跑出来，疑惑.jpg</p>
+<h1 id="polycrypto"><a class="markdownIt-Anchor" href="#polycrypto"></a> PolyCrypto</h1>
+<p>没时间看题。。。tcl</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/07/31/天翼杯-2020-Writeup/" title="天翼杯-2020-Writeup" target="_blank" rel="external">https://buki-freak.github.io/2020/07/31/天翼杯-2020-Writeup/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/08/03/De1ta-CTF-2020-Review/" title="De1ta-CTF-2020-Review"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/07/27/3kctf-2020-Review/" title="3kctf-2020-Review"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
 </html>

@@ -1,580 +1,573 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
+<html lang=zh>
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Programming">
-    <meta name="author" content="Haojen Lau">
-    <meta name="keywords" content>
-    <title>buki</title>
-    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
-    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
-    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
-    
-        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
-    
-    <link rel="stylesheet" href="/css/main.css">
-
-    
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>buk1&#39;s blog</title>
+  <meta name="description" content="Programming">
+<meta property="og:type" content="website">
+<meta property="og:title" content="buk1">
+<meta property="og:url" content="https://buki-freak.github.io/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="Programming">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="buk1">
+<meta name="twitter:description" content="Programming">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
 </head>
 
 
-<body>
-<header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-<div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>buki</strong>&nbsp;</a>
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
             
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  
+  <div class="content article-list">
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/03/De1ta-CTF-2020-Review/">De1ta-CTF-2020-Review</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/08/03/De1ta-CTF-2020-Review/" class="article-date">
+	  <time datetime="2020-08-03T03:40:01.862Z" itemprop="datePublished">8月 3</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/03/De1ta-CTF-2020-Review/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/31/天翼杯-2020-Writeup/">天翼杯-2020-Writeup</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/07/31/天翼杯-2020-Writeup/" class="article-date">
+	  <time datetime="2020-07-31T15:00:19.000Z" itemprop="datePublished">7月 31</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Writeup/">Writeup</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/31/天翼杯-2020-Writeup/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 219(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/27/3kctf-2020-Review/">3kctf-2020-Review</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/07/27/3kctf-2020-Review/" class="article-date">
+	  <time datetime="2020-07-27T06:21:11.000Z" itemprop="datePublished">7月 27</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/27/3kctf-2020-Review/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 617(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/30/2020-First-Half-Review/">2020-First-Half-Review</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/06/30/2020-First-Half-Review/" class="article-date">
+	  <time datetime="2020-06-30T15:23:46.000Z" itemprop="datePublished">6月 30</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Personal-Development/">Personal Development</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/30/2020-First-Half-Review/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/">das-CTF&amp;GK-CTF-2020-Writeup</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/" class="article-date">
+	  <time datetime="2020-05-24T01:30:24.000Z" itemprop="datePublished">5月 24</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Writeup/">Writeup</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-drafts" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/Npu-CTF-2020-Review/">Npu-CTF-2020-Review</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/12/Npu-CTF-2020-Review/" class="article-date">
+	  <time datetime="2020-05-12T13:20:15.000Z" itemprop="datePublished">5月 12</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/12/Npu-CTF-2020-Review/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/03/2020-05-03/">2020-05-03</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/03/2020-05-03/" class="article-date">
+	  <time datetime="2020-05-03T14:44:24.000Z" itemprop="datePublished">5月 3</time>
+	</a>
+</span>
+    
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Daily-Post/">Daily Post</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/03/2020-05-03/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 71(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+  </div>
+
+  
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev disabled">
+                <a href="javascript:;">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
             </li>
             
-            <li class="nav-item">
-                <a class="nav-link" href="/archives/">Archives</a>
-            </li>
             
-            <li class="nav-item">
-                <a class="nav-link" href="/categories/">Categories</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/tags/">Tags</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/about/">About</a>
+            <li class="next">
+                <a href="/page/2/">
+                    下一页
+                    <i class="icon icon-angle-right"></i>
+                </a>
             </li>
             
         </ul>
-    </div>
-</div>
-
-
-</nav>
-    <div class="view intro-2"
-         style="background: url('/img/index.jpg')no-repeat center center;background-size: cover;">
-        <div class="full-bg-img">
-            <div class="mask rgba-black-light flex-center">
-                <div class="container text-center white-text wow fadeInUp">
-                    <span class="h2" id="subtitle">
-                        
-                    </span>
-                    
-                </div>
-            </div>
+        <div class="total-article bar-right">Page 1 of 2</div>
         </div>
-    </div>
-</header>
-
-<main>
+    </nav>
     
-        <div class="container nopadding-md">
-            <div class="py-5 z-depth-3 board">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-10 m-auto">
-                            
-
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/07/31/天翼杯-2020-Writeup/">
-                <p class="h4 index-header">天翼杯-2020-Writeup</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">比赛排得很密，gkd 把 writeup 写了。
-easyRSA签到题，对于每一次加密，明文空间小，于是直接遍历。
-n = ...
-cipher = ...
-
-
-
-import string
-e = 11299
-plaintext = &#39;&#39;
-for i in range(len(cipher)):
-    for s in string.printable:
-        if pow(ord(s),e,n) == cipher[i]:
-            plaintext += s
-            print(plaintext)
-            break
-
-hardRSA已知 d 低 539 位，q 为 510 位，计算低位 q 的方法可以直接获得 q。
-import gmpy2
-from Crypto.Util.number import long_to_bytes
-
-def find_q(d0, kbits, e, n, p):
-    X = var(&#39;X&#39;)
-    for k in range(1, e+1):
- </div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-31
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Writeup">Writeup</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/07/27/3kctf-2020-Review/">
-                <p class="h4 index-header">3kctf-2020-Review</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">pyzzle1Given a cst tree code, use libcst package in python to transform it into source code:
-from libcst import *
-abc = Module(....
-)
-
-with open(&#39;...&#39;,&#39;w&#39;) as f:
-    f.write(str(abc.code))
-
-Here is the source code in python:
-
-import binascii
-
-plaintext = &quot;REDACTED&quot;
-
-def exor(a, b):
-    temp = &quot;&quot;
-    for i in range(n):
-        if (a[i] == b[i]):
-            temp += &quot;0&quot;
-        else:
-            temp += &quot;1&quot;
-    return temp
-
-
-def BinaryToDecim</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-27
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Review">Review</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/06/30/2020-First-Half-Review/">
-                <p class="h4 index-header">2020-First-Half-Review</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">2020 已经过半，新年的钟声仿佛仍然萦绕在耳边。时间过得太快，留下的太少。
-回顾今年真的很特别啊，二月份的时候还抱着回学校上课的想法，现在已经上了一学期的网课。对于网课和回学校上课，我是偏后者的。要知道，待在家里学习效率不到学校的十分之一：）不过还好，现在好像慢慢习惯下去了 hhhhh
-本来是二月底开学的，不过学校说推迟开学（不带网课的那种）。好吧，等到三月份，盼了许久谁知改成网课（直接裂开&gt;_&lt;，网课==自学。不得不说，这半年处于真·白学阶段，白学能力提高了不少。
-一月主要在学了 Matlab 编程和 Latex，从基本语法到画图，再到如何用 Latex 写出一篇 nice 的论文。学这个主要是为了准备数模，不过听说毕业论文要用 Latex 2333。因为寒假前有个朋友拉数模美赛，自己感觉想试试（说不定好好学能拿个奖。于是就报名去了，报名费也不便宜。后面去听了听那边的基础课，建模对数学要求还是挺高的，有点懵。后面朋友说让我学学 Matlab 编程。基础学下来其实也不用花很长时间，但是拖着拖着到二月份去了。不过回想那个时候，自己跟着网上教程走，还是不错的。
-美赛在三月份，</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-30
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Personal%20Development">Personal Development</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/24/das-CTF-GK-CTF-2020-Writeup/">
-                <p class="h4 index-header">das-CTF&amp;GK-CTF-2020-Writeup</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Only writeup in Crypto.
-GKCTF小学生的密码学(Solved)Pretty easy affince cipher. Both keys are given.
-babycrypto(Solved)Partial high bits of p is known.
-# Use sage to run the script
-# Reference: https://www.jianshu.com/p/1a0e876d5929
-from sage.all import *
-from Crypto.Util.number import long_to_bytes
-
-# All variables are in hex
-n = 0xb119849bc4523e49c6c038a509a74cda628d4ca0e4d0f28e677d57f3c3c7d0d876ef07d7581fe05a060546fedd7d061d3bc70d679b6c5dd9bc66c5bdad8f2ef898b1e785496c4989daf716a1c89d5c174da494eee7061</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-24
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Writeup">Writeup</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/12/Npu-CTF-2020-Review/">
-                <p class="h4 index-header">Npu-CTF-2020-Review</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Only review in Crypto.
-What does the tag mean
-
-
-
-Status
-Description
-
-
-
-
-Solved
-Solved in the competition
-
-
-Unlved
-Unsolved in the competition
-
-
-
-
-Mersenne Twister(unsolved)This challenge is related to Mersenne Twister Encryption. However, there are differences between them exactly. Here is the file:
-Mersenne Twiser.py
-from hashlib import *
-from itertools import *
-from binascii import hexlify , unhexlify
-
-from flag import flag ,seed
-
-assert len(flag) == 26
-assert flag[:7] == &#39;npuctf{&#39;
-ass</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-12
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Review">Review</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/11/De1ta-CTF-2020-Review/">
-                <p class="h4 index-header">De1ta-CTF-2020-Review</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Only review in Crypto.
-nlfsr(unsolved)This challenge consists of 4 linear feedback shift registers (below I use LFSR instead), with accordingly 19 bits, 19 bits, 6 bits and 3 bits state length. Here is the given file:
-quiz.py
-from flag import a, b, c, d, flag
-assert flag == &quot;De1CTF{&quot; + &#39;&#39;.join([hex(i)[2:] for i in [a, b, c, d]]) + &quot;}&quot;
-assert [len(bin(i)[2:]) for i in [a, b, c, d]] == [19, 19, 13, 6]
-
-ma, mb, mc, md = 0x505a1, 0x40f3f, 0x1f02, 0x31
-
-
-def lfsr(r, m): re</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-11
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Review">Review</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/03/2020-05-03/">
-                <p class="h4 index-header">2020-05-03</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">What I Have DoneSadly, the quiz yesterday is still unsolved. It seems that z3-solver doesn’t work. As a result, I study Correlation Attack  which is a kind of brute-force attack method. The method seems to work now and I am trying to understanding the codes written by others. Daily IELTS exercises have been done. What a day!
-Things to Learn and Improve
-Stream Cipher - Correlation Attack Method
-
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-03
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Daily%20Post">Daily Post</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/02/2020-05-02/">
-                <p class="h4 index-header">2020-05-02</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">What I Have DoneA competition is held in these days, exciting and also exhausting! I am confident on a quiz about LFSR, which I have lately learned. However, things always does go in the right way, isn’t it? After being trapped for over five hours, I went to sleep… While I did several IELTS reading exercises, oh of course, I have finished The End of the fxxking world Season One just for fun ha ha ha!
-Things to Learn and Improve
-z3-solver
-English reading speed
-Be easygoing
-
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-02
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Daily%20Post">Daily Post</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/01/Greeting/">
-                <p class="h4 index-header">Greeting</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Today, I have deleted all blogs deployed before. My greeting is below.
-The Past​    For a so-called loser, it is always mournful to talk about his or her past. Actually, I am one of them, after failing the college entrance examination. What’s more, things go wrong in these university days. It seems that I have have been trapped for such a long time, or have had a nightmare. Families, friends, mates, the environment, …, everything goes in a wrong way. However, Mama usually tells  me to be positiv</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-01
-                    &nbsp;&nbsp;
-                    
-                    
-                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
-                        
-                            <a href="/tags/Personal%20Development">Personal Development</a>&nbsp;
-                        
-                    
-                </div>
-            
-        </div>
-    </div>
-
-    <div class="row mb-4 mx-auto">
-        
-        
-        <div class="col-12 col-md-8 m-auto">
-            <a href="/2020/05/01/hello-world/">
-                <p class="h4 index-header">Hello World</p>
-                <div class="index-excerpt">
-                    
-                        <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server$ hexo server
-
-More info: Server
-Generate static files$ hexo generate
-
-More info: Generating
-Deploy to remote sites$ hexo deploy
-
-More info: Deployment
-</div>
-                    
-                </div>
-            </a>
-
-            
-                <div>
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-01
-                    &nbsp;&nbsp;
-                    
-                    
-                </div>
-            
-        </div>
-    </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
+ 
 </main>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer class="mt-5">
-  <div class="text-center py-3">
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
-    <br><br>
-    <span id="busuanzi_container_site_pv">
-    <b>Reads: </b><span id="busuanzi_value_site_pv"></span><b> times</b><b> | </b><b>Visits: </b><span id="busuanzi_value_site_uv"></span><b> people</b>
-    </span><br>
-    
-  </div>
-</footer>
-
-  <!-- SCRIPTS -->
-  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
-  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
-  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
-  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
-  <script src="/js/main.js"></script>
-  
-  
-    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
-    <script>
-      $(document).ready(function(){
-        $('pre').addClass('prettyprint linenums');
-        prettyPrint();
-      })
-    </script>
-  
-  
-    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
-    <script>
-        var typed = new Typed('#subtitle', {
-          strings: [
-            '  ',
-            "Leaving that fxxking world!&nbsp;",
-        ],
-        cursorChar: "|",
-        typeSpeed: 90,
-        startDelay: 300, //开始之前延迟300毫秒
-        loop: false,
-        });
-        $(".typed-cursor").addClass("h2");
-    </script>
-  
-  
-    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
-    <script>
-      anchors.options = {
-        placement: "left",
-        visible: "true",
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-      };
-      anchors.add(".post-content > h1,h2,h3");
-    </script>
-  
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
