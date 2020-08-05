@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="buk1">
 <meta property="og:description" content="今天看了一篇 RSA 的paper，总结的不错，简单地做下笔记。 RSA 是基于 Factoring Large Integers Problem 的公钥密码体制。  Elementary Attacks  Common Modulus …  Blinding 出现在不经 padding 和 check 的 RSA signiture 中，如果签名方不仔细审查明文，攻击者可以伪造某人对于任何内容的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/1.jpg">
+<meta property="og:image" content="https://buki-freak.github.io/2020/08/03/RSA-Learning/images/RSA-learning/1.jpg">
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/2.jpg">
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/3.jpg">
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/4.jpg">
@@ -37,11 +37,11 @@
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/10.jpg">
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/11.jpg">
 <meta property="og:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/12.jpg">
-<meta property="og:updated_time" content="2020-08-05T14:33:47.908Z">
+<meta property="og:updated_time" content="2020-08-05T14:44:24.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA-Learning">
 <meta name="twitter:description" content="今天看了一篇 RSA 的paper，总结的不错，简单地做下笔记。 RSA 是基于 Factoring Large Integers Problem 的公钥密码体制。  Elementary Attacks  Common Modulus …  Blinding 出现在不经 padding 和 check 的 RSA signiture 中，如果签名方不仔细审查明文，攻击者可以伪造某人对于任何内容的">
-<meta name="twitter:image" content="https://buki-freak.github.io/2020/08/03/images/RSA-learning/1.jpg">
+<meta name="twitter:image" content="https://buki-freak.github.io/2020/08/03/RSA-Learning/images/RSA-learning/1.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="https://buki-freak.github.io/2020/08/03/RSA-Learning/index.html">
   
@@ -273,7 +273,7 @@
 <h2 id="blinding"><a class="markdownIt-Anchor" href="#blinding"></a> Blinding</h2>
 <p>出现在不经 padding 和 check 的 RSA signiture 中，如果签名方不仔细审查明文，攻击者可以伪造某人对于任何内容的签名。</p>
 <p>cheat 大致过程如下：</p>
-<p><img src="../images/RSA-learning/1.jpg" alt></p>
+<p><img src="./images/RSA-learning/1.jpg" alt></p>
 <p>整个过程称为 blinding，是因为 Bob 没能得知他要签名的内容。签名方在签名前检查内容能够防止这个问题。</p>
 <h1 id="low-private-exponent"><a class="markdownIt-Anchor" href="#low-private-exponent"></a> Low Private Exponent</h1>
 <p>低解密指数攻击。</p>
