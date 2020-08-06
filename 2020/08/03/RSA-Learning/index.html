@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aReSat.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aR8M7D.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aRGSCd.jpg">
-<meta property="og:updated_time" content="2020-08-06T15:21:07.669Z">
+<meta property="og:updated_time" content="2020-08-06T15:27:29.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA-Learning">
 <meta name="twitter:description" content="今天看了一篇 RSA 的paper，总结的不错，简单地做下笔记。 RSA 是基于 Factoring Large Integers Problem 的公钥密码体制。 Elementary AttacksCommon Modulus…. Blinding出现在不经 padding 和 check 的 RSA signiture 中，如果签名方不仔细审查明文，攻击者可以伪造某人对于任何内容的签名。 c">
@@ -341,7 +341,7 @@ C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，�
 <h3 id="Background-1"><a href="#Background-1" class="headerlink" title="Background"></a>Background</h3><p><img src="https://s1.ax1x.com/2020/08/06/a2XSqH.jpg" alt="a2XSqH.jpg"></p>
 <h3 id="Lemma-7-Frankin-Reiter"><a href="#Lemma-7-Frankin-Reiter" class="headerlink" title="Lemma 7(Frankin-Reiter)"></a>Lemma 7(Frankin-Reiter)</h3><p><img src="https://s1.ax1x.com/2020/08/06/a2XyQO.jpg" alt="a2XyQO.jpg"></p>
 <h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>f 关系为线性关系并且复杂度为 $O(e^2)$，只适用于低加密指数的情况。</p>
-<h3 id="Proof-3"><a href="#Proof-3" class="headerlink" title="Proof"></a>Proof</h3><p>由 Lemma 7 可知：$M_1\;\neq\;M_2\;\in\;\Z_{N}^{*}，并且满足 M_1\;\equiv\;f(M_{2})\;\mod\;N，f 是 Z_{N}[x] 下的线性关系$</p>
+<h3 id="Proof-3"><a href="#Proof-3" class="headerlink" title="Proof"></a>Proof</h3><p>由 Lemma 7 可知：$M_1\;\neq\;M_2\;\in\;Z_{N}^{*}$ ，并且满足  $M_1\;\equiv\;f(M_{2})\;\mod\;N$ ，f 是 Z_{N}[x] 下的线性关系。</p>
 <p>因为 $C_1\;\equiv\;M_{1}^{e}\;\mod\;N$，所以 $M_2$ 是方程 $g_1(x)\;\equiv\;f(x)^{e}\;-\;C_1\;\in\;Z_{N}[x]$ 的一个解。</p>
 <p>同理，我们可以得到 $M_2$ 也是另一条方程 $g_{2}(x)\;\equiv\;x^{e}\;-\;C_{2}\;\in\;Z_{N}[x]$ 。</p>
 <p>$x\;-\;M_2$ 是两条多项式的 gcd。（不懂？</p>
@@ -355,11 +355,11 @@ C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，�
 <script type="math/tex; mode=display">
 g_1(x,y)\;\equiv\;x^{e}\;-\;C_1\\
 g_2(x,y)\;\equiv\;(x+y)^{e}\;-\;C_2\\
-y\;=\;r_1\;-\;r_2\;=\;\Delta</script><p>所以有 $h(y)\;=\;res_{x}(g_1,g_2)\;\in\;Z^{N][y]$。</p>
-<p>因为 $\left|\Delta\right|\;&lt;\;2^{m]\;&lt;\;N^{\frac{1}{e^{2}}}$，所以 $\Delta$ 是 h 在 N 上的 samll root，使用 Coppersmith 的方法可以算出 $\Delta$。然后问题可以转化为 Franklin-Reiter Attack。</p>
+y\;=\;r_1\;-\;r_2\;=\;\Delta</script><p>所以有 $h(y)\;=\;res_{x}(g_1,g_2)\;\in\;Z^{N}[y]$。</p>
+<p>因为 $\left|\Delta\right|\;&lt;\;2^{m}\;&lt;\;N^{\frac{1}{e^{2}}}$，所以 $\Delta$ 是 h 在 N 上的 samll root，使用 Coppersmith 的方法可以算出 $\Delta$。然后问题可以转化为 Franklin-Reiter Attack。</p>
 <h2 id="Partial-Key-Exposure-Attack"><a href="#Partial-Key-Exposure-Attack" class="headerlink" title="Partial Key Exposure Attack"></a>Partial Key Exposure Attack</h2><h3 id="Theorem-9-BDF"><a href="#Theorem-9-BDF" class="headerlink" title="Theorem 9 (BDF)"></a>Theorem 9 (BDF)</h3><p><img src="https://s1.ax1x.com/2020/08/06/aR8M7D.jpg" alt="aR8M7D.jpg"></p>
 <h3 id="Theorem-10-Coppersmith"><a href="#Theorem-10-Coppersmith" class="headerlink" title="Theorem 10 (Coppersmith)"></a>Theorem 10 (Coppersmith)</h3><p><img src="https://s1.ax1x.com/2020/08/06/aRGSCd.jpg" alt="aRGSCd.jpg"></p>
-<p>(未完待续)</p>
+<p>(未完待续……)</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf" target="_blank" rel="noopener">https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf</a></p>
 
       
