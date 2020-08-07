@@ -43,7 +43,9 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aReSat.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aR8M7D.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/06/aRGSCd.jpg">
-<meta property="og:updated_time" content="2020-08-06T15:27:29.983Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/07/aWpLVO.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/07/aWDmyF.jpg">
+<meta property="og:updated_time" content="2020-08-07T09:13:35.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA-Learning">
 <meta name="twitter:description" content="今天看了一篇 RSA 的paper，总结的不错，简单地做下笔记。 RSA 是基于 Factoring Large Integers Problem 的公钥密码体制。 Elementary AttacksCommon Modulus…. Blinding出现在不经 padding 和 check 的 RSA signiture 中，如果签名方不仔细审查明文，攻击者可以伪造某人对于任何内容的签名。 c">
@@ -322,11 +324,11 @@ M\;\equiv\;C^{d_q}\mod\;q
 <script type="math/tex; mode=display">
 2^{\frac{w}{4}}det(L)^{\frac{1}{w}}\;<\;\frac{N^m}{\sqrt{w}},\;where\;w\;=\;d(m+1)\;is\;the\;dimension\;of\;L</script><h2 id="Hastad’s-Broadcast-Attack"><a href="#Hastad’s-Broadcast-Attack" class="headerlink" title="Hastad’s Broadcast Attack"></a>Hastad’s Broadcast Attack</h2><p>Hastad 第一次运用了 Coppersmith’s theorem。</p>
 <h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p><img src="https://s1.ax1x.com/2020/08/06/agFvW9.jpg" alt="agFvW9.jpg"></p>
-<p>如果 $k\;\geq\3$，Marvin 可以恢复明文，假设我们有 $e_i\;=\;1,2,3….$，</p>
+<p>如果 $k\;\geq\;3$，Marvin 可以恢复明文，假设我们有 $e_i\;=\;1,2,3….$，</p>
 <script type="math/tex; mode=display">
 C_1\;\equiv\;M^3\;\mod\;N_1,\\
 C_2\;\equiv\;M^3\;\mod\;N_2,\\
-C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，有  $gcd(N_i,\;N_j)\;=\;1$，那么使用 CRT 可以解除 $M^3$ 在整数上的值，开三次方根可以求出 M。</p>
+C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，有  $gcd(N_i,\;N_j)\;=\;1$，那么使用 CRT 可以解出 $M^3$ 在整数上的值，开三次方根可以求出 M。</p>
 <h3 id="Limits-1"><a href="#Limits-1" class="headerlink" title="Limits"></a>Limits</h3><p>所有的加密指数需要相同，并且需要满足 $k\;\geq\;e$。</p>
 <p>Hastad 对于 pad 改进了攻击方法。</p>
 <h3 id="Theorem-6-Hastad"><a href="#Theorem-6-Hastad" class="headerlink" title="Theorem 6(Hastad)"></a>Theorem 6(Hastad)</h3><p><img src="https://s1.ax1x.com/2020/08/06/agkSQ1.jpg" alt="agkSQ1.jpg"></p>
@@ -341,7 +343,7 @@ C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，�
 <h3 id="Background-1"><a href="#Background-1" class="headerlink" title="Background"></a>Background</h3><p><img src="https://s1.ax1x.com/2020/08/06/a2XSqH.jpg" alt="a2XSqH.jpg"></p>
 <h3 id="Lemma-7-Frankin-Reiter"><a href="#Lemma-7-Frankin-Reiter" class="headerlink" title="Lemma 7(Frankin-Reiter)"></a>Lemma 7(Frankin-Reiter)</h3><p><img src="https://s1.ax1x.com/2020/08/06/a2XyQO.jpg" alt="a2XyQO.jpg"></p>
 <h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>f 关系为线性关系并且复杂度为 $O(e^2)$，只适用于低加密指数的情况。</p>
-<h3 id="Proof-3"><a href="#Proof-3" class="headerlink" title="Proof"></a>Proof</h3><p>由 Lemma 7 可知：$M_1\;\neq\;M_2\;\in\;Z_{N}^{*}$ ，并且满足  $M_1\;\equiv\;f(M_{2})\;\mod\;N$ ，f 是 Z_{N}[x] 下的线性关系。</p>
+<h3 id="Proof-3"><a href="#Proof-3" class="headerlink" title="Proof"></a>Proof</h3><p>由 Lemma 7 可知：$M_1\;\neq\;M_2\;\in\;Z_{N}^{*}$ ，并且满足  $M_1\;\equiv\;f(M_{2})\;\mod\;N$ ，f 是 $Z_{N}[x]$ 下的线性关系。</p>
 <p>因为 $C_1\;\equiv\;M_{1}^{e}\;\mod\;N$，所以 $M_2$ 是方程 $g_1(x)\;\equiv\;f(x)^{e}\;-\;C_1\;\in\;Z_{N}[x]$ 的一个解。</p>
 <p>同理，我们可以得到 $M_2$ 也是另一条方程 $g_{2}(x)\;\equiv\;x^{e}\;-\;C_{2}\;\in\;Z_{N}[x]$ 。</p>
 <p>$x\;-\;M_2$ 是两条多项式的 gcd。（不懂？</p>
@@ -355,11 +357,33 @@ C_3\;\equiv\;M^3\;\mod\;N_3</script><p>如果对于所有  $N, i\;\neq\;j $，�
 <script type="math/tex; mode=display">
 g_1(x,y)\;\equiv\;x^{e}\;-\;C_1\\
 g_2(x,y)\;\equiv\;(x+y)^{e}\;-\;C_2\\
-y\;=\;r_1\;-\;r_2\;=\;\Delta</script><p>所以有 $h(y)\;=\;res_{x}(g_1,g_2)\;\in\;Z^{N}[y]$。</p>
+y\;=\;r_1\;-\;r_2\;=\;\Delta</script><p>所以有 $h(y)\;=\;res_{x}(g_1,g_2)\;\in\;Z_s{N}[y]$。</p>
 <p>因为 $\left|\Delta\right|\;&lt;\;2^{m}\;&lt;\;N^{\frac{1}{e^{2}}}$，所以 $\Delta$ 是 h 在 N 上的 samll root，使用 Coppersmith 的方法可以算出 $\Delta$。然后问题可以转化为 Franklin-Reiter Attack。</p>
 <h2 id="Partial-Key-Exposure-Attack"><a href="#Partial-Key-Exposure-Attack" class="headerlink" title="Partial Key Exposure Attack"></a>Partial Key Exposure Attack</h2><h3 id="Theorem-9-BDF"><a href="#Theorem-9-BDF" class="headerlink" title="Theorem 9 (BDF)"></a>Theorem 9 (BDF)</h3><p><img src="https://s1.ax1x.com/2020/08/06/aR8M7D.jpg" alt="aR8M7D.jpg"></p>
 <h3 id="Theorem-10-Coppersmith"><a href="#Theorem-10-Coppersmith" class="headerlink" title="Theorem 10 (Coppersmith)"></a>Theorem 10 (Coppersmith)</h3><p><img src="https://s1.ax1x.com/2020/08/06/aRGSCd.jpg" alt="aRGSCd.jpg"></p>
-<p>(未完待续……)</p>
+<h3 id="Proof-5"><a href="#Proof-5" class="headerlink" title="Proof"></a>Proof</h3><p>首先有：$ed\;-\;k\;(N\;-\;p\;-\;q\;+\;1)\;=\;1$ ，由于 $d\;&lt;\;\varphi(N)$ ，所以 $0\;&lt;\;k\;\leq\;e$ 。</p>
+<p>然后改写下模数，并且将 $q\;=\;\frac{N}{p}$ 代入，可得：</p>
+<script type="math/tex; mode=display">
+(e*d)*p\;-\;k*p(N\;-\;p\;+\;1)\;+\;k*N\;\equiv\;p\mod\;(2^{\frac{n}{4}})</script><p>由于已知 $d\mod\;2^{\frac{n}{4}}$ ，所以得到一个关于 $k,\;p$ 的方程。遍历所有 $k$ 的值，我们可以得到一组候选的 $p\;\mod\;2^{\frac{n}{4}}$</p>
+<p>然后转为 Theorem 10 的方法分解 $N$ 。</p>
+<h3 id="Limits-3"><a href="#Limits-3" class="headerlink" title="Limits"></a>Limits</h3><p>$e$ 需要满足 $e\;&lt;\;\sqrt{N}$ 。</p>
+<p>由于候选 $p$ 的数量最多为 $e\;log_{2}e$ ，所以 $e$ 的不能太大。</p>
+<h1 id="Implementation-Attacks"><a href="#Implementation-Attacks" class="headerlink" title="Implementation Attacks"></a>Implementation Attacks</h1><h2 id="Timing-Attack"><a href="#Timing-Attack" class="headerlink" title="Timing Attack"></a>Timing Attack</h2><p>时序攻击，是一种侧信道攻击。</p>
+<p>Kocher 提出：通过分析许多不同组随机生成（感觉还是有人为设置）数据的解密/签名时间，可以找到私钥 $d$ 。这个人还提出了一个能耗分析的方法。</p>
+<p>先复习一下 modular multipications:</p>
+<p><img src="https://s1.ax1x.com/2020/08/07/aWpLVO.jpg" alt="aWpLVO.jpg"></p>
+<p>这种方法简单的说，是利用 modular multiplications 中二进制 $d$ 的 0/1 计算时间差异来爆破出 $d$ 。</p>
+<p>对于 $e$ 比较小的情况，可以先爆破出低 $\frac{n}{4}$ 位，然后使用 partial key exposure attack。</p>
+<p>防御这种攻击有两种方法：</p>
+<p>第一种是增加适当的延迟，消除计算时间差异，不过计算时间开销会增加。</p>
+<p>第二种是 Rivest 提出的 blinding 方法，在每次计算前混入随机数。</p>
+<h2 id="Random-Faults"><a href="#Random-Faults" class="headerlink" title="Random Faults"></a>Random Faults</h2><p>先留个坑。。</p>
+<h2 id="Bleichenbacher’s-Attack-on-PKCS-1"><a href="#Bleichenbacher’s-Attack-on-PKCS-1" class="headerlink" title="Bleichenbacher’s Attack on PKCS 1"></a>Bleichenbacher’s Attack on PKCS 1</h2><p>首先学习一下 PKCS 1 的 padding 方式：</p>
+<p><img src="https://s1.ax1x.com/2020/08/07/aWDmyF.jpg" alt="aWDmyF.jpg"></p>
+<p>padding 的开头为 ‘\x00\x02’（十六个字节，下面同），结尾是 ‘\x00\x00’，中间为 padding 的内容，大于等于八字节。padding 之后的长度要求和模数 $N$ 的长度相同。</p>
+<p>再了解一下收发机制：</p>
+<p>发送方 padding 加密之后发送密文，接收方先将密文解密，如果解密出来的结果不以 ‘\x00\x02’ 开头，则会向发送方返回错误；否则不放回任何信息。攻击者可以截取传输密文并且向接收方发送密文。</p>
+<p>再留个坑哈哈。。。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf" target="_blank" rel="noopener">https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf</a></p>
 
       
