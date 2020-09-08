@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://buki-freak.github.io/2020/09/06/gactf-2020-Review/</loc>
+    <lastmod>2020-09-08</lastmod>
+  </url>
+  <url>
+    <loc>https://buki-freak.github.io/2020/08/24/CISCN2020-%E5%88%9D%E8%B5%9B-Writeup/</loc>
+    <lastmod>2020-09-08</lastmod>
+  </url>
+  <url>
+    <loc>https://buki-freak.github.io/2020/07/31/%E5%A4%A9%E7%BF%BC%E6%9D%AF-2020-Writeup/</loc>
+    <lastmod>2020-08-24</lastmod>
+  </url>
+  <url>
     <loc>https://buki-freak.github.io/2020/08/03/RSA-Learning/</loc>
     <lastmod>2020-08-07</lastmod>
   </url>
@@ -18,10 +30,6 @@
   </url>
   <url>
     <loc>https://buki-freak.github.io/2020/05/24/das-CTF-GK-CTF-2020-Writeup/</loc>
-    <lastmod>2020-08-03</lastmod>
-  </url>
-  <url>
-    <loc>https://buki-freak.github.io/2020/07/31/%E5%A4%A9%E7%BF%BC%E6%9D%AF-2020-Writeup/</loc>
     <lastmod>2020-08-03</lastmod>
   </url>
   <url>

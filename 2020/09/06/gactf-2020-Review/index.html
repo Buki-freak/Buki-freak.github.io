@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>gactf-2020-Review | buk1&#39;s blog</title>
+  <meta name="description" content="比赛期间打工，所以没怎么看题，回顾一下。&amp;nbsp; da vinci after rsayafu 分解 n 可以得到三个质数，计算 $\varphi$ 发现 $e | \varphi$，于是化简：&amp;nbsp;$ e’\;\;=\;\;e\;//\;gcd(e,\varphi(n))\;=\;5\;,\;d’\;=\;invert(e’,\varphi(n)) $，得到：$c^{d’}\;\equ">
+<meta name="keywords" content="Review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gactf-2020-Review">
+<meta property="og:url" content="https://buki-freak.github.io/2020/09/06/gactf-2020-Review/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="比赛期间打工，所以没怎么看题，回顾一下。&amp;nbsp; da vinci after rsayafu 分解 n 可以得到三个质数，计算 $\varphi$ 发现 $e | \varphi$，于是化简：&amp;nbsp;$ e’\;\;=\;\;e\;//\;gcd(e,\varphi(n))\;=\;5\;,\;d’\;=\;invert(e’,\varphi(n)) $，得到：$c^{d’}\;\equ">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-08T08:24:54.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gactf-2020-Review">
+<meta name="twitter:description" content="比赛期间打工，所以没怎么看题，回顾一下。&amp;nbsp; da vinci after rsayafu 分解 n 可以得到三个质数，计算 $\varphi$ 发现 $e | \varphi$，于是化简：&amp;nbsp;$ e’\;\;=\;\;e\;//\;gcd(e,\varphi(n))\;=\;5\;,\;d’\;=\;invert(e’,\varphi(n)) $，得到：$c^{d’}\;\equ">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/09/06/gactf-2020-Review/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-gactf-2020-Review" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gactf-2020-Review
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/06/gactf-2020-Review/" class="article-date">
+	  <time datetime="2020-09-06T12:09:10.000Z" itemprop="datePublished">2020-09-06</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/06/gactf-2020-Review/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>比赛期间打工，所以没怎么看题，回顾一下。&nbsp;</p>
+<h1 id="da-vinci-after-rsa"><a href="#da-vinci-after-rsa" class="headerlink" title="da vinci after rsa"></a>da vinci after rsa</h1><p>yafu 分解 n 可以得到三个质数，计算 $\varphi$ 发现 $e | \varphi$，于是化简：<br>&nbsp;<br>$ e’\;\;=\;\;e\;//\;gcd(e,\varphi(n))\;=\;5\;,\;d’\;=\;invert(e’,\varphi(n)) $，得到：$c^{d’}\;\equiv\;m^5\mod\;n$ 。<br>&nbsp;<br>看大佬的博客可以用 AMM，自己实现了一遍发现只能求一个根，直接上 sage。<br>&nbsp;<br>&nbsp;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">c = <span class="number">421363015174981309103786520626603807427915973516427836319727073378790974986429057810159449046489151</span></span><br><span class="line">pa = <span class="number">9749</span></span><br><span class="line">pb = <span class="number">11237753507624591</span></span><br><span class="line">pc = <span class="number">9127680453986244150392840833873266696712898279308227257525736684312919750469261</span></span><br><span class="line"><span class="comment"># factor with yafu</span></span><br><span class="line"></span><br><span class="line">mas = GF(pa)(c).nth_root(<span class="number">5</span>, all=<span class="literal">True</span>) <span class="comment"># find 5-th root in modulus pa, so do below</span></span><br><span class="line">mbs = GF(pb)(c).nth_root(<span class="number">5</span>, all=<span class="literal">True</span>)</span><br><span class="line">mcs = GF(pc)(c).nth_root(<span class="number">5</span>, all=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># algl = True, which means find all roots, otherwise...</span></span><br><span class="line"><span class="comment"># all = False is default</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># find all possible m</span></span><br><span class="line">ms = [] </span><br><span class="line"><span class="keyword">for</span> ma, mb, mc <span class="keyword">in</span> itertools.product(mas, mbs, mcs): </span><br><span class="line">    m = ZZ(crt(list(map(ZZ,[ma,mb,mc])), [pa,pb,pc]))</span><br><span class="line">    mi = long_to_bytes(m)</span><br><span class="line">    <span class="keyword">if</span> mi[:<span class="number">4</span>] == <span class="string">b'flag'</span>:</span><br><span class="line">        flag = mi[<span class="number">5</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># b'weadfa9987_adwd23123_454f'</span></span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;<br>&nbsp;<br>后面是一个斐波那契数列，秘钥是一段乱序的斐波那契数列，加密解密的过程是秘钥和原斐波那契数列的映射关系。这里是把 flag 按照 encryption 中的 key 再加密一遍。<br>&nbsp;<br>&nbsp;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># decrypt da vinci encryption</span></span><br><span class="line">fb = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">LEN = len(flag)</span><br><span class="line"><span class="keyword">while</span> len(fb) &lt; LEN:</span><br><span class="line">    fb.append(fb[<span class="number">-1</span>] + fb[<span class="number">-2</span>])</span><br><span class="line">fb[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">enc = [<span class="number">0</span>,<span class="number">28657</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">17711</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">46368</span>,<span class="number">75025</span>,<span class="number">34</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">610</span>,<span class="number">377</span>,<span class="number">144</span>,<span class="number">233</span>,<span class="number">1597</span>,<span class="number">2584</span>,<span class="number">4181</span>,<span class="number">6765</span>,<span class="number">10946</span>,<span class="number">987</span>]</span><br><span class="line">r_flag = [flag[fb.index(enc[i])] <span class="keyword">for</span> i <span class="keyword">in</span> range(LEN)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> r_flag:</span><br><span class="line">    print(chr(i),end=<span class="string">''</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># w5aed4fa994f87_dwad3123_2</span></span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;<br>&nbsp;<br>&nbsp;</p>
+<h1 id="what-r-the-noise"><a href="#what-r-the-noise" class="headerlink" title="what_r_the_noise"></a>what_r_the_noise</h1><p>&nbsp;<br>求平均值。。。<br>&nbsp;</p>
+<h1 id="elgamal-rsa"><a href="#elgamal-rsa" class="headerlink" title="elgamal_rsa"></a>elgamal_rsa</h1><p>&nbsp;<br>&nbsp;<br>yafu 分解 secret，得到一堆数。。。最高幂的素数为：$653551912583^{15}$ 。<br>&nbsp;<br>ws 分析一波，flag 的长度：$2^{36*8} $ 比最高幂的素数要小，舒服，跟上题一样，走 AMM，但还是要求多个根，学一手。<br>&nbsp;<br>取最高幂的素数为 $n$，$e’\;=\;e\;//\;gcd(e,\;\varphi(n))\;=\;2379$ ，$d’\;=\;invert(e’,\;\varphi(n))$ ，$c’\;\equiv\;c^{d’}\;\equiv\;m^{gcd(e,\;\varphi(n))}\mod\;n$<br>&nbsp;<br>借了一部分 <a href="https://0xdktb.top/2020/08/30/WriteUp-GACTF2020-Crypto/" target="_blank" rel="noopener">tb师傅的exp</a><br>&nbsp;<br>师傅 tql！<br>&nbsp;<br>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> gcd, invert</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">e = <span class="number">0x1296</span></span><br><span class="line">c = <span class="number">255310806360822158306697936064463902328816816156848194779397173946813224291656351345682266227949792774097276485816149202739762582969208376195999403112665514848825884325279574067341653685838880693150001066940379902609411551128810484902428845412055387955258568610350610226605230048821754213270699317153844590496606931431733319116866235538921198147193538906156906954406577796507390570080177313707462469835954564824944706687157852157673146976402325057144745208116022973614795377968986322754779469798013426261911408914756488145211933799442123449261969392169406969410065018032795960230701484816708147958190769470879211953704222809883281592308316942052671516609231501663363123562942</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># factor through yafu</span></span><br><span class="line">fac = [(<span class="number">42044128297</span>, <span class="number">6</span>), (<span class="number">232087313537</span>, <span class="number">5</span>), (<span class="number">653551912583</span>, <span class="number">15</span>),</span><br><span class="line">       (<span class="number">802576647765917</span>, <span class="number">7</span>), (<span class="number">28079229001363</span>, <span class="number">14</span>), (<span class="number">104280142799213</span>, <span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AMM</span><span class="params">(q, r, delta, k=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Adleman-Manders-Miller r-th Root Extraction Algorithm in F_q</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    * Attention:</span></span><br><span class="line"><span class="string">        - r and q satisfy r | q - 1</span></span><br><span class="line"><span class="string">    :param q: modulus q --&gt; int</span></span><br><span class="line"><span class="string">    :param r: exponent r --&gt; int</span></span><br><span class="line"><span class="string">    :param delta: remain --&gt; int</span></span><br><span class="line"><span class="string">    :param k: the exponent of k, default is 1 --&gt; int</span></span><br><span class="line"><span class="string">    :return: a r-th root of delta</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    phi = pow(q, k<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">    mod = pow(q, k)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:  <span class="comment"># step1 &amp; step2</span></span><br><span class="line">        rho = random.getrandbits(mod.nbits()) % mod</span><br><span class="line">        <span class="keyword">if</span> pow(rho, phi//r, mod) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># step 3</span></span><br><span class="line">    s = phi</span><br><span class="line">    t = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> s % r == <span class="number">0</span>:</span><br><span class="line">        s //= r</span><br><span class="line">        t += <span class="number">1</span></span><br><span class="line">    <span class="keyword">assert</span>(gcd(s, r) == <span class="number">1</span>)  <span class="comment"># check if s is coprimed with r</span></span><br><span class="line">    <span class="keyword">assert</span>(pow(r, t) * s == phi)</span><br><span class="line"></span><br><span class="line">    alpha = invert(r, s)</span><br><span class="line">    a, b, c, h = pow(rho, phi//r, mod), pow(delta, r *</span><br><span class="line">                                            alpha<span class="number">-1</span>, mod), pow(rho, s, mod), <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># step 4</span></span><br><span class="line">    j, k = <span class="number">0</span>, phi // (r * s)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, t):</span><br><span class="line">        k //= r</span><br><span class="line">        d = pow(b, k, mod)</span><br><span class="line">        <span class="keyword">if</span> d == <span class="number">1</span>:</span><br><span class="line">            j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            j = - discrete_log(phi, d, a)</span><br><span class="line">            b, h, c = b*(pow(c, r*j, mod)) % mod, h * \</span><br><span class="line">                pow(c, j, mod) % mod, pow(c, r, mod)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># step 5</span></span><br><span class="line">    <span class="keyword">return</span> pow(delta, alpha, mod) * h % mod</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">allroot</span><span class="params">(root, r, q, k = <span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="comment"># find all roots</span></span><br><span class="line">    </span><br><span class="line">    phi = (q - <span class="number">1</span>) * q**(k - <span class="number">1</span>)</span><br><span class="line">    mod = q ** k</span><br><span class="line">    all_root = set()</span><br><span class="line">    all_root.add(root)</span><br><span class="line">    <span class="keyword">while</span> len(all_root) &lt; r:</span><br><span class="line">        new_root = root</span><br><span class="line">        unity = pow(getRandomRange(<span class="number">2</span>, mod), phi // r, mod)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(r - <span class="number">1</span>):</span><br><span class="line">            new_root = (new_root * unity) % mod</span><br><span class="line">            all_root.add(new_root)</span><br><span class="line">    <span class="keyword">return</span> all_root</span><br><span class="line"></span><br><span class="line"><span class="comment"># since 653551912583**15 &gt; 2**(36*8)</span></span><br><span class="line">n0 = <span class="number">653551912583</span></span><br><span class="line">n = pow(<span class="number">653551912583</span>, <span class="number">15</span>)</span><br><span class="line">phi = n * (<span class="number">653551912583</span> - <span class="number">1</span>) // <span class="number">653551912583</span></span><br><span class="line">e_p = e // gcd(e, phi)</span><br><span class="line">d = invert(e_p, phi)</span><br><span class="line">c_p = pow(c, d, n)</span><br><span class="line">ar = allroot(AMM(n0,<span class="number">2</span>,c_p,<span class="number">15</span>),<span class="number">2</span>,n0,<span class="number">15</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ar:</span><br><span class="line">    print(long_to_bytes(i))</span><br><span class="line"></span><br><span class="line"><span class="comment"># b'you_4re_good_at_b0th_el94mal_and_rs4'</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;<br>不用 AMM 的话，直接上 sage 也可。<br>&nbsp;<br>&nbsp;</p>
+<h1 id="square"><a href="#square" class="headerlink" title="square"></a>square</h1><p>&nbsp;<br>平方数求和公式化简成：$6x^{2}\;=\;(y\;+\;1)(2y\;+\;1)$，然后再转换成 pell 方程: $(4y\;+\;3)^2\; -\; 48x^{2} \;=\; 1$。<br>&nbsp;<br>&nbsp;<br>再令 $t\;=\;4y\;+\;3$，有：$t^2\;-\;48x^{2}\;=\;1$。爆破走出前四位：$1,\;7,\;97,\;1351$，然后在 <a href="https://oeis.org/search?q=1%2C7%2C97%2C1351&amp;language=english&amp;go=Search" target="_blank" rel="noopener">oeis</a> 找到递归式:</p>
+<script type="math/tex; mode=display">a(m) = 14a(m-1) - a(m-2)</script><p>&nbsp;<br>找到所有满足 $t,\;y$ 的pell 方程的解，然后再根据 $t,\;x$ 的关系求出 $x,\;y$，oeis 是个好东西。<br>&nbsp;<br>exp 如下：<br>&nbsp;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can get something like pell equation: (4*y+3)^2 - 48*x^2 == 1</span></span><br><span class="line"><span class="comment"># Write it into t^2 - 48*x^2 == 1</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">for i in range(10000):</span></span><br><span class="line"><span class="string">    for j in range(10000):</span></span><br><span class="line"><span class="string">        if i ** 2 - 48 * j ** 2 == 1:</span></span><br><span class="line"><span class="string">            print(i,j)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">1 0</span></span><br><span class="line"><span class="string">7 1</span></span><br><span class="line"><span class="string">97 14</span></span><br><span class="line"><span class="string">1351 195</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Formula: 	</span></span><br><span class="line"><span class="string">a(m) = 14a(m-1) - a(m-2)</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>,<span class="number">7</span>,<span class="number">97</span>,<span class="number">1351</span>]</span><br><span class="line">x = [<span class="number">1</span>,<span class="number">7</span>,<span class="number">97</span>,<span class="number">1351</span>]</span><br><span class="line">y = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">14</span>,<span class="number">195</span>]</span><br><span class="line"><span class="keyword">while</span> len(x) &lt;  <span class="number">120</span>:</span><br><span class="line">    ta = <span class="number">14</span> * a[<span class="number">-1</span>] - a[<span class="number">-2</span>]</span><br><span class="line">    a.append(ta)</span><br><span class="line">    <span class="keyword">if</span> ta % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">        x.append(ta)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>,len(x)):</span><br><span class="line">    y.append(gmpy2.iroot((x[i]**<span class="number">2</span><span class="number">-1</span>) // <span class="number">48</span>,<span class="number">2</span>)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>,<span class="number">120</span>):</span><br><span class="line">    x[i] = (x[i] - <span class="number">3</span>) // <span class="number">4</span></span><br><span class="line">x = x[<span class="number">4</span>:]</span><br><span class="line">y = y[<span class="number">4</span>:]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i,j <span class="keyword">in</span> zip(x,y):</span><br><span class="line">    print(i,j)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># check pass</span></span><br><span class="line"><span class="keyword">for</span> i,j <span class="keyword">in</span> zip(x,y):</span><br><span class="line">    <span class="keyword">assert</span>((<span class="number">4</span>*i+<span class="number">3</span>)**<span class="number">2</span> - <span class="number">48</span>*j**<span class="number">2</span> == <span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;<br>坚持！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/09/06/gactf-2020-Review/" title="gactf-2020-Review" target="_blank" rel="external">https://buki-freak.github.io/2020/09/06/gactf-2020-Review/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/08/24/CISCN2020-初赛-Writeup/" title="CISCN2020-初赛-Writeup"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
