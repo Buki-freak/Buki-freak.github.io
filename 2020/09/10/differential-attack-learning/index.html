@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>differential attack learning | buk1&#39;s blog</title>
+  <meta name="description" content="学习一下差分攻击，最近比赛出现得有点多。 ​        原理剖析先花个 30 分钟看个视频，看一下差分攻击到底是个啥。英语有点撇脚，勉强听一下。 顺便记录一下 non-generic attack 的分类：     ​         linear attack differential attack slide-channel attack   related key attack  &amp;nb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="differential attack learning">
+<meta property="og:url" content="https://buki-freak.github.io/2020/09/10/differential-attack-learning/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="学习一下差分攻击，最近比赛出现得有点多。 ​        原理剖析先花个 30 分钟看个视频，看一下差分攻击到底是个啥。英语有点撇脚，勉强听一下。 顺便记录一下 non-generic attack 的分类：     ​         linear attack differential attack slide-channel attack   related key attack  &amp;nb">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/09/11/xak3Kw1hM4WZYD7.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/11/aZljpGgMociEeVC.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/11/aWZ3e2ljkKfrg5G.png">
+<meta property="og:updated_time" content="2020-09-11T14:23:56.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="differential attack learning">
+<meta name="twitter:description" content="学习一下差分攻击，最近比赛出现得有点多。 ​        原理剖析先花个 30 分钟看个视频，看一下差分攻击到底是个啥。英语有点撇脚，勉强听一下。 顺便记录一下 non-generic attack 的分类：     ​         linear attack differential attack slide-channel attack   related key attack  &amp;nb">
+<meta name="twitter:image" content="https://i.loli.net/2020/09/11/xak3Kw1hM4WZYD7.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/09/10/differential-attack-learning/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-differential-attack-learning" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      differential attack learning
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/10/differential-attack-learning/" class="article-date">
+	  <time datetime="2020-09-10T12:48:14.000Z" itemprop="datePublished">2020-09-10</time>
+	</a>
+</span>
+        
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/10/differential-attack-learning/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 14(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>学习一下<a href="https://en.wikipedia.org/wiki/Differential_cryptanalysis" target="_blank" rel="noopener">差分攻击</a>，最近比赛出现得有点多。</p>
+<p>​       </p>
+<h1 id="原理剖析"><a href="#原理剖析" class="headerlink" title="原理剖析"></a>原理剖析</h1><p>先花个 30 分钟看个<a href="https://www.youtube.com/watch?v=ONhPfIABxFs" target="_blank" rel="noopener">视频</a>，看一下差分攻击到底是个啥。英语有点撇脚，勉强听一下。</p>
+<p>顺便记录一下 <strong>non-generic attack</strong> 的分类：    </p>
+<p>​       </p>
+<blockquote>
+<p>linear attack</p>
+<p>differential attack</p>
+<p>slide-channel attack</p>
+<p>  related key attack</p>
+</blockquote>
+<p>&nbsp;        </p>
+<p><img src="https://i.loli.net/2020/09/11/xak3Kw1hM4WZYD7.png" alt="屏幕截图(17)"><br>&nbsp;</p>
+<p>借个图，虽然有点糊。差分攻击基于<a href="https://en.wikipedia.org/wiki/Chosen-plaintext_attack" target="_blank" rel="noopener">选择明文攻击</a>，并且前提是  $\alpha\;-\;\beta$  具有 <strong>high-probability</strong>。解释一下，$\alpha$ 是一对</p>
+<p>明文，或者进入 <strong>F function</strong> 前中间值的异或值（差值），$\beta$ 是经过 $r-1$ <strong>round F Function</strong> 之后的对应的密文对的异或</p>
+<p>值。<br>​<br>​       </p>
+<p>对于 $\alpha$，</p>
+<script type="math/tex; mode=display">
+\alpha\;=\;x_1\;\oplus\;x_2</script><p>​       </p>
+<p>对于 $\beta$，</p>
+<script type="math/tex; mode=display">
+y_1\;=\;F_{r}^{-1}(K_r^{i},\;C_1)\\
+y_2\;=\;F_{r}^{-1}(K_r^{i},\;C_2)\\
+\beta\;=\;y_1\;\;\oplus\;y_2</script><p>​       </p>
+<p>​       </p>
+<p>那么 $\alpha$，$\beta$ 怎么用呢？我们先假设 $\alpha$ 和 $\beta$ 是确定的并具有 <strong>high-probability</strong>，那么对于一个 n bits 的 key，对于所有可能</p>
+<p>的值，我们建立一个表：</p>
+<p>​       </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Potential r-th round Key</th>
+<th>K0</th>
+<th>K1</th>
+<th>…</th>
+<th>Ki</th>
+<th>Kn-2</th>
+<th>Kn-1</th>
+<th>Kn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​       </p>
+<p>​    </p>
+<p>对于所有差值为 $\alpha$ 的明文对，我们用 $K_i$ 计算对应的 $\beta’$。对于每一个 $K_i$ ，如果产生的差值为 $\beta$ ，那么 count 自增。最</p>
+<p>后 count 为 maximum 的 <strong>potential r-th round key</strong> 很可能为 <strong>real key</strong>。</p>
+<p>​       </p>
+<p>那么如何找出最佳的 $\alpha$，$\beta$ 呢？这里先抛开 <strong>potential r-th key</strong>，对于每一个可能的 $\alpha$，$\beta$，建立一个表格（假设这里取值范围为 0x04）:</p>
+<p>​       </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>B/A</th>
+<th>0x01</th>
+<th>0x02</th>
+<th>0x03</th>
+<th>0x04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​      </p>
+<p>设 $\alpha$ 的值为 $\alpha_i$，对应表格上的每一列，对所有差值为 $\alpha_i$ 的明文对，计算其 $\beta$ 值并且在表格上记录出现频率，频率最高的 $\alpha-\beta$ 为最佳 <strong>characteristic</strong>。</p>
+<p>​       </p>
+<p>​       看懂原理之后，跟着 <a href="https://blog.soreatu.com/posts/case-study-differetial-cryptanalysis-attack" target="_blank" rel="noopener">soreatu</a> 大佬复现一波题目。</p>
+<p>​      </p>
+<p>​      </p>
+<h1 id="WMCTF-idiot-box"><a href="#WMCTF-idiot-box" class="headerlink" title="WMCTF- idiot box"></a>WMCTF- idiot box</h1><p>​     </p>
+<p>​    题目给出的远程文件。</p>
+<p>​     </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> hexlify, unhexlify</span><br><span class="line"><span class="keyword">import</span> Crypto.Random.random <span class="keyword">as</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, long_to_bytes, getRandomNBitInteger</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">banner = <span class="string">'''</span></span><br><span class="line"><span class="string">__        __   _                            _         __        ____  __  ____ _____ _____</span></span><br><span class="line"><span class="string">\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___   \ \      / /  \/  |/ ___|_   _|  ___|</span></span><br><span class="line"><span class="string"> \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \   \ \ /\ / /| |\/| | |     | | | |</span></span><br><span class="line"><span class="string">  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |   \ V  V / | |  | | |___  | | |  _|</span></span><br><span class="line"><span class="string">   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/     \_/\_/  |_|  |_|\____| |_| |_|</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">sbox = [[<span class="number">11</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">14</span>], [<span class="number">0</span>, <span class="number">15</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">13</span>], [<span class="number">5</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">14</span>, <span class="number">11</span>], [<span class="number">4</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">5</span>, <span class="number">12</span>], [</span><br><span class="line">    <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">2</span>], [<span class="number">0</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">13</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">3</span>], [<span class="number">9</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">11</span>, <span class="number">8</span>, <span class="number">14</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">11</span>], [<span class="number">13</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">7</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">5</span>]]</span><br><span class="line">pbox = [<span class="number">19</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">20</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">18</span>, <span class="number">6</span>, <span class="number">30</span>,</span><br><span class="line">        <span class="number">29</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">27</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">22</span>, <span class="number">12</span>, <span class="number">31</span>, <span class="number">11</span>, <span class="number">28</span>]</span><br><span class="line">keys = []</span><br><span class="line">pc_key = [<span class="number">2</span>, <span class="number">13</span>, <span class="number">16</span>, <span class="number">37</span>, <span class="number">34</span>, <span class="number">32</span>, <span class="number">21</span>, <span class="number">29</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">44</span>, <span class="number">42</span>, <span class="number">18</span>, <span class="number">35</span>, <span class="number">5</span>, <span class="number">38</span>, <span class="number">39</span>, <span class="number">12</span>, <span class="number">30</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">20</span>,</span><br><span class="line">          <span class="number">17</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">10</span>, <span class="number">26</span>, <span class="number">1</span>, <span class="number">33</span>, <span class="number">46</span>, <span class="number">45</span>, <span class="number">6</span>, <span class="number">40</span>, <span class="number">41</span>, <span class="number">43</span>, <span class="number">24</span>, <span class="number">9</span>, <span class="number">47</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">19</span>, <span class="number">28</span>, <span class="number">27</span>, <span class="number">3</span>, <span class="number">31</span>, <span class="number">36</span>, <span class="number">8</span>, <span class="number">23</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_key</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> keys</span><br><span class="line">    key = getRandomNBitInteger(<span class="number">49</span>) &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">48</span>) - <span class="number">1</span>)</span><br><span class="line">    key_bin = bin(key)[<span class="number">2</span>:].rjust(<span class="number">48</span>, <span class="string">'0'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">        key_bin = <span class="string">''</span>.join([key_bin[pc_key[j]] <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">48</span>)])</span><br><span class="line">        sub_key = int(key_bin, <span class="number">2</span>)</span><br><span class="line">        keys.append(sub_key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span><span class="params">(x, i)</span>:</span></span><br><span class="line">    row = ((x &amp; <span class="number">0b100000</span>) &gt;&gt; <span class="number">4</span>) + (x &amp; <span class="number">1</span>)</span><br><span class="line">    col = (x &amp; <span class="number">0b011110</span>) &gt;&gt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sbox[i][(row &lt;&lt; <span class="number">4</span>) + col]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">p</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_bin = [int(_) <span class="keyword">for</span> _ <span class="keyword">in</span> bin(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">'0'</span>)]</span><br><span class="line">    y_bin = [x_bin[pbox[i]] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>)]</span><br><span class="line">    y = int(<span class="string">''</span>.join([str(_) <span class="keyword">for</span> _ <span class="keyword">in</span> y_bin]), <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">e</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_bin = bin(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_bin = <span class="string">''</span></span><br><span class="line">    idx = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(idx, idx + <span class="number">6</span>):</span><br><span class="line">            y_bin += x_bin[j % <span class="number">32</span>]</span><br><span class="line">        idx += <span class="number">4</span></span><br><span class="line">    print(y_bin)</span><br><span class="line">    <span class="keyword">return</span> int(y_bin, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">F</span><span class="params">(x, k)</span>:</span></span><br><span class="line">    x_in = bin(e(x) ^ k)[<span class="number">2</span>:].rjust(<span class="number">48</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_out = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">48</span>, <span class="number">6</span>):</span><br><span class="line">        x_in_i = int(x_in[i:i+<span class="number">6</span>], <span class="number">2</span>)</span><br><span class="line">        y_out += bin(s(x_in_i, i // <span class="number">6</span>))[<span class="number">2</span>:].rjust(<span class="number">4</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_out = int(y_out, <span class="number">2</span>)</span><br><span class="line">    y = p(y_out)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enc_block</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_bin = bin(x)[<span class="number">2</span>:].rjust(<span class="number">64</span>, <span class="string">'0'</span>)</span><br><span class="line">    l, r = int(x_bin[:<span class="number">32</span>], <span class="number">2</span>), int(x_bin[<span class="number">32</span>:], <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">        l, r = r, l ^ F(r, keys[i])</span><br><span class="line">    y = (l + (r &lt;&lt; <span class="number">32</span>)) &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">64</span>) - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enc</span><span class="params">(pt)</span>:</span></span><br><span class="line">    pad_len = (<span class="number">8</span> - len(pt) % <span class="number">8</span>) % <span class="number">8</span></span><br><span class="line">    pt = pt.encode()</span><br><span class="line">    pt += <span class="string">b'\x00'</span> * pad_len</span><br><span class="line">    ct = <span class="string">b''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(pt), <span class="number">8</span>):</span><br><span class="line">        ct_block = long_to_bytes(enc_block(bytes_to_long(pt[i:i+<span class="number">8</span>]))).rjust(<span class="number">8</span>, <span class="string">b'\x00'</span>)</span><br><span class="line">        ct += ct_block</span><br><span class="line">    <span class="keyword">return</span> ct</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(banner)</span><br><span class="line">    gen_key()</span><br><span class="line">    print(keys)</span><br><span class="line">    cipher = hexlify(enc(flag)).decode(<span class="string">'utf8'</span>)</span><br><span class="line">    print(<span class="string">'[++++++++++++++++] FLAG [++++++++++++++++]'</span>)</span><br><span class="line">    print(cipher)</span><br><span class="line">    print(<span class="string">'[+] You have up to 65537 chances to obtain the ct corresponding to the pt your input(&lt;= 64 bits and hex required).'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">65537</span>):</span><br><span class="line">        pt = input()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            pt = unhexlify(pt)</span><br><span class="line">            <span class="keyword">assert</span>(len(pt) &lt;= <span class="number">8</span>)</span><br><span class="line">            ct = enc(pt)</span><br><span class="line">            print(hexlify(ct).decode(<span class="string">'utf8'</span>))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">'[*] Read the above carefully!'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>​           </p>
+<p>​        </p>
+<p>分析源码，题目给出了是一个自己实现的 <strong>DES</strong>，测试一下 <strong>F Function</strong> 的 <strong>characteristic</strong>：</p>
+<p>​       </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getRandomNBitInteger</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sbox = [[<span class="number">11</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">14</span>], [<span class="number">0</span>, <span class="number">15</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">13</span>], [<span class="number">5</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">14</span>, <span class="number">11</span>], [<span class="number">4</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">5</span>, <span class="number">12</span>], [\</span><br><span class="line">    <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">2</span>], [<span class="number">0</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">13</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">3</span>], [<span class="number">9</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">15</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">11</span>, <span class="number">8</span>, <span class="number">14</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">11</span>], [<span class="number">13</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">7</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">13</span>, <span class="number">11</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">5</span>]]</span><br><span class="line">pbox = [<span class="number">19</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">20</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">18</span>, <span class="number">6</span>, <span class="number">30</span>,\</span><br><span class="line">        <span class="number">29</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">27</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">22</span>, <span class="number">12</span>, <span class="number">31</span>, <span class="number">11</span>, <span class="number">28</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">e</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_bin = bin(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_bin = <span class="string">''</span></span><br><span class="line">    idx = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(idx, idx + <span class="number">6</span>):</span><br><span class="line">            y_bin += x_bin[j % <span class="number">32</span>]</span><br><span class="line">        idx += <span class="number">4</span></span><br><span class="line">    <span class="comment"># print(y_bin)</span></span><br><span class="line">    <span class="keyword">return</span> int(y_bin, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span><span class="params">(x, i)</span>:</span></span><br><span class="line">    row = ((x &amp; <span class="number">0b100000</span>) &gt;&gt; <span class="number">4</span>) + (x &amp; <span class="number">1</span>)</span><br><span class="line">    col = (x &amp; <span class="number">0b011110</span>) &gt;&gt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sbox[i][(row &lt;&lt; <span class="number">4</span>) + col]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">p</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_bin = [int(_) <span class="keyword">for</span> _ <span class="keyword">in</span> bin(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">'0'</span>)]</span><br><span class="line">    y_bin = [x_bin[pbox[i]] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>)]</span><br><span class="line">    y = int(<span class="string">''</span>.join([str(_) <span class="keyword">for</span> _ <span class="keyword">in</span> y_bin]), <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">F</span><span class="params">(x, k)</span>:</span></span><br><span class="line">    x_in = bin(e(x) ^ k)[<span class="number">2</span>:].rjust(<span class="number">48</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_out = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">48</span>, <span class="number">6</span>):</span><br><span class="line">        x_in_i = int(x_in[i:i+<span class="number">6</span>], <span class="number">2</span>)</span><br><span class="line">        y_out += bin(s(x_in_i, i // <span class="number">6</span>))[<span class="number">2</span>:].rjust(<span class="number">4</span>, <span class="string">'0'</span>)</span><br><span class="line">    y_out = int(y_out, <span class="number">2</span>)</span><br><span class="line">    y = p(y_out)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_diff_output</span><span class="params">(diff)</span>:</span></span><br><span class="line">    p1 = getRandomNBitInteger(<span class="number">32</span>)</span><br><span class="line">    p2 = p1 ^ diff</span><br><span class="line">    key = getRandomNBitInteger(<span class="number">48</span>)</span><br><span class="line">    c1, c2 = F(p1, key), F(p2, key)</span><br><span class="line">    <span class="keyword">return</span> c1^c2, (p1,p2,c1,c2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">counter = Counter()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):</span><br><span class="line">    P_ = <span class="number">0x00002002</span>  <span class="comment"># \alpha</span></span><br><span class="line">    X_, _ = gen_diff_output(P_)</span><br><span class="line">    counter[X_] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">X_, freq = counter.most_common(<span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line">print(hex(X_)[<span class="number">2</span>:].rjust(<span class="number">8</span>,<span class="string">'0'</span>), freq / <span class="number">10000.0</span>)  <span class="comment"># \beta, probability</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [0x00000000 0x00000000 1.0] # 0 is assure to be output 0</span></span><br><span class="line"><span class="comment"># [0x00000002 0x00030005 0.2163]</span></span><br><span class="line"><span class="comment"># [0x00000040 0x00000000 0.2554]  # seems to be the best</span></span><br><span class="line"><span class="comment"># [0x00002000 0x00000000 0.2492]</span></span><br><span class="line"><span class="comment"># [0x00002002 0x00030005 0.052]</span></span><br></pre></td></tr></table></figure>
+<p>​        </p>
+<p>​        </p>
+<p>$\alpha\;=\;0x00000040$，$\beta\;=\;0x00000000$ 的 <strong>high-probability</strong> 比较明显，取一下数据。借了下<a href="https://blog.soreatu.com/" target="_blank" rel="noopener">师傅</a>的代码，Counter 包真好用 😳。</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/11/aZljpGgMociEeVC.png" alt="hlUWDaoC2xBY6VN"></p>
+<p>​            </p>
+<p>​                 </p>
+<p>再抄一幅图，嘿嘿~</p>
+<p>这里我刚开始进入了一个误区，如果遍历所有 <strong>potential key</strong> 的话，复杂度必大于 $O(2^{48})$，但是如果将 48-bits 的 </p>
+<p><strong>potential key</strong> 分成 8 个 6-bits  的 S-boxes，复杂度可以降到 $10000*O(2^{6+3})$，大概是 $O(2^{22})$，完全没有毛病。</p>
+<p>​           </p>
+<p>再贴一个 <strong>F Function</strong> 的 <strong>schedule</strong>：</p>
+<p>​       </p>
+<p><img src="https://i.loli.net/2020/09/11/aWZ3e2ljkKfrg5G.png" alt="image-20200911210447077"></p>
+<p>​        </p>
+<p>​       </p>
+<p><strong>DES</strong> 的 <strong>F Function</strong> 流程如下：</p>
+<p>​      </p>
+<blockquote>
+<p>Expansion D-box : E( ) function</p>
+<p>XOR - key</p>
+<p>S-boxes : S( ) function</p>
+<p>Straight D-box : D( ) function</p>
+</blockquote>
+<p>​      </p>
+<p>大概就是一个两边从中间靠的过程，写出来就是 : </p>
+<p>​      </p>
+<script type="math/tex; mode=display">
+S(E(T\_R{'})\;\oplus\;K_i)\;=\;D^{-1}(F')\;=\;D^{-1}(T\_L'\;\oplus\;0x00000040)</script><p>​      </p>
+<p>自己写的 exp 就不贴出来了，仔细看了一下大佬的，tql！ </p>
+<p>​      </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h1><p><a href="https://medium.com/lotus-fruit/breaking-des-using-differential-cryptanalysis-958e8118ff41" target="_blank" rel="noopener">Breaking DES using Differential Cryptanalysis</a></p>
+<p><a href="https://blog.soreatu.com/posts/case-study-differetial-cryptanalysis-attack/#wmctf-idiot-box" target="_blank" rel="noopener">Case Study: Differetial Cryptanalysis Attack</a></p>
+<p><a href="https://www.youtube.com/watch?v=ONhPfIABxFs" target="_blank" rel="noopener">Differential Cryptanalysis</a></p>
+<p>​     </p>
+<p>特别致谢：</p>
+<p><a href="https://blog.soreatu.com/posts/case-study-differetial-cryptanalysis-attack/" target="_blank" rel="noopener">soreatu 大佬</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/09/10/differential-attack-learning/" title="differential attack learning" target="_blank" rel="external">https://buki-freak.github.io/2020/09/10/differential-attack-learning/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/09/09/强网杯-2020-Review/" title="强网杯-2020-Review"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
