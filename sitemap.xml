@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buki-freak.github.io/2020/09/12/SM4-Algorithm-Learning/</loc>
+    
+    <lastmod>2020-09-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buki-freak.github.io/2020/09/10/differential-attack-learning/</loc>
     
     <lastmod>2020-09-11</lastmod>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/repository/index.html</loc>
+    <loc>https://buki-freak.github.io/tags/index.html</loc>
     
     <lastmod>2020-08-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://buki-freak.github.io/tags/index.html</loc>
+    <loc>https://buki-freak.github.io/repository/index.html</loc>
     
     <lastmod>2020-08-03</lastmod>
     
@@ -130,50 +137,50 @@
 
   <url>
     <loc>https://buki-freak.github.io/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://buki-freak.github.io/tags/Learning/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <loc>https://buki-freak.github.io/tags/Daily-Post/</loc>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://buki-freak.github.io/tags/Personal-Development/</loc>
-    <lastmod>2020-09-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://buki-freak.github.io/tags/Daily-Post/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://buki-freak.github.io/tags/Review/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://buki-freak.github.io/tags/Writeup/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://buki-freak.github.io/tags/Paper/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://buki-freak.github.io/tags/Learning/</loc>
+    <lastmod>2020-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
