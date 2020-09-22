@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>An-Introduction-to-Mathematical-Cryptography-I | buk1&#39;s blog</title>
+  <meta name="description" content="​                         An Introduction to Mathematical Cryptography 读书笔记。由于之前看过 Introduction to Cryptography， 所以打算选择性阅读（陌生以及忘却的知识。 ​        ​        Chapter TwoAn overview of the theory of groups先学">
+<meta name="keywords" content="Textbook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An-Introduction-to-Mathematical-Cryptography-I">
+<meta property="og:url" content="https://buki-freak.github.io/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="​                         An Introduction to Mathematical Cryptography 读书笔记。由于之前看过 Introduction to Cryptography， 所以打算选择性阅读（陌生以及忘却的知识。 ​        ​        Chapter TwoAn overview of the theory of groups先学">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/bOzVLqoiX4hdEk5.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/9ZUvGs6i5Jj2oqy.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/tjdRAo7fZSheJDu.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/kG6eAYKod4vHp59.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/72bjZO6GEi9AgCy.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/pzuvyT1FGQNLtdf.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/vwoG1t8lz3QBnPH.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/9vHBOQ8aV3Ndsqm.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/LcZgB83aXzjTw67.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/16/q1lUIuyNbvzn6Ro.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/16/rHMYyxhZ1lavBij.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/16/Pz9QTAqu3dVmvi1.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/16/OwsVHNRKxaYmIAX.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/OKSWIci287PYLjs.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/14/LcZgB83aXzjTw67.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/FlyxSpYb8EnOWQ3.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/22/xVsmKYhz39N5MSD.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/SVQ7ZwBpDnK1jmU.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/EMcOhLNpiuRJzdQ.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/17/bycAeVIJodlaQGx.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/17/TM45yPA92Cpa37d.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/17/2bZPHWYRUzIo7Dy.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/17/6moL1Z4C9tK8rAJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/DLCoTXdHBqVUvW1.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/igndWbJVG7PBMqZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/4VxCWykFJSzIXhG.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/GwLTj2brJHioAnI.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/T6mUqVXlOQg2eSA.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/ARbTcVgylD8zWLC.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/hTwY6GvtXfZpoJe.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/JwbDKflyLVqMjAe.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/dVBOwPCpeqFaZG5.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/22/HRUjuh8ZMSDnCsl.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/3EI5KujmwkVHDRL.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/22/Vnb8ZciLxoMpHgI.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/22/4ojMxstKgWzfu3d.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/21/jn1ophuDUPKtJGQ.png">
+<meta property="og:updated_time" content="2020-09-22T13:05:28.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="An-Introduction-to-Mathematical-Cryptography-I">
+<meta name="twitter:description" content="​                         An Introduction to Mathematical Cryptography 读书笔记。由于之前看过 Introduction to Cryptography， 所以打算选择性阅读（陌生以及忘却的知识。 ​        ​        Chapter TwoAn overview of the theory of groups先学">
+<meta name="twitter:image" content="https://i.loli.net/2020/09/14/bOzVLqoiX4hdEk5.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎Wechat交流：LLL_HJPAHu</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textbook/">Textbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-An-Introduction-to-Mathematical-Cryptography-I" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      An-Introduction-to-Mathematical-Cryptography-I
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/" class="article-date">
+	  <time datetime="2020-09-14T08:19:33.000Z" itemprop="datePublished">2020-09-14</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Textbook/">Textbook</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>​                        </p>
+<p><em>An Introduction to Mathematical Cryptography</em> 读书笔记。由于之前看过 <em>Introduction to Cryptography</em>，</p>
+<p>所以打算选择性阅读（陌生以及忘却的知识。</p>
+<p>​       </p>
+<p>​       </p>
+<h1 id="Chapter-Two"><a href="#Chapter-Two" class="headerlink" title="Chapter Two"></a>Chapter Two</h1><h2 id="An-overview-of-the-theory-of-groups"><a href="#An-overview-of-the-theory-of-groups" class="headerlink" title="An overview of the theory of groups"></a>An overview of the theory of groups</h2><p>先学习交换群（commutative group），或者叫阿贝尔群（abelian group）。</p>
+<p>​      </p>
+<p>交换群的属性，以乘法（multiplication）群 $F^{*}_{p}$ 为例：</p>
+<p>​       </p>
+<p><img src="https://i.loli.net/2020/09/14/bOzVLqoiX4hdEk5.png" alt="image-20200914165331191"></p>
+<p>​            </p>
+<p>满足四个条件：</p>
+<ul>
+<li>存在一个单位元 1</li>
+<li>对于 group 内每一个元素，存在一个唯一的逆元<strong>（群内每一个元素都与 $p$ 互质）</strong></li>
+<li>结合律</li>
+<li>交换律</li>
+</ul>
+<p>​       </p>
+<p>如果是加法（addition）群 $F_p$，则有以下性质：</p>
+<p>​        </p>
+<p><img src="https://i.loli.net/2020/09/14/9ZUvGs6i5Jj2oqy.png" alt="image-20200914165736217"></p>
+<p>​                    </p>
+<p>也满足四个条件：</p>
+<ul>
+<li>存在一个单位元 0</li>
+<li>对于 group 内每一个元素，存在一个唯一的逆元</li>
+<li>结合律</li>
+<li>交换律</li>
+</ul>
+<p>​      </p>
+<p>​       </p>
+<p>上面两个属于特殊的群，不失一般性，给出一般群的定义：</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/14/tjdRAo7fZSheJDu.png" alt="image-20200914185654189"></p>
+<p>​          </p>
+<p>​          </p>
+<p>同时满足四个条件：</p>
+<ul>
+<li>对于 group 内每一个元素，存在一个单位元 $e$ 满足 $e\;*\;a\;=\;a$ 。</li>
+<li>对于 group 内每一个元素，对应存在一个<strong>唯一</strong>的逆元 $a^{-1}$ 满足 $a\;*\;a^{-1}\;=\;1$ 。</li>
+<li>结合律，即 $for\;all\;a,b,c\;\in\;G,\;satisfying\;a·(b·c)\;=\;(a·b)·c$ 。</li>
+<li>交换律，即 $for\;all\;a,b\;\in\;G,\;satisfying\;a·b\;=\;b·a$</li>
+</ul>
+<p>​       </p>
+<p><strong>若交换群 $G$ 的元素数量有限，则这个群又称为有限群（finite group）, 群内的元素数量记作 $|G|$或 $#G$ </strong>。</p>
+<p>​        </p>
+<p>再记两个特殊的交换群，存个图：</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/14/kG6eAYKod4vHp59.png" alt="image-20200914193313769"></p>
+<p>​       </p>
+<p>(b) 中 $Z/NZ$ ，group 中元素个数为 $N$，所以同时也是有限群，举例： $G\;=\;\{-3,-2,-1,0,1,2,3\}$ 。</p>
+<p>(c) 中 $Z$，group 中元素个数无限（所有整数）。</p>
+<p>​       </p>
+<p>元素的 order ：</p>
+<p>​        </p>
+<p><img src="https://i.loli.net/2020/09/14/72bjZO6GEi9AgCy.png" alt="image-20200914195039496"></p>
+<p>​       </p>
+<p>​       </p>
+<p>对于元素的 order 有 Lagrange’s Theorem： </p>
+<p>​       </p>
+<p><img src="https://i.loli.net/2020/09/14/pzuvyT1FGQNLtdf.png" alt="image-20200914200231059"></p>
+<p>​        </p>
+<p>​         </p>
+<h2 id="Solving-congruence-with-composite-moduli"><a href="#Solving-congruence-with-composite-moduli" class="headerlink" title="Solving congruence with composite moduli"></a>Solving congruence with composite moduli</h2><p>计算 $F_p^{*}$ 下的二次根：</p>
+<p>​       </p>
+<p><img src="https://i.loli.net/2020/09/14/vwoG1t8lz3QBnPH.png" alt="image-20200914201510060"></p>
+<p>​             </p>
+<p>​       </p>
+<p>如果模数 $p$ 为合数，则先分解 $p$ ，然后分别化简不同因子下的同余方程，然后使用<strong>中国剩余定理</strong>计算不同因子</p>
+<p>下的同余方程组。</p>
+<p>​        </p>
+<p>​        </p>
+<h2 id="The-Pohlig-Hellman-Algorithm"><a href="#The-Pohlig-Hellman-Algorithm" class="headerlink" title="The Pohlig-Hellman Algorithm"></a>The Pohlig-Hellman Algorithm</h2><p>​           </p>
+<p>Pohlig-Hellman 解决 DLP 的方法使用了中国剩余定理。对于 $F_{p}^{*}$ 下的 DLP 问题，通过分解 $p\;-\;1$ 来解</p>
+<p>决，所以其算法复杂度是由分解难度决定的。</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/14/9vHBOQ8aV3Ndsqm.png" alt="image-20200914203750508"></p>
+<p>​        </p>
+<p>对于 $|G|\;=\;N\;=\;q_1^{e_1}·q_2^{e_2}···q_t^{e_t}$ ，Pohlig-Hellman 方法的计算时间复杂度为：</p>
+<p>​         </p>
+<p><img src="https://i.loli.net/2020/09/14/LcZgB83aXzjTw67.png" alt="image-20200914215003414"></p>
+<p>​            </p>
+<p>对于所有 $q_i$ 都特别小的情况，计算时间会明显缩短。</p>
+<p>​         </p>
+<p>在相同情况下，对比下两种算法的时间复杂度：</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/16/q1lUIuyNbvzn6Ro.png" alt="image-20200916091733008"></p>
+<p>​          </p>
+<p>​          </p>
+<p>再贴一下 <strong>Shank’s Babystep-Giantstep Algorithm</strong> 的，</p>
+<p>​         </p>
+<p><img src="https://i.loli.net/2020/09/16/rHMYyxhZ1lavBij.png" alt="image-20200916091955371"></p>
+<p>​          </p>
+<p>对于同一 $order\;q^{e},\;e\;\geq\;1$ ，PH 的时间复杂度大约为： $O(e\sqrt{q}）$ ，而 BSGS 的时间复杂度大约为： $O(\sqrt{q^{e}})$，</p>
+<p>当 $e\;\geq\;2$ 的时候，PH 的计算时间要小得多。</p>
+<p>​         </p>
+<p>证明过程大概就是计算的过程，下面进行详细学习：</p>
+<p>​                 </p>
+<p>对于单个素数或者其幂的情况：</p>
+<p>​          </p>
+<script type="math/tex; mode=display">
+g^{x}\;=\;h,\;where\;the\;order\;of\;g\;is\;q^{e}\;with\;e\;\geq\;1</script><p>​      </p>
+<p>先将 $x$ ，写成 $x\;=\;x_{0}\;+\;x_{1}q\;+\;x_2q^{2}\;+\;···\;+x_{e-1}q^{e-1}\;\;with\;0\;\leq\;x_i\;&lt;\;q$ ，</p>
+<p>然后计算 $x_0,\;x_1,\;x_2,\;….\;x_{e-1}$ 的确切值。这里需要用到 $g’\;=\;g^{q^{e-1}}$ 的 order 为 $q$ 的性质，直接截个图：</p>
+<p>​       </p>
+<p><img src="https://i.loli.net/2020/09/16/Pz9QTAqu3dVmvi1.png" alt="image-20200916211818646"></p>
+<p>​        </p>
+<p>​         </p>
+<p>由于 $0\;\leq\;x_0\;&lt;\;q$ ，所以这里就转换为另一个 order 为 $q$ 的 DLP 问题。认真的读还是会发现，</p>
+<p>这里还是需要使用 BSGS 算法，所以时间复杂度为： $O(\sqrt{q})$ 。再利用相似的方法计算 $x_1$ ：</p>
+<p>​        </p>
+<p><img src="https://i.loli.net/2020/09/16/OwsVHNRKxaYmIAX.png" alt="image-20200916213141154"></p>
+<p>​         </p>
+<p>同样地，得到：</p>
+<p>​        </p>
+<script type="math/tex; mode=display">
+(g^{q^{e-1}})^{x_1}\;=\;(h\;·\;g^{-x_0})^{q^{e-2}}</script><p>​      </p>
+<p>由于 $x_0$ 已知，这里又转化为另一个 DLP 问题，使用 BSGS 算法可以计算出 $x_1$ ，时间复杂度为 $O(\sqrt{q})$ 。</p>
+<p>​       </p>
+<p>从上面两条式子我们找出一般性：</p>
+<p>​      </p>
+<script type="math/tex; mode=display">
+(g^{q^{e-1}})^{x_i}\;=\;(h\;·\;g^{-x_0-x_1-···-x_{i-1}q^{i-1}})^{q^{e-i-1}}\;\;in\;\;G.</script><p>​       </p>
+<p>由于每一个解 $x_i$ 的时间复杂度为 $O(\sqrt{q})$ ，所以计算 $x$ 的总时间复杂度为：$O(eS_q)\;=\;O(e\sqrt{q})$ 。</p>
+<p>​       </p>
+<p>证明完成。剩下的就是将计算结果交给中国剩余定理，其时间复杂度为： $O(log_{2}N)$ ，其中 $N$ 为$|G|$ 。</p>
+<p>​      </p>
+<p>计算步骤：</p>
+<p>​         <img src="https://i.loli.net/2020/09/14/OKSWIci287PYLjs.png" alt="image-20200914215224859"></p>
+<p>​        </p>
+<p>注意这里的 $N$ 为 $|G|$ 。计算 $g_i\;=\;g^{N/q_{i}^{e_i}}$ 是为了得到 $g_i\;with\;order\;q_i^{e_i}$ 。           </p>
+<p>​         </p>
+<p>再贴一次 PH 算法的时间复杂度：</p>
+<p>​      </p>
+<p><img src="https://i.loli.net/2020/09/14/LcZgB83aXzjTw67.png" alt="image-20200914215003414"></p>
+<p>​                                   </p>
+<p>​                          </p>
+<p>顺便提一下， sageMath 中的 discrete_log 函数使用的就是 Pohlig-Hellman Algorithm </p>
+<p>和 Baby Step Giant Step Algorithm 的结合。</p>
+<p>​            </p>
+<p><img src="https://i.loli.net/2020/09/21/FlyxSpYb8EnOWQ3.png" alt="image-20200921190217192"></p>
+<p>​          </p>
+<p>​                             </p>
+<h2 id="Rings-quotient-rings-polynomial-rings-and-finite-fields"><a href="#Rings-quotient-rings-polynomial-rings-and-finite-fields" class="headerlink" title="Rings, quotient rings, polynomial rings, and finite fields"></a>Rings, quotient rings, polynomial rings, and finite fields</h2><p>​         </p>
+<h3 id="Rings"><a href="#Rings" class="headerlink" title="Rings"></a>Rings</h3><p>​              </p>
+<p>对总结一下这一章的知识和之后密码体系的关联：</p>
+<p>​         </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Cryptosystem</th>
+<th>Knowledge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elliptic Curve Cryptography</td>
+<td>Finite Fields</td>
+</tr>
+<tr>
+<td>Lattice-based NTRU Cryptosystem</td>
+<td>Quetients of polynomial rings</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​       </p>
+<p>​            </p>
+<p>普通的环（Ring）：</p>
+<p>​                           </p>
+<p><img src="https://i.loli.net/2020/09/22/xVsmKYhz39N5MSD.png" alt="image-20200917143450066"></p>
+<p>​                              </p>
+<p>同时满足下面条件：</p>
+<p>​              </p>
+<p>对于 “+” operation：</p>
+<p>​              </p>
+<ul>
+<li>存在一个单位元，对于所有元素，满足 $0\;+\;a\;=\;a\;+\;0\;=\;a$ 。</li>
+<li>对于所有元素 $a$，存在对应的逆元 $b$ ，满足 $a\;+\;b\;=\;b\;+\;a\;=\;0$ 。</li>
+<li>对于所有元素，满足结合律。</li>
+<li>对于所有元素，满足交换律。</li>
+</ul>
+<p>​            </p>
+<p>Ring 上的元素加上 “+” operation 可以看成是一个交换群。</p>
+<p>​           </p>
+<p>对于 “*” operation，这里由于显示问题，我将其写成 “·”：</p>
+<p>​             </p>
+<ul>
+<li>存在一个单位元，对于所有元素满足 $1\;·\;a\;=\;a\;·\;1\;=\;a$ 。</li>
+<li>对于所有元素，满足结合律。</li>
+<li>对于所有元素，满足交换律。</li>
+</ul>
+<p>​             </p>
+<p>RIng 上的元素加上 “*” operation 可以看成是一个幺半群。</p>
+<p>​              </p>
+<p>对于两个 operation：</p>
+<p>​           </p>
+<p>满足分配律， $a\;·\;(b\;+\;c)\;=\;a\;·\;b\;+\;a\;·\;c$ 。</p>
+<p>​             </p>
+<p>上面这个环实际上属于交换环，但是由于我们经常会碰到这个类型的环，所以我们简称之为环。</p>
+<p>​            </p>
+<p>下面记一个环的例子：</p>
+<p>​                    </p>
+<p><img src="https://i.loli.net/2020/09/21/SVQ7ZwBpDnK1jmU.png" alt="image-20200921185329993"></p>
+<p>​                 </p>
+<p>​                     </p>
+<p>如果对环再加上要求，可能就是域了，看看 field 和 ring 之间的关系：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/09/21/EMcOhLNpiuRJzdQ.png" alt="image-20200921170104147"></p>
+<p>​                  </p>
+<p>仔细一下其实也就多了一个乘法的逆元。</p>
+<p>​                           </p>
+<p>​                       </p>
+<h3 id="Divisibility-and-Quotients-Rings"><a href="#Divisibility-and-Quotients-Rings" class="headerlink" title="Divisibility and Quotients Rings"></a>Divisibility and Quotients Rings</h3><p>​             </p>
+<p>先看一下什么是 <em>Divisibility</em>：</p>
+<p>​                </p>
+<p><img src="https://i.loli.net/2020/09/17/bycAeVIJodlaQGx.png" alt="image-20200917191057513"></p>
+<p>​                   </p>
+<p>环上的 Divisibility 和整数的整除性基本相同。</p>
+<p>​           </p>
+<p>回忆一下，如果一个数除了 $-1$ 和 $1$ 因子以外，没有其他多余的（trivial）因子，那么这个数为质数。</p>
+<p>原因是 $1$ 和 $-1$ 都存在乘法逆元（本身）。所以在环的定义上，如果一个元素存在乘法逆元，那么这个元素称为 unit。</p>
+<p>​                </p>
+<p>再看一下 unit 的定义：</p>
+<p>​             </p>
+<p><img src="https://i.loli.net/2020/09/17/TM45yPA92Cpa37d.png" alt="image-20200917194238648"></p>
+<p>​            </p>
+<p>如果 $u\;\in\;R$ ，且 $u$ 有乘法上的逆元，则 $u$ 被称为 unit，这里 unit 就相当于前面提到的 $1$ 和 $-1$ 。</p>
+<p>如果 $u$ 不是 unit 并且它的二元分解中有一个是 unit，它就是不可约的。这里不可约的相当于前面提到的质数。</p>
+<p>​                 </p>
+<p>看一下环上的同余定义：</p>
+<p>​             </p>
+<p><img src="https://i.loli.net/2020/09/17/2bZPHWYRUzIo7Dy.png" alt="image-20200917200333674"></p>
+<p>​                   </p>
+<p>对于同一模数的两个环，两个环上的同余式可以进行加法，减法和乘法。</p>
+<p>​                 </p>
+<p>下面学习下商环，简单地看下定义：</p>
+<p>​             </p>
+<p><img src="https://i.loli.net/2020/09/17/6moL1Z4C9tK8rAJ.png" alt="image-20200917202708520"></p>
+<p>​                </p>
+<p>商环又称为剩余类环，它也满足加法，减法和乘法的性质。                                         </p>
+<p>​                  </p>
+<p>​                        </p>
+<p>利用上面的方法我们可以生成一个新的环。</p>
+<p>​           </p>
+<h3 id="Polynomial-rings-and-the-Euclidean-algorithm"><a href="#Polynomial-rings-and-the-Euclidean-algorithm" class="headerlink" title="Polynomial rings and the Euclidean algorithm"></a>Polynomial rings and the Euclidean algorithm</h3><p>​                      </p>
+<p>看一下多项式环简单的定义：</p>
+<p>​                   </p>
+<p><img src="https://i.loli.net/2020/09/21/DLCoTXdHBqVUvW1.png" alt="image-20200921190416583"></p>
+<p>​            </p>
+<p><strong>coefficients</strong> 也可以从 $Q,\;R,\;C$ 或者是有限域 $F_p$ 中取。密码学中 $F_p$ 中出现的情况比较多，这种</p>
+<p>类型的环我们称之为 <strong>Euclidean Ring</strong> （欧几里得环）。</p>
+<p>​                </p>
+<p>再认识几个关于多项式的概念：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/09/21/igndWbJVG7PBMqZ.png" alt="image-20200921172946644"></p>
+<p>​                </p>
+<p>对于一个非零的多项式，最高次项的幂被称为 <strong>degree</strong> 。对于多项式 $a(x)$ ，其 <strong>degree</strong> 可以记为 $deg(a)$ 。</p>
+<p>最高次项的系数被称为 <strong>leading coefficient</strong> 。如果 <strong>leading coefficient</strong> 为 $1$ ，我们称这个多项式</p>
+<p>为 <strong>monic polynomial</strong> 。</p>
+<p>​                        </p>
+<p>再看一下 $F_p$ 下的环，也就是 <strong>Euclidean Ring</strong> 的定义：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/09/21/4VxCWykFJSzIXhG.png" alt="image-20200921192756409"></p>
+<p>​                    </p>
+<p>其中，$k$ 被称为商，$r$ 被称为剩余。</p>
+<p>​                </p>
+<p><strong>Euclidean Ring</strong> 下最大公因数的定义：</p>
+<p>​               </p>
+<p><img src="https://i.loli.net/2020/09/21/GwLTj2brJHioAnI.png" alt="image-20200921194306375"></p>
+<p>​                    </p>
+<p>定义很容易理解，因为在有限域内，通常我们将取 <strong>monic</strong> 的那个 gcd。</p>
+<p>​                   </p>
+<p>再学习一下 <strong>Euclidean Ring</strong> 下的扩展欧几里得定理：</p>
+<p>​                      </p>
+<p> 感觉这是一个扩展欧几里得定理的变体，这个定理有两个用途：</p>
+<p>​                 </p>
+<ul>
+<li>计算同一 Euclidean Ring 下两个多项式的 gcd</li>
+<li>因式分解 Euclidean RIng 下的多项式</li>
+</ul>
+<p>​                     </p>
+<p>先看计算 gcd 的方法：</p>
+<p>​                  </p>
+<p>大前提：</p>
+<p>​                  </p>
+<p><img src="https://i.loli.net/2020/09/21/T6mUqVXlOQg2eSA.png" alt="image-20200921194722385"></p>
+<p>​                  </p>
+<p>计算方法：</p>
+<p>​                </p>
+<p><img src="https://i.loli.net/2020/09/21/ARbTcVgylD8zWLC.png" alt="image-20200921201644490"></p>
+<p>​                                  </p>
+<p>步骤看懂了，可是原理看得不太懂？反正一直计算到 $r_{t+1}$ 就 ok 。</p>
+<p>​                </p>
+<p>​                 </p>
+<p>再看分解的方法：</p>
+<p>​               </p>
+<p>大前提：</p>
+<p>​                      </p>
+<p><img src="https://i.loli.net/2020/09/21/hTwY6GvtXfZpoJe.png" alt="image-20200921203049424"></p>
+<p>​                       </p>
+<p>Euclidean Ring 下的任何一个非零多项式，都可以唯一地被分解成不同的首一不可约多项式和常量的乘积。</p>
+<p>​                 </p>
+<h3 id="Quotients-of-polynomial-rings"><a href="#Quotients-of-polynomial-rings" class="headerlink" title="Quotients of polynomial rings"></a>Quotients of polynomial rings</h3><p>​                </p>
+<p>有点拗口，前面学得剩余类环（<strong>Quotients Rings</strong>），现在又整一个 <strong>Quotients of polynomial rings</strong> ，</p>
+<p>说白了就是 <strong>Polynomial Rings</strong> 产生的剩余类环。整一个定义：</p>
+<p>​                  </p>
+<p><img src="https://i.loli.net/2020/09/21/JwbDKflyLVqMjAe.png" alt="image-20200921204104982">               </p>
+<p>​                   </p>
+<p><strong>重点学习 Euclidean RIng 的剩余类环。</strong></p>
+<p>​                       </p>
+<p>Euclidean Rings 产生的剩余类环依然满足剩余类环的某些性质，即加法、减法和乘法。</p>
+<p>​                       </p>
+<p>Euclidean Rings 产生的剩余类环的 unit 有如下性质：</p>
+<p>​             </p>
+<p><img src="https://i.loli.net/2020/09/21/dVBOwPCpeqFaZG5.png" alt="image-20200921210530877"></p>
+<p>​              </p>
+<p>​                  </p>
+<p>Euclidean RIngs 产生的剩余类环同时是域， 需要满足的条件：</p>
+<p>​                    </p>
+<p><img src="https://i.loli.net/2020/09/22/HRUjuh8ZMSDnCsl.png" alt="image-20200922195708815"></p>
+<p>​                  </p>
+<p>对于产生的剩余类环 $F[x]/(m)$ ，如果 $m$ 是不可约多项式，因为：</p>
+<p>​                  </p>
+<script type="math/tex; mode=display">
+for\;every\;a\in F[x]/(m),\;gcd(a,m)\;=\;1</script><p>​                            </p>
+<p>那么剩余类环中每个元素都存在一个乘法逆元，这时候 $F[x]/(m)$ 就是一个域。</p>
+<p>​                    </p>
+<p>这个产生的 $F[x]/(m)$ 域有如下性质：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/09/21/3EI5KujmwkVHDRL.png" alt="image-20200921215219801"></p>
+<p>​                        </p>
+<p>很容易理解，就是有 $d$ 个项（$a_0\;\sim\;a_{d-1}$），因为每个项有 $p$ 个可能取值，并且这些所有可能的</p>
+<p>取值都在这个域中，所以这个域中有 $p^d$ 个元素。这个域就是有名的 Galois Fields，可记为 $GF(p^d)$  ，</p>
+<p>或者记为 $F_{p^d}$ ，说明这个域有 $p^d$ 个元素。</p>
+<p>​                      </p>
+<p>这个跟整数的有限域 $GF(p)$ 有几分神似：</p>
+<p>​                     </p>
+<p>比如：</p>
+<p>​               </p>
+<p><img src="https://i.loli.net/2020/09/22/Vnb8ZciLxoMpHgI.png" alt="image-20200922205258377">  </p>
+<p>​            </p>
+<p>还有：</p>
+<p>​                </p>
+<p><img src="https://i.loli.net/2020/09/22/4ojMxstKgWzfu3d.png" alt="image-20200922205320466"></p>
+<p>​                    </p>
+<p>​                      </p>
+<p>​                        </p>
+<p>最后补充一些性质：</p>
+<p>​                       </p>
+<p><img src="https://i.loli.net/2020/09/21/jn1ophuDUPKtJGQ.png" alt="image-20200921220849839"></p>
+<p>​                     </p>
+<p>最后一点提到，如果两个有限域的元素个数相同，那么就称这两个有限域同构。</p>
+<p>​                </p>
+<p>对于两个域 $F_{p^e}$ 和 $F_{p^d}$ ，如果有 $e\;|\;d$ ，那么称 $F_{p^e}$ 为 $F_{p^d}$ 的子域。</p>
+<p>​                         </p>
+<p>​                           </p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><ul>
+<li><em>An Introduction to Mathematical Cryptography</em></li>
+</ul>
+<p>​                        </p>
+<p>​                         </p>
+<p>坚持！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/" title="An-Introduction-to-Mathematical-Cryptography-I" target="_blank" rel="external">https://buki-freak.github.io/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/09/12/SM4-Algorithm-Learning/" title="SM4-Algorithm-Learning"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
