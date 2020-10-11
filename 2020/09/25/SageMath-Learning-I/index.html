@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>SageMath-Learning-I | buk1&#39;s blog</title>
+  <meta name="description" content="​                  学习完抽象代数部分，感觉不光要搞懂理论，还得搞好实践和运用，所以学习一下 Sage 的抽象代数部分。 ​                 ​                    Group Theory and Sage​                        Basic properties of the integers​">
+<meta name="keywords" content="Sage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SageMath-Learning-I">
+<meta property="og:url" content="https://buki-freak.github.io/2020/09/25/SageMath-Learning-I/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="​                  学习完抽象代数部分，感觉不光要搞懂理论，还得搞好实践和运用，所以学习一下 Sage 的抽象代数部分。 ​                 ​                    Group Theory and Sage​                        Basic properties of the integers​">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/dtzXZ4Uk5FP8Mnv.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/psveLSFqImNVEBu.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/mwacsq1B9ZzPvDK.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/cbRHuv6grqSEzZt.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/McT18YnqtmeyDdp.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/25/VwYLZ8AUciREk4J.png">
+<meta property="og:updated_time" content="2020-10-11T07:07:51.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SageMath-Learning-I">
+<meta name="twitter:description" content="​                  学习完抽象代数部分，感觉不光要搞懂理论，还得搞好实践和运用，所以学习一下 Sage 的抽象代数部分。 ​                 ​                    Group Theory and Sage​                        Basic properties of the integers​">
+<meta name="twitter:image" content="https://i.loli.net/2020/09/25/dtzXZ4Uk5FP8Mnv.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/09/25/SageMath-Learning-I/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎Wechat交流：LLL_HJPAHu</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sage/">Sage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textbook/">Textbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-SageMath-Learning-I" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SageMath-Learning-I
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/25/SageMath-Learning-I/" class="article-date">
+	  <time datetime="2020-09-25T01:16:54.000Z" itemprop="datePublished">2020-09-25</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Sage/">Sage</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/25/SageMath-Learning-I/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 967(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>​                 </p>
+<p>学习完抽象代数部分，感觉不光要搞懂理论，还得搞好实践和运用，所以学习一下 <strong>Sage</strong> 的抽象代数部分。</p>
+<p>​                </p>
+<p>​                   </p>
+<h1 id="Group-Theory-and-Sage"><a href="#Group-Theory-and-Sage" class="headerlink" title="Group Theory and Sage"></a>Group Theory and Sage</h1><p>​                       </p>
+<h2 id="Basic-properties-of-the-integers"><a href="#Basic-properties-of-the-integers" class="headerlink" title="Basic properties of the integers"></a>Basic properties of the integers</h2><p>​                      </p>
+<p>扩展欧几里得函数 <strong>xgcd</strong> ：</p>
+<p>​                </p>
+<p><img src="https://i.loli.net/2020/09/25/dtzXZ4Uk5FP8Mnv.png" alt="image-20200925093644636"></p>
+<p>​                    </p>
+<p>返回是一个三元组，第一个元素为 $a$ 和 $b$ 的 gcd ，第二个和第三个元素是 $r$ 和 $s$ 满足 $ra\;+\;sb\;=\;gcd(a,\;b)$ 。</p>
+<p>​                  </p>
+<p>分解（decomposition）函数 <strong>factor</strong> ：</p>
+<p>​                  </p>
+<p><img src="https://i.loli.net/2020/09/25/psveLSFqImNVEBu.png" alt="image-20200925094526138"></p>
+<p>​                 </p>
+<p>factor 函数返回的是一个二元组的数组，但显示的时候会自动转换为数学公式形式。</p>
+<p>​                  </p>
+<p><img src="https://i.loli.net/2020/09/25/mwacsq1B9ZzPvDK.png" alt="image-20200925094934557"></p>
+<p>​                    </p>
+<p><strong>factor 函数还可以用于分解多项式。</strong></p>
+<p>​                 </p>
+<p>如果只想要提取某个数的因子，可以用 <strong>prime_divisors</strong> 函数。</p>
+<p>​                </p>
+<p><img src="https://i.loli.net/2020/09/25/cbRHuv6grqSEzZt.png" alt="image-20200925095153716"></p>
+<p>​                     </p>
+<p>求逆元用 <strong>inverse_mod</strong> 函数，模幂运算用 <strong>power_mod</strong> 函数，</p>
+<p>欧拉函数（Euler $\phi$ function）用 <strong>euler_phi</strong> 函数。</p>
+<p>​                       </p>
+<p>​                    </p>
+<h2 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h2><p>​                      </p>
+<p>好像没啥可看的，先留个坑。</p>
+<p>​                    </p>
+<p>​                         </p>
+<h1 id="Basic-Rings"><a href="#Basic-Rings" class="headerlink" title="Basic Rings"></a>Basic Rings</h1><p>​                   </p>
+<p>再来学习一下环。先搞清楚四种类型环的表示，偷个图：</p>
+<p>​                   </p>
+<p><img src="https://i.loli.net/2020/09/25/McT18YnqtmeyDdp.png" alt="image-20200925112218207"></p>
+<p>​              </p>
+<p>整数环为 $ZZ$ ，有理数环为 $QQ$ ，实数环为 $RR$ ，复数环为 $CC$ 。</p>
+<p>​                </p>
+<h2 id="Rings-of-integers-module-n"><a href="#Rings-of-integers-module-n" class="headerlink" title="Rings of integers module n"></a>Rings of integers module n</h2><p>​             </p>
+<p>同余类，又称 ring of integers of modulo n ，记作 $\Z/n\Z$ 。</p>
+<p>​           </p>
+<p>定义同余类的方法，有三种：</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: Zmod(<span class="number">4</span>) == Integers(<span class="number">4</span>)</span><br><span class="line">sage: Zmod(<span class="number">4</span>) == IntegerModRing(<span class="number">4</span>)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>​               </p>
+<p>​                 </p>
+<h2 id="Polynomial-Rings"><a href="#Polynomial-Rings" class="headerlink" title="Polynomial Rings"></a>Polynomial Rings</h2><p>​                 </p>
+<p>Reference 里面大部分是多项式环的定义，并且分两种：<strong>单变量</strong> 和 <strong>多变量</strong> 。</p>
+<p>​                  </p>
+<p>​                    </p>
+<p>定义整数上的多项式环：</p>
+<p>​                </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sage: retpoly.&lt;z&gt; = PolynomialRing(RR)</span><br></pre></td></tr></table></figure>
+<p>​                 </p>
+<p>一般情况下的定义：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/09/25/VwYLZ8AUciREk4J.png" alt="image-20200925151944191"></p>
+<p>​                  </p>
+<p>再举几个例子：</p>
+<p>​                 </p>
+<p>有理数上的多项式环：</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R.&lt;x&gt; = PolynomialRing(QQ)</span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> x over Rational Field</span><br></pre></td></tr></table></figure>
+<p>​                  </p>
+<p>欧几里得环：</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R.&lt;x&gt; = PolynomialRing(GF(<span class="number">3</span>))</span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> x over Finite Field of size <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>​               </p>
+<p>在剩余类中的多项式：</p>
+<p>​              </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R = Zmod(<span class="number">123</span>)[<span class="string">'x'</span>]</span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> x over Ring of integers modulo <span class="number">123</span></span><br></pre></td></tr></table></figure>
+<p>​             </p>
+<p>Sage 中还有多项式其他的书写定义方式：</p>
+<p>​              </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sage: R.&lt;z&gt; = QQ[] <span class="comment"># 方括号书写 1</span></span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> z over Rational Field</span><br><span class="line">sage: R = QQ[<span class="string">'z'</span>]  <span class="comment"># 方括号书写 2</span></span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> z over Rational Field</span><br></pre></td></tr></table></figure>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R = PolynomialRing(QQ,<span class="string">'z,y,c'</span>) <span class="comment"># 常规书写方式</span></span><br><span class="line">sage: R</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> z, y, c over Rational Field</span><br></pre></td></tr></table></figure>
+<p>​             </p>
+<p>带上第三个参数。</p>
+<p>​                 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R = PolynomialRing(QQ,<span class="string">'z'</span>,<span class="number">10</span>)</span><br><span class="line">sage: R</span><br><span class="line">Multivariate Polynomial Ring <span class="keyword">in</span> z0, z1, z2, z3, z4, z5, z6, z7, z8, z9 over Rational Field</span><br></pre></td></tr></table></figure>
+<p>​              </p>
+<p>更骚一点。</p>
+<p>​           </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sage: R = PolynomialRing(ZZ,[<span class="string">'x%s'</span>%p <span class="keyword">for</span> p <span class="keyword">in</span> primes(<span class="number">10</span>)])</span><br><span class="line">sage: R</span><br><span class="line">Multivariate Polynomial Ring <span class="keyword">in</span> x2, x3, x5, x7 over Integer Ring</span><br></pre></td></tr></table></figure>
+<p>​                   </p>
+<p>PolynomialRing.inject_variables() 方法可以查看当前已经定义的变量。</p>
+<p>​              </p>
+<p>​                 </p>
+<p>在不同数集的环，相同的计算会产生不同的结果。如：</p>
+<p>​             </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sage: ratpoly.&lt;t&gt; = PolynomialRing(QQ)</span><br><span class="line">sage: factor(t^<span class="number">2</span> - <span class="number">2</span>)</span><br><span class="line">t^<span class="number">2</span> - <span class="number">2</span></span><br><span class="line">sage: retpoly.&lt;z&gt; = PolynomialRing(RR)</span><br><span class="line">sage: factor(z^<span class="number">2</span> - <span class="number">2</span>)</span><br><span class="line">(z - <span class="number">1.41421356237310</span>) * (z + <span class="number">1.41421356237310</span>)</span><br></pre></td></tr></table></figure>
+<p>​                 </p>
+<p>上面提到过 <strong>factor</strong> 可以分解多项式，上面的例子是一个很好的运用。</p>
+<p>​               </p>
+<p>发现 Sage 中有一个查找变量类型的方法，<strong>parent</strong> 函数：</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sage: ratplot.&lt;t&gt; = PolynomialRing(CC)</span><br><span class="line">sage: t</span><br><span class="line">t</span><br><span class="line">sage: </span><br><span class="line">sage: parent(t)</span><br><span class="line">Univariate Polynomial Ring <span class="keyword">in</span> t over Complex Field <span class="keyword">with</span> <span class="number">53</span> bits of precision</span><br></pre></td></tr></table></figure>
+<p>​                </p>
+<p>求欧几里得环中的首一不可约多项式，使用 irreducible_element 函数，</p>
+<p>第一个参数指定 degree 。</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sage: R = GF(<span class="number">47</span>)[<span class="string">'x'</span>]</span><br><span class="line">sage: R.irreducible_element(<span class="number">1</span>)</span><br><span class="line">x + <span class="number">46</span></span><br><span class="line">sage: R.irreducible_element(<span class="number">2</span>)</span><br><span class="line">x^<span class="number">2</span> + <span class="number">45</span>*x + <span class="number">5</span></span><br><span class="line">sage: R.irreducible_element(<span class="number">4</span>)</span><br><span class="line">x^<span class="number">4</span> + <span class="number">8</span>*x^<span class="number">2</span> + <span class="number">40</span>*x + <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>​                                 </p>
+<p>​                              </p>
+<h1 id="Fields"><a href="#Fields" class="headerlink" title="Fields"></a>Fields</h1><p>​                  </p>
+<p>定义有理域：</p>
+<p>​                   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sage: RationalField()</span><br><span class="line">Rational Field</span><br></pre></td></tr></table></figure>
+<p>​                  </p>
+<p>定义整数有限域 $GF(p),\;where\;p\;is\;a\;prime$ :</p>
+<p>​                </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sage: R = GF(<span class="number">149</span>);R</span><br><span class="line">Finite Field of size <span class="number">149</span></span><br></pre></td></tr></table></figure>
+<p>​               </p>
+<p>定义有限域 $GF(p^e),\;where\;p\;is\;a\;prime$ ，也就是欧几里得环下商环产生的域：</p>
+<p>​             </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sage: R = GF(<span class="number">2</span>^<span class="number">10</span>,name=<span class="string">'x'</span>,modulus=x^<span class="number">10</span> + x^<span class="number">6</span> + x^<span class="number">5</span> + x^<span class="number">3</span> + x^<span class="number">2</span> + x + <span class="number">1</span>);R</span><br><span class="line">Finite Field <span class="keyword">in</span> x of size <span class="number">2</span>^<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>​              </p>
+<p>由于是多项式，所以需要给出变量名，这里是 $x$ ，并且给出产生商环的</p>
+<p>不可约多项式 $m$ ，这里是 $x^{10}\;+\;x^6\;+\;x^5\;+\;x^3\;+\;x^2\;+\;x +\;1$ 。</p>
+<p>​                 </p>
+<p>SageMath 会检测传入的 irreducible polynomial 是否为不可约。如果没有</p>
+<p>指定不可约多项式和变量名，那么 Sage 会自动产生一个变量名和一个不可</p>
+<p>约多项式。</p>
+<p>​               </p>
+<p>​                 </p>
+<p>​                     </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>​                       </p>
+<p><a href="https://doc.sagemath.org/html/en/thematic_tutorials/group_theory.html" target="_blank" rel="noopener">https://doc.sagemath.org/html/en/thematic_tutorials/group_theory.html</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/09/25/SageMath-Learning-I/" title="SageMath-Learning-I" target="_blank" rel="external">https://buki-freak.github.io/2020/09/25/SageMath-Learning-I/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/" title="An-Introduction-to-Mathematical-Cryptography-I"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
