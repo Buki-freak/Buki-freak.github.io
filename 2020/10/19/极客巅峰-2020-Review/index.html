@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>极客巅峰-2020-Review | buk1&#39;s blog</title>
+  <meta name="description" content="​                        菜狗比赛没做出几题，前一段时间心态崩了，复现一下吧。 ​                     tryrsa​                            比赛的时候把精力都放在 trypoly 上面了，没看到这道题，tcl 。。。 ​                   先看一下题目，output 给出数据。 ​">
+<meta name="keywords" content="Review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极客巅峰-2020-Review">
+<meta property="og:url" content="https://buki-freak.github.io/2020/10/19/极客巅峰-2020-Review/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="​                        菜狗比赛没做出几题，前一段时间心态崩了，复现一下吧。 ​                     tryrsa​                            比赛的时候把精力都放在 trypoly 上面了，没看到这道题，tcl 。。。 ​                   先看一下题目，output 给出数据。 ​">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-29T04:14:11.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极客巅峰-2020-Review">
+<meta name="twitter:description" content="​                        菜狗比赛没做出几题，前一段时间心态崩了，复现一下吧。 ​                     tryrsa​                            比赛的时候把精力都放在 trypoly 上面了，没看到这道题，tcl 。。。 ​                   先看一下题目，output 给出数据。 ​">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/10/19/极客巅峰-2020-Review/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎WC交流：TExMX0hKUEFIdQ==</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sage/">Sage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textbook/">Textbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-极客巅峰-2020-Review" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      极客巅峰-2020-Review
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/19/极客巅峰-2020-Review/" class="article-date">
+	  <time datetime="2020-10-19T11:23:05.000Z" itemprop="datePublished">2020-10-19</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Review/">Review</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/19/极客巅峰-2020-Review/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 848(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>​                       </p>
+<p>菜狗比赛没做出几题，前一段时间心态崩了，复现一下吧。</p>
+<p>​                    </p>
+<h1 id="tryrsa"><a href="#tryrsa" class="headerlink" title="tryrsa"></a>tryrsa</h1><p>​                           </p>
+<p>比赛的时候把精力都放在 trypoly 上面了，没看到这道题，tcl 。。。</p>
+<p>​                  </p>
+<p>先看一下题目，output 给出数据。</p>
+<p>​             </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> e1,e2,flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">msg = bytes_to_long(<span class="string">"=========Hint:e1="</span>+str(e1)+<span class="string">"============="</span>) <span class="comment"># 2020321</span></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">N = p*q</span><br><span class="line"><span class="keyword">print</span> N</span><br><span class="line"><span class="keyword">print</span> pow(msg,<span class="number">3</span>,N) </span><br><span class="line"></span><br><span class="line">msg = bytes_to_long(flag)</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">N = p*q</span><br><span class="line">c = pow(msg, e2, N)</span><br><span class="line"><span class="keyword">print</span> N,e2 </span><br><span class="line"><span class="keyword">print</span> c </span><br><span class="line">print(pow(p+q,e1,N ))</span><br><span class="line">print(pow(p+e1, q, N))</span><br></pre></td></tr></table></figure>
+<p>​                 </p>
+<p>数据挺多的。首先看到一个低加密指数，尝试一下开三次方，成功得到 $e1$ 。</p>
+<p>​                 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">6</span>]: c = <span class="number">28249132350044579687091110964285446575404805400757326954185222098803605008954490760462246663674360047951197296557689347856716297531621331430289344669498939239588624311221464757652619402073234993515450143594805022438694559765344247838048186137683783869848355994953125</span>                                                                                      </span><br><span class="line">In [<span class="number">7</span>]: gmpy2.iroot(c,<span class="number">3</span>)                                                                                                       </span><br><span class="line">Out[<span class="number">7</span>]: </span><br><span class="line">(mpz(<span class="number">30455684940295012564308820485670106905218940938159317278342517311135788043906905072811325</span>),</span><br><span class="line"> <span class="literal">True</span>) <span class="comment"># e1</span></span><br></pre></td></tr></table></figure>
+<p>​                     </p>
+<p>下面是一个常规的 <strong>rsa</strong> 加密，给出了几个关系：</p>
+<p>​                   </p>
+<script type="math/tex; mode=display">
+1.\;c\;\equiv\;msg^{e2}\mod N\\
+\;\;\;\;\;2.\;c_1\;\equiv(p+q)^{e1}\mod N\\
+\;\;\;\;\;\;3.\;c_2\;\equiv(p+e_1)^q\mod N</script><p>​                    </p>
+<p>​                      </p>
+<p>对于第二条式子，进行以下化简：</p>
+<p>​                   </p>
+<script type="math/tex; mode=display">
+c_1\;=\;(p+q)^{e_1}\;+\;kqp\\
+c_1\mod q\;=\;(p\mod q\;+\;q\mod q)^{e1}\mod q\;+\;0\\
+c_1\equiv p^{e1}\mod q\\
+c_1\;=\;p^{e_1}\;+\;kq</script><p>​               </p>
+<p>对于第三条式子，也进行化简，中间使用费马定理：</p>
+<p>​                 </p>
+<script type="math/tex; mode=display">
+c_2\;=\;(p+e_1)^q\;+\;kpq\\
+c_2\mod q\;=\;(p\mod q\;+\;e_1\mod q)^q\mod q\;+\;0\\
+c_2\equiv p\;+\;e_1\mod q\\
+c_2\;=\;p\;+\;e_1\;+\;kq\\
+c_2\;-\;e_1\;=\;p\;+\;kq</script><p>​             </p>
+<p>注意第三条式子左边的值我们是可以进行计算的。加上 $e1$ 次方，再用二项式定理展开可得：</p>
+<p>​                  </p>
+<script type="math/tex; mode=display">
+(c_2-e_1)^{e1}\;=\;(p+kq)^{e1}\;=\;C_n^{0}p^{e1}+C_n^{1}p^{e1-1}(kq)+\;...\;+C_n^{n-1}p(kq)^{n-1}+C_{n}^{n}(kq)^n</script><p>​                 </p>
+<p>再减去第一条式子可得：</p>
+<p>​               </p>
+<script type="math/tex; mode=display">
+（c_2-e_1）^{e1}-c_1\;=\;tkq</script><p>​                 </p>
+<p>上面这条式子右边的值为 $q$ 的整数倍，而左边的值我们可以进行计算，求其与 $N$ 的最大公因数即可。</p>
+<p>​                     </p>
+<p>exp 如下：</p>
+<p>​                    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">29</span>]: q = gmpy2.gcd(pow(c2 - e1,e1,N) - c1,N)                                                                               </span><br><span class="line">In [<span class="number">30</span>]: q                                                                                                                     </span><br><span class="line">Out[<span class="number">30</span>]: mpz(<span class="number">162984526621683870625098586014910615083563535116972222345188747969350923464088799732530801488388575838451737347617234153531460507216470173767572431203228056853761835680227568853138262896922662664650377958457439852663861645573573134863458099139681417307977919507889782957584330019942586292868271385366037674313</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">46</span>]: p = N // q                                                                                                           </span><br><span class="line">In [<span class="number">47</span>]: p                                                                                                                     </span><br><span class="line">Out[<span class="number">47</span>]: mpz(<span class="number">165756727599372791875820541625601955300453776993770577352314168977734910665053298526454521639089078020881208027049933409502069159705827587730047406034448233170464600044968540270031406627778916422623991350852342453286144055883559111480220646693965481942701883316426823927969224691707129909621502373328134683537</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">48</span>]: phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)                                                                                              </span><br><span class="line">In [<span class="number">49</span>]: d = gmpy2.invert(e2,phi)                                                                                             </span><br><span class="line">In [<span class="number">50</span>]: m = pow(c,d,N)                                                                                                        </span><br><span class="line">In [<span class="number">52</span>]: long_to_bytes(m)                                                                                                      </span><br><span class="line">Out[<span class="number">52</span>]: <span class="string">b'flag&#123;5b55c69f-398d-47bc-ad37-4f268e8ae4b2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># flag&#123;5b55c69f-398d-47bc-ad37-4f268e8ae4b2&#125;</span></span><br></pre></td></tr></table></figure>
+<p>​                           </p>
+<p>​                              </p>
+<p>​                           </p>
+<h1 id="trypoly"><a href="#trypoly" class="headerlink" title="trypoly"></a>trypoly</h1><p>​                        </p>
+<p>这题是[原题]: (<a href="https://amritabi0s.wordpress.com/2019/03/18/confidence-teaser-ctf-crypto-writeups/)，花了" target="_blank" rel="noopener">https://amritabi0s.wordpress.com/2019/03/18/confidence-teaser-ctf-crypto-writeups/)，花了</a> 10 分钟。当时急急忙忙做出来了，现在仔细看一下原理。</p>
+<p>​               </p>
+<p>看一下代码：</p>
+<p>​               </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">flag = bytes_to_long(flag) </span><br><span class="line">ranges = int(log(flag,<span class="number">3</span>))</span><br><span class="line">pri = next_prime(ZZ.random_element(<span class="number">3</span>^<span class="number">16</span>, <span class="number">3</span>^<span class="number">17</span>))</span><br><span class="line">it = <span class="number">5</span></span><br><span class="line">N = pri^<span class="number">120</span></span><br><span class="line"></span><br><span class="line">P.&lt;x&gt; = PolynomialRing(Zmod(N), implementation=<span class="string">'NTL'</span>)</span><br><span class="line">poly = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> range(it):</span><br><span class="line">    poly += ZZ.random_element(<span class="number">3</span>^ranges, <span class="number">3</span>^(ranges+<span class="number">1</span>))*x^c</span><br><span class="line">poly = poly - poly(flag)</span><br><span class="line">print(pri)</span><br><span class="line">print(poly)</span><br></pre></td></tr></table></figure>
+<p>​                  </p>
+<p>题目定义了一个模 $pri^{120}$ 下的多项式环，接着生成一个 $degree$ 为 4 的多项式 $poly$，然后用这个多项式减去 $flag$ 代入的 </p>
+<p>值$poly(flag)$ 得到一个新的多项式 $poly’$, 题目给出了 $pri$ 和 $poly’$ 。</p>
+<p>​                    </p>
+<p>exp 如下：</p>
+<p>​                  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lift</span><span class="params">(f, p, k, previous)</span>:</span></span><br><span class="line">    result = []</span><br><span class="line">    df = diff(f)</span><br><span class="line">    <span class="keyword">for</span> lower_solution <span class="keyword">in</span> previous:</span><br><span class="line">        dfr = Integer(df(lower_solution))</span><br><span class="line">        fr = Integer(f(lower_solution))</span><br><span class="line">        <span class="keyword">if</span> dfr % p != <span class="number">0</span>:</span><br><span class="line">            t = (-(xgcd(dfr, p)[<span class="number">1</span>]) * int(fr / p ** (k - <span class="number">1</span>))) % p</span><br><span class="line">            result.append(lower_solution + t * p ** (k - <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> dfr % p == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> fr % p ** k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">0</span>, p):</span><br><span class="line">                    result.append(lower_solution + t * p ** (k - <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hensel_lifting</span><span class="params">(f, p, k, base_solution)</span>:</span></span><br><span class="line">    solution = base_solution</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, k + <span class="number">1</span>):</span><br><span class="line">        solution = lift(f, p, i, solution)</span><br><span class="line">    <span class="keyword">return</span> solution</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    <span class="comment">#base = [27020,25020]</span></span><br><span class="line">    base = [<span class="number">71914448</span>]</span><br><span class="line">    p = <span class="number">91178819</span></span><br><span class="line">    k = <span class="number">100</span></span><br><span class="line">    N = p^k</span><br><span class="line">    P.&lt;x&gt; = PolynomialRing(Zmod(N), implementation=<span class="string">'NTL'</span>)</span><br><span class="line">    f = <span class="number">57453455752934422314569380490870437392139092788674299919611253252932221869550680569946725024530545003</span>*x^<span class="number">4</span> + <span class="number">48037906924411573201214693262554265057001265856059030798403001287597455830201673623580499809814145397</span>*x^<span class="number">3</span> + <span class="number">115978529756755271495684497597111489575180207439819530844214796357232008531997740692954971387805647169</span>*x^<span class="number">2</span> + <span class="number">90144181335780729761572136076745420392729113384422074643542473780101371704844686670328386988693003565</span>*x + <span class="number">15391307705240277278890263165432140210177612531692370138228866751525717915844630600454114316817767347237410103825891623720982676085014910889900050564292685762014395155362574870811426331093375257234685605632632665945906781957636758863633857453440902818467506862994716985071078742637470209975218157566199744899513967029548028126417040526508345337196021889482286023256338442270711332457021150881328372306307158084639537132701296810708211240517552171001258318265080522140684915746401253066679720255872700102642721647928067158080049850626073426063356187938363644873928284413044082195265066444624399404805990964473348796290240520637015040450522056216046061514855949283976028501383885079871184350334880950826925674190842626492485432769357092486284047237776336391752959868191708104998859612329034138201867198495897106145496766577408003296902815140152148936337282162436442452632231320117066224252199246120829466402954585288911632249785731492040264164216078655949851</span></span><br><span class="line">    solutions = hensel_lifting(f,p,k,base)</span><br><span class="line">    <span class="keyword">for</span> solution <span class="keyword">in</span> solutions:</span><br><span class="line">        <span class="keyword">print</span> (long_to_bytes(solution))</span><br><span class="line"><span class="comment"># b'flag&#123;b3cfcea8-6cca-11ea-bc55-0242ac130003&#125;'</span></span><br></pre></td></tr></table></figure>
+<p>​                   </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>​                              </p>
+<p>​                      </p>
+<ul>
+<li><a href="https://blog.csdn.net/weixin_45369385/article/details/108876212" target="_blank" rel="noopener">https://blog.csdn.net/weixin_45369385/article/details/108876212</a></li>
+<li><a href="https://amritabi0s.wordpress.com/2019/03/18/confidence-teaser-ctf-crypto-writeups/" target="_blank" rel="noopener">https://amritabi0s.wordpress.com/2019/03/18/confidence-teaser-ctf-crypto-writeups/</a></li>
+<li></li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/10/19/极客巅峰-2020-Review/" title="极客巅峰-2020-Review" target="_blank" rel="external">https://buki-freak.github.io/2020/10/19/极客巅峰-2020-Review/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/10/12/西湖论剑-2020-Writeup/" title="西湖论剑-2020-Writeup"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
