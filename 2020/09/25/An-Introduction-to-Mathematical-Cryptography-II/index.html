@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>An-Introduction-to-Mathematical-Cryptography-II | buk1&#39;s blog</title>
+  <meta name="description" content="​                          椭圆曲线之前已经学习过部分，进行选择性阅读。 ​               Elliptic Curves and Cryptography​                           ​                           [TOC] Elliptic curves​                      椭圆">
+<meta name="keywords" content="Textbook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An-Introduction-to-Mathematical-Cryptography-II">
+<meta property="og:url" content="https://buki-freak.github.io/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/index.html">
+<meta property="og:site_name" content="buk1">
+<meta property="og:description" content="​                          椭圆曲线之前已经学习过部分，进行选择性阅读。 ​               Elliptic Curves and Cryptography​                           ​                           [TOC] Elliptic curves​                      椭圆">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/10/13/tF2REz3pvLiygT4.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/3sgx4lZUpQMJDum.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/wIDtXdh2FSzpinB.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/aUNDJx1ycifOHWX.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/mHRnQwjNOvriLBx.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/46R8VOYPNBerWyK.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/wg7pNFRd8rvyEqC.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/03/Jb7CwEGYxaRZ2HX.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/18/pFdZuoRXGwDYtle.png">
+<meta property="og:updated_time" content="2020-11-18T14:27:37.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="An-Introduction-to-Mathematical-Cryptography-II">
+<meta name="twitter:description" content="​                          椭圆曲线之前已经学习过部分，进行选择性阅读。 ​               Elliptic Curves and Cryptography​                           ​                           [TOC] Elliptic curves​                      椭圆">
+<meta name="twitter:image" content="https://i.loli.net/2020/10/13/tF2REz3pvLiygT4.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://buki-freak.github.io/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="buk1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Buki-freak" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">buk1</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTFer &amp; Crypto</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>东方欲晓，莫道君行早。踏遍青山人未老，风景这边独好。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Post/">Daily Post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper/">Paper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-Development/">Personal Development</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sage/">Sage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textbook/">Textbook</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="posts-An-Introduction-to-Mathematical-Cryptography-II" class="article article-type-posts" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      An-Introduction-to-Mathematical-Cryptography-II
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/" class="article-date">
+	  <time datetime="2020-09-25T01:11:11.000Z" itemprop="datePublished">2020-09-25</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Textbook/">Textbook</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>​                         </p>
+<p>椭圆曲线之前已经学习过部分，进行选择性阅读。</p>
+<p>​              </p>
+<h1 id="Elliptic-Curves-and-Cryptography"><a href="#Elliptic-Curves-and-Cryptography" class="headerlink" title="Elliptic Curves and Cryptography"></a>Elliptic Curves and Cryptography</h1><p>​                          </p>
+<p>​                          </p>
+<p>[TOC]</p>
+<h2 id="Elliptic-curves"><a href="#Elliptic-curves" class="headerlink" title="Elliptic curves"></a>Elliptic curves</h2><p>​                     </p>
+<p>椭圆曲线上的点满足 Weierstrass equations ，方程类似于为：</p>
+<p>​                 </p>
+<script type="math/tex; mode=display">
+Y^2\;=\;X^3\;+\;AX\;+\;B</script><p>​                   </p>
+<p>椭圆曲线上的两个不同点的加法之前已经学习过，从几何上来说，比如在椭圆曲线 $E$ 上有 $P$ 和 $Q$ 两点，$P$ </p>
+<p>和 $Q$ 决定的直线 $L$ 和 椭圆曲线 $E$ 的另一交点 $C$ 关于 $x$ 轴的对称点 $C’$ 为 $P$ 和 $Q$ 加法的结果，写作：</p>
+<p>$P\;+\;Q\;=\;C’$。</p>
+<p>​                     </p>
+<p>从数学上来说，可以联立直线 $L$ 和 椭圆曲线方程 $E$  ，由于有两个点的 $x$ 坐标已知，所以可以写成关于 $x$ 的</p>
+<p>一次多项式乘积的形式。</p>
+<p>​                 </p>
+<p>​                  </p>
+<p>对于两个相同点的加法，几何上来说是去切线交点对称。</p>
+<p>​                      </p>
+<p>按照这个方法进行加法会产生第二个问题。比如有一个点 $P$ 和它的 $x$ 轴对称点 $P’$ ，两者做加法，直线 $L$ 在</p>
+<p>几何上垂直于 $x$ 轴，所以找不到第三个交点，所以需要再定义一个不存在于 $X-Y$ 轴的点 $\mathcal{0}$ ，并且规定他</p>
+<p>在任意一条垂直于 $x$ 轴并且与椭圆曲线 $E$ 相交的直线上。</p>
+<p>​                </p>
+<p>按照上面的规定，$P\;\oplus\;\mathcal{0}\;=\;P$ 成立，$\mathcal{0}$ 的作用类似于加法中的 $0$ 。</p>
+<p>​                   </p>
+<p>​                    </p>
+<p>再看一下椭圆曲线的定义：</p>
+<p>​                   </p>
+<p><img src="https://i.loli.net/2020/10/13/tF2REz3pvLiygT4.png" alt="image-20201013222234748"></p>
+<p>​                   </p>
+<p>重点是这个后面的判别式，因为 $\delta\;=4A^{3}\;+\;27B^{2}\;\neq\;0$ 是为了确保三次多项式 $X^3\;+\;AX\;+\;B$ 有不</p>
+<p>重复的根。</p>
+<p>​                  </p>
+<p>​                          </p>
+<p>椭圆曲线下的加法规则满足：</p>
+<p>​                   </p>
+<p><img src="https://i.loli.net/2020/11/03/3sgx4lZUpQMJDum.png" alt="image-20201103080807987"></p>
+<p>​               </p>
+<p>椭圆曲线上的点集以及它特定的加法规则结合起来是一个阿贝尔群，或者是交换群。</p>
+<p>​               </p>
+<p>​               </p>
+<p>​                   </p>
+<h2 id="Elliptic-curves-over-finite-fields"><a href="#Elliptic-curves-over-finite-fields" class="headerlink" title="Elliptic curves over finite fields"></a>Elliptic curves over finite fields</h2><p>​                </p>
+<p>有限域的椭圆曲线的简单定义：</p>
+<p>​                      </p>
+<p><img src="https://i.loli.net/2020/11/03/wIDtXdh2FSzpinB.png" alt="image-20201103075826899"></p>
+<p>​                 </p>
+<p>这个定义有点类似于欧几里得环。</p>
+<p>​                     </p>
+<p>有限域下的椭圆曲线 $E(F_{p})$ 也满足 <strong>Theorem 5.5</strong> 的运算规则。</p>
+<p>​                    </p>
+<p>Hasse Theorem 可以估计有限域 $F_p$ 下椭圆曲线点的数量，但只是一个区间：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/11/03/aUNDJx1ycifOHWX.png" alt="image-20201103081843976"></p>
+<p>​                </p>
+<p>​                  </p>
+<p>​                      </p>
+<h2 id="The-elliptic-curve-discrete-logarithm-problem"><a href="#The-elliptic-curve-discrete-logarithm-problem" class="headerlink" title="The elliptic curve discrete logarithm problem"></a>The elliptic curve discrete logarithm problem</h2><p>​                    </p>
+<p>对于有限域 $F_p^{*}$ 下的 DLP，我们有：</p>
+<p>​                </p>
+<script type="math/tex; mode=display">
+h\equiv g^x\;(mod\;p)</script><p>​                    </p>
+<p>对于椭圆曲线 $E(F_p)$，可以定义一个对应的 DLP：</p>
+<p>​              </p>
+<p><img src="https://i.loli.net/2020/11/03/mHRnQwjNOvriLBx.png" alt="image-20201103101527262"></p>
+<p>​                        </p>
+<p>其中公钥是 $P$ ，私钥为 $n$ ，并且它是计算困难的。</p>
+<p>​              </p>
+<p>关于私钥 $n$，由于 $P\in E(F_p)$ ，所以 $n$ 可能会有多个值，假设满足上面等式的最小值为 $n_0$ ，那么关于 $n$ 我们有：</p>
+<p>​              </p>
+<script type="math/tex; mode=display">
+n\;=\;n_0\;+\;ks,\;i\in\Z</script><p>​                 </p>
+<p>其中 s 为 $P$ 点的 order ，这个 order 可能会比 $#E(F_p)$ 要小，即椭圆曲线上的所有点可能不全是 $P$ 点</p>
+<p>的“积”。</p>
+<p>​                  </p>
+<p>​                 </p>
+<p>​                      </p>
+<h2 id="The-Double-and-Add-Algorithm"><a href="#The-Double-and-Add-Algorithm" class="headerlink" title="The Double-and-Add Algorithm"></a>The Double-and-Add Algorithm</h2><p>​                     </p>
+<p>模幂运算也有一个 square-and-multipy algorihtm，这里椭圆曲线也整一个类似的，只不过这里是作加法，</p>
+<p>大致的运算过程：</p>
+<p>​               </p>
+<p><img src="https://i.loli.net/2020/11/03/46R8VOYPNBerWyK.png" alt="image-20201103111053555"></p>
+<p>​                    </p>
+<p>​                 </p>
+<p>​                       </p>
+<h2 id="Elliptic-curve-cryptography"><a href="#Elliptic-curve-cryptography" class="headerlink" title="Elliptic curve cryptography"></a>Elliptic curve cryptography</h2><p>​                  </p>
+<p>跟普通的 DLP 类似，ECDLP 可以运用于DHKE 以及 Elgamal，贴两张 flow chart 以便复习。</p>
+<p>​                 </p>
+<h3 id="Elliptic-Diffie–Hellman-key-exchange"><a href="#Elliptic-Diffie–Hellman-key-exchange" class="headerlink" title="Elliptic Diffie–Hellman key exchange"></a>Elliptic Diffie–Hellman key exchange</h3><p>​                  </p>
+<p>以 Alice 和 Bob 的传输为例：</p>
+<p>​               </p>
+<p><img src="https://i.loli.net/2020/11/03/wg7pNFRd8rvyEqC.png" alt="image-20201103121741786"></p>
+<p>​                  </p>
+<p>​                    </p>
+<p>有一个小细节，在共享秘钥的时候，$Q_A$ 或者 $Q_B$ 仅需要分享 $x$ 坐标。由于椭圆曲线是提前确定的，所以对</p>
+<p>于同一个 $x$ 坐标，仅仅会有两个不同的 $y$ 值，这样减少了传送的长度。</p>
+<p>​                        </p>
+<p>​                   </p>
+<h3 id="Elliptic-ElGamal-public-key-cryptosystem"><a href="#Elliptic-ElGamal-public-key-cryptosystem" class="headerlink" title="Elliptic ElGamal public key cryptosystem"></a>Elliptic ElGamal public key cryptosystem</h3><p>​                            </p>
+<p><img src="https://i.loli.net/2020/11/03/Jb7CwEGYxaRZ2HX.png" alt="image-20201103214936897"></p>
+<p>​                       </p>
+<p>相对于普通有限域下的椭圆曲线，密文与明文相比多了四倍。类似于前面的 ECDHKE，这里也可以只发送 $C_1$ </p>
+<p>和 $C_2$的 $x$ 坐标，但是 $y$ 需要精确正负，所以需要附加一个 $y$ 的 $sign\;bit$ 。</p>
+<p>​                   </p>
+<p>​                        </p>
+<p>​                         </p>
+<h2 id="Lenstra’s-elliptic-curve-factorization-algorithm"><a href="#Lenstra’s-elliptic-curve-factorization-algorithm" class="headerlink" title="Lenstra’s elliptic curve factorization algorithm"></a>Lenstra’s elliptic curve factorization algorithm</h2><p>​                   </p>
+<p>​                       </p>
+<p>Lenstra’s 根据椭圆曲线上有限域的性质提出了另外一种分解质数的方法。</p>
+<p>​               </p>
+<p>这种分解方法十分有趣，它基于椭圆曲线上的计算 <strong>error</strong>（计算 <strong>point addition</strong> 的时候找不到某个数对应</p>
+<p>的逆元，因为目标分解数是合数），来得到目标分解数的一个因子。算法的思想很简单。</p>
+<p>​                </p>
+<p>具体过程：</p>
+<p>​                  </p>
+<p><img src="https://i.loli.net/2020/11/18/pFdZuoRXGwDYtle.png" alt="image-20201118211531838"></p>
+<p>​               </p>
+<p>​                 </p>
+<p>这种算法的时间复杂度取决于 $N$ 的最小素因子的大小，而不是传统算法所要求的 $N$ 的大小，所以这种分解方</p>
+<p>法对于两个大小接近的素数乘积几乎不起作用。</p>
+<p>​                       </p>
+<p>​                      </p>
+<p>​                        </p>
+<p>剩下的部分留到以后再仔细阅读吧，之后再写一个关于椭圆曲线的 SageMath 使用方法。</p>
+<p>​                   </p>
+<p>​                    </p>
+<h2 id="Elliptic-curves-over-F-2-and-over-F-2-k"><a href="#Elliptic-curves-over-F-2-and-over-F-2-k" class="headerlink" title="Elliptic curves over $F_2$ and over $F_{2^k}$"></a>Elliptic curves over $F_2$ and over $F_{2^k}$</h2><p>​                 </p>
+<h2 id="Bilinear-pairings-on-elliptic-curves"><a href="#Bilinear-pairings-on-elliptic-curves" class="headerlink" title="Bilinear pairings on elliptic curves"></a>Bilinear pairings on elliptic curves</h2><p>​                     </p>
+<h2 id="The-Weil-pairing-over-fields-of-prime-power-order"><a href="#The-Weil-pairing-over-fields-of-prime-power-order" class="headerlink" title="The Weil pairing over fields of prime power order"></a>The Weil pairing over fields of prime power order</h2><p>​                     </p>
+<p>​                         </p>
+<p>​                             </p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>​                          </p>
+<p>​                    </p>
+<ul>
+<li><em>An Introduction to Mathematical Cryptography</em></li>
+</ul>
+<p>​                    </p>
+<p>​                  </p>
+<p>​                      </p>
+<p>坚持！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://buki-freak.github.io/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/" title="An-Introduction-to-Mathematical-Cryptography-II" target="_blank" rel="external">https://buki-freak.github.io/2020/09/25/An-Introduction-to-Mathematical-Cryptography-II/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Buki-freak" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Buki-freak" target="_blank"><span class="text-dark">buk1</span><small class="ml-1x">CTFer &amp; Crypto</small></a></h3>
+        <div>Every day will be my last day.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/09/25/SageMath-Learning-I/" title="SageMath-Learning-I"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/09/14/An-Introduction-to-Mathematical-Cryptography-I/" title="An-Introduction-to-Mathematical-Cryptography-I"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Buki-freak" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
